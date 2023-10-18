@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import TextComponent from "./TextComponent";
+import TextComponent from "./Texts/TextComponent";
 
 const CollapsedComponent = ({ type, isRounded, handleClick, subTitle }) => {
   const [show, setShow] = useState(false);

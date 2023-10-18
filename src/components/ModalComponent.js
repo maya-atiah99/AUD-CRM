@@ -1,6 +1,6 @@
 import React from 'react';
-import TextComponent from './TextComponent';
-import AUDButton from './AUDButton';
+import TextComponent from './Texts/TextComponent';
+import AUDButton from './Buttons/AUDButton';
 
 const ModalComponent = ({ title,description, isOpen, onClose, width, height, children }) => {
  

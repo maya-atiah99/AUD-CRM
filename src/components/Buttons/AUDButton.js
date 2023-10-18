@@ -1,9 +1,11 @@
 import React from 'react'
 
-const AUDButton = ({ text, handleOnCLick, icon }) => {
+const AUDButton = ({ text, handleOnClick, icon }) => {
+
+  
   return (
     <div >
-  <button onClick={()=>handleOnCLick()} className="aud-button">
+  <button onClick={handleOnClick} className="aud-button">
       {icon && <img src={icon} alt="Icon" className="button-icon" />}
       {text}
     </button>

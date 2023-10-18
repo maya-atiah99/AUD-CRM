@@ -3,11 +3,11 @@ import PhoneInput from 'react-phone-input-2'
 import 'react-phone-input-2/lib/style.css'
 
 
-const PhoneNumber = ({ label, required, value, setValue, placeholder,width }) => {
+const PhoneNumber = ({ label, required, value, setValue,width }) => {
 
     return (
       <div style={{width:width}}>
-        <label htmlFor={label}>{label}</label>
+           {label ? <label htmlFor={label}>{label}<span className="required">*</span></label> : "" } 
        <PhoneInput
        name='phone'
        placeholder=''
@@ -15,6 +15,7 @@ const PhoneNumber = ({ label, required, value, setValue, placeholder,width }) =>
        onChange={setValue}
        defaultCountry='AE'
        autoComplete='off'/>
+    
       </div>
     );
   };

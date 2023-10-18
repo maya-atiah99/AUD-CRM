@@ -1,5 +1,5 @@
 import React from 'react'
-import RadioButton from './RadioButton'
+import RadioButton from '../Inputs/RadioButton'
 
 const RadioButtonGroup = ({ options, selectedValue, onRadioChange}) => {
   return (
@@ -10,7 +10,7 @@ const RadioButtonGroup = ({ options, selectedValue, onRadioChange}) => {
           label={option.label}
           value={option.value}
           checked={selectedValue === option.value}
-          onChange={onRadioChange}
+          handleOnChange={onRadioChange}
         />
       ))}
     </div>

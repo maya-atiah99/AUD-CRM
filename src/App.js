@@ -5,7 +5,7 @@ import TestComponents from "./TestComponents";
 
 function App() {
   return (
-    <div className="d-flex justify-content-center mt-5">
+    <div className="m-5">
       <TestComponents />
     </div>
   );

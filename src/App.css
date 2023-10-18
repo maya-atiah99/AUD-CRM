@@ -34,6 +34,11 @@
   justify-content: center;
 
 }
+.radio-input label{
+ color: #1B224C;
+  font-size: 18px;
+  font: normal normal medium 18px/21px Raleway;
+}
 
 .radio-input input {
   appearance: none;
@@ -83,12 +88,15 @@
 
 
 /***TextBox**/
-
+input[type='date']{
+ color: transparent;
+}
 .text-input {
   border-radius: 5px;
   height: 35px;
   border: 1px solid #1b224c31;
   /* opacity: 0.2; */
+  padding: 5px;
 }
 .text-input::placeholder{
   display: none;
@@ -97,20 +105,22 @@
   border-color: #1B224C ;
 }
 label {
-  font-weight: 500;
+  font-weight: 600;
   font-size: 15px;
+  color: #1B224C;
 }
 
 .required {
   color: #F3223C;
   padding-left: 5px;
-  font-size: 30px;
+  font-size: 20px;
 
 }
 
 .textBox-container {
   display: flex;
   flex-direction: column;
+  justify-content: flex-end;
 }
 
 .textBox-container label {
@@ -145,7 +155,7 @@ label {
 }
 
 .dotted-line {
-  width: 100%;
+  flex-grow: 1;
   height: 1px;
   background: linear-gradient(90deg, #1b224c49 50%, transparent 50%, transparent);
   background-size: 8px 1px;
@@ -293,13 +303,22 @@ label {
   border-radius: 3px 0 0 0;
 }
 /****Link*****/
-a {
+.linktext {
   color: #F3223C;
   font-size: 16px;
   font-weight: bold;
   padding-left: 5px;
+  text-decoration: none;
 }
 
+.underlined-link{
+  text-decoration: underline;
+  color: #F3223C;
+  font-size: 16px;
+  font-weight: bold;
+  padding-left: 5px;
+  cursor: pointer;
+}
 
 /*****Bulleted text******/
 li::marker{
@@ -309,6 +328,11 @@ li::marker{
 ul.circle-bullets{
   list-style-type: circle;
  
+}
+ul{
+  font-size: 18px;
+  color:#1B224C ;
+  font-weight: 500;
 }
 /****Custom Checkbox******/
 
@@ -382,68 +406,68 @@ ul.circle-bullets{
 /******textarea*****/
 .textBox-container textarea {
   resize: none;
+  border-radius: 5px;
+  border: 1px solid #1b224c31;
 }
 
 
 /*****stepper***/
+
 .stepper {
   display: flex;
-  justify-content: space-between;
-  align-items: center;
-  width: 80%;
-  margin: 0 auto;
+  justify-content: flex-end;
+  width: 100%;
 }
 
-.step {
+.subStep-container {
   display: flex;
-  flex-direction: column;
   align-items: center;
 }
 
-.step.active .step-number {
-  background-color: #007bff;
-  color: #fff;
-}
-
-.step-number {
-  width: 30px;
-  height: 30px;
-  border: 2px solid #007bff;
+.stepper .step {
+  padding: 3px 15px;
+  margin: 0 10px 0px 10px;
+  color: #FFFFFF;
+  height: 40px;
   border-radius: 50%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin-bottom: 5px;
+  width: 40px;
+  transition: 0.5s all ease-in-out;
 }
 
-.step-title {
-  text-align: center;
+.activeLine {
+  width: 0;
+  height: 1px;
+  opacity: 0;
+  background-color: white;
+  margin: 0 0.5rem;
+}
+.inActiveLine{
+  width: 0;
+  height: 1px;
+  opacity: 0.4;
+  width: 45px;
+  background-color: white;
+  margin: 0 10px;
+}
+.stepper .step.active ~ .activeLine {
+  width:200px;
+  opacity: 1;
 }
 
-.step-line {
-  flex: 1;
-  border: 2px solid #007bff;
-  margin: 0 5px;
+.active {
+  background-color: white;
+  transform: scale(1);
 }
 
-.step-line.completed {
-  width: 15px;
+.inactive {
+  background-color: rgba(135, 135, 135, 0.555);
 }
 
-button {
-  background-color: #007bff;
-  color: #fff;
-  border: none;
-  padding: 8px 16px;
-  border-radius: 4px;
-  cursor: pointer;
-  margin-top: 10px;
+.checkedLogo {
+  padding: 0rem 10px;
+  height: 40px;
+  opacity: 0.4;
 }
-
-button:hover {
-  background-color: #0056b3;
-}
-
 
 /******select react*******/
 .css-tj5bde-Svg {
@@ -470,4 +494,55 @@ button:hover {
 .css-t3ipsp-control {
   border-color: #1B224C !important;
   box-shadow: none !important;
+}
+.css-tj5bde-Svg{
+ 
+}
+
+/*******Aud app header*************/
+.aud-app-header{
+  background-color: #1B224C;
+  width:100%;
+  height: 84px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding: 20px;
+
+}
+
+@media screen and (max-width:1300px){
+  /*****stepper***/
+
+
+.stepper .step {
+ padding: 0;
+  margin: 0 10px 0px 10px;
+  background-color  : #FFFFFF;
+  height: 24px;
+  border-radius: 50%;
+  width: 24px;
+  transition: 0.5s all ease-in-out;
+}
+
+.activeLine {
+  width: 0;
+  height: 1px;
+  opacity: 0;
+  background-color: white;
+  margin: 0 0.5rem;
+}
+.inActiveLine{
+  width: 0;
+  height: 1px;
+  opacity: 0.4;
+  width: 24px;
+  background-color: white;
+  margin: 0 10px;
+}
+.stepper .step.active ~ .activeLine {
+  width:142px;
+  opacity: 1;
+}
+
 }

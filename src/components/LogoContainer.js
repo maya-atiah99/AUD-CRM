@@ -1,10 +1,9 @@
 import React from 'react'
 
-const LogoContainer = () => {
+const LogoContainer = ({width,height}) => {
   return (
-    <div>
-      
-    </div>
+    <img src='/images/Group 103@2x.png' alt="Logo" width={width}  height={height}/>
+   
   )
 }
 

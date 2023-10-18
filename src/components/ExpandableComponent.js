@@ -1,7 +1,7 @@
 import React from "react";
-import TextComponent from "./TextComponent";
-import TextBox from "./TextBox";
-import LinkButton from "./LinkButton";
+import TextComponent from "./Texts/TextComponent";
+import TextBox from "./Inputs/TextBox";
+import LinkButton from "./Buttons/LinkButton";
 
 const ExpandableComponent = ({ type, handleClick, subTitle }) => {
   return (

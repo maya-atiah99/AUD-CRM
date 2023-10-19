@@ -1,27 +1,53 @@
-import React, { useState } from 'react'
-import Select from 'react-select';
-const DropDown = ({ label, isRequired, value, setValue, data, placeholder, width }) => {
-
+import React, { useState } from "react";
+import Select from "react-select";
+const DropDown = ({
+  label,
+  required,
+  value,
+  setValue,
+  data,
+  placeholder,
+  width,
+}) => {
+  const [selectedOption, setSelectedOption] = useState(null);
   const options = [
-    { value: 'chocolate', label: 'Chocolate' },
-    { value: 'strawberry', label: 'Strawberry' },
-    { value: 'vanilla', label: 'Vanilla' },
+    { value: "chocolate", label: "Chocolate" },
+    { value: "strawberry", label: "Strawberry" },
+    { value: "vanilla", label: "Vanilla" },
   ];
 
-  const [selectedOption, setSelectedOption] = useState(null);
+  const CustomDropdownArrow = () => {
     return (
-      <div className='textBox-container' style={{width:width}}>
-         <label htmlFor={label}>
-            {label}
-            {isRequired && <span className='required'>*</span>}
-          </label>
-          <Select
-        defaultValue={selectedOption}
-        onChange={setSelectedOption}
-        options={options}
-      />
-      
+      <div className='custom-dropdown-arrow'>
+        <img src='/images/customDropdown.svg' />
       </div>
     );
   };
-export default DropDown
+  const customStyles = {
+    dropdownIndicator: (base) => ({
+      ...base,
+      padding: "4px",
+    }),
+    // You can also adjust other styles as needed.
+  };
+
+  return (
+    <div className='textBox-container' style={{ width: width }}>
+      <label htmlFor={label}>
+        {label}
+        {required && <span className='required'>*</span>}
+      </label>
+      <Select
+        defaultValue={selectedOption}
+        onChange={setSelectedOption}
+        options={options}
+        required={required}
+        styles={customStyles}
+        components={{
+          IndicatorSeparator: CustomDropdownArrow,
+        }}
+      />
+    </div>
+  );
+};
+export default DropDown;

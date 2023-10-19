@@ -1,16 +1,15 @@
 * {
   margin: 0;
-  font-family: 'Raleway', sans-serif;
+  font-family: "Raleway", sans-serif;
   letter-spacing: 0px;
 }
-
 
 /***Buttons*****/
 .aud-button {
   border-radius: 5px;
   padding: 12px;
-  background-color: #1B224C;
-  color: #FFFFFF;
+  background-color: #1b224c;
+  color: #ffffff;
   border: none;
   margin: 10px;
   font-size: 18px;
@@ -18,9 +17,8 @@
 }
 
 .aud-button:hover {
-  background-color: #F3223C;
+  background-color: #f3223c;
   cursor: pointer;
-
 }
 
 .aud-button img {
@@ -32,10 +30,10 @@
   display: flex;
   align-items: center;
   justify-content: center;
-
 }
-.radio-input label{
- color: #1B224C;
+
+.radio-input label {
+  color: #1b224c;
   font-size: 18px;
   font: normal normal medium 18px/21px Raleway;
 }
@@ -48,10 +46,9 @@
   /* transition: .4s ease-in-out; */
   border: 2px solid #113161;
   cursor: pointer;
-
 }
 
-.radio-input input:hover+.circle {
+.radio-input input:hover + .circle {
   scale: 1.2;
   cursor: pointer;
   box-shadow: none;
@@ -66,7 +63,7 @@
   background-color: #6f70705d;
   scale: 0;
   border-radius: 10px;
-  transition: .4s ease-in-out;
+  transition: 0.4s ease-in-out;
   cursor: pointer;
 }
 
@@ -75,46 +72,53 @@
   border: 2px solid #113161;
 }
 
-.radio-input input:checked+.circle {
+.radio-input input:checked + .circle {
   background-color: #113161;
   scale: 0.9;
-
 }
 
 .radio-buttons-container {
   display: flex;
-  gap: 5px
+  gap: 5px;
 }
-
 
 /***TextBox**/
-input[type='date']{
- color: transparent;
+input[type="date"] {
+  color: transparent;
 }
+
 .text-input {
+  background-color: transparent;
   border-radius: 5px;
-  height: 35px;
+  height: 38px;
   border: 1px solid #1b224c31;
   /* opacity: 0.2; */
   padding: 5px;
 }
-.text-input::placeholder{
+
+.text-input::placeholder {
   display: none;
 }
-.text-input:focus{
-  border-color: #1B224C ;
+
+input[type="text"]:hover {
+  border: 0.5px solid #1b224c5c;
+  transition: 0.2s ease-in-out;
 }
+input[type="text"]:focus-visible {
+  outline: 0.8px solid #1b224c;
+  border: none;
+}
+
 label {
   font-weight: 600;
   font-size: 15px;
-  color: #1B224C;
+  color: #1b224c;
 }
 
 .required {
-  color: #F3223C;
+  color: #f3223c;
   padding-left: 5px;
   font-size: 20px;
-
 }
 
 .textBox-container {
@@ -124,10 +128,9 @@ label {
 }
 
 .textBox-container label {
-  font-weight: 500;
+  font-weight: 600;
   font-size: 15px;
 }
-
 
 /*** DropDown*******/
 /* select {
@@ -137,36 +140,45 @@ label {
   opacity: 0.2;
 
 } */
-
-
+.css-tj5bde-Svg {
+  display: none !important;
+}
+.custom-dropdown-arrow {
+  color: #1b224c;
+  width: 12px;
+}
 /***Text with line*****/
 .title-with-line {
   display: flex;
   align-items: center;
-  gap: 3px
+  gap: 3px;
 }
 
 .line {
   flex-grow: 1;
   height: 0px;
   opacity: 0.4;
-  border: 1px solid #1B224C;
+  border: 1px solid #1b224c;
   margin-right: 10px;
 }
 
 .dotted-line {
   flex-grow: 1;
   height: 1px;
-  background: linear-gradient(90deg, #1b224c49 50%, transparent 50%, transparent);
+  background: linear-gradient(
+    90deg,
+    #1b224c49 50%,
+    transparent 50%,
+    transparent
+  );
   background-size: 8px 1px;
-  
 }
 
 .title {
-  color: #1B224C;
+  color: #1b224c;
   text-transform: uppercase;
-  font-weight: bold;
-  font-size: 18px;
+  font-weight: 800;
+  font-size: 20px;
   margin-bottom: 0;
 }
 
@@ -179,8 +191,8 @@ label {
   color: white;
   border-radius: 28px;
   opacity: 1;
-  background-color: #3886BD;
-  width: fit-content
+  background-color: #3886bd;
+  width: fit-content;
 }
 
 .button-icon {
@@ -188,7 +200,7 @@ label {
 }
 
 .rounded-button:hover {
-  background-color: #F3223C;
+  background-color: #f3223c;
   cursor: pointer;
 }
 
@@ -205,7 +217,6 @@ label {
   display: flex;
   flex-direction: row;
   align-items: center;
-
 }
 
 .file-input-container:hover {
@@ -214,7 +225,7 @@ label {
 
 .file-input-container img {
   width: 80px;
-  height: 50px
+  height: 50px;
 }
 
 /***Modal****/
@@ -226,16 +237,16 @@ label {
   justify-content: center;
   align-items: center;
   background-color: #00000029;
-  transform: 'translate(-50%,-50%';
+  transform: "translate(-50%,-50%";
   z-index: 1000;
   width: 100%;
-  height: 100vh
+  height: 100vh;
 }
 
 .inner-modal-container {
   position: relative;
   padding: 30px 50px;
-  background-color: #FFFFFF;
+  background-color: #ffffff;
   border-radius: 10px;
   height: 38rem;
   width: 60rem;
@@ -254,7 +265,7 @@ label {
 
 .inner-modal-container h2 {
   font-size: 22px;
-  color: #020A58;
+  color: #020a58;
   font-weight: bold;
 }
 
@@ -264,27 +275,23 @@ label {
   right: 40px;
 }
 
-
 /***Text component ***/
 .p-style {
   font-weight: 500;
   margin-bottom: 0;
-  color: #1B224C;
+  color: #1b224c;
   font-weight: 18px;
+  letter-spacing: 0px;
 }
-
-
 
 /***Collapsed container*****/
 .collapsed-container {
   width: 100%;
-  background-color: #020A581A;
+  background-color: #020a581a;
   padding: 15px 29px;
   margin: 10px 0;
   cursor: pointer;
-
 }
-
 
 .roundedRadius {
   border-radius: 5px 48px 48px 5px;
@@ -294,26 +301,28 @@ label {
 .form-control:focus {
   color: var(--bs-body-color);
   background-color: var(--bs-body-bg);
-  border-color: #1B224C !important;
+  border-color: #1b224c !important;
   outline: 0;
-  box-shadow:none !important;
+  box-shadow: none !important;
 }
+
 .react-tel-input .flag-dropdown.open .selected-flag {
-  background: #F2F2F2;
+  background: #f2f2f2;
   border-radius: 3px 0 0 0;
 }
+
 /****Link*****/
 .linktext {
-  color: #F3223C;
+  color: #f3223c;
   font-size: 16px;
   font-weight: bold;
   padding-left: 5px;
   text-decoration: none;
 }
 
-.underlined-link{
+.underlined-link {
   text-decoration: underline;
-  color: #F3223C;
+  color: #f3223c;
   font-size: 16px;
   font-weight: bold;
   padding-left: 5px;
@@ -321,19 +330,21 @@ label {
 }
 
 /*****Bulleted text******/
-li::marker{
-    color: #1B224C;
-    font-size: 20px;
+li::marker {
+  color: #1b224c;
+  font-size: 20px;
 }
-ul.circle-bullets{
+
+ul.circle-bullets {
   list-style-type: circle;
- 
 }
-ul{
+
+ul {
   font-size: 18px;
-  color:#1B224C ;
+  color: #1b224c;
   font-weight: 500;
 }
+
 /****Custom Checkbox******/
 
 .checkbox-container {
@@ -349,7 +360,6 @@ ul{
   user-select: none;
 }
 
-
 .checkbox-container input {
   position: absolute;
   opacity: 0;
@@ -357,7 +367,6 @@ ul{
   height: 0;
   width: 0;
 }
-
 
 .checkmark {
   position: absolute;
@@ -369,16 +378,13 @@ ul{
   border: 1px solid #113161;
 }
 
-
-.checkbox-container input:checked~.checkmark {
+.checkbox-container input:checked ~ .checkmark {
   background-color: #113161;
 }
 
-
-.checkbox-container:hover input~.checkmark {
-  border: 1px solid #F3223C;
+.checkbox-container:hover input ~ .checkmark {
+  border: 1px solid #f3223c;
 }
-
 
 .checkmark:after {
   content: "";
@@ -386,8 +392,7 @@ ul{
   display: none;
 }
 
-
-.checkbox-container input:checked~.checkmark:after {
+.checkbox-container input:checked ~ .checkmark:after {
   display: block;
 }
 
@@ -410,7 +415,6 @@ ul{
   border: 1px solid #1b224c31;
 }
 
-
 /*****stepper***/
 
 .stepper {
@@ -427,7 +431,7 @@ ul{
 .stepper .step {
   padding: 3px 15px;
   margin: 0 10px 0px 10px;
-  color: #FFFFFF;
+  color: #ffffff;
   height: 40px;
   border-radius: 50%;
   width: 40px;
@@ -441,7 +445,8 @@ ul{
   background-color: white;
   margin: 0 0.5rem;
 }
-.inActiveLine{
+
+.inActiveLine {
   width: 0;
   height: 1px;
   opacity: 0.4;
@@ -449,8 +454,9 @@ ul{
   background-color: white;
   margin: 0 10px;
 }
+
 .stepper .step.active ~ .activeLine {
-  width:200px;
+  width: 200px;
   opacity: 1;
 }
 
@@ -469,9 +475,27 @@ ul{
   opacity: 0.4;
 }
 
+/******Phone Number*********/
+.react-tel-input .form-control {
+  position: relative;
+  font-size: 14px;
+  letter-spacing: 0.01rem;
+  margin-top: 0 !important;
+  margin-bottom: 0 !important;
+  padding-left: 48px;
+  margin-left: 0;
+  background: transparent !important;
+  border: 1px solid #cacaca;
+  border-radius: 5px;
+  line-height: 25px;
+  height: 35px;
+  width: 343px !important;
+  outline: none;
+}
+
 /******select react*******/
 .css-tj5bde-Svg {
-  color: #1B224C;
+  color: #1b224c;
   display: inline-block;
   fill: currentColor;
   line-height: 1;
@@ -487,62 +511,179 @@ ul{
   display: none;
 }
 
+.css-13cymwt-control {
+  background-color: transparent !important;
+}
+
 .css-g37w59-control {
-  border-color: #1B224C;
+  border-color: #1b224c;
 }
 
 .css-t3ipsp-control {
-  border-color: #1B224C !important;
+  border-color: #1b224c !important;
   box-shadow: none !important;
-}
-.css-tj5bde-Svg{
- 
 }
 
 /*******Aud app header*************/
-.aud-app-header{
-  background-color: #1B224C;
-  width:100%;
+.aud-app-header {
+  background-color: #1b224c;
+  width: 100%;
   height: 84px;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   padding: 20px;
-
 }
 
-@media screen and (max-width:1300px){
+@media screen and (max-width: 1300px) {
   /*****stepper***/
 
+  .stepper .step {
+    padding: 0;
+    margin: 0 10px 0px 10px;
+    background-color: #ffffff;
+    height: 24px;
+    border-radius: 50%;
+    width: 24px;
+    transition: 0.5s all ease-in-out;
+  }
 
-.stepper .step {
- padding: 0;
-  margin: 0 10px 0px 10px;
-  background-color  : #FFFFFF;
-  height: 24px;
-  border-radius: 50%;
-  width: 24px;
-  transition: 0.5s all ease-in-out;
+  .activeLine {
+    width: 0;
+    height: 1px;
+    opacity: 0;
+    background-color: white;
+    margin: 0 0.5rem;
+  }
+
+  .inActiveLine {
+    width: 0;
+    height: 1px;
+    opacity: 0.4;
+    width: 24px;
+    background-color: white;
+    margin: 0 10px;
+  }
+
+  .stepper .step.active ~ .activeLine {
+    width: 142px;
+    opacity: 1;
+  }
 }
 
-.activeLine {
-  width: 0;
-  height: 1px;
-  opacity: 0;
-  background-color: white;
-  margin: 0 0.5rem;
-}
-.inActiveLine{
-  width: 0;
-  height: 1px;
-  opacity: 0.4;
-  width: 24px;
-  background-color: white;
-  margin: 0 10px;
-}
-.stepper .step.active ~ .activeLine {
-  width:142px;
-  opacity: 1;
+/****Show interest*****/
+.showInterest-container {
+  position: fixed;
+  top: 0;
+  right: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transform: "translate(-50%,-50%";
+  z-index: 1000;
+  width: 100%;
+  height: 100vh;
 }
 
+.showInterest-subContainer {
+  position: relative;
+  padding: 30px 50px;
+  background-color: #ffffff;
+  border-radius: 10px;
+  height: 90%;
+  width: 85%;
+  display: flex;
+  flex-direction: row;
+  opacity: 0.9;
+  box-shadow: 0px 3px 6px #00000029;
+  border-radius: 10px;
+  align-items: center;
+  justify-content: space-between;
+  gap: 5%;
+}
+
+#background-video {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  min-width: 100%;
+  min-height: 100%;
+  width: auto;
+  height: auto;
+  transform: translate(-50%, -50%);
+  z-index: -1;
+}
+
+/****Horizantal line*****/
+.horizantalLine-container {
+  height: 10vh;
+  display: flex;
+  align-items: center;
+}
+
+.horizontal {
+  width: 2px;
+  height: 80vh;
+  background: linear-gradient(
+    359deg,
+    #1b224c49 50%,
+    transparent 50%,
+    transparent
+  );
+  background-size: 8px 1px;
+  opacity: 0.6;
+}
+
+/********Show Interest Form*********/
+.show-interest-form {
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  /* padding: 20px; */
+  padding: 0 20px 0 20px;
+}
+
+.grid-container {
+  display: grid;
+  grid-template-columns: 1.5fr 2fr;
+  grid-column-gap: 10px;
+}
+
+.grid-container2 {
+  display: grid;
+  grid-template-columns: 2fr 2fr;
+  grid-column-gap: 10px;
+}
+
+@media screen and (max-width: 1460px) {
+  .show-interest-form {
+    gap: 10px;
+  }
+  .title {
+    font-size: 14px;
+  }
+  .p-style {
+    font-size: 18px !important;
+  }
+  .text-input {
+    height: 30px;
+  }
+  .textBox-container label {
+    font-size: 12px;
+  }
+  .css-13cymwt-control {
+    min-height: 30px !important;
+  }
+  .css-qbdosj-Input {
+    margin: 0px !important;
+    padding-bottom: 0px !important;
+    padding-top: 0px !important;
+  }
+  .css-1xc3v61-indicatorContainer {
+    padding: 2px !important;
+  }
+  .react-tel-input .form-control {
+    height: 30px !important;
+  }
 }

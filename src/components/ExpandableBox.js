@@ -2,22 +2,29 @@ import React, { useState } from "react";
 import CollapsedComponent from "./CollapsedComponent";
 import ExpandableComponent from "./ExpandableComponent";
 
-const ExpandableBox = ({ type,isRounded ,data, expanded, colapsed}) => {
+const ExpandableBox = ({ isRounded , expanded, collapsed}) => {
   const [isExpanded, setIsExpanded] = useState(false);
+  const containerClassName = `collapsed-container ${
+    isRounded ? "roundedRadius" : ""
+  }`;
 
   const toggleExpansion = () => {
     setIsExpanded(!isExpanded);
   };
-
+console.log(collapsed)
 
   return (
     <div>
       {!isExpanded && (
-        <CollapsedComponent type={type} handleClick={toggleExpansion} isRounded={isRounded} subTitle={data}/>
+        <div  className={containerClassName}  onClick={toggleExpansion}>
+          {collapsed}
+          </div>
       )}
 
       {isExpanded && (
-        <ExpandableComponent type={type} handleClick={toggleExpansion} subTitle={data}/>
+     <div  className="collapsed-container test" onClick={toggleExpansion}>
+      {expanded}
+      </div>
       )}
     </div>
   );

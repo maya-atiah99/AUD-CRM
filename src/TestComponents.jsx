@@ -15,7 +15,8 @@ import PhoneNumber from "./components/Inputs/PhoneNumber";
 import DateTime from "./components/Inputs/DateTime";
 import LinkButton from "./components/Buttons/LinkButton";
 import ModalComponent from "./components/ModalComponent";
-import ExpandableBox from "./components/ExpandableBox"
+import ExpandableBox from "./components/ExpandableBox";
+
 const TestComponents = () => {
   const [selectedOption, setSelectedOption] = useState("option1");
   const [selectedValue, setSelectedValue] = useState("");
@@ -28,20 +29,81 @@ const TestComponents = () => {
     setSelectedOption(e.target.value);
   };
 
- const data=[{
-  email:"maya@gmail.com",
-  phone:"0362548"
- }]
+  const data = [
+    {
+      email: "maya@gmail.com",
+      phone: "0362548",
+    },
+  ];
   const datatest = [
     { text: "Student name" },
     {
       text: "telephone number(s)",
-      items: [{ text: "telephone number(s)" }, { text: "Any other education record is classified as non-directory information and can not be disclosed to any party without the student’s consent." }],
+      items: [
+        { text: "telephone number(s)" },
+        {
+          text: "Any other education record is classified as non-directory information and can not be disclosed to any party without the student’s consent.",
+        },
+      ],
     },
     { text: "Student name" },
   ];
   const handleClick = () => {
     console.log("Button clicked");
+  };
+
+  const collapsed = (type) => {
+    if (type == "phone") {
+      return (
+        <div className="d-flex flex-column">
+          <TextComponent text="Phone Number" size="15px" font="700" />
+          <TextComponent text={data[0].phone} size="15px" font="500" />
+        </div>
+      );
+    } else if (type == "email") {
+      return (
+        <div>
+          <TextComponent text="Email" size="15px" font="700" />
+          <TextComponent text={data[0].email} size="15px" font="500" />
+        </div>
+      );
+    }
+  };
+  const expanded = (type) => {
+    if (type == "phone") {
+      return (
+        <div className="d-flex flex-column gap-2">
+          <TextComponent text="Phone Number" size="15px" font="700" />
+          <TextComponent
+            text="We have sent the OTP to your phone as a text to authenticate you mobile number"
+            size="15px"
+            font="500"
+          />
+          <TextComponent text={data[0].phone} size="15px" font="500" />
+          <LinkButton
+            title="Click Here To Resend"
+            text="Please type the number you received or "
+          />
+          <TextBox />
+        </div>
+      );
+    } else if (type == "email") {
+      return (
+        <div className="d-flex flex-column gap-2">
+          <TextComponent text="Email" size="15px" font="700" />
+          <TextComponent
+            text="We have sent the OTP to your email please open it and authenticate your email"
+            size="15px"
+            font="500"
+          />
+          <TextComponent text={data[0].email} size="15px" font="500" />
+          <LinkButton
+            title="Click Here To Resend"
+            text="Please press on done if you received the email or"
+          />
+        </div>
+      );
+    }
   };
   return (
     <div className="d-flex flex-column  gap-5 ">
@@ -84,13 +146,33 @@ const TestComponents = () => {
 
       <SectionTitle title="BASIC INFORMATION" />
 
-      {/* <ModalComponent  title="Sent Successfully" description="Before we continue the application we need to authenticate the email and the phone number you provided">
-  <ExpandableBox type="phone" isRounded={true}  data={data[0].phone}/>
-  <ExpandableBox type="email" isRounded={true}  data={data[0].email} />
-</ModalComponent> */}
+      {/* <ModalComponent
+        title="Sent Successfully"
+        description="Before we continue the application we need to authenticate the email and the phone number you provided"
+      >
+        <ExpandableBox
+          isRounded={true}
+          collapsed={collapsed("phone")}
+          expanded={expanded("phone")}
+        />
+        <ExpandableBox
+          isRounded={true}
+          collapsed={collapsed("email")}
+          expanded={expanded("email")}
+        />
+      </ModalComponent> */}
 
-      <DateTime  width="50%"/>
-      <PhoneNumber width="50%"/>
+
+
+      {/* <ModalComponent
+       title="Paid Successfully"
+       description="You will receive an email from us very soon"
+      >
+
+      </ModalComponent> */}
+
+      <DateTime width="50%" />
+      <PhoneNumber width="50%" />
       <SquareCheckBox text="test" />
       <DocumentUpload text="test" />
 
@@ -106,9 +188,15 @@ const TestComponents = () => {
 
       <AUDButton icon="/images/homeicon.svg" text="Back To Main" />
 
-      <LinkButton title="CONTINUE TO APPLY" underlined={true} linkTo="https://fonts.google.com/specimen/Raleway" />
-      <LinkButton title="CONTINUE TO APPLY" linkTo="https://fonts.google.com/specimen/Raleway" />
-
+      <LinkButton
+        title="CONTINUE TO APPLY"
+        underlined={true}
+        linkTo="https://fonts.google.com/specimen/Raleway"
+      />
+      <LinkButton
+        title="CONTINUE TO APPLY"
+        linkTo="https://fonts.google.com/specimen/Raleway"
+      />
     </div>
   );
 };

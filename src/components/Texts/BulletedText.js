@@ -1,10 +1,11 @@
-import React from 'react';
+import React from "react";
 
-const BulletedText = ({ items }) => {
+const BulletedText = ({ items, size }) => {
   return (
     <ul>
       {items.map((item, index) => (
-        <li key={index}>{item.text}
+        <li style={{ fontSize: size }} key={index}>
+          {item.text}
           {item.items && item.items.length > 0 && (
             <ul className='circle-bullets'>
               {item.items.map((subItem, subIndex) => (

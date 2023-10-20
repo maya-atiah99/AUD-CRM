@@ -10,12 +10,12 @@ const ShowInterestFormContainer = () => {
         <TextComponent
           text='WELCOME TO THE ONLINE ADMISSIONS PORTAL '
           font='800'
-          size='25px'
+          size='24px'
         />
         <TextComponent
           text='AT THE AMERICAN UNIVERSITY IN DUBAI!'
           font='800'
-          size='25px'
+          size='24px'
         />
       </div>
 

@@ -651,7 +651,7 @@ ul {
   grid-column-gap: 10px;
 }
 
-@media screen and (max-width: 1460px) {
+@media screen and (max-width: 1500px) {
   .show-interest-form {
     gap: 10px;
   }
@@ -680,5 +680,10 @@ ul {
   }
   .react-tel-input .form-control {
     height: 30px !important;
+  }
+  .showInterest-subContainer {
+  
+    height: 95%;
+ 
   }
 }

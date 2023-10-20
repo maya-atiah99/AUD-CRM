@@ -622,16 +622,11 @@ ul {
 }
 
 .horizontal {
-  width: 2px;
-  height: 80vh;
-  background: linear-gradient(
-    359deg,
-    #1b224c49 50%,
-    transparent 50%,
-    transparent
-  );
-  background-size: 8px 1px;
-  opacity: 0.6;
+  width: 2px; 
+  height: 75vh ;
+  background: transparent;
+  border-left: 2px dashed rgba(0, 0, 0, 0.23);
+  
 }
 
 /********Show Interest Form*********/

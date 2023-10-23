@@ -36,12 +36,12 @@ const ShowInterestForm = () => {
       <div className='d-flex justify-content-between '>
         <LinkButton
           title='CONTINUE TO APPLY'
-          linkTo='https://fonts.google.com/specimen/Raleway'
+          linkTo='/register'
           underlined={true}
           required={true}
         />
 
-        <AUDButton text='Submit Form' required={true} />
+        <AUDButton text='Submit Form' required={true}  />
       </div>
     </div>
   );

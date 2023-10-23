@@ -25,7 +25,7 @@ const RegisterContainer = ({ activeStep, steps, lastStep }) => {
           <RegisterFormStep2 />
         ) : activeStep == "2" ? (
           <RegisterFormStep3 />
-        ) : activeStep == "0" ? (
+        ) : activeStep == "3" ? (
           <RegisterFormStep4 />
         ) : (
           ""

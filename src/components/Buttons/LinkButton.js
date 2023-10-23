@@ -1,7 +1,7 @@
-import React from 'react';
+import React from "react";
 
 const LinkButton = ({ text, title, linkTo, underlined }) => {
-  const linkClass = underlined ? 'underlined-link' : 'linktext';
+  const linkClass = underlined ? "underlined-link" : "linktext";
 
   return (
     <div className='d-flex align-items-center'>

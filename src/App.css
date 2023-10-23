@@ -123,7 +123,7 @@ label {
 .required {
   color: #f3223c;
   padding-left: 5px;
-  font-size: 20px;
+  font-size: 22px;
 }
 
 .textBox-container {
@@ -220,7 +220,7 @@ label {
 
 .file-input-container {
   border-radius: 5px;
-  height: 100px;
+  /* height: 100px; */
   border: 1px solid #1b224c31;
   padding: 30px;
   display: flex;
@@ -239,15 +239,16 @@ label {
 
 /***Modal****/
 .modal-container {
-  position: fixed;
+  position:fixed;
+  padding: 30px 50px;
   top: 0;
   right: 0;
   display: flex;
   justify-content: center;
   align-items: center;
   background-color: #00000029;
-  transform: "translate(-50%,-50%";
-  z-index: 1000;
+  /* transform: "translate(-50%,-50%"; */
+  /* z-index: 1000; */
   width: 100%;
   height: 100vh;
 }
@@ -257,8 +258,8 @@ label {
   padding: 30px 50px;
   background-color: #ffffff;
   border-radius: 10px;
-  height: 38rem;
-  width: 60rem;
+  height: 50rem;
+  /* width: 60rem; */
   display: flex;
   flex-direction: column;
   /* align-items: center; */
@@ -282,6 +283,10 @@ label {
   position: absolute;
   bottom: 30px;
   right: 40px;
+}
+.modal-content{
+  height: 95%;
+  overflow: auto;
 }
 
 /***Text component ***/
@@ -326,6 +331,8 @@ label {
   font-size: 16px;
   font-weight: bold;
   padding-left: 5px;
+  padding-right: 5px;
+  
   text-decoration: none;
 }
 
@@ -337,7 +344,19 @@ label {
   padding-left: 5px;
   cursor: pointer;
 }
-
+.blue-link{
+  color: #3886BD;
+text-transform: capitalize;
+font-weight: bold;
+font-size: 18px;
+padding-left: 5px;
+cursor: pointer;
+}
+.blue-link span{
+  font-size: 18px;
+    font-weight: 600;
+    color:#1b224c;
+}
 /*****Bulleted text******/
 li::marker {
   color: #1b224c;
@@ -580,18 +599,32 @@ ul {
   z-index: -1;
 }
 
-/****Horizantal line*****/
-.horizantalLine-container {
+/****verticsl line*****/
+.vertical-container {
   height: 10vh;
   display: flex;
   align-items: center;
 }
 
-.horizontal {
+.vertical {
   width: 2px;
   height: 75vh;
   background: transparent;
   border-left: 2px dashed rgba(0, 0, 0, 0.23);
+}
+
+/****Horizantal line*****/
+.horizontal-container {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.horizontal {
+  width: 75vw; /* Adjust the width as needed */
+  height: 2px;
+  background: transparent;
+  border-top: 2px dashed rgba(0, 0, 0, 0.23);
 }
 
 /********Show Interest Form*********/
@@ -644,6 +677,7 @@ ul {
   margin: 4rem;
   gap: 1.5rem;
 }
+
 
 /*******Register forms container*********/
 .registerForms-container {
@@ -701,16 +735,238 @@ ul {
 }
 
 /**********Academic information***************/
-.grid-academic-cont{
+.grid-academic-cont {
   display: grid;
   grid-template-columns: 3fr 4fr 3fr 2fr;
   grid-column-gap: 10px;
 }
 
-.grid-academic2-cont{
+.grid-academic2-cont {
   display: grid;
-  grid-template-columns: 1fr 1fr ;
+  grid-template-columns: 1fr 1fr;
   grid-column-gap: 10px;
+}
+
+/*********Regulation table******************/
+.regulations-container {
+  background: var(--unnamed-color-ffffff) 0% 0% no-repeat padding-box;
+  background: #ffffff 0% 0% no-repeat padding-box;
+  border: 1px solid #1b224c66;
+  border-radius: 5px;
+}
+.regulations-header {
+  height: 60px;
+  background: var(--unnamed-color-1b224c) 0% 0% no-repeat padding-box;
+  background: #1b224c2b 0% 0% no-repeat padding-box;
+  border-radius: 5px 5px 0px 0px;
+  font-weight: 800;
+  color: #1b224c;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+}
+.reg-sub-cont-header {
+  display: flex;
+  flex-direction: row;
+  gap: 3rem;
+}
+
+/*******Agreement table***************/
+table {
+  border: none;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+th {
+  background-color: #1b224c1e;
+  color: #1b224c;
+  font-size: 16px;
+  font-weight: 800;
+  text-align: left;
+}
+
+td {
+  color: #1b224c;
+  opacity: 1;
+  font-size: 16px;
+  font-weight: 600;
+  text-align: center;
+  padding: 10px;
+}
+thead {
+  text-align: center;
+}
+
+thead tr th:first-child {
+  text-align: left;
+  padding: 20px 30px;
+}
+
+td:first-child {
+  text-align: left;
+  padding-left: 30px;
+}
+
+/******Agreement*******/
+.agreement-table-cont {
+  border-bottom: 1px solid #1b224c66;
+  border-left: 1px solid #1b224c66;
+  border-right: 1px solid #1b224c66;
+  padding-bottom: 35px;
+  display: flex;
+  flex-direction: column;
+  gap:2rem
+}
+.agreement-table-cont  div{
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  padding:0px 20px;
+}
+.agreement-container {
+  display: flex;
+  flex-direction: column;
+  gap: 2.5rem;
+}
+.agreement-title{
+  background-color: #1b224c1e;
+}
+/*******Academic files*********/
+.grid-acd-cont {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 2fr;
+  grid-column-gap: 10px;
+}
+/*****Tuition******/
+.tuition-container {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+/*********Registration page 4*************/
+.payment-container {
+  display: flex;
+  flex-direction: row;
+  padding: 0 10%;
+  justify-content: space-between;
+}
+.payment-subcontainer {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+.payment-subcontainer p {
+  font-weight: 600;
+  font-size: 17px;
+  margin-bottom: 0px;
+}
+/***********Payment***************/
+
+.tab-container {
+  border: 1px solid #1b224c27;
+  border-radius: 5px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.active-tab {
+  color: #1b224c;
+  font-weight: bold;
+  background-color: #39a3003c;
+  padding-top: 12px;
+  padding-bottom: 12px;
+  border-radius: 5px;
+  margin: 3px;
+  width: 250px;
+  text-align: center;
+}
+a {
+  text-decoration: none !important;
+}
+.inactive-tab {
+  color: #1b224c;
+  font-weight: 600;
+  padding-top: 12px;
+  padding-bottom: 12px;
+  width: 250px;
+  text-align: center;
+}
+.stroke {
+  width: 0px;
+  height: 24px;
+  border: 1px solid #000000;
+  opacity: 0.2;
+}
+
+/*****Card type********/
+.activeType {
+  background-color: #39a3003c;
+  border: 1px solid #00000033;
+  padding: 5px 10px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+.inActiveType {
+  border: 1px solid #00000033;
+  padding: 5px 10px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+/*******Invoice**********/
+.invoice-container {
+  background-image: url("../public/images/invoice-image.png");
+  background-repeat: no-repeat;
+  background-size: contain;
+  height: 500px;
+  width: 455px;
+  padding: 30px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.invoice-title {
+  align-self: center;
+}
+.app-fee-cont {
+  margin-bottom: 35px;
+  margin-left: 20px;
+  font-size: 18px;
+}
+.app-details {
+  display: flex;
+  justify-content: space-between;
+  padding: 0px 30px;
+}
+.app-details div:first-child {
+  color: #1b224c;
+  text-transform: capitalize;
+  font-size: 18px;
+  font-weight: 500;
+}
+.app-details div:nth-child(2) {
+  color: #1b224c;
+  text-transform: capitalize;
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.verticalPayment-container {
+  /* height: 10vh; */
+  display: flex;
+  align-items: center;
+}
+.verticalLine {
+  width: 2px;
+  height: 500px;
+  background: transparent;
+  border-left: 2px dashed rgba(0, 0, 0, 0.23);
 }
 /****************Media Query****************************/
 /**************************************/

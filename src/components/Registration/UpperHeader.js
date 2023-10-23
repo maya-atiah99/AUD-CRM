@@ -1,11 +1,7 @@
-import React from 'react'
+import React from "react";
 
 const UpperHeader = () => {
-  return (
-    <div className='upperHeader-container'>
-      
-    </div>
-  )
-}
+  return <div className='upperHeader-container'></div>;
+};
 
-export default UpperHeader
+export default UpperHeader;

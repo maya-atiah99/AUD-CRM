@@ -6,10 +6,6 @@ import TextComponent from "../../components/Texts/TextComponent";
 
 const RegisterPage = () => {
   const [activeStep, setActiveStep] = useState(0);
-  const [stepOne, setStepOne] = useState(false);
-  const [stepTwo, setStepTwo] = useState(false);
-  const [stepThree, setStepThree] = useState(false);
-  const [stepFour, setStepFour] = useState(false);
 
   const steps = [
     {
@@ -38,9 +34,12 @@ const RegisterPage = () => {
     } else {
       if (activeStep > 0) {
         setActiveStep(activeStep - 1);
+        window.scrollTo(0, 0);
+
       }
     }
   };
+
   return (
     <div>
       <UpperHeader />
@@ -65,13 +64,21 @@ const RegisterPage = () => {
           steps={steps}
           lastStep={activeStep === steps.length - 1}
         />
+        <div style={{ marginLeft: "auto" }}>
         {activeStep !== steps.length - 1 && (
           <AUDButton
             text='Continue To The Next Step'
             handleOnClick={() => handleChange(true)}
           />
         )}
+        {activeStep === 3 &&  <AUDButton
+            text='Go Back To Programs Page'
+            handleOnClick={() => setActiveStep(0)}
+          />}
+        </div>
+       
       </div>
+      
     </div>
   );
 };

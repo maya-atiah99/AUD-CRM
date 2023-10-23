@@ -1,11 +1,19 @@
-import React from 'react';
+import React from "react";
 
-const TextArea = ({ label, required, value, setValue, rows, cols, placeholder }) => {
+const TextArea = ({
+  label,
+  required,
+  value,
+  setValue,
+  rows,
+  cols,
+  placeholder,
+}) => {
   return (
-    <div  className='textBox-container'>
-       <label htmlFor={label}>
+    <div className='textBox-container'>
+      <label htmlFor={label}>
         {label}
-        {required && <span className="required">*</span>}
+        {required && <span className='required'>*</span>}
       </label>
       <textarea
         id={label}

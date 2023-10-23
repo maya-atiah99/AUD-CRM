@@ -1,11 +1,7 @@
-import React from 'react'
+import React from "react";
 
 const CardType = () => {
-  return (
-    <div>
-      
-    </div>
-  )
-}
+  return <div></div>;
+};
 
-export default CardType
+export default CardType;

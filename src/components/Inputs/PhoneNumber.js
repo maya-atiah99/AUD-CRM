@@ -6,7 +6,7 @@ const PhoneNumber = ({ label, required, value, setValue, width }) => {
   const customStyles = {
     container: (base) => ({
       ...base,
-      width:`${width} !important`,
+      width: `${width} !important`,
     }),
   };
   const containerClass = `custom-phone-input-${width}`;
@@ -15,20 +15,20 @@ const PhoneNumber = ({ label, required, value, setValue, width }) => {
       {label ? (
         <label htmlFor={label}>
           {label}
-          <span className="required">*</span>
+          <span className='required'>*</span>
         </label>
       ) : (
         ""
       )}
       <PhoneInput
-        name="phone"
-        placeholder=""
+        name='phone'
+        placeholder=''
         value={value || "AE"}
         onChange={setValue}
-        defaultCountry="AE"
-        autoComplete="off"
+        defaultCountry='AE'
+        autoComplete='off'
         required={required}
-        // inputStyle={customStyles} 
+        // inputStyle={customStyles}
         className={containerClass}
       />
     </div>

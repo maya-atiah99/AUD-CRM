@@ -1,14 +1,20 @@
-import React from 'react'
-import RadioButton from '../Inputs/RadioButton'
+import React from "react";
+import RadioButton from "../Inputs/RadioButton";
 
-const RadioButtonGroup = ({label, required, options, selectedValue, onRadioChange}) => {
+const RadioButtonGroup = ({
+  label,
+  required,
+  options,
+  selectedValue,
+  onRadioChange,
+}) => {
   return (
-    <div className='radio-buttons-container' >
-       <label htmlFor={label} className='radioBtn-label'>
+    <div className='radio-buttons-container'>
+      <label htmlFor={label} className='radioBtn-label'>
         {label}
-        {required && <span className="required">*</span>}
+        {required && <span className='required'>*</span>}
       </label>
-        {options.map((option) => (
+      {options.map((option) => (
         <RadioButton
           key={option.value}
           label={option.label}
@@ -18,7 +24,7 @@ const RadioButtonGroup = ({label, required, options, selectedValue, onRadioChang
         />
       ))}
     </div>
-  )
-}
+  );
+};
 
-export default RadioButtonGroup
+export default RadioButtonGroup;

@@ -9,12 +9,12 @@ const DropDown = ({
   placeholder,
   width,
 }) => {
-  const [selectedOption, setSelectedOption] = useState(null);
-  const options = [
-    { value: "chocolate", label: "Chocolate" },
-    { value: "strawberry", label: "Strawberry" },
-    { value: "vanilla", label: "Vanilla" },
-  ];
+  // const [selectedOption, setSelectedOption] = useState(null);
+  // const options = [
+  //   { value: "chocolate", label: "Chocolate" },
+  //   { value: "strawberry", label: "Strawberry" },
+  //   { value: "vanilla", label: "Vanilla" },
+  // ];
 
   const CustomDropdownArrow = () => {
     return (
@@ -38,9 +38,9 @@ const DropDown = ({
         {required && <span className='required'>*</span>}
       </label>
       <Select
-        defaultValue={selectedOption}
-        onChange={setSelectedOption}
-        options={options}
+        // defaultValue={selectedOption}
+        // onChange={setSelectedOption}
+        options={data}
         required={required}
         styles={customStyles}
         components={{

@@ -2,6 +2,7 @@ import React from "react";
 import SubmitText from "./SubmitText";
 import AcadamicFiles from "./AcadamicFiles";
 import AcadamicInformation from "./AcadamicInformation";
+import PersonalStatement from "./PersonalStatement";
 
 const RegisterFormStep2 = () => {
   return (
@@ -9,6 +10,7 @@ const RegisterFormStep2 = () => {
       <SubmitText />
       <AcadamicInformation />
       <AcadamicFiles />
+      <PersonalStatement/>
     </div>
   );
 };

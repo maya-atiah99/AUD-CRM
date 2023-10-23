@@ -42,7 +42,7 @@ const Consent = () => {
       </div>
       <div className='d-flex'>
         <SquareCheckBox />
-        <LinkButton title='I AUThorize ' />
+        <LinkButton title='I Authorize ' />
         <TextComponent
           size='18px'
           font='600'

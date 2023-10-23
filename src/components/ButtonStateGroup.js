@@ -1,11 +1,7 @@
-import React from 'react'
+import React from "react";
 
 const ButtonStateGroup = () => {
-  return (
-    <div>
-      
-    </div>
-  )
-}
+  return <div></div>;
+};
 
-export default ButtonStateGroup
+export default ButtonStateGroup;

@@ -11,8 +11,8 @@ const RegisterFormStep1 = () => {
       <PersonalInformation />
       <MailingAddress />
       <ProgramInformation />
-      <ParentInformation/>
-      <Consent/>
+      <ParentInformation />
+      <Consent />
     </div>
   );
 };

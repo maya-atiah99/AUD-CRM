@@ -8,7 +8,7 @@ import RegisterPage from "./Pages/Registration/RegisterPage";
 function App() {
   return (
     <div >
-       {/* <TestComponents /> */}
+       {/* <TestComponents />  */}
   {/* <ShowInterest/> */}
   <RegisterPage/>
   

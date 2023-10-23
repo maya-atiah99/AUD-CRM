@@ -7,7 +7,7 @@ import AUDButton from "../Buttons/AUDButton";
 
 const ShowInterestForm = () => {
   return (
-    <div className="d-flex flex-column gap-2 ">
+    <div className='d-flex flex-column gap-2 '>
       <div className='grid-container'>
         <Dropdown width='100%' label='Title' />
         <TextBox width='100%' label='First Name' required={true} />
@@ -33,7 +33,7 @@ const ShowInterestForm = () => {
         <Dropdown width='100%' label='Selected Term' required={true} />
       </div>
       <Dropdown width='50%' label='Field Of Interest' required={true} />
-      <div className="d-flex justify-content-between ">
+      <div className='d-flex justify-content-between '>
         <LinkButton
           title='CONTINUE TO APPLY'
           linkTo='https://fonts.google.com/specimen/Raleway'

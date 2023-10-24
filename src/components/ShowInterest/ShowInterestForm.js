@@ -7,7 +7,7 @@ import AUDButton from "../Buttons/AUDButton";
 
 const ShowInterestForm = () => {
   return (
-    <div className='d-flex flex-column gap-2 '>
+    <div className='d-flex flex-column  '>
       <div className='grid-container'>
         <Dropdown width='100%' label='Title' />
         <TextBox width='100%' label='First Name' required={true} />

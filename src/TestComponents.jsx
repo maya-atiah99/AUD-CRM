@@ -158,12 +158,13 @@ const TestComponents = () => {
 
       <SectionTitle title='BASIC INFORMATION' /> */}
 
-      {/* <ModalComponent
+      <ModalComponent
         height='40rem'
         width='60rem'
         title='Sent Successfully'
         description='Before we continue the application we need to authenticate the email and the phone number you provided'
       >
+        <div  style={{ paddingLeft: "20px", paddingRight: "30px" }}>
         <ExpandableBox
           isRounded={true}
           collapsed={collapsed("phone")}
@@ -173,8 +174,10 @@ const TestComponents = () => {
           isRounded={true}
           collapsed={collapsed("email")}
           expanded={expanded("email")}
-        />
-      </ModalComponent> */}
+        /> 
+        </div>
+ 
+      </ModalComponent>
 
       {/* <ModalComponent title='American University In Dubai Reservation And Enrollment Agreement & Terms'>
         <div style={{ backgroundColor: "#1B224C" }}>

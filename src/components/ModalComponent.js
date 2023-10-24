@@ -26,7 +26,7 @@ const ModalComponent = ({
             onClick={onClose}
           />
         </div>
-        <div className='py-4'>
+        <div className='py-4'  style={{ paddingLeft: "20px", paddingTop: "30px" }}>
           {" "}
           <TextComponent text={description} size='18px' font='500' />{" "}
         </div>

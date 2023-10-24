@@ -25,11 +25,9 @@ const ShowInterestForm = () => {
       </div>
 
       <div className='grid-container2 '>
-        <TextBox
-          width='100%'
-          label='How Did You Hear About Us?'
-          required={true}
-        />
+     
+        <Dropdown width='100%' label='How Did You Hear About Us?' required={true} />
+      
         <Dropdown width='100%' label='Selected Term' required={true} />
       </div>
       <Dropdown width='50%' label='Field Of Interest' required={true} />

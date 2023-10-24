@@ -632,9 +632,9 @@ ul {
 
 /****verticsl line*****/
 .vertical-container {
-  /* height: 10vh;
+  height: 10vh;
   display: flex;
-  align-items: center; */
+  align-items: center;
 }
 
 .vertical {

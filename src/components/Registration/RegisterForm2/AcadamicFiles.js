@@ -12,6 +12,16 @@ import RoundedButton from "../../Buttons/RoundedButtons";
 
 const AcadamicFiles = () => {
   const [sections, setSections] = useState(1);
+  const [selectedOption, setSelectedOption] = useState("");
+
+  const [formData, setFormData] = useState([
+    {
+      test: "",
+      dateTaken: "",
+      registrationNo: "",
+      totalScore: "",
+    },
+  ]);
   const details = [
     {
       text: "Students who are native speakers and have obtained a secondary school diploma in the UK, US, Canada, Ireland, New Zealand or Australia;",
@@ -28,11 +38,11 @@ const AcadamicFiles = () => {
     { label: "TOEFL", value: "TOEFL" },
     { label: "EMSAT", value: "EMSAT" },
     { label: "PTE", value: "PTE" },
-    { label: "SAT", value: "EMSAT" },
+    { label: "SAT", value: "SAT" },
   ];
   const collapsed = () => {
     return (
-      <div className='d-flex flex-column'>
+      <div className='d-flex flex-column title-hover'>
         <TextComponent text='Further Details' size='20px' font='800' />
       </div>
     );
@@ -40,49 +50,54 @@ const AcadamicFiles = () => {
   const expanded = () => {
     return (
       <div className='d-flex flex-column'>
-        <TextComponent text='Further Details' size='20px' font='800' />
+        <TextComponent
+          text='Further Details'
+          size='20px'
+          font='800'
+          hover={true}
+        />
         <TextComponent text='Phone Number' size='18px' font='600' />
         <BulletedText items={details} />
       </div>
     );
   };
   const addSection = () => {
+    setFormData([
+      ...formData,
+      {
+        test: "",
+        dateTaken: "",
+        registrationNo: "",
+        totalScore: "",
+      },
+    ]);
     setSections(sections + 1);
   };
+
+  const handleFieldChange = (sectionIndex, field, value) => {
+    const updatedFormData = [...formData];
+    updatedFormData[sectionIndex][field] = value;
+    setFormData(updatedFormData);
+  };
+  const handleRadioChange = (e) => {
+    setSelectedOption(e.target.value);
+  };
+
   return (
     <div className='form-subcontainers'>
       <SectionTitle
         title='ACADEMIC IELTS/TOEFL/EMSAT/PTE SCORE/SAT'
         isTaken={true}
       />
-      <ExpandableBox
-        // isRounded={true}
-        collapsed={collapsed()}
-        expanded={expanded()}
-      />
-      <div className='form-subcontainers'>
-        <RadioButtonGroup label='Choose Test :' options={test} />
-        <DocumentUpload
-          text='Upload The Academic Document'
-          required={true}
-          height='100px'
-          label='Upload Document'
-        />
-        <div className='grid-acd-cont'>
-          <DateTime width='100%' label='Date Taken' required={true} />
-          <TextBox width='100%' label='Registration No' required={true} />
-          <TextBox width='100%' label='Total Score' required={true} />
-        </div>
-        <RoundedButton
-          icon='/images/plusicon.svg'
-          text='Add More'
-          handleOnClick={addSection}
-        />
-      </div>
-
-      {[...Array(sections)].map((_, index) => (
+      <ExpandableBox collapsed={collapsed()} expanded={expanded()} />
+      {formData.map((section, index) => (
         <div key={index} className='form-subcontainers'>
-          <RadioButtonGroup label='Choose Test :' options={test} />
+          <RadioButtonGroup
+            label='Choose Test :'
+            options={test}
+            selectedValue={selectedOption}
+            onRadioChange={handleRadioChange}
+          />
           <DocumentUpload
             text='Upload The Academic Document'
             required={true}
@@ -90,17 +105,42 @@ const AcadamicFiles = () => {
             label='Upload Document'
           />
           <div className='grid-acd-cont'>
-            <DateTime width='100%' label='Date Taken' required={true} />
-            <TextBox width='100%' label='Registration No' required={true} />
-            <TextBox width='100%' label='Total Score' required={true} />
+            <DateTime
+              width='100%'
+              label='Date Taken'
+              required={true}
+              value={section.dateTaken}
+              onChange={(value) => handleFieldChange(index, "dateTaken", value)}
+            />
+            <TextBox
+              width='100%'
+              label='Registration No'
+              required={true}
+              value={section.registrationNo}
+              onChange={(value) =>
+                handleFieldChange(index, "registrationNo", value)
+              }
+            />
+            <TextBox
+              width='100%'
+              label='Total Score'
+              required={true}
+              value={section.totalScore}
+              onChange={(value) =>
+                handleFieldChange(index, "totalScore", value)
+              }
+            />
           </div>
-          <RoundedButton
-            icon='/images/plusicon.svg'
-            text='Add More'
-            handleOnClick={addSection}
-          />
         </div>
       ))}
+      {/* "Add More" button in the last section */}
+      <div className='form-subcontainers'>
+        <RoundedButton
+          icon='/images/plusicon.svg'
+          text='Add More'
+          handleOnClick={addSection}
+        />
+      </div>
     </div>
   );
 };

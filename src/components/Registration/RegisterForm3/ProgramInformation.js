@@ -14,7 +14,7 @@ const ProgramInformation = () => {
   ];
   return (
     <div className='form-subcontainers'>
-      <SectionTitle title='PROGRAM INFORMATION' />
+      <SectionTitle title='PROGRAM INFORMATION' size='18px' font='600' />
       <BulletedText items={details} />
       <SquareCheckBox text='If I am accepted by The American University in Dubai (AUD),' />
     </div>

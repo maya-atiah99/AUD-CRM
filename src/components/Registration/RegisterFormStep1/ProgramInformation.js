@@ -1,14 +1,12 @@
-import React from "react";
+import React, { useState } from "react";
 import SectionTitle from "../../Texts/SectionTitle";
 import RadioButtonGroup from "../../Inputs/RadioButtonGroup";
 import DropDown from "../../Inputs/DropDown";
 import TextBox from "../../Inputs/TextBox";
 
 const ProgramInformation = () => {
-  // const [selectedOption, setSelectedOption] = useState("option1");
-  // const handleRadioChange = (e) => {
-  //     setSelectedOption(e.target.value);
-  //   };
+  const [selectedOption, setSelectedOption] = useState("");
+
   const startYourApplicationOptions = [
     { label: "Undergraduate", value: "Undergraduate" },
     { label: "Graduate", value: "Graduate" },
@@ -19,20 +17,24 @@ const ProgramInformation = () => {
     { label: "Exchange Student", value: "Exchange Student" },
     { label: "Clinton Scholar", value: "Clinton Scholar" },
   ];
+
+  const handleRadioChange = (e) => {
+    setSelectedOption(e.target.value);
+  };
   return (
     <div className='form-subcontainers'>
       <SectionTitle title='PROGRAM INFORMATION' dotted={true} />
       <RadioButtonGroup
         options={startYourApplicationOptions}
-        //  selectedValue={selectedOption}
-        //  onRadioChange={handleRadioChange}
+        selectedValue={selectedOption}
+        onRadioChange={handleRadioChange}
         label='Start Your Application'
         required={true}
       />
       <RadioButtonGroup
         options={ApplyingAsOptions}
-        //  selectedValue={selectedOption}
-        //  onRadioChange={handleRadioChange}
+        selectedValue={selectedOption}
+        onRadioChange={handleRadioChange}
         label='Applying As'
         required={true}
       />

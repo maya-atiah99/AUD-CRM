@@ -30,7 +30,7 @@ const ImportantNotices = () => {
   return (
     <div className='form-subcontainers'>
       <SectionTitle title='IMPORTANT NOTICES' />
-      <BulletedText items={details} />
+      <BulletedText items={details} size='18px' font='600' />
       <SquareCheckBox text='If I am accepted by The American University in Dubai (AUD),' />
     </div>
   );

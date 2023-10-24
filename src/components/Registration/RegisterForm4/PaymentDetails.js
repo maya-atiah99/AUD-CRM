@@ -1,22 +1,20 @@
 import React, { useState } from "react";
 import TabButton from "../../Buttons/TabButton";
-import SectionTitle from "../../Texts/SectionTitle"
+import SectionTitle from "../../Texts/SectionTitle";
 import CardDetails from "./CardDetails";
 const PaymentDetails = () => {
   const [selected, setSelected] = useState("card");
 
   return (
-    <div className="payment-subcontainer">
-    <SectionTitle title="PAYMENT DETAILS" noLine={true} />
+    <div className='payment-subcontainer'>
+      <SectionTitle title='PAYMENT DETAILS' noLine={true} />
       <div className='tab-container'>
         <TabButton
           active={"card" === selected ? true : false}
           text='Pay by Card'
           handleOnClick={() => setSelected("card")}
         />
-        <div className="stroke">
-
-        </div>
+        <div className='stroke'></div>
         <TabButton
           active={"other" === selected ? true : false}
           text='Other Payment Method'
@@ -24,9 +22,8 @@ const PaymentDetails = () => {
         />
       </div>
       <div>
-        {selected === "card" && <CardDetails/>}
+        {selected === "card" && <CardDetails />}
         {selected === "other" && "other"}
-
       </div>
     </div>
   );

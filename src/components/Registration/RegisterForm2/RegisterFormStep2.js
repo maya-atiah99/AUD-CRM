@@ -6,11 +6,11 @@ import PersonalStatement from "./PersonalStatement";
 
 const RegisterFormStep2 = () => {
   return (
-    <div className='form-subcontainer'>
+    <div className='form-subcontainer '>
       <SubmitText />
       <AcadamicInformation />
       <AcadamicFiles />
-      <PersonalStatement/>
+      <PersonalStatement />
     </div>
   );
 };

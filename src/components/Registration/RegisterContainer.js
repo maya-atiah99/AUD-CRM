@@ -7,7 +7,6 @@ import RegisterFormStep3 from "./RegisterForm3/RegisterFormStep3";
 import RegisterFormStep4 from "./RegisterForm4/RegisterFormStep4";
 
 const RegisterContainer = ({ activeStep, steps, lastStep }) => {
-  console.log("steps.step", activeStep);
   return (
     <div>
       <div className='aud-app-header'>

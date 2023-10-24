@@ -35,7 +35,7 @@ const EnrollmentAgreement = () => {
     { text: "I understand the refund policy is as follows:" },
   ];
   return (
-    <div>
+    <div style={{ paddingLeft: "50px", paddingRight: "50px" }}>
       <BulletedText items={rules} />
     </div>
   );

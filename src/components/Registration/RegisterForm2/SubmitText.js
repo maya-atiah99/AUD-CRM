@@ -18,7 +18,7 @@ const SubmitText = () => {
   return (
     <div>
       <TextComponent text='Please submit' size='18px' font='800' />
-      <BulletedText items={submitTexts} size="15px"/>
+      <BulletedText items={submitTexts} size='18px' font='600' />
     </div>
   );
 };

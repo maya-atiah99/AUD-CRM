@@ -40,6 +40,11 @@ const Consent = () => {
           items={[{ text: "dates of attendance and credentials awarded." }]}
         />
       </div>
+      <TextComponent
+        size='18px'
+        font='600'
+        text='Any other education record is classified as non-directory information and can not be disclosed to any party without the student’s consent.'
+      />
       <div className='d-flex'>
         <SquareCheckBox />
         <LinkButton title='I Authorize ' />

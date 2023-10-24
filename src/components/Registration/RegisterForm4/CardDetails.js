@@ -17,12 +17,12 @@ const CardDetails = () => {
           <CardTypeTab
             active={"visa" === cardType ? true : false}
             icon='/images/visa.png'
-            handleOnClick={()=>setCardType("visa")}
+            handleOnClick={() => setCardType("visa")}
           />
           <CardTypeTab
             active={"master card" === cardType ? true : false}
             icon='/images/masterCard.png'
-            handleOnClick={()=>setCardType("master card")}
+            handleOnClick={() => setCardType("master card")}
           />
         </div>
       </div>
@@ -32,7 +32,7 @@ const CardDetails = () => {
         <DropDown label='Expiration Month' required={true} />
         <TextBox label='CVV' required={true} />
       </div>
-      <AUDButton text='Pay Now' width="100%" />
+      <AUDButton text='Pay Now' width='100%' />
     </div>
   );
 };

@@ -18,7 +18,7 @@ const ModalComponent = ({
         style={{ width: width, height: height }}
       >
         <div>
-          <h2>{title}</h2>
+          <h2 style={{ paddingLeft: "20px", paddingTop: "30px" }}>{title}</h2>
           <img
             src='/images/closeicon.svg'
             alt='close icon'

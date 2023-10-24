@@ -25,7 +25,7 @@ const PhoneNumber = ({ label, required, value, setValue, width }) => {
         placeholder=''
         value={value || "AE"}
         onChange={setValue}
-        defaultCountry='AE'
+        country={"AE"}
         autoComplete='off'
         required={required}
         // inputStyle={customStyles}

@@ -41,7 +41,7 @@ const ShowInterestForm = () => {
           required={true}
         />
 
-        <AUDButton text='Submit Form' required={true}  />
+        <AUDButton text='Submit Form' required={true} />
       </div>
     </div>
   );

@@ -25,7 +25,7 @@ const HousingFees = () => {
     },
   ];
   return (
-    <div className="tuition-container">
+    <div className='tuition-container'>
       <SectionTitle title='(2) HOUSING FEES AND CHARGES' />
       <TextComponent
         size='18px'

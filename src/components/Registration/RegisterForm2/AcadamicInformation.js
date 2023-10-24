@@ -15,11 +15,7 @@ const AcadamicInformation = () => {
           required={true}
         />
         <DropDown width='100%' label='School/University Name' required={true} />
-        <DropDown
-          width='100%'
-          label='High School Diploma / Bachelor Diploma Type'
-          required={true}
-        />
+        <DropDown width='100%' label='High School Diploma' required={true} />
         <DateTime width='100%' label='Graduation Year' required={true} />
       </div>
       <div className='grid-academic2-cont'>
@@ -29,16 +25,17 @@ const AcadamicInformation = () => {
           cols='3'
         />
         <DocumentUpload
-         text='Upload The Academic Document' 
-        required={true}  
-        height="100px"
-        label="Upload Document"/>
+          text='Upload The Academic Document'
+          required={true}
+          height='100px'
+          label='Upload Document'
+        />
       </div>
       <TextArea
-          label='If You Are Not Currently Enrolled In A School, Please Describe Your Activities Since You Last Attended.'
-          rows='4'
-          cols='3'
-        />
+        label='If You Are Not Currently Enrolled In A School, Please Describe Your Activities Since You Last Attended.'
+        rows='4'
+        cols='3'
+      />
     </div>
   );
 };

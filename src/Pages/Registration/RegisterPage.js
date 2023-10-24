@@ -3,6 +3,7 @@ import UpperHeader from "../../components/Registration/UpperHeader";
 import AUDButton from "../../components/Buttons/AUDButton";
 import RegisterContainer from "../../components/Registration/RegisterContainer";
 import TextComponent from "../../components/Texts/TextComponent";
+import { useNavigate } from "react-router-dom";
 
 const RegisterPage = () => {
   const [activeStep, setActiveStep] = useState(0);
@@ -35,7 +36,6 @@ const RegisterPage = () => {
       if (activeStep > 0) {
         setActiveStep(activeStep - 1);
         window.scrollTo(0, 0);
-
       }
     }
   };
@@ -44,6 +44,9 @@ const RegisterPage = () => {
     <div>
       <UpperHeader />
       <div className='registerPage-container'>
+        {activeStep === 0 && (
+          <AUDButton text='Back To Main' to='/' icon='/images/homeicon.svg' />
+        )}
         {activeStep !== 0 && (
           <AUDButton
             text='Back To Main'
@@ -65,20 +68,20 @@ const RegisterPage = () => {
           lastStep={activeStep === steps.length - 1}
         />
         <div style={{ marginLeft: "auto" }}>
-        {activeStep !== steps.length - 1 && (
-          <AUDButton
-            text='Continue To The Next Step'
-            handleOnClick={() => handleChange(true)}
-          />
-        )}
-        {activeStep === 3 &&  <AUDButton
-            text='Go Back To Programs Page'
-            handleOnClick={() => setActiveStep(0)}
-          />}
+          {activeStep !== steps.length - 1 && (
+            <AUDButton
+              text='Continue To The Next Step'
+              handleOnClick={() => handleChange(true)}
+            />
+          )}
+          {activeStep === 3 && (
+            <AUDButton
+              text='Go Back To Programs Page'
+              handleOnClick={() => setActiveStep(0)}
+            />
+          )}
         </div>
-       
       </div>
-      
     </div>
   );
 };

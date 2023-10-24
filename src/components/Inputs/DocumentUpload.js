@@ -8,7 +8,7 @@ const DocumentUpload = ({
   limit,
   restriction,
   width,
-  height
+  height,
 }) => {
   return (
     <div>
@@ -17,7 +17,10 @@ const DocumentUpload = ({
         {required && <span className='required'>*</span>}
       </label>
 
-      <label className='file-input-container' style={{ width: width,height:height }}>
+      <label
+        className='file-input-container'
+        style={{ width: width, height: height }}
+      >
         <img src='/images/Layer 25.svg' alt='layer' />
         <input type='file' className='file-input' />
         <p className='p-style'> {text} </p>

@@ -20,7 +20,7 @@ const Invoice = () => {
         </div>
         <div className='app-fee-cont'>
           <label>Application Fee</label>
-          <SectionTitle title='420.00 AED' noLine={true} />
+          <div>420.00 AED</div>
         </div>
       </div>
     </div>

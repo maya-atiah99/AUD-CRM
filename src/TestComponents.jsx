@@ -107,13 +107,18 @@ const TestComponents = () => {
             title='Click Here To Resend'
             text='Please press on done if you received the email or'
           />
-          
         </div>
       );
     }
   };
   return (
     <div className=' '>
+      <RadioButtonGroup
+        options={radioOptions}
+        selectedValue={selectedOption}
+        onRadioChange={handleRadioChange}
+      />
+
       {/* <AudAppHeader />
 
       <RadioButtonGroup
@@ -209,13 +214,13 @@ const TestComponents = () => {
         linkTo='https://fonts.google.com/specimen/Raleway'
       /> */}
 
-      <ModalComponent
+      {/* <ModalComponent
         // height='fir-content'
         width='90%'
         title='American University In Dubai Reservation And Enrollment Agreement & Terms'
       >
         <Agreement />
-      </ModalComponent>
+      </ModalComponent> */}
     </div>
   );
 };

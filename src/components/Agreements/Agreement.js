@@ -7,8 +7,8 @@ import AUDButton from "../Buttons/AUDButton";
 
 const Agreement = () => {
   return (
-    <div className="agreement-container">
-      <div className="agreement-title">
+    <div className='agreement-container'>
+      <div className='agreement-title'>
         <TextComponent
           size='18px'
           font='800'
@@ -18,8 +18,8 @@ const Agreement = () => {
       <EnrollmentAgreement />
       <Tuition />
       <HousingFees />
-      <div style={{marginLeft: "auto"}}>
-      <AUDButton text='Download Agreement' />
+      <div style={{ marginLeft: "auto" }}>
+        <AUDButton text='Download Agreement' />
       </div>
     </div>
   );

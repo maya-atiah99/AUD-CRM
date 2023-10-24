@@ -9,12 +9,9 @@ const RegisterFormStep3 = () => {
   const [showModal, setShowModal] = useState(false);
 
   useEffect(() => {
-    if (showModal)
-      document.body.style.overflowY = 'hidden';
-    else
-      document.body.style.overflowY= 'scroll';
-
-   }, [showModal]);
+    if (showModal) document.body.style.overflowY = "hidden";
+    else document.body.style.overflowY = "scroll";
+  }, [showModal]);
 
   return (
     <>

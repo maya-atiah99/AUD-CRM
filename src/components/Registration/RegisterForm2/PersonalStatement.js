@@ -5,9 +5,7 @@ import TextArea from "../../Inputs/TextArea";
 const PersonalStatement = () => {
   return (
     <div className='form-subcontainers'>
-      <SectionTitle
-        title='PERSONAL STATEMENT'
-      />
+      <SectionTitle title='PERSONAL STATEMENT' />
       <TextArea
         label='The Personal Statement Is An Opportunity To Highlight Aspects Of Your Background To Support Your Application'
         rows='4'

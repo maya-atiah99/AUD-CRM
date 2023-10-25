@@ -1,6 +1,6 @@
 import React from "react";
 
-const TextBox = ({ label, required, value, setValue, width, placeholder }) => {
+const TextBox = ({ label, required, value,onChange, width, placeholder }) => {
   return (
     <div className='textBox-container'>
       <label htmlFor={label}>
@@ -12,9 +12,8 @@ const TextBox = ({ label, required, value, setValue, width, placeholder }) => {
         id={label}
         required={required}
         value={value}
-        onChange={(e) => setValue(e.target.value)}
+        onChange={onChange}
         style={{ width: width }}
-        placeholder={placeholder}
         className='text-input'
       />
     </div>

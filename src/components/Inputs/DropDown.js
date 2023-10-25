@@ -1,20 +1,29 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Select from "react-select";
+import { useFetchDropDownTypes } from "../../Hooks/DropDownTypes";
+
 const DropDown = ({
   label,
   required,
   value,
   setValue,
-  data,
   placeholder,
   width,
+  type,
 }) => {
   // const [selectedOption, setSelectedOption] = useState(null);
-  // const options = [
-  //   { value: "chocolate", label: "Chocolate" },
-  //   { value: "strawberry", label: "Strawberry" },
-  //   { value: "vanilla", label: "Vanilla" },
-  // ];
+  const { data: options, refetch } = useFetchDropDownTypes(type || null);
+
+  const formattedOptions = options?.data
+    ? options?.data?.map((option) => ({
+        value: option.value,
+        label: option.text,
+      }))
+    : [];
+
+  useEffect(() => {
+    refetch();
+  }, [type]);
 
   const CustomDropdownArrow = () => {
     return (
@@ -23,12 +32,12 @@ const DropDown = ({
       </div>
     );
   };
+
   const customStyles = {
     dropdownIndicator: (base) => ({
       ...base,
       padding: "4px",
     }),
-    // You can also adjust other styles as needed.
   };
 
   return (
@@ -38,9 +47,7 @@ const DropDown = ({
         {required && <span className='required'>*</span>}
       </label>
       <Select
-        // defaultValue={selectedOption}
-        // onChange={setSelectedOption}
-        options={data}
+        options={formattedOptions}
         required={required}
         styles={customStyles}
         components={{
@@ -50,4 +57,5 @@ const DropDown = ({
     </div>
   );
 };
+
 export default DropDown;

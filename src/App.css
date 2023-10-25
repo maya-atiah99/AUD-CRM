@@ -640,7 +640,12 @@ ul {
 .vertical {
   width: 2px;
   height: 75vh;
-  background: linear-gradient( 170deg, #1b224c49 50%, transparent 50%, transparent );
+  background: linear-gradient(
+    170deg,
+    #1b224c49 50%,
+    transparent 50%,
+    transparent
+  );
   background-size: 1px 20px;
 }
 

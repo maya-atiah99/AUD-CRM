@@ -13,9 +13,20 @@ const AcadamicInformation = () => {
           width='100%'
           label='Country Your Current University'
           required={true}
+          type='4'
         />
-        <DropDown width='100%' label='School/University Name' required={true} />
-        <DropDown width='100%' label='High School Diploma' required={true} />
+        <DropDown
+          width='100%'
+          label='School/University Name'
+          required={true}
+          type='4'
+        />
+        <DropDown
+          width='100%'
+          label='High School Diploma'
+          required={true}
+          type='7'
+        />
         <DateTime width='100%' label='Graduation Year' required={true} />
       </div>
       <div className='grid-academic2-cont'>

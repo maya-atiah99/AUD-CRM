@@ -9,13 +9,13 @@ const ParentInformation = () => {
     <div className='form-subcontainers'>
       <SectionTitle title='PARENT OR GUARDIAN INFORMATION' />
       <div className='grid-personal1-cont'>
-        <DropDown width='100%' label='Guardian Relation' />
+        <DropDown width='100%' label='Guardian Relation' type='6' />
         <TextBox width='100%' label='Guardian Name' />
         <PhoneNumber width='50%' label='Mobile' />
         <TextBox width='100%' label='Email Address' />
       </div>
       <div className='grid-personal1-cont'>
-        <DropDown width='100%' label='Guardian Relation' />
+        <DropDown width='100%' label='Guardian Relation' type='6' />
         <TextBox width='100%' label='Guardian Name' />
         <PhoneNumber width='50%' label='Mobile' />
         <TextBox width='100%' label='Email Address' />

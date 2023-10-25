@@ -20,7 +20,7 @@ const ShowInterestFormContainer = () => {
       </div>
 
       <SectionTitle title='BASIC INFORMATION' />
-      <ShowInterestForm />
+      <ShowInterestForm  />
     </div>
   );
 };

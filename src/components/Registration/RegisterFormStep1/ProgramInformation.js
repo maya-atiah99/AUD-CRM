@@ -39,7 +39,12 @@ const ProgramInformation = () => {
         required={true}
       />
       <div className='grid-programInfo-cont'>
-        <DropDown width='100%' label='Program Of Interest' required={true} />
+        <DropDown
+          width='100%'
+          label='Program Of Interest'
+          required={true}
+          type='5'
+        />
         <TextBox
           width='100%'
           label='Your Current Place Of Study (Transfer Students)'

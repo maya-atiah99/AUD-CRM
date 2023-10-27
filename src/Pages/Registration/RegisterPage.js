@@ -3,7 +3,6 @@ import UpperHeader from "../../components/Registration/UpperHeader";
 import AUDButton from "../../components/Buttons/AUDButton";
 import RegisterContainer from "../../components/Registration/RegisterContainer";
 import TextComponent from "../../components/Texts/TextComponent";
-import { useNavigate } from "react-router-dom";
 
 const RegisterPage = () => {
   const [activeStep, setActiveStep] = useState(0);

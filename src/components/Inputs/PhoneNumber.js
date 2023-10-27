@@ -1,19 +1,39 @@
-import React from "react";
+import React, { useState } from "react";
 import PhoneInput from "react-phone-input-2";
 import "react-phone-input-2/lib/style.css";
 
-const PhoneNumber = ({ label, required, value, setValue, width }) => {
-  const customStyles = {
-    container: (base) => ({
-      ...base,
-      width: `${width} !important`,
-    }),
-  };
+const PhoneNumber = ({
+  label,
+  required,
+  name,
+  value,
+  onChange,
+  width,
+  errors,
+  touched,
+}) => {
+  const [initialValue, setInitialValue] = useState(value);
+  // const customStyles = {
+  //   container: (base) => ({
+  //     ...base,
+  //     width: `${width} !important`,
+  //   }),
+  // };
+
   const containerClass = `custom-phone-input-${width}`;
+
+  const inputStyles = {
+    border: errors && touched ? "1px solid red" : "",
+  };
+  const handlePhoneChange = (phone) => {
+    setInitialValue(phone);
+    onChange(name, phone);
+  };
+
   return (
     <div>
       {label ? (
-        <label htmlFor={label}>
+        <label htmlFor={name}>
           {label}
           <span className='required'>*</span>
         </label>
@@ -21,16 +41,15 @@ const PhoneNumber = ({ label, required, value, setValue, width }) => {
         ""
       )}
       <PhoneInput
-        name='phone'
-        placeholder=''
-        value={value || "AE"}
-        onChange={setValue}
-        country={"AE"}
+        country={"ae"}
+        value={initialValue}
+        onChange={handlePhoneChange}
         autoComplete='off'
         required={required}
-        // inputStyle={customStyles}
-        className={containerClass}
+        className='phone-container'
+        // inputStyle={errors && touched && "1px solid red"}
       />
+
     </div>
   );
 };

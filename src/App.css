@@ -104,7 +104,14 @@ input[type="date"] {
 .text-input::placeholder {
   display: none;
 }
-
+.text-input-error {
+  background-color: transparent;
+  border-radius: 5px;
+  height: 38px;
+  border: 1px solid #F3223C;
+  /* opacity: 0.2; */
+  padding: 5px;
+}
 input[type="text"]:hover {
   border: 0.5px solid #1b224c5c;
   transition: 0.2s ease-in-out;
@@ -159,6 +166,9 @@ textarea:focus-visible {
 .custom-dropdown-arrow {
   color: #1b224c;
   width: 12px;
+}
+.css-qbdosj-Input:hover{
+  border: none;
 }
 /***Text with line*****/
 .title-with-line {
@@ -228,6 +238,7 @@ textarea:focus-visible {
 }
 
 .file-input-container {
+  position: relative;
   border-radius: 5px;
   /* height: 100px; */
   border: 1px solid #1b224c31;
@@ -236,7 +247,17 @@ textarea:focus-visible {
   flex-direction: row;
   align-items: center;
 }
-
+.file-input-container-upl{
+  position: relative;
+  border-radius: 5px;
+  /* height: 100px; */
+  border: 1px solid #1b224c31;
+  padding: 30px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  background-color: #020b581f;
+}
 .file-input-container:hover {
   cursor: pointer;
 }
@@ -248,6 +269,15 @@ textarea:focus-visible {
 .file-input-container p {
   font-size: 18px;
 }
+
+.close-document-icon{
+  position: absolute;
+  top:10px;
+  right: 20px;
+  color:#020a58 ;
+  opacity: 0.7;
+  font-size: 25px;
+}
 /***Modal****/
 .modal-container {
   position: fixed;
@@ -257,7 +287,8 @@ textarea:focus-visible {
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: #00000029;
+  background-color: #0000003b;
+
   /* transform: "translate(-50%,-50%"; */
   /* z-index: 1000; */
   width: 100%;
@@ -282,6 +313,7 @@ textarea:focus-visible {
   right: 16px;
   cursor: pointer;
   font-size: 20px;
+  opacity: 1;
 }
 
 .inner-modal-container h2 {
@@ -579,14 +611,32 @@ ul {
 }
 
 .css-g37w59-control {
-  border-color: #1b224c;
+  border-color: #1b224c !important;
 }
 
 .css-t3ipsp-control {
   border-color: #1b224c !important;
   box-shadow: none !important;
 }
+.css-zso92v-control{
+  border-color: #1b224c !important;
+  box-shadow: none !important;
+}
+.css-zso92v-control:focus{
+  border-color: #1b224c !important;
+  box-shadow: none !important;
+}
+.css-zso92v-control:focus-visible{
+  border-color:none !important;
+}
+.css-ugifqb-control:hover{
+  border: none !important;
+}
+.css-ugifqb-control{
+  border: none !important;
 
+  outline: none;
+}
 /****Show interest*****/
 .showInterest-container {
   position: fixed;

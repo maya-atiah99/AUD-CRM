@@ -91,7 +91,7 @@ const AcadamicFiles = () => {
       />
       <ExpandableBox collapsed={collapsed()} expanded={expanded()} />
       {formData.map((section, index) => (
-        <div key={index} className='form-subcontainers'>
+        <div key={index} className='form-subcontainers my-3'>
           <RadioButtonGroup
             label='Choose Test :'
             options={test}

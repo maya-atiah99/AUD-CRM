@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-
+import { AiOutlineClose } from "react-icons/ai";
 const ExpandableBox = ({ isRounded, expanded, collapsed }) => {
   const [isExpanded, setIsExpanded] = useState(false);
   const containerClassName = `collapsed-container ${
@@ -12,17 +12,16 @@ const ExpandableBox = ({ isRounded, expanded, collapsed }) => {
 
   return (
     <div>
-      {!isExpanded && (
-        <div className={containerClassName} onClick={toggleExpansion}>
-          {collapsed}
-        </div>
-      )}
+      <div className={containerClassName}>
+        {!isExpanded && <div onClick={toggleExpansion}>{collapsed}</div>}
+        {isExpanded && (
+          <div className='d-flex flex-column gap-2'>
+            <AiOutlineClose onClick={toggleExpansion} className='close-icon' />
 
-      {isExpanded && (
-        <div className='collapsed-container test' onClick={toggleExpansion}>
-          {expanded}
-        </div>
-      )}
+            {expanded}
+          </div>
+        )}
+      </div>
     </div>
   );
 };

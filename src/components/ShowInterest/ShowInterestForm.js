@@ -58,7 +58,7 @@ const ShowInterestForm = ({setshowVerifiedModal}) => {
           isSubmitting,
         }) => (
           <Form>
-          <div className='d-flex flex-column gap-2 '>
+          <div className='d-flex flex-column  '>
             <div className='grid-container'>
               <Dropdown
                 width='100%'
@@ -149,7 +149,7 @@ const ShowInterestForm = ({setshowVerifiedModal}) => {
             <div className='grid-container2 '>
               <PhoneNumber
                 styleType='formField'
-                width='50%'
+                width='100%'
                 label='Mobile'
                 required={true}
                 name='mobile'

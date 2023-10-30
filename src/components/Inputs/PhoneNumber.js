@@ -20,11 +20,17 @@ const PhoneNumber = ({
   //   }),
   // };
 
-  const containerClass = `custom-phone-input-${width}`;
+  // const containerClass = `custom-phone-input-${width}`;
 
-  const inputStyles = {
-    border: errors && touched ? "1px solid red" : "",
+  // const phoneInputStyle = {
+  //   width: width
+  // };
+
+  const inputStyle = {
+    width: '100%',
+    border: errors && touched ? '1px solid red' : '',
   };
+
   const handlePhoneChange = (phone) => {
     setInitialValue(phone);
     onChange(name, phone);
@@ -40,15 +46,15 @@ const PhoneNumber = ({
       ) : (
         ""
       )}
-      <PhoneInput
-        country={"ae"}
-        value={initialValue}
-        onChange={handlePhoneChange}
-        autoComplete='off'
-        required={required}
-        className='phone-container'
-        // inputStyle={errors && touched && "1px solid red"}
-      />
+   
+        <PhoneInput
+          country={"ae"}
+          value={initialValue}
+          onChange={handlePhoneChange}
+          autoComplete='off'
+          required={required}
+          inputStyle={inputStyle}
+        />
 
     </div>
   );

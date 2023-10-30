@@ -1,26 +1,39 @@
 import React, { useState } from "react";
 import { AiOutlineClose } from "react-icons/ai";
-const ExpandableBox = ({ isRounded, expanded, collapsed }) => {
+import TextComponent from "./Texts/TextComponent";
+
+const ExpandableBox = ({ isRounded, children, title, text }) => {
   const [isExpanded, setIsExpanded] = useState(false);
-  const containerClassName = `collapsed-container ${
+
+  const containerClassName = `expandable-card ${
     isRounded ? "roundedRadius" : ""
   }`;
 
   const toggleExpansion = () => {
-    setIsExpanded(!isExpanded);
+    setIsExpanded(true);
+  };
+
+  const toggleCollapse = () => {
+    setIsExpanded(false);
   };
 
   return (
-    <div>
-      <div className={containerClassName}>
-        {!isExpanded && <div onClick={toggleExpansion}>{collapsed}</div>}
-        {isExpanded && (
-          <div className='d-flex flex-column gap-2'>
-            <AiOutlineClose onClick={toggleExpansion} className='close-icon' />
-
-            {expanded}
-          </div>
-        )}
+    <div
+      className={`expandable-card ${isRounded ? "roundedRadius" : ""} ${
+        isExpanded ? "expanded" : ""
+      }`}
+    >
+      {isExpanded && (
+        <AiOutlineClose onClick={toggleCollapse} className='close-icon-exp' />
+      )}
+      <div onClick={toggleExpansion}>
+        <TextComponent text={title} size='20px' font='700' />
+        {isExpanded
+          ? " "
+          : text && <TextComponent text={text} size='15px' font='500' />}
+        <div className={`card-content  ${isExpanded ? "expanded" : ""}`}>
+          {children}
+        </div>
       </div>
     </div>
   );

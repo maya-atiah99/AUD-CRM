@@ -89,7 +89,9 @@ const AcadamicFiles = () => {
         title='ACADEMIC IELTS/TOEFL/EMSAT/PTE SCORE/SAT'
         isTaken={true}
       />
-      <ExpandableBox collapsed={collapsed()} expanded={expanded()} />
+      <ExpandableBox title='Further Details'>
+        <BulletedText items={details} />
+      </ExpandableBox>
       {formData.map((section, index) => (
         <div key={index} className='form-subcontainers my-3'>
           <RadioButtonGroup

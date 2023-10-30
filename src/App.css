@@ -357,7 +357,54 @@ textarea:focus-visible {
 .title-hover:hover {
   color: #f3223c !important;
 }
+.expandable-card {
+  width: 100%;
+  background-color: #020a581a;
+  padding: 15px 29px;
+  margin: 10px 0;
+  cursor: pointer;
+  border-radius: 5px;
+  position: relative;
+}
+ .close-icon-exp{
+  z-index: 1;
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  cursor: pointer;
+  font-size: 20px;
+  /* opacity: 1; */
+}
+.card {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+.card-content {
+  max-height: 0;
+  opacity: 0;
+}
+.expanded {
+  max-height:700px;
+  opacity: 1;
+}
 /***Phone Input****/
+.react-tel-input .form-control {
+  position: relative;
+  font-size: 14px;
+  letter-spacing: 0.01rem;
+  margin-top: 0 !important;
+  margin-bottom: 0 !important;
+  padding-left: 48px;
+  margin-left: 0;
+  background: transparent !important;
+  border: 1px solid #cacaca;
+  border-radius: 5px;
+  line-height: 25px;
+  height: 35px;
+  width: 343px ;
+  outline: none;
+}
 .form-control:focus {
   color: var(--bs-body-color);
   background-color: var(--bs-body-bg);
@@ -372,16 +419,25 @@ textarea:focus-visible {
 }
 
 .react-tel-input .form-control {
-  border: 1px solid #1b224c31 !important;
+  border: 1px solid #1b224c31;
   height: 38px !important;
-  width: 100% !important;
 }
 .react-tel-input .form-control:focus-visible {
-  outline: 0.8px solid #1b224c;
+  outline: 0.8px solid #1b224c ;
 }
-.custom-phone-input-100 {
-  width: 100% !important;
+
+.phone-input-25 {
+  width:25% !important;
 }
+
+.phone-input-50 {
+  width:50% !important;
+}
+
+.phone-input-100 {
+  width: 100%  !important;
+}
+
 
 /****Link*****/
 .linktext {
@@ -570,23 +626,7 @@ ul {
   opacity: 0.4;
 }
 
-/******Phone Number*********/
-.react-tel-input .form-control {
-  position: relative;
-  font-size: 14px;
-  letter-spacing: 0.01rem;
-  margin-top: 0 !important;
-  margin-bottom: 0 !important;
-  padding-left: 48px;
-  margin-left: 0;
-  background: transparent !important;
-  border: 1px solid #cacaca;
-  border-radius: 5px;
-  line-height: 25px;
-  height: 35px;
-  width: 343px !important;
-  outline: none;
-}
+
 
 /******select react*******/
 .css-tj5bde-Svg {

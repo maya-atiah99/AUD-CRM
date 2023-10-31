@@ -1,11 +1,13 @@
 import React from "react";
-import RadioButton from "../Inputs/RadioButton";
+
+import RadioButton from "../../components/Inputs/RadioButton";
 
 const RadioButtonGroup = ({
   label,
   required,
   options,
   selectedValue,
+  name,
   onRadioChange,
 }) => {
   return (
@@ -20,7 +22,7 @@ const RadioButtonGroup = ({
           label={option.label}
           value={option.value}
           checked={selectedValue === option.value}
-          handleOnChange={onRadioChange}
+          handleOnChange={() => onRadioChange(name, option.value)}
         />
       ))}
     </div>

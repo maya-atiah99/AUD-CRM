@@ -1,14 +1,25 @@
-import React from "react";
+import React, { useState } from "react";
 
 const DateTime = ({
   label,
   required,
   value,
-  setValue,
-  type,
-  placeholder,
+  onChange,
   width,
+  name,
+  errors,
+  touched
 }) => {
+  const [initialValue, setInitialValue] = useState(value);
+
+  const handleChange = (event) => {
+    const newValue = event.target.value;
+    setInitialValue(newValue);
+    if (onChange) {
+      onChange(name, newValue);
+    }
+  };
+
   return (
     <div className='textBox-container'>
       <label htmlFor={label}>
@@ -17,16 +28,15 @@ const DateTime = ({
       </label>
       <div
         id='dateInput'
-        className='custom-date-input'
+        className={`${errors && touched ? 'custom-date-input-red' : 'custom-date-input'}`}
         style={{ width: width }}
       >
         <input
           type='date'
           id={label}
           required={required}
-          value={value}
-          // onChange={(e) => setValue(e.target.value)}
-          placeholder=''
+          onChange={handleChange}
+          value={initialValue}
           // className='text-input'
         />
         <span className='custom-date-icon'></span>

@@ -1,16 +1,28 @@
-import React from "react";
+import React, { useState } from "react";
 
 const TextArea = ({
   label,
   required,
   value,
-  setValue,
+  onChange,
   rows,
   cols,
   placeholder,
+  name,
+  errors,
+  touched
 }) => {
+  const [initialValue, setInitialValue] = useState(value);
+
+  const handleChange = (event) => {
+    const newValue = event.target.value;
+    setInitialValue(newValue);
+    if (onChange) {
+      onChange(name, newValue);
+    }
+  };
   return (
-    <div className='textBox-container'>
+    <div className={`${errors && touched ? 'textBox-container-error ' : 'textBox-container'}`}>
       <label htmlFor={label}>
         {label}
         {required && <span className='required'>*</span>}
@@ -18,8 +30,8 @@ const TextArea = ({
       <textarea
         id={label}
         required={required}
-        value={value}
-        onChange={(e) => setValue(e.target.value)}
+        onChange={handleChange}
+        value={initialValue}
         rows={rows}
         cols={cols}
         placeholder={placeholder}

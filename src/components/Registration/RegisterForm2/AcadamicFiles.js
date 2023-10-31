@@ -1,86 +1,50 @@
 import React, { useState } from "react";
 import RadioButtonGroup from "../../Inputs/RadioButtonGroup";
-import DropDown from "../../Inputs/DropDown";
 import SectionTitle from "../../Texts/SectionTitle";
 import ExpandableBox from "../../ExpandableBox";
-import TextComponent from "../../Texts/TextComponent";
 import BulletedText from "../../Texts/BulletedText";
 import DocumentUpload from "../../Inputs/DocumentUpload";
 import TextBox from "../../Inputs/TextBox";
 import DateTime from "../../Inputs/DateTime";
 import RoundedButton from "../../Buttons/RoundedButtons";
+import { useFormikContext } from "formik";
+
+const details = [
+  {
+    text: "Students who are native speakers and have obtained a secondary school diploma in the UK, US, Canada, Ireland, New Zealand or Australia;",
+  },
+  {
+    text: "Students with an accredited international American high-school diploma (with at least 2 years of study in this system) or British international GCE/ GCSE (minimum of C on English Language)/A-levels;",
+  },
+  {
+    text: "Students with the International Baccalaureate (IB) diploma (with English as medium of instruction and minimum score of 4 for English), or European Baccalaureate with English as first or second language (minimum score of 6 for English); or",
+  },
+];
+const test = [
+  { label: "IELTS", value: "IELTS" },
+  { label: "TOEFL", value: "TOEFL" },
+  { label: "EMSAT", value: "EMSAT" },
+  { label: "PTE", value: "PTE" },
+  { label: "SAT", value: "SAT" },
+];
 
 const AcadamicFiles = () => {
   const [sections, setSections] = useState(1);
-  const [selectedOption, setSelectedOption] = useState("");
+  const formik = useFormikContext();
 
-  const [formData, setFormData] = useState([
-    {
-      test: "",
-      dateTaken: "",
-      registrationNo: "",
-      totalScore: "",
-    },
-  ]);
-  const details = [
-    {
-      text: "Students who are native speakers and have obtained a secondary school diploma in the UK, US, Canada, Ireland, New Zealand or Australia;",
-    },
-    {
-      text: "Students with an accredited international American high-school diploma (with at least 2 years of study in this system) or British international GCE/ GCSE (minimum of C on English Language)/A-levels;",
-    },
-    {
-      text: "Students with the International Baccalaureate (IB) diploma (with English as medium of instruction and minimum score of 4 for English), or European Baccalaureate with English as first or second language (minimum score of 6 for English); or",
-    },
-  ];
-  const test = [
-    { label: "IELTS", value: "IELTS" },
-    { label: "TOEFL", value: "TOEFL" },
-    { label: "EMSAT", value: "EMSAT" },
-    { label: "PTE", value: "PTE" },
-    { label: "SAT", value: "SAT" },
-  ];
-  const collapsed = () => {
-    return (
-      <div className='d-flex flex-column title-hover'>
-        <TextComponent text='Further Details' size='20px' font='800' />
-      </div>
-    );
-  };
-  const expanded = () => {
-    return (
-      <div className='d-flex flex-column'>
-        <TextComponent
-          text='Further Details'
-          size='20px'
-          font='800'
-          hover={true}
-        />
-        <TextComponent text='Phone Number' size='18px' font='600' />
-        <BulletedText items={details} />
-      </div>
-    );
-  };
   const addSection = () => {
-    setFormData([
-      ...formData,
-      {
-        test: "",
-        dateTaken: "",
-        registrationNo: "",
-        totalScore: "",
-      },
+    const newSection = {
+      chosenTest: "",
+      academicDocument: "",
+      dateTaken: "",
+      registrationNumber: "",
+      totalScore: "",
+    };
+    formik.setFieldValue("academicFiles", [
+      ...formik.values.academicFiles,
+      newSection,
     ]);
     setSections(sections + 1);
-  };
-
-  const handleFieldChange = (sectionIndex, field, value) => {
-    const updatedFormData = [...formData];
-    updatedFormData[sectionIndex][field] = value;
-    setFormData(updatedFormData);
-  };
-  const handleRadioChange = (e) => {
-    setSelectedOption(e.target.value);
   };
 
   return (
@@ -92,49 +56,73 @@ const AcadamicFiles = () => {
       <ExpandableBox title='Further Details'>
         <BulletedText items={details} />
       </ExpandableBox>
-      {formData.map((section, index) => (
+      {formik.values.academicFiles.map((section, index) => (
         <div key={index} className='form-subcontainers my-3'>
           <RadioButtonGroup
             label='Choose Test :'
             options={test}
-            selectedValue={selectedOption}
-            onRadioChange={handleRadioChange}
+            name={`academicFiles[${index}].chosenTest`}
+            selectedValue={section.chosenTest}
+            onRadioChange={(name, value) => {
+              formik.setFieldValue(name, value);
+            }}
+            errors={formik.errors?.academicFiles?.[index]?.chosenTest}
+            touched={formik.touched?.academicFiles?.[index]?.chosenTest}
           />
           <DocumentUpload
             text='Upload The Academic Document'
             required={true}
             height='100px'
             label='Upload Document'
+            name={`academicFiles[${index}].academicDocument`}
+            value={section.academicDocument}
+            onChange={(name, value) => {
+              formik.setFieldValue(name, value);
+            }}
+            errors={formik.errors?.academicFiles?.[index]?.academicDocument}
+            touched={formik.touched?.academicFiles?.[index]?.academicDocument}
           />
           <div className='grid-acd-cont'>
             <DateTime
               width='100%'
               label='Date Taken'
               required={true}
+              name={`academicFiles[${index}].dateTaken`}
               value={section.dateTaken}
-              onChange={(value) => handleFieldChange(index, "dateTaken", value)}
+              onChange={(name, value) => {
+                formik.setFieldValue(name, value);
+              }}
+              errors={formik.errors?.academicFiles?.[index]?.dateTaken}
+              touched={formik.touched?.academicFiles?.[index]?.dateTaken}
             />
             <TextBox
               width='100%'
               label='Registration No'
               required={true}
-              value={section.registrationNo}
-              onChange={(value) =>
-                handleFieldChange(index, "registrationNo", value)
-              }
+              name={`academicFiles[${index}].registrationNumber`}
+              value={section.registrationNumber}
+              onChange={(name, value) => {
+                formik.setFieldValue(name, value);
+              }}
+              errors={formik.errors?.academicFiles?.[index]?.registrationNumber}
+              touched={formik.touched?.academicFiles?.[index]?.registrationNumber}
             />
             <TextBox
               width='100%'
               label='Total Score'
               required={true}
+              name={`academicFiles[${index}].totalScore`}
               value={section.totalScore}
-              onChange={(value) =>
-                handleFieldChange(index, "totalScore", value)
-              }
+              onChange={(name, value) => {
+                formik.setFieldValue(name, value);
+              }}
+              errors={formik.errors?.academicFiles?.[index]?.totalScore}
+              touched={formik.touched?.academicFiles?.[index]?.totalScore}
             />
           </div>
         </div>
       ))}
+
       {/* "Add More" button in the last section */}
       <div className='form-subcontainers'>
         <RoundedButton

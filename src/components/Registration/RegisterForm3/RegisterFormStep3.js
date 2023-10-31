@@ -1,24 +1,60 @@
-import React, { useEffect, useState } from "react";
+import React, {
+  forwardRef,
+  useEffect,
+  useImperativeHandle,
+  useState,
+} from "react";
 import ProgramInformation from "../RegisterForm3/ProgramInformation";
 import ImportantNotices from "./ImportantNotices";
 import Reservation from "./Reservation";
 import ModalComponent from "../../ModalComponent";
 import Agreement from "../../Agreements/Agreement";
-
-const RegisterFormStep3 = () => {
+import { FormikProvider, useFormik } from "formik";
+import Step3ValidationSchema from "../../../ValidationSchemas/Step3ValidationSchema";
+const RegisterFormStep3 = forwardRef((_, ref) => {
   const [showModal, setShowModal] = useState(false);
+
+  const formik = useFormik({
+    initialValues: {
+      programInformation: {
+        countryUniversity: "",
+      },
+      impoortantNotices: {
+        acceptance: "",
+      },
+      academicInformation: {
+        acknowledgeTerms: "",
+        undergraduateProgram: "",
+      },
+    },
+    validationSchema: Step3ValidationSchema,
+    onSubmit: (values) => {
+      console.log("hiiii", values);
+    },
+  });
 
   useEffect(() => {
     if (showModal) document.body.style.overflowY = "hidden";
     else document.body.style.overflowY = "scroll";
   }, [showModal]);
 
+  useImperativeHandle(ref, () => ({
+    submitForm: () => {
+      formik.submitForm();
+    },
+  }));
+  useEffect(() => {
+    ref.current = formik;
+  }, [ref, formik]);
+
   return (
     <>
       <div className='form-subcontainer'>
-        <ProgramInformation />
-        <ImportantNotices />
-        <Reservation handleClick={() => setShowModal(true)} />
+        <FormikProvider>
+          <ProgramInformation />
+          <ImportantNotices />
+          <Reservation handleClick={() => setShowModal(true)} />
+        </FormikProvider>
       </div>
       {showModal && (
         <ModalComponent
@@ -31,6 +67,6 @@ const RegisterFormStep3 = () => {
       )}
     </>
   );
-};
+});
 
 export default RegisterFormStep3;

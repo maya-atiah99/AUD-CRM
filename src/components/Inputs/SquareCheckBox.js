@@ -1,10 +1,16 @@
-import React, { useState } from "react";
+import React from "react";
 
-const SquareCheckBox = ({ text, handleOnChange, value }) => {
+const SquareCheckBox = ({ text, value, onChange, errors, touched }) => {
   return (
     <label className='checkbox-container'>
-      <input type='checkbox' checked={value} onChange={handleOnChange} />
-      <span className='checkmark'></span>
+      <input
+        type='checkbox'
+        checked={value}
+        onChange={(e) => onChange(e.target.checked)}
+      />
+      <span
+        className={`${errors && touched ? "red-checkmark " : "checkmark"}`}
+      ></span>
       <p>{text}</p>
     </label>
   );

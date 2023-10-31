@@ -108,7 +108,7 @@ input[type="date"] {
   background-color: transparent;
   border-radius: 5px;
   height: 38px;
-  border: 1px solid #F3223C;
+  border: 1px solid #f3223c;
   /* opacity: 0.2; */
   padding: 5px;
 }
@@ -146,7 +146,11 @@ textarea:focus-visible {
   flex-direction: column;
   justify-content: flex-end;
 }
-
+.textBox-container-error{
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+}
 .textBox-container label {
   font-weight: 600;
   font-size: 17px;
@@ -167,7 +171,7 @@ textarea:focus-visible {
   color: #1b224c;
   width: 12px;
 }
-.css-qbdosj-Input:hover{
+.css-qbdosj-Input:hover {
   border: none;
 }
 /***Text with line*****/
@@ -247,7 +251,7 @@ textarea:focus-visible {
   flex-direction: row;
   align-items: center;
 }
-.file-input-container-upl{
+.file-input-container-upl {
   position: relative;
   border-radius: 5px;
   /* height: 100px; */
@@ -270,11 +274,11 @@ textarea:focus-visible {
   font-size: 18px;
 }
 
-.close-document-icon{
+.close-document-icon {
   position: absolute;
-  top:10px;
+  top: 10px;
   right: 20px;
-  color:#020a58 ;
+  color: #020a58;
   opacity: 0.7;
   font-size: 25px;
 }
@@ -366,7 +370,7 @@ textarea:focus-visible {
   border-radius: 5px;
   position: relative;
 }
- .close-icon-exp{
+.close-icon-exp {
   z-index: 1;
   position: absolute;
   top: 16px;
@@ -385,7 +389,7 @@ textarea:focus-visible {
   opacity: 0;
 }
 .expanded {
-  max-height:700px;
+  max-height: 700px;
   opacity: 1;
 }
 /***Phone Input****/
@@ -402,7 +406,7 @@ textarea:focus-visible {
   border-radius: 5px;
   line-height: 25px;
   height: 35px;
-  width: 343px ;
+  width: 343px;
   outline: none;
 }
 .form-control:focus {
@@ -423,21 +427,20 @@ textarea:focus-visible {
   height: 38px !important;
 }
 .react-tel-input .form-control:focus-visible {
-  outline: 0.8px solid #1b224c ;
+  outline: 0.8px solid #1b224c;
 }
 
 .phone-input-25 {
-  width:25% !important;
+  width: 25% !important;
 }
 
 .phone-input-50 {
-  width:50% !important;
+  width: 50% !important;
 }
 
 .phone-input-100 {
-  width: 100%  !important;
+  width: 100% !important;
 }
-
 
 /****Link*****/
 .linktext {
@@ -555,7 +558,46 @@ ul {
   font-weight: 600;
   padding-left: 5px;
 }
+/*************testttt*************************/
+.red-checkmark {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 20px;
+  width: 20px;
+  background-color: transparent;
+  border: 1px solid #f3223c;
+}
 
+.checkbox-container input:checked ~ .red-checkmark {
+  background-color: #f3223c;
+}
+
+.checkbox-container:hover input ~ .red-checkmark {
+  border: 1px solid #f3223c;
+}
+
+.red-checkmark:after {
+  content: "";
+  position: absolute;
+  display: none;
+}
+
+.checkbox-container input:checked ~ .red-checkmark:after {
+  display: block;
+}
+
+.checkbox-container .red-checkmark:after {
+  left: 6px;
+  top: 3px;
+  width: 5px;
+  height: 10px;
+  border: solid white;
+  border-width: 0 3px 3px 0;
+  -webkit-transform: rotate(45deg);
+  -ms-transform: rotate(45deg);
+  transform: rotate(45deg);
+}
 /******textarea*****/
 .textBox-container textarea {
   resize: none;
@@ -565,6 +607,12 @@ ul {
 .textBox-container textarea:hover {
   border: 0.5px solid #1b224c5c;
   transition: 0.2s ease-in-out;
+}
+
+.textBox-container-error textarea{
+  resize: none;
+  border-radius: 5px;
+  border: 1px solid #f3223c;
 }
 /*****stepper***/
 
@@ -626,8 +674,6 @@ ul {
   opacity: 0.4;
 }
 
-
-
 /******select react*******/
 .css-tj5bde-Svg {
   color: #1b224c;
@@ -658,21 +704,21 @@ ul {
   border-color: #1b224c !important;
   box-shadow: none !important;
 }
-.css-zso92v-control{
+.css-zso92v-control {
   border-color: #1b224c !important;
   box-shadow: none !important;
 }
-.css-zso92v-control:focus{
+.css-zso92v-control:focus {
   border-color: #1b224c !important;
   box-shadow: none !important;
 }
-.css-zso92v-control:focus-visible{
-  border-color:none !important;
+.css-zso92v-control:focus-visible {
+  border-color: none !important;
 }
-.css-ugifqb-control:hover{
+.css-ugifqb-control:hover {
   border: none !important;
 }
-.css-ugifqb-control{
+.css-ugifqb-control {
   border: none !important;
 
   outline: none;
@@ -942,6 +988,7 @@ td:first-child {
   padding: 5px;
   overflow: hidden;
 }
+
 .custom-date-input:hover {
   border: 0.5px solid #1b224c5c;
   transition: 0.2s ease-in-out;
@@ -969,6 +1016,44 @@ td:first-child {
   outline: transparent;
   border: none;
 }
+/***********test******************/
+.custom-date-input-red {
+  position: relative;
+  border-radius: 5px;
+  height: 38px;
+  border: 1px solid #f3223c;
+  padding: 5px;
+  overflow: hidden;
+}
+
+.custom-date-input-red:hover {
+  border: 0.5px solid #1b224c5c;
+  transition: 0.2s ease-in-out;
+}
+.custom-date-input-red input[type="date"] {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 2;
+  width: 100%;
+  height: 85%;
+  cursor: pointer;
+  color: #020a58;
+  font-weight: 600;
+  padding: 10px;
+  border: transparent;
+  background-color: transparent;
+}
+
+.custom-date-input-red input[type="date"]::-webkit-calendar-picker-indicator {
+  opacity: 0;
+}
+
+.custom-date-input-red input[type="date"]:focus-visible {
+  outline: transparent;
+  border: none;
+}
+/********************************/
 
 .custom-date-icon {
   position: absolute;

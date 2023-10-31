@@ -9,8 +9,7 @@ import * as Yup from "yup";
 import TextComponent from "../Texts/TextComponent";
 import VerificationModal from "./VerificationModal";
 
-const ShowInterestForm = ({setshowVerifiedModal}) => {
-
+const ShowInterestForm = ({ setshowVerifiedModal }) => {
   const validationSchema = Yup.object().shape({
     firstName: Yup.string().required("First Name is required"),
     middleName: Yup.string().required("Middle Name is required"),
@@ -37,27 +36,25 @@ const ShowInterestForm = ({setshowVerifiedModal}) => {
     fieldOFInterest: "",
   };
 
-
   return (
- 
-      <Formik
-        initialValues={initialValues}
-        validationSchema={validationSchema}
-        onSubmit={(values) => {
-          console.log("test", values);
-          setshowVerifiedModal(true)
-        }}
-      >
-        {({
-          values,
-          errors,
-          touched,
-          setFieldValue,
-          handleBlur,
-          handleSubmit,
-          isSubmitting,
-        }) => (
-          <Form>
+    <Formik
+      initialValues={initialValues}
+      validationSchema={validationSchema}
+      onSubmit={(values) => {
+        console.log("test", values);
+        setshowVerifiedModal(true);
+      }}
+    >
+      {({
+        values,
+        errors,
+        touched,
+        setFieldValue,
+        handleBlur,
+        handleSubmit,
+        isSubmitting,
+      }) => (
+        <Form>
           <div className='d-flex flex-column  '>
             <div className='grid-container'>
               <Dropdown
@@ -217,17 +214,15 @@ const ShowInterestForm = ({setshowVerifiedModal}) => {
               />
               <AUDButton
                 text='Submit Form'
-                type="submit"
+                type='submit'
                 required={true}
                 handleOnClick={() => handleSubmit()}
               />
             </div>
           </div>
-          </Form>
-        )}
-      </Formik>
-     
-
+        </Form>
+      )}
+    </Formik>
   );
 };
 

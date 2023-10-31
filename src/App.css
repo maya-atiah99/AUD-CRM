@@ -1255,8 +1255,10 @@ td:first-child {
 /***/
 
 @media screen and (max-width: 1300px) {
-  /*****stepper***/
-
+ 
+  .show-interest-form {
+    gap: 10px;
+  }
   .stepper .step {
     padding: 0;
     margin: 0 10px 0px 10px;

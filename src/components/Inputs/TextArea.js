@@ -10,7 +10,7 @@ const TextArea = ({
   placeholder,
   name,
   errors,
-  touched
+  touched,
 }) => {
   const [initialValue, setInitialValue] = useState(value);
 
@@ -22,7 +22,11 @@ const TextArea = ({
     }
   };
   return (
-    <div className={`${errors && touched ? 'textBox-container-error ' : 'textBox-container'}`}>
+    <div
+      className={`${
+        errors && touched ? "textBox-container-error " : "textBox-container"
+      }`}
+    >
       <label htmlFor={label}>
         {label}
         {required && <span className='required'>*</span>}

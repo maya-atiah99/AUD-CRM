@@ -105,7 +105,9 @@ const AcadamicFiles = () => {
                 formik.setFieldValue(name, value);
               }}
               errors={formik.errors?.academicFiles?.[index]?.registrationNumber}
-              touched={formik.touched?.academicFiles?.[index]?.registrationNumber}
+              touched={
+                formik.touched?.academicFiles?.[index]?.registrationNumber
+              }
             />
             <TextBox
               width='100%'

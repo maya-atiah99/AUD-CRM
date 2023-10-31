@@ -56,18 +56,17 @@ const DropDown = ({
       ...base,
       padding: "4px",
     }),
-      control: (base) => ({
-        ...base,
-        border: errors && touched ? "1px solid #F3223C" : "",
-        "&:focus": {
-          borderColor: "blue", // Change the border color when focused
-        },
-      }),
-    
+    control: (base) => ({
+      ...base,
+      border: errors && touched ? "1px solid #F3223C" : "",
+      "&:focus": {
+        borderColor: "blue", // Change the border color when focused
+      },
+    }),
   };
   return (
     <div className='textBox-container' style={{ width: width }}>
-      <label htmlFor={label} >
+      <label htmlFor={label}>
         {label}
         {required && <span className='required'>*</span>}
       </label>

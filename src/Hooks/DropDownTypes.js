@@ -1,6 +1,6 @@
 import axios from "axios";
 import { useQuery } from "react-query";
-import { API_URL } from "../Contsants";
+import { API_URL } from "../Constants";
 
 const fetchDropdownTypes = async (typeId) => {
   return await axios.get(API_URL + `/api/Setting/GetDrowDown/${typeId}`);

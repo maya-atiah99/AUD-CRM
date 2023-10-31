@@ -24,7 +24,7 @@ const RegisterFormStep2 = forwardRef((_, ref) => {
           dateTaken: "",
           registrationNumber: "",
           totalScore: "",
-        }
+        },
       ],
       personalStatement: {
         personalStatement: "",

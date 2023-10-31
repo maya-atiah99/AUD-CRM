@@ -8,7 +8,7 @@ const DateTime = ({
   width,
   name,
   errors,
-  touched
+  touched,
 }) => {
   const [initialValue, setInitialValue] = useState(value);
 
@@ -28,7 +28,9 @@ const DateTime = ({
       </label>
       <div
         id='dateInput'
-        className={`${errors && touched ? 'custom-date-input-red' : 'custom-date-input'}`}
+        className={`${
+          errors && touched ? "custom-date-input-red" : "custom-date-input"
+        }`}
         style={{ width: width }}
       >
         <input

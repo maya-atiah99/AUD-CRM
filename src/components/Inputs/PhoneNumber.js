@@ -27,8 +27,8 @@ const PhoneNumber = ({
   // };
 
   const inputStyle = {
-    width: '100%',
-    border: errors && touched ? '1px solid red' : '',
+    width: "100%",
+    border: errors && touched ? "1px solid red" : "",
   };
 
   const handlePhoneChange = (phone) => {
@@ -46,16 +46,15 @@ const PhoneNumber = ({
       ) : (
         ""
       )}
-   
-        <PhoneInput
-          country={"ae"}
-          value={initialValue}
-          onChange={handlePhoneChange}
-          autoComplete='off'
-          required={required}
-          inputStyle={inputStyle}
-        />
 
+      <PhoneInput
+        country={"ae"}
+        value={initialValue}
+        onChange={handlePhoneChange}
+        autoComplete='off'
+        required={required}
+        inputStyle={inputStyle}
+      />
     </div>
   );
 };

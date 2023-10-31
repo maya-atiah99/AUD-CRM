@@ -79,11 +79,11 @@ const AcadamicInformation = () => {
         />
 
         <DocumentUpload
-          text="Upload The Academic Document"
+          text='Upload The Academic Document'
           required={true}
-          height="100px"
-          label="Upload Document"
-          name="academicInformation.academicDocument"
+          height='100px'
+          label='Upload Document'
+          name='academicInformation.academicDocument'
           errors={formik.errors?.academicInformation?.academicDocument}
           touched={formik.touched?.academicInformation?.academicDocument}
         />

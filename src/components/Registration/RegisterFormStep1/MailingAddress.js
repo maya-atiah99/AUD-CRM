@@ -16,7 +16,7 @@ const MailingAddress = () => {
         name='mailingAddress.address'
         value={formik.values.mailingAddress.address}
         onChange={(name, value) => {
-         formik.setFieldValue(name, value);
+          formik.setFieldValue(name, value);
         }}
         errors={formik.errors?.mailingAddress?.address}
         touched={formik.touched?.mailingAddress?.address}
@@ -29,7 +29,7 @@ const MailingAddress = () => {
           name='mailingAddress.country'
           value={formik.values.mailingAddress.country}
           onChange={(name, value) => {
-           formik.setFieldValue(name, value);
+            formik.setFieldValue(name, value);
           }}
           errors={formik.errors?.mailingAddress?.country}
           touched={formik.touched?.mailingAddress?.country}
@@ -41,7 +41,7 @@ const MailingAddress = () => {
           name='mailingAddress.city'
           value={formik.values.mailingAddress.city}
           onChange={(name, value) => {
-           formik.setFieldValue(name, value);
+            formik.setFieldValue(name, value);
           }}
           errors={formik.errors?.mailingAddress?.city}
           touched={formik.touched?.mailingAddress?.city}
@@ -53,7 +53,7 @@ const MailingAddress = () => {
           name='mailingAddress.POBox'
           value={formik.values.mailingAddress.POBox}
           onChange={(name, value) => {
-           formik.setFieldValue(name, value);
+            formik.setFieldValue(name, value);
           }}
           errors={formik.errors?.mailingAddress?.POBox}
           touched={formik.touched?.mailingAddress?.POBox}
@@ -65,7 +65,7 @@ const MailingAddress = () => {
           name='mailingAddress.zipCode'
           value={formik.values.mailingAddress.zipCode}
           onChange={(name, value) => {
-           formik.setFieldValue(name, value);
+            formik.setFieldValue(name, value);
           }}
           errors={formik.errors?.mailingAddress?.zipCode}
           touched={formik.touched?.mailingAddress?.zipCode}

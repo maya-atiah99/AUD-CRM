@@ -66,7 +66,6 @@ const RegisterFormStep1 = forwardRef((_, ref) => {
     validationSchema: ValidationSchema,
     onSubmit: (values) => {
       console.log("test", values);
- 
     },
   });
 

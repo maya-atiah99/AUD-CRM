@@ -3,7 +3,7 @@ import TextComponent from "../Texts/TextComponent";
 import SectionTitle from "../Texts/SectionTitle";
 import ShowInterestForm from "./ShowInterestForm";
 
-const ShowInterestFormContainer = ({setshowVerifiedModal}) => {
+const ShowInterestFormContainer = ({ setshowVerifiedModal }) => {
   return (
     <div className='show-interest-form'>
       <div>

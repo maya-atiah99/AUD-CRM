@@ -85,8 +85,11 @@ const VerificationModal = ({ setshowVerifiedModal }) => {
         collapsed={collapsed("email")}
         expanded={expanded("email")}
       /> */}
-        <ExpandableBox title='Phone Number' text={data[0].phone} isRounded={true}>
-         
+        <ExpandableBox
+          title='Phone Number'
+          text={data[0].phone}
+          isRounded={true}
+        >
           <TextComponent
             text='We have sent the OTP to your phone as a text to authenticate you mobile number'
             size='15px'
@@ -99,7 +102,7 @@ const VerificationModal = ({ setshowVerifiedModal }) => {
           />
           <TextBox />
         </ExpandableBox>
-        <ExpandableBox title='Email' text={data[0].email}  isRounded={true}>
+        <ExpandableBox title='Email' text={data[0].email} isRounded={true}>
           <TextComponent
             text='We have sent the OTP to your email please open it and authenticate your email'
             size='15px'
@@ -112,7 +115,6 @@ const VerificationModal = ({ setshowVerifiedModal }) => {
           />
         </ExpandableBox>
       </div>
-      
     </ModalComponent>
   );
 };

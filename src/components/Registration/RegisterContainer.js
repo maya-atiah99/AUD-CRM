@@ -7,9 +7,10 @@ import RegisterFormStep3 from "./RegisterForm3/RegisterFormStep3";
 import RegisterFormStep4 from "./RegisterForm4/RegisterFormStep4";
 
 const RegisterContainer = forwardRef(
-  ({ activeStep, steps, lastStep, refStep1, refStep2, refStep3, refStep4 }, ref)  => {
-  
-
+  (
+    { activeStep, steps, lastStep, refStep1, refStep2, refStep3, refStep4 },
+    ref
+  ) => {
     return (
       <div>
         <div className='aud-app-header'>
@@ -24,9 +25,9 @@ const RegisterContainer = forwardRef(
           {activeStep == "0" ? (
             <RegisterFormStep1 ref={refStep1} />
           ) : activeStep == "1" ? (
-            <RegisterFormStep2  ref={refStep2} />
+            <RegisterFormStep2 ref={refStep2} />
           ) : activeStep == "2" ? (
-            <RegisterFormStep3   ref={refStep3}/>
+            <RegisterFormStep3 ref={refStep3} />
           ) : activeStep == "3" ? (
             <RegisterFormStep4 />
           ) : (

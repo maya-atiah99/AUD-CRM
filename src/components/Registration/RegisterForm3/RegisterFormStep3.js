@@ -50,7 +50,11 @@ const RegisterFormStep3 = forwardRef((_, ref) => {
   return (
     <>
       <div className='form-subcontainer'>
-        <FormikProvider>
+        <FormikProvider
+          value={formik}
+          innerRef={ref}
+          validationSchema={Step3ValidationSchema}
+        >
           <ProgramInformation />
           <ImportantNotices />
           <Reservation handleClick={() => setShowModal(true)} />

@@ -8,9 +8,8 @@ const TextBox = ({
   onChange,
   name,
   errors,
-  touched
+  touched,
 }) => {
-
   const [initialValue, setInitialValue] = useState(value);
 
   const handleChange = (event) => {
@@ -20,7 +19,6 @@ const TextBox = ({
       onChange(name, newValue);
     }
   };
-
 
   return (
     <div className='textBox-container'>
@@ -33,7 +31,7 @@ const TextBox = ({
         id={label}
         required={required}
         style={{ width: width }}
-        className={errors && touched ? 'text-input-error' : 'text-input'}
+        className={errors && touched ? "text-input-error" : "text-input"}
         onChange={handleChange}
         value={initialValue}
       />

@@ -3,7 +3,7 @@ import SectionTitle from "../../Texts/SectionTitle";
 import RadioButtonGroup from "../../Inputs/RadioButtonGroup";
 import DropDown from "../../Inputs/DropDown";
 import TextBox from "../../Inputs/TextBox";
-import { useFormikContext } from "formik";
+import { ErrorMessage, useFormikContext } from "formik";
 
 const ProgramInformation = () => {
   const formik = useFormikContext();
@@ -34,6 +34,13 @@ const ProgramInformation = () => {
         required={true}
         onRadioChange={onRadioChange}
       />
+      {formik.errors?.programInformation?.startYourApp &&
+      formik.touched?.programInformation?.startYourApp ? (
+        <span className="span-required">Start Your Application is required</span>
+      ) : (
+        ""
+      )}
+
       <RadioButtonGroup
         options={ApplyingAsOptions}
         name='programInformation.applyingAs'
@@ -42,6 +49,12 @@ const ProgramInformation = () => {
         required={true}
         onRadioChange={onRadioChange}
       />
+      {formik.errors?.programInformation?.applyingAs &&
+      formik.touched?.programInformation?.applyingAs ? (
+        <span className="span-required">Applying as is required</span>
+      ) : (
+        ""
+      )}
       <div className='grid-programInfo-cont'>
         <DropDown
           width='100%'

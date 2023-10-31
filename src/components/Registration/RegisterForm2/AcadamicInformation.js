@@ -66,7 +66,7 @@ const AcadamicInformation = () => {
       </div>
       <div className='grid-academic2-cont'>
         <TextArea
-          label='Please List Any Advanced Courses Such As: ‘A’ Levels, Ap, Clep, Ib Diploma.'
+          label='Please List Any Advanced Courses Such As: ‘A’ Levels, Ap.'
           rows='4'
           cols='3'
           name='academicInformation.advancedCourse'

@@ -31,9 +31,11 @@ const ExpandableBox = ({ isRounded, children, title, text }) => {
         {isExpanded
           ? " "
           : text && <TextComponent text={text} size='15px' font='500' />}
-        <div className={`card-content  ${isExpanded ? "expanded" : ""}`}>
-          {children}
-        </div>
+        {isExpanded ? (
+          <div className={` ${isExpanded ? "expanded" : ""}`}>{children}</div>
+        ) : (
+          ""
+        )}
       </div>
     </div>
   );

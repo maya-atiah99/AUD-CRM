@@ -61,7 +61,7 @@ const RegisterPage = () => {
       formikRefStep3.current?.submitForm();
     }
   };
-  console.log("formikRefStep1.current", formikRefStep2.current);
+
   const handleChange = (next) => {
     if (next) handeleSubmit(activeStep);
 
@@ -70,19 +70,23 @@ const RegisterPage = () => {
         if (activeStep === 0 && formikRefStep1.current?.isValid) {
           if (activeStep < steps.length - 1) {
             setActiveStep(activeStep + 1);
+            window.scrollTo(0, 0);
           }
-        }else if (activeStep === 1 && formikRefStep2.current?.isValid) {
-
+        } else if (activeStep === 1 && formikRefStep2.current?.isValid) {
           if (activeStep < steps.length - 1) {
             setActiveStep(activeStep + 1);
+            window.scrollTo(0, 0);
           }
         } else if (activeStep === 2 && formikRefStep3.current?.isValid) {
           if (activeStep < steps.length - 1) {
             setActiveStep(activeStep + 1);
+            window.scrollTo(0, 0);
           }
+        }else{
+          window.scrollTo(0,0)
         }
-      } 
-    }, [300]);
+      }
+    }, [100]);
   };
   return (
     <div>
@@ -93,8 +97,8 @@ const RegisterPage = () => {
         )}
         {activeStep !== 0 && (
           <AUDButton
-            text='Back To Main'
-            handleOnClick={() => handleChange(false)}
+            text='Back To Previous Page'
+            handleOnClick={() =>setActiveStep(activeStep -1)}
             icon='/images/homeicon.svg'
           />
         )}

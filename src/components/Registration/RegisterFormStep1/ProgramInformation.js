@@ -71,7 +71,7 @@ const ProgramInformation = () => {
         />
         <TextBox
           width='100%'
-          label='Your Current Place Of Study (Transfer Students)'
+          label='Your Current Place Of Study'
           required={true}
           name='programInformation.currentPlaceOfStudy'
           value={formik.values.programInformation.currentPlaceOfStudy}

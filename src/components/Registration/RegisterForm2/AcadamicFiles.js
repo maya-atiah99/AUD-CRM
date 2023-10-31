@@ -69,6 +69,12 @@ const AcadamicFiles = () => {
             errors={formik.errors?.academicFiles?.[index]?.chosenTest}
             touched={formik.touched?.academicFiles?.[index]?.chosenTest}
           />
+          {formik.errors?.academicFiles?.[index]?.chosenTest &&
+         formik.touched?.academicFiles?.[index]?.chosenTest ? (
+            <span className='span-required'>Choose Test is required</span>
+          ) : (
+            ""
+          )}
           <DocumentUpload
             text='Upload The Academic Document'
             required={true}

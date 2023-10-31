@@ -18,7 +18,7 @@ const step1ValidationSchema = Yup.object().shape({
     city: Yup.string().required("City/State is required"),
     country: Yup.string().required("Country is required"),
     POBox: Yup.string().required("P.O.Box is required"),
-    zipCode: Yup.string().required("Zip Code is required"),
+    zipCode: Yup.number().required("Zip Code is required"),
   }),
   programInformation: Yup.object().shape({
     startYourApp: Yup.string().required("Start your application is required"),

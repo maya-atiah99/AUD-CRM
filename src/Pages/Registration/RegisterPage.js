@@ -4,6 +4,7 @@ import AUDButton from "../../components/Buttons/AUDButton";
 import RegisterContainer from "../../components/Registration/RegisterContainer";
 import TextComponent from "../../components/Texts/TextComponent";
 import { act } from "react-dom/test-utils";
+import toast from "react-hot-toast";
 
 const RegisterPage = () => {
   const [activeStep, setActiveStep] = useState(0);
@@ -83,6 +84,7 @@ const RegisterPage = () => {
             window.scrollTo(0, 0);
           }
         }else{
+          // toast.error("Fill all the required fields")
           window.scrollTo(0,0)
         }
       }

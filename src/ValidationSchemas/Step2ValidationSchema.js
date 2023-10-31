@@ -18,7 +18,7 @@ const Step2ValidationSchema = Yup.object().shape({
       registrationNumber: Yup.number().required(
         "Registration number is required"
       ),
-      totalScore: Yup.string().required("Total score is required"),
+      totalScore: Yup.number().required("Total score is required"),
     })
   ),
   personalStatement: Yup.object().shape({

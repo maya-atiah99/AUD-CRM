@@ -20,6 +20,11 @@ const TextBox = ({
     }
   };
 
+  const inputStyle = {
+    width: width,
+    borderColor: errors && touched && "#F3223C" ,
+  };
+
   return (
     <div className='textBox-container'>
       <label htmlFor={label}>
@@ -30,8 +35,8 @@ const TextBox = ({
         type='text'
         id={label}
         required={required}
-        style={{ width: width }}
-        className={errors && touched ? "text-input-error" : "text-input"}
+        style={inputStyle}
+        className="text-input"
         onChange={handleChange}
         value={initialValue}
       />

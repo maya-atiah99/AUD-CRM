@@ -25,8 +25,8 @@
   width: 25px !important;
 }
 /************/
-.span-required{
-  color: #F3223C;
+.span-required {
+  color: #f3223c;
   font-weight: 500;
   font-size: 15px;
 }
@@ -54,7 +54,7 @@
 }
 
 .radio-input input:hover + .circle {
-  scale: 1.2;
+  /* scale: 1.2; */
   cursor: pointer;
   box-shadow: none;
 }
@@ -151,7 +151,7 @@ textarea:focus-visible {
   flex-direction: column;
   justify-content: flex-end;
 }
-.textBox-container-error{
+.textBox-container-error {
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
@@ -392,7 +392,6 @@ textarea:focus-visible {
 .card-content {
   max-height: 0;
   opacity: 0;
-  
 }
 .expanded {
   max-height: 700px;
@@ -617,7 +616,7 @@ ul {
   transition: 0.2s ease-in-out;
 }
 
-.textBox-container-error textarea{
+.textBox-container-error textarea {
   resize: none;
   border-radius: 5px;
   border: 1px solid #f3223c;
@@ -1301,7 +1300,7 @@ td:first-child {
     font-size: 18px !important;
   }
   .text-input {
-    height: 30px;
+    /* height: 30px; */
   }
   .textBox-container label {
     font-size: 12px;
@@ -1318,7 +1317,7 @@ td:first-child {
     padding: 2px !important;
   }
   .react-tel-input .form-control {
-    height: 30px !important;
+    /* height: 30px !important; */
   }
   .showInterest-subContainer {
     height: 95%;

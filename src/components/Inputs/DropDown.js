@@ -18,8 +18,6 @@ const DropDown = ({
   touched,
   props,
 }) => {
-  const [selectedOption, setSelectedOption] = useState(value);
-
   const { data: options, refetch: refetchTypes } = useFetchDropDownTypes(
     type || null
   );
@@ -60,10 +58,11 @@ const DropDown = ({
       ...base,
       border: errors && touched ? "1px solid #F3223C" : "",
       "&:focus": {
-        borderColor: "blue", // Change the border color when focused
+        borderColor: "blue",
       },
     }),
   };
+
   return (
     <div className='textBox-container' style={{ width: width }}>
       <label htmlFor={label}>
@@ -75,7 +74,7 @@ const DropDown = ({
         required={required}
         styles={customStyles}
         components={{
-          IndicatorSeparator: CustomDropdownArrow,
+          DropdownIndicator: CustomDropdownArrow, // Use 'DropdownIndicator' instead of 'IndicatorSeparator'
         }}
         value={formattedOptions.find((option) => option.value === value)}
         onChange={(selectedOption) => {

@@ -7,7 +7,7 @@ const fetchDropdownTypes = async (typeId) => {
 };
 
 const fetchAcademicTerms = async () => {
-  return await axios.get(API_URL + '/api/Setting/GetAcadmicTerms');
+  return await axios.get(API_URL + "/api/Setting/GetAcadmicTerms");
 };
 
 export const useFetchDropDownTypes = (typeId) => {
@@ -18,7 +18,7 @@ export const useFetchDropDownTypes = (typeId) => {
   });
 };
 
-export const useFetchAcademicTerms =  () => {
+export const useFetchAcademicTerms = () => {
   return useQuery({
     queryKey: ["Terms"],
     queryFn: () => fetchAcademicTerms(),

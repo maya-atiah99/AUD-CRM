@@ -64,7 +64,8 @@ const RegisterFormStep3 = forwardRef((_, ref) => {
         <ModalComponent
           onClose={() => setShowModal(false)}
           width='90%'
-          title='American University In Dubai Reservation And Enrollment Agreement & Terms'
+          height='50rem'
+         title='American University In Dubai Reservation And Enrollment Agreement & Terms'
         >
           <Agreement />
         </ModalComponent>

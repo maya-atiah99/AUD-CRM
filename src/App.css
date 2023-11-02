@@ -4,7 +4,7 @@
   letter-spacing: 0px;
 }
 
-/***Buttons*****/
+/**************************************Buttons*****/
 .aud-button {
   border-radius: 5px;
   padding: 12px;
@@ -30,7 +30,7 @@
   font-weight: 500;
   font-size: 15px;
 }
-/***Radio Buttons*****/
+/******************************************Radio Buttons*****/
 .radio-input {
   display: flex;
   align-items: center;
@@ -92,7 +92,7 @@
   font-size: 18px;
   font-weight: bold;
 }
-/***TextBox**/
+/****************************************************TextBox**/
 input[type="date"] {
   color: transparent;
 }
@@ -161,25 +161,21 @@ textarea:focus-visible {
   font-size: 17px;
 }
 
-/*** DropDown*******/
-/* select {
-  border-radius: 5px;
-  height: 35px;
-  border: 1px solid #1b224c2d;
-  opacity: 0.2;
+/************************************************** DropDown*******/
 
-} */
 .css-tj5bde-Svg {
   display: none !important;
 }
 .custom-dropdown-arrow {
   color: #1b224c;
   width: 12px;
+  padding-right: 15px;
 }
 .css-qbdosj-Input:hover {
   border: none;
 }
-/***Text with line*****/
+
+/***************************************************Text with line*****/
 .title-with-line {
   display: flex;
   align-items: center;
@@ -219,7 +215,7 @@ textarea:focus-visible {
   margin-bottom: 0;
 }
 
-/***Rounded button********/
+/****************************************Rounded button********/
 .rounded-button {
   padding: 10px;
   border: none;
@@ -241,7 +237,7 @@ textarea:focus-visible {
   cursor: pointer;
 }
 
-/*****file input********/
+/******************************************file input********/
 .file-input {
   display: none;
 }
@@ -287,7 +283,7 @@ textarea:focus-visible {
   opacity: 0.7;
   font-size: 25px;
 }
-/***Modal****/
+/**************************************Modal****/
 .modal-container {
   position: fixed;
   padding: 30px 50px;
@@ -297,9 +293,6 @@ textarea:focus-visible {
   justify-content: center;
   align-items: center;
   background-color: #0000003b;
-
-  /* transform: "translate(-50%,-50%"; */
-  /* z-index: 1000; */
   width: 100%;
   height: 100vh;
 }
@@ -309,7 +302,7 @@ textarea:focus-visible {
   /* padding: 30px 50px; */
   background-color: #ffffff;
   border-radius: 10px;
-  height: 50rem;
+  /* height: 50rem; */
   /* width: 60rem; */
   display: flex;
   flex-direction: column;
@@ -341,7 +334,7 @@ textarea:focus-visible {
   overflow: auto;
 }
 
-/***Text component ***/
+/****************************************Text component ***/
 .p-style {
   font-weight: 500;
   margin-bottom: 0;
@@ -350,7 +343,7 @@ textarea:focus-visible {
   letter-spacing: 0px;
 }
 
-/***Collapsed container*****/
+/**********************************Collapsed container*****/
 .collapsed-container {
   width: 100%;
   background-color: #020a581a;
@@ -397,7 +390,7 @@ textarea:focus-visible {
   max-height: 700px;
   opacity: 1;
 }
-/***Phone Input****/
+/***********************************Phone Input****/
 .react-tel-input .form-control {
   position: relative;
   font-size: 14px;
@@ -410,7 +403,7 @@ textarea:focus-visible {
   border: 1px solid #cacaca;
   border-radius: 5px;
   line-height: 25px;
-  height: 35px;
+  height: 30px ;
   width: 343px;
   outline: none;
 }
@@ -447,7 +440,7 @@ textarea:focus-visible {
   width: 100% !important;
 }
 
-/****Link*****/
+/**************************************888****Link*****/
 .linktext {
   color: #f3223c;
   font-size: 16px;
@@ -461,7 +454,7 @@ textarea:focus-visible {
 .underlined-link {
   text-decoration: underline;
   color: #f3223c;
-  font-size: 16px;
+  font-size: 18px;
   font-weight: bold;
   padding-left: 5px;
   cursor: pointer;
@@ -479,7 +472,10 @@ textarea:focus-visible {
   font-weight: 600;
   color: #1b224c;
 }
-/*****Bulleted text******/
+.cursor{
+  cursor: pointer;
+}
+/****************************************8***Bulleted text******/
 li::marker {
   color: #1b224c;
   font-size: 25px;
@@ -496,7 +492,7 @@ ul {
   padding-left: 1.5rem !important;
 }
 
-/****Custom Checkbox******/
+/**************************************88**Custom Checkbox******/
 
 .checkbox-container {
   display: block;
@@ -564,7 +560,7 @@ ul {
   font-weight: 600;
   padding-left: 5px;
 }
-/*************testttt*************************/
+/*************red checkmark*************************/
 .red-checkmark {
   position: absolute;
   top: 0;
@@ -605,7 +601,7 @@ ul {
   -ms-transform: rotate(45deg);
   transform: rotate(45deg);
 }
-/******textarea*****/
+/*********************************************textarea*****/
 .textBox-container textarea {
   resize: none;
   border-radius: 5px;
@@ -621,7 +617,7 @@ ul {
   border-radius: 5px;
   border: 1px solid #f3223c;
 }
-/*****stepper***/
+/******************************stepper***/
 
 .stepper {
   display: flex;
@@ -730,7 +726,7 @@ ul {
 
   outline: none;
 }
-/****Show interest*****/
+/************************************Show interest*****/
 .showInterest-container {
   position: fixed;
   top: 0;
@@ -749,7 +745,7 @@ ul {
   padding: 30px 50px;
   background-color: #ffffff;
   border-radius: 10px;
-  height: 90%;
+  height: 97%;
   width: 85%;
   display: flex;
   flex-direction: row;
@@ -773,7 +769,7 @@ ul {
   z-index: -1;
 }
 
-/****verticsl line*****/
+/***************************************verticsl line*****/
 .vertical-container {
   height: 10vh;
   display: flex;
@@ -782,7 +778,7 @@ ul {
 
 .vertical {
   width: 2px;
-  height: 75vh;
+  height: 85vh;
   background: linear-gradient(
     170deg,
     #1b224c49 50%,
@@ -792,7 +788,7 @@ ul {
   background-size: 1px 20px;
 }
 
-/****Horizantal line*****/
+/***************************************8*Horizantal line*****/
 .horizontal-container {
   width: 100%;
   display: flex;
@@ -806,7 +802,7 @@ ul {
   border-top: 2px dashed rgba(0, 0, 0, 0.23);
 }
 
-/********Show Interest Form*********/
+/*********************************8***Show Interest Form*********/
 .show-interest-form {
   width: 50%;
   display: flex;
@@ -815,7 +811,11 @@ ul {
   /* padding: 20px; */
   padding: 0 20px 0 20px;
 }
-
+.showInterestForm-inner-cont{
+  display: flex;
+  flex-direction: column;
+  gap:0.8rem
+}
 .grid-container {
   display: grid;
   grid-template-columns: 1.5fr 2fr;
@@ -828,7 +828,7 @@ ul {
   grid-column-gap: 10px;
 }
 
-/*********Upper Header*************/
+/***********************************Upper Header*************/
 .upperHeader-container {
   /* position: fixed; */
   height: 84px;
@@ -836,7 +836,7 @@ ul {
   background-color: #1b224c;
 }
 
-/*******Aud app header*************/
+/******************************Aud app header*************/
 .aud-app-header {
   background-color: #1b224c;
   width: 100%;
@@ -849,7 +849,7 @@ ul {
   padding-right: 3rem;
 }
 
-/******Register Page***************/
+/*******************************Register Page***************/
 .registerPage-container {
   display: flex;
   flex-direction: column;
@@ -857,7 +857,7 @@ ul {
   gap: 1.5rem;
 }
 
-/*******Register forms container*********/
+/**************************8****Register forms container*********/
 .registerForms-container {
   border-bottom: 1px solid #1b224c66;
   border-left: 1px solid #1b224c66;
@@ -875,7 +875,7 @@ ul {
   gap: 0.5rem;
 }
 
-/********Personal Information********/
+/***********************************Personal Information********/
 .grid-personal1-cont {
   display: grid;
   grid-template-columns: 2fr 3fr 3fr 3fr;
@@ -886,21 +886,21 @@ ul {
   grid-template-columns: 3fr 3fr 2fr 3fr;
   grid-column-gap: 10px;
 }
-/**********Mailing Address*************/
+/**********************************Mailing Address*************/
 .grid-mailing-cont {
   display: grid;
   grid-template-columns: 2fr 1fr 1fr 1fr;
   grid-column-gap: 10px;
 }
 
-/**********PROGRAM INFORMATION*******************/
+/****************************PROGRAM INFORMATION*******************/
 .grid-programInfo-cont {
   display: grid;
   grid-template-columns: 2fr 2fr 2fr 1fr;
   grid-column-gap: 10px;
 }
 
-/***********Consent****************/
+/************************************Consent****************/
 .grid-consent1-cont {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
@@ -912,7 +912,7 @@ ul {
   grid-column-gap: 10px;
 }
 
-/**********Academic information***************/
+/*****************************Academic information***************/
 .grid-academic-cont {
   display: grid;
   grid-template-columns: 3fr 4fr 3fr 2fr;
@@ -925,7 +925,7 @@ ul {
   grid-column-gap: 10px;
 }
 
-/*********Regulation table******************/
+/*********************************Regulation table******************/
 .regulations-container {
   background: var(--unnamed-color-ffffff) 0% 0% no-repeat padding-box;
   background: #ffffff 0% 0% no-repeat padding-box;
@@ -950,7 +950,7 @@ ul {
   gap: 3rem;
 }
 
-/*******Agreement table***************/
+/************************8***Agreement table***************/
 table {
   border: none;
   border-collapse: collapse;
@@ -1023,7 +1023,7 @@ td:first-child {
   outline: transparent;
   border: none;
 }
-/***********test******************/
+/*************************test******************/
 .custom-date-input-red {
   position: relative;
   border-radius: 5px;
@@ -1060,7 +1060,7 @@ td:first-child {
   outline: transparent;
   border: none;
 }
-/********************************/
+/**********************************************/
 
 .custom-date-icon {
   position: absolute;
@@ -1074,7 +1074,7 @@ td:first-child {
   overflow: hidden;
 }
 
-/******Agreement*******/
+/**********************************Agreement*******/
 .agreement-table-cont {
   border: 1px solid #1b224c66;
   padding-bottom: 35px;
@@ -1098,13 +1098,13 @@ td:first-child {
 .agreement-title {
   background-color: #1b224c1e;
 }
-/*******Academic files*********/
+/***********************************Academic files*********/
 .grid-acd-cont {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 2fr;
   grid-column-gap: 10px;
 }
-/*****Tuition******/
+/*********************************Tuition******/
 .tuition-container {
   display: flex;
   flex-direction: column;
@@ -1112,7 +1112,7 @@ td:first-child {
   padding: 0 50px 0 50px;
 }
 
-/*********Registration page 4*************/
+/*************************************Registration page 4*************/
 .payment-container {
   display: flex;
   flex-direction: row;
@@ -1130,7 +1130,7 @@ td:first-child {
   font-size: 17px;
   margin-bottom: 0px;
 }
-/***********Payment***************/
+/***************************************Payment***************/
 
 .tab-container {
   border: 1px solid #1b224c27;
@@ -1174,7 +1174,7 @@ td:first-child {
   opacity: 0.2;
 }
 
-/*****Card type********/
+/*********************************Card type********/
 .activeType {
   background-color: #39a3003c;
   border: 1px solid #00000033;
@@ -1189,7 +1189,7 @@ td:first-child {
   cursor: pointer;
 }
 
-/*******Invoice**********/
+/***********************************Invoice**********/
 .invoice-container {
   background-image: url("../public/images/invoice-image.png");
   background-repeat: no-repeat;
@@ -1246,6 +1246,19 @@ td:first-child {
   background: transparent;
   border-left: 2px dashed rgba(0, 0, 0, 0.23);
 }
+
+/************************************Login container**************/
+.login-container{
+  padding-top: 1.8rem;
+  padding-left:50px ;
+  padding-right: 50px;
+  display: flex;
+  flex-direction: column;
+  gap:1.8rem
+}
+.login-container .test222{
+  align-self: center;
+}
 /****************Media Query****************************/
 /**************************************/
 /*****************************/
@@ -1254,7 +1267,7 @@ td:first-child {
 /*********/
 /***/
 
-@media screen and (max-width: 1300px) {
+/* @media screen and (max-width: 1300px) {
  
   .show-interest-form {
     gap: 10px;
@@ -1302,7 +1315,7 @@ td:first-child {
     font-size: 18px !important;
   }
   .text-input {
-    /* height: 30px; */
+    height: 30px;
   }
   .textBox-container label {
     font-size: 12px;
@@ -1319,9 +1332,29 @@ td:first-child {
     padding: 2px !important;
   }
   .react-tel-input .form-control {
-    /* height: 30px !important; */
+    height: 30px !important;
   }
   .showInterest-subContainer {
     height: 95%;
   }
+} */
+
+
+@media screen and (max-height:870px) and (max-width:1733px){
+  .show-interest-form {
+    gap: 10px;
+}
+.showInterestForm-inner-cont {
+  gap:5%;
+}
+.radio-buttons-container {
+  gap: 2%;
+}
+.radio-buttons-container label{
+  font-size: 15px;
+}
+.textBox-container label{
+  font-size: 15px;
+
+}
 }

@@ -3,7 +3,11 @@ import TextComponent from "../Texts/TextComponent";
 import SectionTitle from "../Texts/SectionTitle";
 import ShowInterestForm from "./ShowInterestForm";
 
-const ShowInterestFormContainer = ({ setshowVerifiedModal }) => {
+const ShowInterestFormContainer = ({
+  setshowVerifiedModal,
+  setShowLoginModal,
+  openVerifiedModal
+}) => {
   return (
     <div className='show-interest-form'>
       <div>
@@ -20,7 +24,12 @@ const ShowInterestFormContainer = ({ setshowVerifiedModal }) => {
       </div>
 
       <SectionTitle title='BASIC INFORMATION' />
-      <ShowInterestForm setshowVerifiedModal={setshowVerifiedModal} />
+      <ShowInterestForm
+        setshowVerifiedModal={setshowVerifiedModal}
+        setShowLoginModal={setShowLoginModal}
+        openVerifiedModal={openVerifiedModal}
+
+      />
     </div>
   );
 };

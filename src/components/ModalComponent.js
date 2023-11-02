@@ -7,9 +7,11 @@ const ModalComponent = ({
   description,
   isOpen,
   onClose,
+  handleOnClick,
   width,
   height,
   children,
+  isButton,
 }) => {
   return (
     <div className='modal-container'>
@@ -26,18 +28,24 @@ const ModalComponent = ({
             onClick={onClose}
           />
         </div>
-        <div
-          className='py-4'
-          style={{ paddingLeft: "20px", paddingTop: "30px" }}
-        >
-          {" "}
-          <TextComponent text={description} size='18px' font='500' />{" "}
-        </div>
+        {description ? (
+          <div
+            className='py-4'
+            style={{ paddingLeft: "20px", paddingTop: "30px" }}
+          >
+            {" "}
+            <TextComponent text={description} size='18px' font='500' />{" "}
+          </div>
+        ) : (
+          ""
+        )}
 
         <div className='modal-content'>{children}</div>
-        {/* <div className='submit-modal-button'>
-          <AUDButton text='Done' />
-        </div> */}
+        {isButton && (
+          <div className='submit-modal-button'>
+            <AUDButton text='Done' handleOnClick={handleOnClick} />
+          </div>
+        )}
       </div>
     </div>
   );

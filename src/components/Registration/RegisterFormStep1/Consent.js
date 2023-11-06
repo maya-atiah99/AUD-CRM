@@ -17,10 +17,12 @@ const Consent = () => {
         text='The American University in Dubai classifies Directory Information as the following :'
         size='18px'
         font='600'
+        classfont="consent-text"
       />
       <TextComponent
         text='Any other education record is classified as non-directory information and can not be disclosed to any party without the student’s consent.'
         size='18px'
+        classfont="consent-text"
         font='600'
       />
       <div className='d-flex justify-content-between'>
@@ -46,6 +48,7 @@ const Consent = () => {
       <TextComponent
         size='18px'
         font='600'
+        classfont="consent-text"
         text='Any other education record is classified as non-directory information and can not be disclosed to any party without the student’s consent.'
       />
       <div className='d-flex'>
@@ -61,6 +64,7 @@ const Consent = () => {
         <TextComponent
           size='18px'
           font='600'
+        classfont="consent-text"
           text='to release my education records (e.g., grades, GPA, ID, schedule, statement of fees) to the following:'
         />
       </div>

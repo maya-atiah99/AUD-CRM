@@ -63,7 +63,7 @@ const RegisterFormStep1 = forwardRef((_, ref) => {
         consentTelephone: "",
       },
     },
-    validationSchema: ValidationSchema,
+    // validationSchema: ValidationSchema,
     onSubmit: (values) => {
       console.log("test", values);
     },

@@ -27,16 +27,21 @@ const ShowInterest = () => {
       setShowLoginModal(true);
     }
   };
-  console.log('actionOrigin',actionOrigin)
-  console.log('showVerifiedCheckModal',showVerifiedCheckModal)
+
   return (
     <div className='showInterest-container'>
       <video autoPlay loop muted id='background-video'>
         <source src={ShowInterestVideo} type='video/mp4' />
       </video>
       <div className='showInterest-subContainer'>
-        <LogoContainer src='/images/showInterestLogo1.png' width='40%' />
-        <VerticalLine />
+        <img
+          src='/images/showInterestLogo1.png'
+          alt='Logo'
+          className='showInterestLogo'
+        />
+        <div className='vertical-line-showInterest'>
+          <VerticalLine />
+        </div>
         <ShowInterestFormContainer
           setshowVerifiedModal={setshowVerifiedModal}
           setShowLoginModal={setShowLoginModal}

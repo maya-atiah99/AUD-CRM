@@ -14,10 +14,10 @@ const RegisterContainer = forwardRef(
     return (
       <div>
         <div className='aud-app-header'>
-          <LogoContainer
-            width='200px'
-            height='40px'
+          <img
             src='/images/Group 103.png'
+            alt='Logo'
+            className='aud-header-logo'
           />
           <Stepper activeStep={activeStep} steps={steps} lastStep={lastStep} />
         </div>

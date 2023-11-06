@@ -125,7 +125,7 @@ const PersonalInformation = () => {
           errors={formik.errors?.personalInformation?.mobile}
           touched={formik.touched?.personalInformation?.mobile}
         />
-        <TextBox
+        <PhoneNumber
           width='100%'
           label='Telephone'
           name='personalInformation.telephone'

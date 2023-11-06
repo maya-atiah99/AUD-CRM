@@ -390,6 +390,9 @@ textarea:focus-visible {
   max-height: 700px;
   opacity: 1;
 }
+.expand-font-title{
+  font-size: 20px;
+}
 /***********************************Phone Input****/
 .react-tel-input .form-control {
   position: relative;
@@ -403,7 +406,7 @@ textarea:focus-visible {
   border: 1px solid #cacaca;
   border-radius: 5px;
   line-height: 25px;
-  height: 30px ;
+  height: 30px;
   width: 343px;
   outline: none;
 }
@@ -472,7 +475,7 @@ textarea:focus-visible {
   font-weight: 600;
   color: #1b224c;
 }
-.cursor{
+.cursor {
   cursor: pointer;
 }
 /****************************************8***Bulleted text******/
@@ -676,7 +679,12 @@ ul {
   height: 40px;
   opacity: 0.4;
 }
-
+.stepper-font-number-inact {
+  font-size: 20px;
+}
+.stepper-font-number-title {
+  font-size: 15px;
+}
 /******select react*******/
 .css-tj5bde-Svg {
   color: #1b224c;
@@ -746,7 +754,7 @@ ul {
   background-color: #ffffff;
   border-radius: 10px;
   height: 97%;
-  width: 85%;
+  width: 87%;
   display: flex;
   flex-direction: row;
   opacity: 0.9;
@@ -757,6 +765,9 @@ ul {
   gap: 5%;
 }
 
+.showInterestLogo {
+  width: 40%;
+}
 #background-video {
   position: absolute;
   top: 50%;
@@ -767,6 +778,14 @@ ul {
   height: auto;
   transform: translate(-50%, -50%);
   z-index: -1;
+}
+.classfont-show {
+  font-size: 24px;
+  font-weight: 500;
+  margin-bottom: 0;
+  color: #1b224c;
+  font-weight: 18px;
+  letter-spacing: 0px;
 }
 
 /***************************************verticsl line*****/
@@ -811,10 +830,10 @@ ul {
   /* padding: 20px; */
   padding: 0 20px 0 20px;
 }
-.showInterestForm-inner-cont{
+.showInterestForm-inner-cont {
   display: flex;
   flex-direction: column;
-  gap:0.8rem
+  gap: 0.8rem;
 }
 .grid-container {
   display: grid;
@@ -849,12 +868,19 @@ ul {
   padding-right: 3rem;
 }
 
+.aud-header-logo {
+  width: 200px;
+  height: 40px;
+}
 /*******************************Register Page***************/
 .registerPage-container {
   display: flex;
   flex-direction: column;
   margin: 7rem;
   gap: 1.5rem;
+}
+.register-title {
+  font-size: 20px;
 }
 
 /**************************8****Register forms container*********/
@@ -910,6 +936,9 @@ ul {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
   grid-column-gap: 10px;
+}
+.consent-text {
+  font-size: 18px;
 }
 
 /*****************************Academic information***************/
@@ -995,7 +1024,9 @@ td:first-child {
   padding: 5px;
   overflow: hidden;
 }
-
+.classfont-agreement {
+  font-size: 18px;
+}
 .custom-date-input:hover {
   border: 0.5px solid #1b224c5c;
   transition: 0.2s ease-in-out;
@@ -1091,12 +1122,16 @@ td:first-child {
   padding: 30px;
 }
 .agreement-container {
+  padding: 2% 0;
   display: flex;
   flex-direction: column;
   gap: 2.5rem;
 }
+
 .agreement-title {
   background-color: #1b224c1e;
+  padding-left: 10px;
+  padding-right: 10px;
 }
 /***********************************Academic files*********/
 .grid-acd-cont {
@@ -1234,6 +1269,11 @@ td:first-child {
   font-size: 20px;
   font-weight: bold;
 }
+.invoice-card-container{
+  display: flex;
+  flex-direction: column;
+  gap:3rem;
+}
 
 .verticalPayment-container {
   /* height: 10vh; */
@@ -1248,15 +1288,15 @@ td:first-child {
 }
 
 /************************************Login container**************/
-.login-container{
+.login-container {
   padding-top: 1.8rem;
-  padding-left:50px ;
+  padding-left: 50px;
   padding-right: 50px;
   display: flex;
   flex-direction: column;
-  gap:1.8rem
+  gap: 1.8rem;
 }
-.login-container .test222{
+.login-container .test222 {
   align-self: center;
 }
 /****************Media Query****************************/
@@ -1267,94 +1307,450 @@ td:first-child {
 /*********/
 /***/
 
-/* @media screen and (max-width: 1300px) {
- 
+/************SHOW INTEREST MEDIA QUERY*/
+
+@media screen and (max-width: 1733px) {
   .show-interest-form {
     gap: 10px;
   }
-  .stepper .step {
-    padding: 0;
-    margin: 0 10px 0px 10px;
-    background-color: #ffffff;
-    height: 24px;
-    border-radius: 50%;
-    width: 24px;
-    transition: 0.5s all ease-in-out;
+  .showInterestForm-inner-cont {
+    gap: 5%;
   }
-
-  .activeLine {
-    width: 0;
-    height: 1px;
-    opacity: 0;
-    background-color: white;
-    margin: 0 0.5rem;
+  .radio-buttons-container {
+    gap: 2%;
   }
-
-  .inActiveLine {
-    width: 0;
-    height: 1px;
-    opacity: 0.4;
-    width: 24px;
-    background-color: white;
-    margin: 0 10px;
+  .radio-buttons-container label {
+    font-size: 15px;
   }
-
-  .stepper .step.active ~ .activeLine {
-    width: 142px;
-    opacity: 1;
+  .textBox-container label {
+    font-size: 15px;
   }
 }
-@media screen and (max-width: 1500px) {
+@media screen and (max-height: 694px) {
+  .showInterestLogo {
+    width: 30%;
+  }
   .show-interest-form {
+    gap: 0px;
+  }
+  .show-interest-form {
+    width: 70%;
     gap: 10px;
+    /* padding: 20px; */
+    padding: 0 10px 0 10px;
   }
   .title {
-    font-size: 14px;
-  }
-  .p-style {
-    font-size: 18px !important;
-  }
-  .text-input {
-    height: 30px;
+    font-size: 15px;
   }
   .textBox-container label {
     font-size: 12px;
   }
-  .css-13cymwt-control {
-    min-height: 30px !important;
+  label {
+    font-size: 12px;
   }
-  .css-qbdosj-Input {
-    margin: 0px !important;
-    padding-bottom: 0px !important;
-    padding-top: 0px !important;
+  .radio-buttons-container label {
+    font-size: 12px;
   }
-  .css-1xc3v61-indicatorContainer {
-    padding: 2px !important;
+  .underlined-link {
+    font-size: 15px;
   }
-  .react-tel-input .form-control {
-    height: 30px !important;
+  .linktext {
+    color: #f3223c;
+    font-size: 12px;
+  }
+  .aud-button {
+    padding: 10px;
+    font-size: 15px;
+  }
+  .classfont-show {
+    font-size: 18px;
+  }
+  .required {
+    font-size: 15px;
+  }
+}
+/****TABLET Show Interest **************************/
+/*****************************/
+@media screen and (max-width: 1280px) {
+  .showInterest-subContainer {
+    padding: 30px 30px;
+    height: 95%;
+    width: 95%;
+    flex-direction: column;
+    justify-content: center;
+    gap: 5%;
+  }
+  .vertical-line-showInterest {
+    display: none;
+  }
+  .show-interest-form {
+    width: 100%;
+    gap: 10px;
+    padding: 0 10px 0 10px;
+  }
+  .radio-buttons-container {
+    gap: 8px;
+  }
+  .radio-input label {
+    font-size: 15px;
+  }
+  .showInterestLogo {
+    width: 50%;
+  }
+}
+
+@media screen and (min-width: 1024px) and (max-width: 1280px) and (min-height: 615px) and (max-height: 835px) {
+  .showInterestLogo {
+    width: 40%;
+  }
+  .show-interest-form {
+    width: 70%;
+    gap: 2px;
+    padding: 0 10px 0 10px;
   }
   .showInterest-subContainer {
-    height: 95%;
+    padding: 30px 20px;
+    height: 98%;
+    gap: 2%;
+    width: 95%;
+    flex-direction: row;
   }
-} */
+  .vertical-line-showInterest {
+    display: block;
+  }
+  .classfont-show {
+    font-size: 20px;
+  }
+}
 
+@media screen and (max-width: 1070px) and (max-height: 635px) {
+  .showInterest-subContainer {
+    padding: 30px 20px;
+    height: 98%;
+    gap: 1%;
+    width: 90%;
+    flex-direction: row;
+  }
+  .showInterestLogo {
+    width: 40%;
+  }
 
-@media screen and (max-height:870px) and (max-width:1733px){
+  .required {
+    font-size: 15px;
+  }
+}
+@media screen and (max-width: 1024px) and (max-height: 652px) {
+  .showInterest-subContainer {
+    padding: 30px 20px;
+    height: 98%;
+    gap: 1%;
+    width: 90%;
+    flex-direction: column;
+  }
+  .showInterestLogo {
+    width: 40%;
+  }
+  .required {
+    font-size: 15px;
+  }
+  .vertical-line-showInterest {
+    display: none;
+  }
+}
+@media screen and (max-width: 1280px) and (max-height: 850px) {
+  .showInterest-subContainer {
+    padding: 30px 30px;
+    height: 95%;
+    width: 95%;
+    flex-direction: row;
+    justify-content: center;
+    gap: 5%;
+  }
+  .vertical-line-showInterest {
+    display: block;
+  }
   .show-interest-form {
+    width: 100%;
     gap: 10px;
+    padding: 0 10px 0 10px;
+  }
+  .radio-buttons-container {
+    gap: 8px;
+  }
+  .radio-input label {
+    font-size: 15px;
+  }
+  .showInterestLogo {
+    width: 30%;
+  }
 }
-.showInterestForm-inner-cont {
-  gap:5%;
-}
-.radio-buttons-container {
-  gap: 2%;
-}
-.radio-buttons-container label{
-  font-size: 15px;
-}
-.textBox-container label{
-  font-size: 15px;
 
+/******************************************/
+/********************************/
+/****************/
+/*********/
+
+/************Stepper MEDIA QUERY*/
+@media screen and (max-width: 1507px) {
+  .inActiveLine {
+    width: 25px;
+  }
+  .stepper .step.active ~ .activeLine {
+    width: 95px;
+  }
 }
+@media screen and (max-width: 1371px) {
+  .inActiveLine {
+    width: 24px;
+    margin: 0;
+  }
+  .stepper .step.active ~ .activeLine {
+    width: 70px;
+    /* margin: 0; */
+  }
+  .stepper-font-number-title {
+    font-size: 10px;
+  }
 }
+@media screen and (max-width: 1259px) {
+  .registerPage-container {
+    margin: 2rem;
+  }
+  .inActi .stepper-font-number-title {
+    font-size: 10px;
+  }
+  .stepper .step.active ~ .activeLine {
+    width: 125px;
+  }
+  .stepper .step {
+    padding: 0px 7px 2px 7px;
+    margin: 0 5px 0px 5px;
+    height: 24px;
+    width: 24px;
+  }
+  .stepper-font-number-inact {
+    font-size: 17px;
+  }
+  .activeLine {
+    margin: 0px 0.2rem;
+  }
+  .checkedLogo {
+    height: 25px;
+  }
+}
+
+/******************************************/
+/********************************/
+/****************/
+/*********/
+
+@media screen and (max-width:1490px){
+  .app-details div:first-child {
+    font-size: 12px;
+  }
+  .app-details div:nth-child(2) {
+    font-size: 12px;
+  }
+  .app-details {
+    padding: 0px 10px;
+  }
+  .app-fee-cont label {
+    font-size: 12px;
+  }
+  .app-fee-cont div {
+    font-size: 18px;
+  }
+  .app-fee-cont {
+    margin-bottom: 40px;
+    margin-left: 20px;
+  }
+  .invoice-card-container{
+    padding-bottom: 30px;
+  }
+}
+@media screen and (max-width:1437px) {
+  .invoice-card-container{
+    padding-bottom: 60px;
+  }
+}
+@media screen and (max-width:1400px){
+  .payment-container {
+    display: flex;
+    flex-direction: column-reverse;
+    padding: 0 5%;
+    justify-content: space-between;
+    gap: 0.5rem;
+    align-items: center;
+  }
+  .payment-verticalline {
+    display: none;
+  }
+  .invoice-container .title,
+  .payment-subcontainer .title {
+    font-size: 18px;
+  }
+
+  .invoice-container {
+    height: 350px;
+    width: 250px;
+  }
+  .app-details div:first-child {
+    font-size: 12px;
+  }
+  .app-details div:nth-child(2) {
+    font-size: 12px;
+  }
+  .app-details {
+    padding: 0px 10px;
+  }
+  .app-fee-cont label {
+    font-size: 12px;
+  }
+  .app-fee-cont div {
+    font-size: 18px;
+  }
+  .app-fee-cont {
+    margin-bottom: 40px;
+    margin-left: 20px;
+  }
+  .payment-subcontainer p {
+    font-size: 12px;
+  }
+  .active-tab {
+    font-size: 12px;
+    padding-bottom: 10px;
+    padding-top: 10px;
+  }
+  .inactive-tab {
+    font-size: 12px;
+  }
+  .payment-subcontainer .textBox-container label {
+    font-size: 12px;
+  }
+  .payment-subcontainer {
+    gap: 0.8rem;
+  }
+  .register-title {
+    font-size: 14px;
+  }
+  .invoice-card-container{
+    padding-bottom: 10px;
+  }
+}
+@media screen and (max-width: 1259px) {
+  /*************Aud header MEdia query**************************************/
+  .aud-header-logo {
+    width: 100px;
+    height: 20px;
+  }
+  .aud-app-header {
+    background-color: #1b224c;
+    width: 100%;
+    height: 84px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+  .upperHeader-container {
+    height: 60px;
+  }
+
+  /************Step 1 MEDIA QUERY***************************************/
+  .registerForms-container {
+    padding: 4rem 1rem;
+  }
+  .form-subcontainers .title,
+  .tuition-container .title {
+    font-size: 13px;
+  }
+
+  .form-subcontainers .textBox-container label {
+    font-size: 10px;
+  }
+  .form-subcontainers ul {
+    font-size: 12px;
+  }
+  .consent-text {
+    font-size: 12px;
+  }
+  .form-subcontainers .linktext {
+    font-size: 13px;
+  }
+  .form-subcontainers label {
+    font-size: 10px;
+  }
+  /************Step2 MEDIA QUERY***************************************/
+  .submittext-container ul li {
+    font-size: 10px !important;
+  }
+  .consent-text {
+    font-size: 12px;
+  }
+  .file-input-container .p-style {
+    font-size: 10px !important;
+  }
+  .rounded-button {
+    padding: 10px;
+    font-size: 10px;
+  }
+  .grid-academic-cont {
+    grid-template-columns: 3fr 3fr 3fr 3fr;
+  }
+  .grid-acd-cont {
+    grid-template-columns: 2fr 2fr 2fr 2fr;
+  }
+  li::marker {
+    color: #1b224c;
+    font-size: 15px;
+  }
+  /************Step3 MEDIA QUERY***************************************/
+  .checkbox-container p {
+    font-size: 12px;
+  }
+  .important-notices-container ul li,
+  .agreement-container ul li {
+    font-size: 12px !important;
+  }
+  .blue-link {
+    font-size: 12px;
+  }
+  .blue-link span {
+    font-size: 12px;
+  }
+
+  th,
+  td {
+    font-size: 9px;
+  }
+  .classfont-agreement {
+    font-size: 12px;
+  }
+  .agreement-container .required {
+    font-size: 15px;
+  }
+  .modal-title-3font {
+    font-size: 20px !important;
+  }
+  .custom-date-input input[type="date"]{
+    font-size: 12px;
+  }
+  .login-container .underlined-link{
+    font-size: 12px;
+  }
+  .title-with-line span{
+    font-size: 13px;
+  }
+  .expand-font-title{
+    font-size: 14px;
+  }
+  /******step4 media query********************************/
+ 
+}
+
+/* @media screen and minwidth(125px) and (-webkit-device-pixel-ratio: 1.25) {
+  .showInterest-subContainer {
+    flex-direction: column;
+  }} */

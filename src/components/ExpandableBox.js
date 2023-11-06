@@ -27,7 +27,7 @@ const ExpandableBox = ({ isRounded, children, title, text }) => {
         <AiOutlineClose onClick={toggleCollapse} className='close-icon-exp' />
       )}
       <div onClick={toggleExpansion}>
-        <TextComponent text={title} size='20px' font='700' />
+        <TextComponent text={title} classfont='expand-font-title' font='700' />
         {isExpanded
           ? " "
           : text && <TextComponent text={text} size='15px' font='500' />}

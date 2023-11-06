@@ -10,8 +10,8 @@ const Agreement = () => {
     <div className='agreement-container'>
       <div className='agreement-title'>
         <TextComponent
-          size='18px'
           font='800'
+          classfont='classfont-agreement'
           text='The UAE Ministry of Education has officially licensed the American University in Dubai and accredited all of its programs. AUD is also accredited by the Southern Association of Colleges and Schools Commission on Colleges (SACSCOC) to award Bachelor’s and Master’s degrees.'
         />
       </div>

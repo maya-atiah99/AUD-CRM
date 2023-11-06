@@ -30,7 +30,7 @@ const ImportantNotices = () => {
   const formik = useFormikContext();
 
   return (
-    <div className='form-subcontainers'>
+    <div className='form-subcontainers important-notices-container'>
       <SectionTitle title='IMPORTANT NOTICES' />
       <BulletedText items={details} size='18px' font='600' />
       <SquareCheckBox

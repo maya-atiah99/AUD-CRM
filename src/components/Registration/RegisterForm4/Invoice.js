@@ -7,7 +7,7 @@ const Invoice = () => {
       <div className='invoice-title'>
         <SectionTitle title='PAYMENT & INVOICE' noLine={true} />
       </div>
-      <div className='d-flex flex-column gap-5'>
+      <div className='invoice-card-container'>
         <div className='app-details-cont'>
           <div className='app-details'>
             <div>Application Fee</div>

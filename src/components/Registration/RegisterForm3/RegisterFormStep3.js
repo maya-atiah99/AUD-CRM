@@ -27,7 +27,7 @@ const RegisterFormStep3 = forwardRef((_, ref) => {
         undergraduateProgram: "",
       },
     },
-    validationSchema: Step3ValidationSchema,
+    // validationSchema: Step3ValidationSchema,
     onSubmit: (values) => {
       console.log("hiiii", values);
     },
@@ -64,8 +64,9 @@ const RegisterFormStep3 = forwardRef((_, ref) => {
         <ModalComponent
           onClose={() => setShowModal(false)}
           width='90%'
-          height='50rem'
-         title='American University In Dubai Reservation And Enrollment Agreement & Terms'
+          height='100%'
+          classFont="modal-title-3font"
+          title='American University In Dubai Reservation And Enrollment Agreement & Terms'
         >
           <Agreement />
         </ModalComponent>

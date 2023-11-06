@@ -31,27 +31,6 @@ const RegisterPage = () => {
       title: "Pay & Submit",
     },
   ];
-  // const handleChange = (next) => {
-  //   console.log(" formikRefStep1.current?.submitForm()", formikRefStep1.current);
-
-  //   formikRefStep1.current?.submitForm();
-  //   setTimeout(() => {
-  //     if (next) {
-  //       if (formikRefStep1.current?.isValid) {
-  //         if (activeStep < steps.length - 1) {
-  //           setActiveStep(activeStep + 1);
-  //           window.scrollTo(0, 0);
-
-  //         }
-  //       }
-  //     } else {
-  //       if (activeStep > 0) {
-  //         setActiveStep(activeStep - 1);
-  //         window.scrollTo(0, 0);
-  //       }
-  //     }
-  //   }, [200]);
-  // };
 
   const handeleSubmit = (step) => {
     if (step == 0) {
@@ -110,7 +89,7 @@ const RegisterPage = () => {
           opacity='0.56'
           color='#1B224C'
           font='800'
-          size='20px'
+          classfont='register-title'
         />
         <RegisterContainer
           activeStep={activeStep}

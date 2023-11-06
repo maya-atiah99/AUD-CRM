@@ -28,7 +28,7 @@ const HousingFees = () => {
     <div className='tuition-container'>
       <SectionTitle title='(2) HOUSING FEES AND CHARGES' />
       <TextComponent
-        size='18px'
+        classfont='classfont-agreement'
         font='600'
         text='The one-time housing security deposit is refundable at the end of the semester if no housing damage has occurred. The housing reservation fee is non-refundable and non-transferable unless the student’s application for admission is denied, or the student cancels his/her admission (including conditional) one month prior to the start of the semester for which he or she has paid.'
       />

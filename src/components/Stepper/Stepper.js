@@ -16,7 +16,7 @@ const Stepper = ({ activeStep, fontSize, steps, lastStep, length }) => {
                 text={step.step}
                 font='800'
                 className='inactive '
-                size='20px'
+                classfont="stepper-font-number-inact"
               />
             </div>
           )}
@@ -24,8 +24,8 @@ const Stepper = ({ activeStep, fontSize, steps, lastStep, length }) => {
           <TextComponent
             text={step.title}
             font='600'
-            size='15px'
             color='white'
+            classfont="stepper-font-number-title"
             opacity={index === activeStep ? "1" : "0.4"}
           />
           <div className={!lastStep ? "activeLine" : ""}></div>

@@ -16,13 +16,35 @@ const DropDown = ({
   name,
   errors,
   touched,
-  props,
+  isYear,
+  isMonth,
 }) => {
   const { data: options, refetch: refetchTypes } = useFetchDropDownTypes(
     type || null
   );
   const { data: academicOptions, refetch: refetchTerms } =
     useFetchAcademicTerms();
+
+  const currentYear = new Date().getFullYear();
+  const yearOptions = Array.from(
+    { length: 11 },
+    (_, index) => currentYear + index
+  );
+
+  const monthOptions = [
+    "January",
+    "February",
+    "March",
+    "April",
+    "May",
+    "June",
+    "July",
+    "August",
+    "September",
+    "October",
+    "November",
+    "December",
+  ];
 
   const formattedOptions = options?.data
     ? options?.data?.map((option) => ({
@@ -37,6 +59,14 @@ const DropDown = ({
       }))
     : [];
 
+  const formattedYear = yearOptions.map((year) => ({
+    value: year,
+    label: year.toString(),
+  }));
+  const formattedMonth = monthOptions.map((month, index) => ({
+    value: index + 1,
+    label: month,
+  }));
   useEffect(() => {
     refetchTypes();
   }, [type]);
@@ -70,11 +100,19 @@ const DropDown = ({
         {required && <span className='required'>*</span>}
       </label>
       <Select
-        options={isAcademic ? formattedAcademicOptions : formattedOptions}
+        options={
+          isAcademic
+            ? formattedAcademicOptions
+            : isYear
+            ? formattedYear
+            : isMonth
+            ? formattedMonth
+            : formattedOptions
+        }
         required={required}
         styles={customStyles}
         components={{
-          DropdownIndicator: CustomDropdownArrow, // Use 'DropdownIndicator' instead of 'IndicatorSeparator'
+          DropdownIndicator: CustomDropdownArrow,
         }}
         value={formattedOptions.find((option) => option.value === value)}
         onChange={(selectedOption) => {

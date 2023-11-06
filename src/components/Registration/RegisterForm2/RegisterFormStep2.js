@@ -30,7 +30,7 @@ const RegisterFormStep2 = forwardRef((_, ref) => {
         personalStatement: "",
       },
     },
-    validationSchema: Step2ValidationSchema,
+    // validationSchema: Step2ValidationSchema,
     onSubmit: (values) => {
       console.log("hiiii", values);
     },

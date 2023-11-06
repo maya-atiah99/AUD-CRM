@@ -12,6 +12,7 @@ const ModalComponent = ({
   height,
   children,
   isButton,
+  classFont
 }) => {
   return (
     <div className='modal-container'>
@@ -20,7 +21,7 @@ const ModalComponent = ({
         style={{ width: width, height: height }}
       >
         <div>
-          <h2 style={{ paddingLeft: "20px", paddingTop: "30px" }}>{title}</h2>
+          <h2 style={{ paddingLeft: "20px", paddingTop: "30px" }} className={classFont}>{title}</h2>
           <img
             src='/images/closeicon.svg'
             alt='close icon'

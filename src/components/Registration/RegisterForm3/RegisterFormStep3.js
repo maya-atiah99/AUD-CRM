@@ -27,7 +27,7 @@ const RegisterFormStep3 = forwardRef((_, ref) => {
         undergraduateProgram: "",
       },
     },
-    // validationSchema: Step3ValidationSchema,
+    validationSchema: Step3ValidationSchema,
     onSubmit: (values) => {
       console.log("hiiii", values);
     },

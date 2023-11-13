@@ -89,6 +89,7 @@ const Login = ({
                 />
                 <TextBox
                   label='Password'
+                  type="password"
                   required={true}
                   name='password'
                   value={values.password}

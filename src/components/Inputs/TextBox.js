@@ -9,6 +9,7 @@ const TextBox = ({
   name,
   errors,
   touched,
+  type
 }) => {
   const [initialValue, setInitialValue] = useState(value);
 
@@ -35,7 +36,7 @@ const TextBox = ({
         {required && <span className='required'>*</span>}
       </label>
       <input
-        type='text'
+        type={type ? type : "text"}
         id={label}
         required={required}
         style={inputStyle}

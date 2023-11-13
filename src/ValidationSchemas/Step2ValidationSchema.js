@@ -1,18 +1,16 @@
 import * as Yup from "yup";
 
 const Step2ValidationSchema = Yup.object().shape({
-  academicInformation: Yup.object().shape({
-    countryUniversity: Yup.string().required("Country is required"),
-    universityName: Yup.string().required("University Name is required"),
-    highSchoolDiploma: Yup.string().required("High school diploma is required"),
-    graduationYear: Yup.date().required("Graduation year is required"),
-    advancedCourse: Yup.string(),
-    academicDocument: Yup.string().required("Academic is required"),
-    activitiesAttended: Yup.string(),
-  }),
-  academicFiles: Yup.array().of(
+  CurrentUniversityCountry: Yup.string().required("Country is required"),
+  SchoolCountry: Yup.string().required("University Name is required"),
+  DiplomaType: Yup.string().required("High school diploma is required"),
+  GraduationYear: Yup.date().required("Graduation year is required"),
+  ListAdvancedCources: Yup.string(),
+  DiplomaFile: Yup.string().required("Academic is required"),
+  ActivitiesNotEnrolled: Yup.string(),
+  applicantFiles: Yup.array().of(
     Yup.object().shape({
-      chosenTest: Yup.string().required("Chosen test is required"),
+      testType: Yup.string().required("Chosen test is required"),
       academicDocument: Yup.string().required("Academic document is required"),
       dateTaken: Yup.date().required("Date taken is required"),
       registrationNumber: Yup.number().required(
@@ -21,9 +19,7 @@ const Step2ValidationSchema = Yup.object().shape({
       totalScore: Yup.number().required("Total score is required"),
     })
   ),
-  personalStatement: Yup.object().shape({
-    personalStatement: Yup.mixed(),
-  }),
+  PersonalStatement: Yup.mixed(),
 });
 
 export default Step2ValidationSchema;

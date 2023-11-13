@@ -7,7 +7,7 @@ import VerificationModal from "../../components/ShowInterest/VerificationModal.j
 import Login from "../../Login/Login.js";
 import VerifiedCheckModal from "../../components/ShowInterest/VerifiedCheckModal.js";
 
-const ShowInterest = () => {
+const ShowInterest = ({ setApplicantId, applicantId,setMessage }) => {
   const [showVerifiedModal, setshowVerifiedModal] = useState(false);
   const [showLoginModal, setShowLoginModal] = useState(false);
   const [showVerifiedCheckModal, setShowVerifiedCheckModal] = useState(false);
@@ -46,6 +46,7 @@ const ShowInterest = () => {
           setshowVerifiedModal={setshowVerifiedModal}
           setShowLoginModal={setShowLoginModal}
           openVerifiedModal={openVerifiedModal}
+          setApplicantId={setApplicantId}
         />
       </div>
       {showVerifiedModal && (
@@ -59,7 +60,14 @@ const ShowInterest = () => {
           setShowVerifiedCheckModal={setShowVerifiedCheckModal}
         />
       )}
-      {showLoginModal && <Login setShowLoginModal={setShowLoginModal} />}
+      {showLoginModal && (
+        <Login
+          setShowLoginModal={setShowLoginModal}
+          applicantId={applicantId}
+          setApplicantId={setApplicantId}
+          setMessage={setMessage}
+        />
+      )}
     </div>
   );
 };

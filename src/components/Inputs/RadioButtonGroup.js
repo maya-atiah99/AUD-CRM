@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 
 import RadioButton from "../../components/Inputs/RadioButton";
 
@@ -10,6 +10,8 @@ const RadioButtonGroup = ({
   name,
   onRadioChange,
 }) => {
+  console.log("Selected Value:", selectedValue);
+
   return (
     <div className='radio-buttons-container'>
       <label htmlFor={label} className='radioBtn-label'>

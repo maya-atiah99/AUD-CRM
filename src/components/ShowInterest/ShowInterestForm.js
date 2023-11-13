@@ -8,13 +8,22 @@ import { Formik, Form } from "formik";
 import showInterestValidationSchema from "../../ValidationSchemas/ShowInterestValidationSchema";
 import { useAddApplicantToShowInterest } from "../../Hooks/ShowInterest";
 import RadioButtonGroup from "../Inputs/RadioButtonGroup";
+import { useAddApplicant } from "../../Hooks/Appplicant";
+import { useNavigate } from "react-router-dom";
 
 const startYourApplicationOptions = [
-  { label: "Undergraduate", value: "Undergraduate" },
-  { label: "Graduate", value: "Graduate" },
-  { label: "Visiting", value: "Visiting" },
+  { label: "Undergraduate", value: "0" },
+  { label: "Graduate", value: "1" },
+  { label: "Visiting", value: "2" },
 ];
-const ShowInterestForm = ({ setShowLoginModal, openVerifiedModal }) => {
+const ShowInterestForm = ({
+  setShowLoginModal,
+  openVerifiedModal,
+  setApplicantId,
+}) => {
+  const [clickedButton, setClickedButton] = useState(null);
+  const navigate = useNavigate();
+
   const initialValues = {
     firstName: "",
     middleName: "",
@@ -26,26 +35,49 @@ const ShowInterestForm = ({ setShowLoginModal, openVerifiedModal }) => {
     howDidYouHear: "",
     selectedTerm: "",
     fieldOfInterest: "",
+    applicationStart: "",
   };
 
-  const { mutate: addApplicant } = useAddApplicantToShowInterest();
+  const { mutate: addShowInterest } = useAddApplicantToShowInterest();
+  const { mutate: addApplicant } = useAddApplicant();
+
+  const handleContinueToApply = (values) => {
+    addApplicant(values, {
+      onSuccess: (data) => {
+        console.log("submitted");
+        console.log(data?.data?.applicantId);
+        localStorage.setItem("applicantId", data?.data?.applicantId);
+        setApplicantId(data?.data?.applicantId);
+        navigate("/register", { state: { showInterest: true } });
+      },
+      onError: (error) => {
+        console.error("An error occurred:", error);
+      },
+    });
+  };
+  const handleSubmitForm = (values) => {
+    addShowInterest(values, {
+      onSuccess: () => {
+        console.log(" show interest submitted");
+        openVerifiedModal("Submit");
+      },
+      onError: (error) => {
+        console.error("An error occured:", error);
+      },
+    });
+  };
+
   return (
     <Formik
       initialValues={initialValues}
       validationSchema={showInterestValidationSchema}
       onSubmit={(values) => {
         console.log("test", values);
-        // addApplicant(values, {
-        //   onSuccess: () => {
-        //     console.log("submitted");
-        //     toast.success("Form submittes successfully");
-        //     setshowVerifiedModal(true);
-        //   },
-        //   onError: (error) => {
-        //     console.error("An error occured:", error);
-        //   },
-        // });
-        openVerifiedModal("Submit");
+        if (clickedButton === "continueToApply") {
+          handleContinueToApply(values);
+        } else if (clickedButton === "submitForm") {
+          handleSubmitForm(values);
+        }
       }}
     >
       {({
@@ -211,8 +243,8 @@ const ShowInterestForm = ({ setShowLoginModal, openVerifiedModal }) => {
               <div>
                 <RadioButtonGroup
                   options={startYourApplicationOptions}
-                  name='startYourApp'
-                  selectedValue={values.startYourApp}
+                  name='applicationStart'
+                  selectedValue={values.applicationStart}
                   label='Start Your Application'
                   required={true}
                   onRadioChange={(name, value) => {
@@ -225,12 +257,16 @@ const ShowInterestForm = ({ setShowLoginModal, openVerifiedModal }) => {
                 <div className='d-flex flex-column gap-2'>
                   <LinkButton
                     title='CONTINUE TO APPLY'
-                    handleOnClick={() => {
-                      openVerifiedModal("Continue");
-                    }}
+                    // handleOnClick={() => {
+                    //   openVerifiedModal("Continue");
+                    // }}
                     // linkTo='/register'
                     underlined={true}
                     required={true}
+                    handleOnClick={() => {
+                      setClickedButton("continueToApply");
+                      handleSubmit();
+                    }}
                   />
                   <LinkButton
                     title='LOGIN HERE'
@@ -248,7 +284,10 @@ const ShowInterestForm = ({ setShowLoginModal, openVerifiedModal }) => {
                   text='Submit Form'
                   type='submit'
                   required={true}
-                  handleOnClick={() => handleSubmit()}
+                  handleOnClick={() => {
+                    setClickedButton("submitForm");
+                    handleSubmit();
+                  }}
                 />
               </div>
             </div>

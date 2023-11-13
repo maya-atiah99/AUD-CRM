@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import SectionTitle from "../../Texts/SectionTitle";
 import Dropdown from "../../Inputs/DropDown";
 import TextBox from "../../Inputs/TextBox";
@@ -8,6 +8,7 @@ import { useFormikContext } from "formik";
 
 const PersonalInformation = () => {
   const formik = useFormikContext();
+  const [teststate, setTest] = useState(false);
 
   return (
     <div className='form-subcontainers'>
@@ -17,8 +18,8 @@ const PersonalInformation = () => {
           width='100%'
           label='Title'
           type='1'
-          name='personalInformation.title'
-          value={formik.values.personalInformation.title}
+          name='titleId'
+          value={formik.values.titleId}
           onChange={(name, value) => {
             formik.setFieldValue(name, value);
           }}
@@ -27,37 +28,37 @@ const PersonalInformation = () => {
           width='100%'
           label='First Name'
           required={true}
-          name='personalInformation.firstName'
-          value={formik.values.personalInformation.firstName}
+          name='firstName'
+          value={formik.values.firstName}
           onChange={(name, value) => {
             formik.setFieldValue(name, value);
           }}
-          errors={formik.errors?.personalInformation?.firstName}
-          touched={formik.touched?.personalInformation?.firstName}
+          errors={formik.errors?.firstName}
+          touched={formik.touched?.firstName}
         />
         <TextBox
           width='100%'
           label='Middle Name'
           required={true}
-          name='personalInformation.middleName'
-          value={formik.values.personalInformation.middleName}
+          name='middleName'
+          value={formik.values.middleName}
           onChange={(name, value) => {
             formik.setFieldValue(name, value);
           }}
-          errors={formik.errors?.personalInformation?.middleName}
-          touched={formik.touched?.personalInformation?.middleName}
+          errors={formik.errors?.middleName}
+          touched={formik.touched?.middleName}
         />
         <TextBox
           width='100%'
           label='Last Name'
-          name='personalInformation.lastName'
+          name='lastName'
           required={true}
-          value={formik.values.personalInformation.lastName}
+          value={formik.values.lastName}
           onChange={(name, value) => {
             formik.setFieldValue(name, value);
           }}
-          errors={formik.errors?.personalInformation?.lastName}
-          touched={formik.touched?.personalInformation?.lastName}
+          errors={formik.errors?.lastName}
+          touched={formik.touched?.lastName}
         />
       </div>
       <div className='grid-personal2-cont'>
@@ -65,51 +66,51 @@ const PersonalInformation = () => {
           width='100%'
           label='Email'
           required={true}
-          name='personalInformation.email'
-          value={formik.values.personalInformation.email}
+          name='email'
+          value={formik.values.email}
           onChange={(name, value) => {
             formik.setFieldValue(name, value);
           }}
-          errors={formik.errors?.personalInformation?.email}
-          touched={formik.touched?.personalInformation?.email}
+          errors={formik.errors?.email}
+          touched={formik.touched?.email}
         />
         <DateTime
           width='100%'
           label='Date Of Birth'
           required={true}
-          name='personalInformation.dateOfBirth'
-          value={formik.values.personalInformation.dateOfBirth}
+          name='dob'
+          value={formik.values.dob}
           onChange={(name, value) => {
             formik.setFieldValue(name, value);
           }}
-          errors={formik.errors?.personalInformation?.dateOfBirth}
-          touched={formik.touched?.personalInformation?.dateOfBirth}
+          errors={formik.errors?.dob}
+          touched={formik.touched?.dob}
         />
         <Dropdown
           width='100%'
           label='Gender'
           required={true}
           type='3'
-          name='personalInformation.gender'
-          value={formik.values.personalInformation.gender}
+          name='gender'
+          value={formik.values.gender}
           onChange={(name, value) => {
             formik.setFieldValue(name, value);
           }}
-          errors={formik.errors?.personalInformation?.gender}
-          touched={formik.touched?.personalInformation?.gender}
+          errors={formik.errors?.gender}
+          touched={formik.touched?.gender}
         />
         <Dropdown
           width='100%'
           label='Nationality'
           required={true}
           type='4'
-          name='personalInformation.nationality'
-          value={formik.values.personalInformation.nationality}
+          name='nationality'
+          value={formik.values.nationality}
           onChange={(name, value) => {
             formik.setFieldValue(name, value);
           }}
-          errors={formik.errors?.personalInformation?.nationality}
-          touched={formik.touched?.personalInformation?.nationality}
+          errors={formik.errors?.nationality}
+          touched={formik.touched?.nationality}
         />
       </div>
       <div className='grid-personal2-cont'>
@@ -117,25 +118,25 @@ const PersonalInformation = () => {
           width='50%'
           label='Mobile'
           required={true}
-          name='personalInformation.mobile'
-          value={formik.values.personalInformation.mobile}
+          name='mobile'
+          value={formik.values.mobile}
           onChange={(name, value) => {
             formik.setFieldValue(name, value);
           }}
-          errors={formik.errors?.personalInformation?.mobile}
-          touched={formik.touched?.personalInformation?.mobile}
+          errors={formik.errors?.mobile}
+          touched={formik.touched?.mobile}
         />
         <PhoneNumber
           width='100%'
           label='Telephone'
-          name='personalInformation.telephone'
+          name='telephone'
           required={true}
-          value={formik.values.personalInformation.telephone}
+          value={formik.values.telephone}
           onChange={(name, value) => {
             formik.setFieldValue(name, value);
           }}
-          errors={formik.errors?.personalInformation?.telephone}
-          touched={formik.touched.personalInformation?.telephone}
+          errors={formik.errors?.telephone}
+          touched={formik.touched.telephone}
         />
       </div>
     </div>

@@ -1,57 +1,78 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import SectionTitle from "../../Texts/SectionTitle";
 import RadioButtonGroup from "../../Inputs/RadioButtonGroup";
 import DropDown from "../../Inputs/DropDown";
 import TextBox from "../../Inputs/TextBox";
 import { ErrorMessage, useFormikContext } from "formik";
 
-const ProgramInformation = () => {
+const ProgramInformation = ({ fetchedData }) => {
   const formik = useFormikContext();
+  const [applyingAsOptions, setApplyingAsOptions] = useState([]);
 
-  const startYourApplicationOptions = [
-    { label: "Undergraduate", value: "Undergraduate" },
-    { label: "Graduate", value: "Graduate" },
-    { label: "Visiting", value: "Visiting" },
-  ];
-  const ApplyingAsOptions = [
-    { label: "Visiting Student", value: "Visiting Student" },
-    { label: "Exchange Student", value: "Exchange Student" },
-    { label: "Clinton Scholar", value: "Clinton Scholar" },
-  ];
+  useEffect(() => {
+    if (
+      fetchedData?.data?.applicationStart === 0 ||
+      fetchedData?.data?.stage1?.applicationStart === 0
+    ) {
+      setApplyingAsOptions([
+        { label: "Visiting High School", value: "0" },
+        { label: "Transfer", value: "1" },
+        { label: "Audit", value: "2" },
+        { label: "Non-Degree Seeker", value: "3" },
+      ]);
+    } else if (
+      fetchedData?.data?.applicationStart === 1 ||
+      fetchedData?.data?.stage1?.applicationStart === 1
+    ) {
+      setApplyingAsOptions([
+        { label: "Graduate", value: "0" },
+        { label: "Transfer", value: "1" },
+      ]);
+    } else {
+      setApplyingAsOptions([
+        { label: "Visiting Student", value: "0" },
+        { label: "Exchange Student", value: "1" },
+        { label: "Clinton Scholar", value: "2" },
+      ]);
+    }
+  }, [fetchedData]);
 
   const onRadioChange = (name, value) => {
     formik.setFieldValue(name, value);
   };
 
+  useEffect(() => {
+    formik.setFieldValue("applingAs", fetchedData?.data?.stage2?.applingAs);
+  }, [fetchedData]);
+
   return (
     <div className='form-subcontainers'>
       <SectionTitle title='PROGRAM INFORMATION' dotted={true} />
-      <RadioButtonGroup
+      {/* <RadioButtonGroup
         options={startYourApplicationOptions}
-        name='programInformation.startYourApp'
-        selectedValue={formik.values.programInformation.startYourApp}
+        name='startYourApp'
+        selectedValue={formik.values.startYourApp}
         label='Start Your Application'
         required={true}
         onRadioChange={onRadioChange}
       />
-      {formik.errors?.programInformation?.startYourApp &&
-      formik.touched?.programInformation?.startYourApp ? (
+      {formik.errors?.startYourApp &&
+      formik.touched?.startYourApp ? (
         <span className="span-required">Start Your Application is required</span>
       ) : (
         ""
-      )}
+      )} */}
 
       <RadioButtonGroup
-        options={ApplyingAsOptions}
-        name='programInformation.applyingAs'
-        selectedValue={formik.values.programInformation.applyingAs}
+        options={applyingAsOptions}
+        name='applingAs'
+        selectedValue={formik.values.applingAs}
         label='Applying As'
         required={true}
         onRadioChange={onRadioChange}
       />
-      {formik.errors?.programInformation?.applyingAs &&
-      formik.touched?.programInformation?.applyingAs ? (
-        <span className="span-required">Applying as is required</span>
+      {formik.errors?.applingAs && formik.touched?.applingAs ? (
+        <span className='span-required'>Applying as is required</span>
       ) : (
         ""
       )}
@@ -60,26 +81,26 @@ const ProgramInformation = () => {
           width='100%'
           label='Program Of Interest'
           required={true}
-          name='programInformation.programOfInterest'
+          name='programOfInterest'
           type='5'
-          value={formik.values.programInformation.programOfInterest}
+          value={formik.values.programOfInterest}
           onChange={(name, value) => {
             formik.setFieldValue(name, value);
           }}
-          errors={formik.errors?.programInformation?.programOfInterest}
-          touched={formik.touched?.programInformation?.programOfInterest}
+          errors={formik.errors?.programOfInterest}
+          touched={formik.touched?.programOfInterest}
         />
         <TextBox
           width='100%'
           label='Your Current Place Of Study'
           required={true}
-          name='programInformation.currentPlaceOfStudy'
-          value={formik.values.programInformation.currentPlaceOfStudy}
+          name='currentPlaceOfStudy'
+          value={formik.values.currentPlaceOfStudy}
           onChange={(name, value) => {
             formik.setFieldValue(name, value);
           }}
-          errors={formik.errors?.programInformation?.currentPlaceOfStudy}
-          touched={formik.touched?.programInformation?.currentPlaceOfStudy}
+          errors={formik.errors?.currentPlaceOfStudy}
+          touched={formik.touched?.currentPlaceOfStudy}
         />
       </div>
     </div>

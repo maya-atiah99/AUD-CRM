@@ -35,12 +35,13 @@ const ImportantNotices = () => {
       <BulletedText items={details} size='18px' font='600' />
       <SquareCheckBox
         text='If I am accepted by The American University in Dubai (AUD),'
-        name='importantNotices.acceptance'
+        name='ImportantNotesCheck'
+        value={formik.values.ImportantNotesCheck}
         onChange={(checked) => {
-          formik.setFieldValue("importantNotices.acceptance", checked);
+          formik.setFieldValue("ImportantNotesCheck", checked);
         }}
-        errors={formik.errors?.importantNotices?.acceptance}
-        touched={formik.errors?.importantNotices?.acceptance}
+        errors={formik.errors?.ImportantNotesCheck}
+        touched={formik.errors?.ImportantNotesCheck}
       />
     </div>
   );

@@ -3,7 +3,9 @@ import { useQuery } from "react-query";
 import { API_URL } from "../Constants";
 
 const fetchDropdownTypes = async (typeId) => {
-  return await axios.get(API_URL + `/api/Setting/GetDrowDown/${typeId}`);
+  if (typeId) {
+    return await axios.get(API_URL + `/api/Setting/GetDrowDown/${typeId}`);
+  }
 };
 
 const fetchAcademicTerms = async () => {

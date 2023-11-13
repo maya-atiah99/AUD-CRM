@@ -8,11 +8,11 @@ import * as Yup from "yup";
     email: Yup.string().email("Invalid Email").required("Email is required"),
     nationality: Yup.string().required("Nationality is required"),
     mobile: Yup.string().required("Mobile is required"),
-    titleId: Yup.string().notRequired(),
+    titleId: Yup.string().nullable(),
     howDidYouHear: Yup.string().required("How did you hear about us is required"),
     selectedTerm: Yup.string().required("Selected term is required"),
     fieldOfInterest: Yup.string().required("Field of interest  is required"),
-    startYourApp: Yup.string().required("Start your application is required"),
+    applicationStart: Yup.string().required("Start your application is required"),
 
   });
 

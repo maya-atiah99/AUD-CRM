@@ -390,7 +390,7 @@ textarea:focus-visible {
   max-height: 700px;
   opacity: 1;
 }
-.expand-font-title{
+.expand-font-title {
   font-size: 20px;
 }
 /***********************************Phone Input****/
@@ -1269,10 +1269,10 @@ td:first-child {
   font-size: 20px;
   font-weight: bold;
 }
-.invoice-card-container{
+.invoice-card-container {
   display: flex;
   flex-direction: column;
-  gap:3rem;
+  gap: 3rem;
 }
 
 .verticalPayment-container {
@@ -1371,6 +1371,14 @@ td:first-child {
 }
 /****TABLET Show Interest **************************/
 /*****************************/
+@media screen and (max-width: 1519px) {
+  .showInterestLogo {
+    width: 30%;
+  }
+  .show-interest-form {
+    width: 60%;
+  }
+}
 @media screen and (max-width: 1280px) {
   .showInterest-subContainer {
     padding: 30px 30px;
@@ -1413,7 +1421,7 @@ td:first-child {
     height: 98%;
     gap: 2%;
     width: 95%;
-    flex-direction: row;
+    flex-direction: column;
   }
   .vertical-line-showInterest {
     display: block;
@@ -1439,6 +1447,7 @@ td:first-child {
     font-size: 15px;
   }
 }
+
 @media screen and (max-width: 1024px) and (max-height: 652px) {
   .showInterest-subContainer {
     padding: 30px 20px;
@@ -1484,7 +1493,31 @@ td:first-child {
     width: 30%;
   }
 }
+@media screen and (max-width: 1022px) and (max-height: 730px) {
+  .showInterest-subContainer {
+    padding: 30px 30px;
+    height: 95%;
+    width: 95%;
+    flex-direction: column;
+    justify-content: center;
+    gap: 1%;
+  }
+  .vertical-line-showInterest {
+    display: none;
+  }
 
+  .showInterestLogo {
+    display: none;
+  }
+  .classfont-show {
+    font-size: 18px;
+    font-weight: 500;
+    margin-bottom: 0;
+    color: #1b224c;
+    font-weight: 18px;
+    letter-spacing: 0px;
+  }
+}
 /******************************************/
 /********************************/
 /****************/
@@ -1544,7 +1577,7 @@ td:first-child {
 /****************/
 /*********/
 
-@media screen and (max-width:1490px){
+@media screen and (max-width: 1490px) {
   .app-details div:first-child {
     font-size: 12px;
   }
@@ -1564,16 +1597,16 @@ td:first-child {
     margin-bottom: 40px;
     margin-left: 20px;
   }
-  .invoice-card-container{
+  .invoice-card-container {
     padding-bottom: 30px;
   }
 }
-@media screen and (max-width:1437px) {
-  .invoice-card-container{
+@media screen and (max-width: 1437px) {
+  .invoice-card-container {
     padding-bottom: 60px;
   }
 }
-@media screen and (max-width:1400px){
+@media screen and (max-width: 1400px) {
   .payment-container {
     display: flex;
     flex-direction: column-reverse;
@@ -1633,7 +1666,7 @@ td:first-child {
   .register-title {
     font-size: 14px;
   }
-  .invoice-card-container{
+  .invoice-card-container {
     padding-bottom: 10px;
   }
 }
@@ -1734,20 +1767,19 @@ td:first-child {
   .modal-title-3font {
     font-size: 20px !important;
   }
-  .custom-date-input input[type="date"]{
+  .custom-date-input input[type="date"] {
     font-size: 12px;
   }
-  .login-container .underlined-link{
+  .login-container .underlined-link {
     font-size: 12px;
   }
-  .title-with-line span{
+  .title-with-line span {
     font-size: 13px;
   }
-  .expand-font-title{
+  .expand-font-title {
     font-size: 14px;
   }
   /******step4 media query********************************/
- 
 }
 
 /* @media screen and minwidth(125px) and (-webkit-device-pixel-ratio: 1.25) {

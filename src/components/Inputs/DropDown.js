@@ -52,6 +52,7 @@ const DropDown = ({
         label: option.text,
       }))
     : [];
+
   const formattedAcademicOptions = academicOptions
     ? academicOptions?.data?.map((term) => ({
         value: term.academicTermId,
@@ -68,8 +69,10 @@ const DropDown = ({
     label: month,
   }));
   useEffect(() => {
-    refetchTypes();
-  }, [type]);
+    if (type) {
+      refetchTypes();
+    }
+  }, [type, refetchTypes]);
 
   const CustomDropdownArrow = () => {
     return (
@@ -90,6 +93,14 @@ const DropDown = ({
       "&:focus": {
         borderColor: "blue",
       },
+    }),
+    placeholder: (base) => ({
+      ...base,
+      color: "transparent",
+    }),
+    indicatorSeparator: (base) => ({
+      ...base,
+      display: "none",
     }),
   };
 

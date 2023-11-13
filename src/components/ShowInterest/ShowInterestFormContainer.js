@@ -6,7 +6,8 @@ import ShowInterestForm from "./ShowInterestForm";
 const ShowInterestFormContainer = ({
   setshowVerifiedModal,
   setShowLoginModal,
-  openVerifiedModal
+  openVerifiedModal,
+  setApplicantId
 }) => {
   return (
     <div className='show-interest-form'>
@@ -28,6 +29,7 @@ const ShowInterestFormContainer = ({
         setshowVerifiedModal={setshowVerifiedModal}
         setShowLoginModal={setShowLoginModal}
         openVerifiedModal={openVerifiedModal}
+        setApplicantId={setApplicantId}
 
       />
     </div>

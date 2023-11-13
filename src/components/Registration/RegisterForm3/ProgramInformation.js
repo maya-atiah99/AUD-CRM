@@ -21,12 +21,13 @@ const ProgramInformation = () => {
       <BulletedText items={details} />
       <SquareCheckBox
         text='If I am accepted by The American University in Dubai (AUD),'
-        value={formik.values.programInformation.acceptance}
+        name='ProgramInformationCheck'
+        value={formik.values.ProgramInformationCheck}
         onChange={(checked) => {
-          formik.setFieldValue("programInformation.acceptance", checked);
+          formik.setFieldValue("ProgramInformationCheck", checked);
         }}
-        errors={formik.errors?.programInformation?.acceptance}
-        touched={formik.errors?.programInformation?.acceptance}
+        errors={formik.errors?.ProgramInformationCheck}
+        touched={formik.errors?.ProgramInformationCheck}
       />
     </div>
   );

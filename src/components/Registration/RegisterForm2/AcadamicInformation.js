@@ -17,51 +17,51 @@ const AcadamicInformation = () => {
           label='Country Your Current University'
           required={true}
           type='4'
-          name='academicInformation.countryUniversity'
-          value={formik.values.academicInformation.countryUniversity}
+          name='CurrentUniversityCountry'
+          value={formik.values.CurrentUniversityCountry}
           onChange={(name, value) => {
             formik.setFieldValue(name, value);
           }}
-          errors={formik.errors?.academicInformation?.countryUniversity}
-          touched={formik.touched?.academicInformation?.countryUniversity}
+          errors={formik.errors?.CurrentUniversityCountry}
+          touched={formik.touched?.CurrentUniversityCountry}
         />
         <DropDown
           width='100%'
           label='School/University Name'
           required={true}
           type='4'
-          name='academicInformation.universityName'
-          value={formik.values.academicInformation.universityName}
+          name='SchoolCountry'
+          value={formik.values.SchoolCountry}
           onChange={(name, value) => {
             formik.setFieldValue(name, value);
           }}
-          errors={formik.errors?.academicInformation?.universityName}
-          touched={formik.touched?.academicInformation?.universityName}
+          errors={formik.errors?.SchoolCountry}
+          touched={formik.touched?.SchoolCountry}
         />
         <DropDown
           width='100%'
           label='High School Diploma'
           required={true}
           type='7'
-          name='academicInformation.highSchoolDiploma'
-          value={formik.values.academicInformation.highSchoolDiploma}
+          name='DiplomaType'
+          value={formik.values.DiplomaType}
           onChange={(name, value) => {
             formik.setFieldValue(name, value);
           }}
-          errors={formik.errors?.academicInformation?.highSchoolDiploma}
-          touched={formik.touched?.academicInformation?.highSchoolDiploma}
+          errors={formik.errors?.DiplomaType}
+          touched={formik.touched?.DiplomaType}
         />
         <DateTime
           width='100%'
           label='Graduation Year'
           required={true}
-          name='academicInformation.graduationYear'
-          value={formik.values.academicInformation.graduationYear}
+          name='GraduationYear'
+          value={formik.values.GraduationYear}
           onChange={(name, value) => {
             formik.setFieldValue(name, value);
           }}
-          errors={formik.errors?.academicInformation?.graduationYear}
-          touched={formik.touched?.academicInformation?.graduationYear}
+          errors={formik.errors?.GraduationYear}
+          touched={formik.touched?.GraduationYear}
         />
       </div>
       <div className='grid-academic2-cont'>
@@ -69,13 +69,13 @@ const AcadamicInformation = () => {
           label='Please List Any Advanced Courses Such As: ‘A’ Levels, Ap.'
           rows='4'
           cols='3'
-          name='academicInformation.advancedCourse'
-          value={formik.values.academicInformation.advancedCourse}
+          name='ListAdvancedCources'
+          value={formik.values.ListAdvancedCources}
           onChange={(name, value) => {
             formik.setFieldValue(name, value);
           }}
-          errors={formik.errors?.academicInformation?.advancedCourse}
-          touched={formik.touched?.academicInformation?.advancedCourse}
+          errors={formik.errors?.ListAdvancedCources}
+          touched={formik.touched?.ListAdvancedCources}
         />
 
         <DocumentUpload
@@ -83,22 +83,22 @@ const AcadamicInformation = () => {
           required={true}
           height='100px'
           label='Upload Document'
-          name='academicInformation.academicDocument'
-          errors={formik.errors?.academicInformation?.academicDocument}
-          touched={formik.touched?.academicInformation?.academicDocument}
+          name='DiplomaFile'
+          errors={formik.errors?.DiplomaFile}
+          touched={formik.touched?.DiplomaFile}
         />
       </div>
       <TextArea
         label='If You Are Not Currently Enrolled In A School, Please Describe Your Activities Since You Last Attended.'
         rows='4'
         cols='3'
-        name='academicInformation.activitiesAttended'
-        value={formik.values.academicInformation.activitiesAttended}
+        name='ActivitiesNotEnrolled'
+        value={formik.values.ActivitiesNotEnrolled}
         onChange={(name, value) => {
           formik.setFieldValue(name, value);
         }}
-        errors={formik.errors?.academicInformation?.activitiesAttended}
-        touched={formik.touched?.academicInformation?.activitiesAttended}
+        errors={formik.errors?.ActivitiesNotEnrolled}
+        touched={formik.touched?.ActivitiesNotEnrolled}
       />
     </div>
   );

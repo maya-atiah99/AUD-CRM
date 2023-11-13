@@ -13,13 +13,13 @@ const PersonalStatement = () => {
         label='The Personal Statement Is An Opportunity To Highlight Aspects Of Your Background To Support Your Application'
         rows='4'
         cols='3'
-        name='personalStatement.personalStatement'
-        value={formik.values.personalStatement.personalStatement}
+        name='PersonalStatement'
+        value={formik.values.PersonalStatement}
         onChange={(name, value) => {
           formik.setFieldValue(name, value);
         }}
-        errors={formik.errors?.personalStatement?.personalStatement}
-        touched={formik.touched?.personalStatement?.personalStatement}
+        errors={formik.errors?.PersonalStatement}
+        touched={formik.touched?.PersonalStatement}
       />
     </div>
   );

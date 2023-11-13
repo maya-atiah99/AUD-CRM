@@ -16,46 +16,46 @@ const ParentInformation = () => {
           width='100%'
           label='Guardian Relation'
           type='6'
-          name='parentOfGuardian.gurdianRelation1'
-          value={formik.values.parentOfGuardian.gurdianRelation1}
+          name='guardianRelation1'
+          value={formik.values.guardianRelation1}
           onChange={(name, value) => {
             formik.setFieldValue(name, value);
           }}
-          errors={formik.errors?.parentOfGuardian?.gurdianRelation1}
-          touched={formik.touched?.parentOfGuardian?.gurdianRelation1}
+          errors={formik.errors?.guardianRelation1}
+          touched={formik.touched?.guardianRelation1}
         />
         <TextBox
           width='100%'
           label='Guardian Name'
-          name='parentOfGuardian.guardianName1'
-          value={formik.values.parentOfGuardian.guardianName1}
+          name='guardianName1'
+          value={formik.values.guardianName1}
           onChange={(name, value) => {
             formik.setFieldValue(name, value);
           }}
-          errors={formik.errors?.parentOfGuardian?.guardianName1}
-          touched={formik.touched?.parentOfGuardian?.guardianName1}
+          errors={formik.errors?.guardianName1}
+          touched={formik.touched?.guardianName1}
         />
         <PhoneNumber
           width='50%'
           label='Mobile'
-          name='parentOfGuardian.mobile1'
-          value={formik.values.parentOfGuardian.mobile1}
+          name='guardianMobile1'
+          value={formik.values.guardianMobile1}
           onChange={(name, value) => {
             formik.setFieldValue(name, value);
           }}
-          errors={formik.errors?.parentOfGuardian?.mobile1}
-          touched={formik.touched?.parentOfGuardian?.mobile1}
+          errors={formik.errors?.guardianMobile1}
+          touched={formik.touched?.guardianMobile1}
         />
         <TextBox
           width='100%'
           label='Email Address'
-          name='parentOfGuardian.emailAddress1'
-          value={formik.values.parentOfGuardian.emailAddress1}
+          name='guardianEmail1'
+          value={formik.values.guardianEmail1}
           onChange={(name, value) => {
             formik.setFieldValue(name, value);
           }}
-          errors={formik.errors?.parentOfGuardian?.emailAddress1}
-          touched={formik.touched?.parentOfGuardian?.emailAddress1}
+          errors={formik.errors?.guardianEmail1}
+          touched={formik.touched?.guardianEmail1}
         />
       </div>
       <div className='grid-personal1-cont'>
@@ -63,46 +63,46 @@ const ParentInformation = () => {
           width='100%'
           label='Guardian Relation'
           type='6'
-          name='parentOfGuardian.gurdianRelation2'
-          value={formik.values.parentOfGuardian.gurdianRelation2}
+          name='guardianRelation2'
+          value={formik.values.guardianRelation2}
           onChange={(name, value) => {
             formik.setFieldValue(name, value);
           }}
-          errors={formik.errors?.parentOfGuardian?.gurdianRelation2}
-          touched={formik.touched?.parentOfGuardian?.gurdianRelation2}
+          errors={formik.errors?.guardianRelation2}
+          touched={formik.touched?.guardianRelation2}
         />
         <TextBox
           width='100%'
           label='Guardian Name'
-          name='parentOfGuardian.guardianName2'
-          value={formik.values.parentOfGuardian.guardianName2}
+          name='guardianName2'
+          value={formik.values.guardianName2}
           onChange={(name, value) => {
             formik.setFieldValue(name, value);
           }}
-          errors={formik.errors?.parentOfGuardian?.guardianName2}
-          touched={formik.touched?.parentOfGuardian?.guardianName2}
+          errors={formik.errors?.guardianName2}
+          touched={formik.touched?.guardianName2}
         />
         <PhoneNumber
           width='50%'
           label='Mobile'
-          name='parentOfGuardian.mobile2'
-          value={formik.values.parentOfGuardian.mobile2}
+          name='guardianMobile2'
+          value={formik.values.guardianMobile2}
           onChange={(name, value) => {
             formik.setFieldValue(name, value);
           }}
-          errors={formik.errors?.parentOfGuardian?.mobile2}
-          touched={formik.touched?.parentOfGuardian?.mobile2}
+          errors={formik.errors?.guardianMobile2}
+          touched={formik.touched?.guardianMobile2}
         />
         <TextBox
           width='100%'
           label='Email Address'
-          name='parentOfGuardian.emailAddress2'
-          value={formik.values.parentOfGuardian.emailAddress2}
+          name='guardianEmail2'
+          value={formik.values.guardianEmail2}
           onChange={(name, value) => {
             formik.setFieldValue(name, value);
           }}
-          errors={formik.errors?.parentOfGuardian?.emailAddress2}
-          touched={formik.touched?.parentOfGuardian?.emailAddress2}
+          errors={formik.errors?.guardianEmail2}
+          touched={formik.touched?.guardianEmail2}
         />
       </div>
     </div>

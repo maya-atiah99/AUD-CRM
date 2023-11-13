@@ -13,15 +13,16 @@ const Reservation = ({ handleClick }) => {
         <div className='d-flex'>
           <SquareCheckBox
             text='I hereby acknowledge the terms and conditions of the agreement listed'
-            name='academicInformation.acknowledgeTerms'
+            name='TermAndConditionCheck'
+            value={formik.values.TermAndConditionCheck}
             onChange={(checked) => {
               formik.setFieldValue(
-                "academicInformation.acknowledgeTerms",
+                "TermAndConditionCheck",
                 checked
               );
             }}
-            errors={formik.errors?.academicInformation?.acknowledgeTerms}
-            touched={formik.errors?.academicInformation?.acknowledgeTerms}
+            errors={formik.errors?.TermAndConditionCheck}
+            touched={formik.errors?.TermAndConditionCheck}
           />
           <div className='blue-link' onClick={handleClick}>
             Here
@@ -30,15 +31,16 @@ const Reservation = ({ handleClick }) => {
         <div className='d-flex'>
           <SquareCheckBox
             text='I have read the'
-            name='academicInformation.undergraduateProgram'
+            name='UndergroundCatalogCheck'
+            value={formik.values.UndergroundCatalogCheck}
             onChange={(checked) => {
               formik.setFieldValue(
-                "academicInformation.undergraduateProgram",
+                "UndergroundCatalogCheck",
                 checked
               );
             }}
-            errors={formik.errors?.academicInformation?.undergraduateProgram}
-            touched={formik.errors?.academicInformation?.undergraduateProgram}
+            errors={formik.errors?.UndergroundCatalogCheck}
+            touched={formik.errors?.UndergroundCatalogCheck}
           />
           <div className='blue-link'>
             Undergraduate Catalog <span>online</span>

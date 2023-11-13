@@ -21,11 +21,11 @@ const details = [
   },
 ];
 const test = [
-  { label: "IELTS", value: "IELTS" },
-  { label: "TOEFL", value: "TOEFL" },
-  { label: "EMSAT", value: "EMSAT" },
-  { label: "PTE", value: "PTE" },
-  { label: "SAT", value: "SAT" },
+  { label: "IELTS", value: "0" },
+  { label: "TOEFL", value: "1" },
+  { label: "EMSAT", value: "2" },
+  { label: "PTE", value: "3" },
+  { label: "SAT", value: "4" },
 ];
 
 const AcadamicFiles = () => {
@@ -34,19 +34,19 @@ const AcadamicFiles = () => {
 
   const addSection = () => {
     const newSection = {
-      chosenTest: "",
+      testType: "",
       academicDocument: "",
       dateTaken: "",
       registrationNumber: "",
       totalScore: "",
     };
-    formik.setFieldValue("academicFiles", [
-      ...formik.values.academicFiles,
+    formik.setFieldValue("applicantFiles", [
+      ...formik.values.applicantFiles,
       newSection,
     ]);
     setSections(sections + 1);
   };
-
+console.log('formik.values',formik.values.applicantFiles)
   return (
     <div className='form-subcontainers'>
       <SectionTitle
@@ -56,21 +56,21 @@ const AcadamicFiles = () => {
       <ExpandableBox title='Further Details'>
         <BulletedText items={details} />
       </ExpandableBox>
-      {formik.values.academicFiles.map((section, index) => (
+      {formik.values.applicantFiles.map((section, index) => (
         <div key={index} className='form-subcontainers my-3'>
           <RadioButtonGroup
             label='Choose Test :'
             options={test}
-            name={`academicFiles[${index}].chosenTest`}
-            selectedValue={section.chosenTest}
+            name={`applicantFiles[${index}].testType`}
+            selectedValue={section.testType}
             onRadioChange={(name, value) => {
               formik.setFieldValue(name, value);
             }}
-            errors={formik.errors?.academicFiles?.[index]?.chosenTest}
-            touched={formik.touched?.academicFiles?.[index]?.chosenTest}
+            errors={formik.errors?.applicantFiles?.[index]?.testType}
+            touched={formik.touched?.applicantFiles?.[index]?.testType}
           />
-          {formik.errors?.academicFiles?.[index]?.chosenTest &&
-         formik.touched?.academicFiles?.[index]?.chosenTest ? (
+          {formik.errors?.applicantFiles?.[index]?.testType &&
+         formik.touched?.applicantFiles?.[index]?.testType ? (
             <span className='span-required'>Choose Test is required</span>
           ) : (
             ""
@@ -80,52 +80,52 @@ const AcadamicFiles = () => {
             required={true}
             height='100px'
             label='Upload Document'
-            name={`academicFiles[${index}].academicDocument`}
+            name={`applicantFiles[${index}].academicDocument`}
             value={section.academicDocument}
             onChange={(name, value) => {
               formik.setFieldValue(name, value);
             }}
-            errors={formik.errors?.academicFiles?.[index]?.academicDocument}
-            touched={formik.touched?.academicFiles?.[index]?.academicDocument}
+            errors={formik.errors?.applicantFiles?.[index]?.academicDocument}
+            touched={formik.touched?.applicantFiles?.[index]?.academicDocument}
           />
           <div className='grid-acd-cont'>
             <DateTime
               width='100%'
               label='Date Taken'
               required={true}
-              name={`academicFiles[${index}].dateTaken`}
+              name={`applicantFiles[${index}].dateTaken`}
               value={section.dateTaken}
               onChange={(name, value) => {
                 formik.setFieldValue(name, value);
               }}
-              errors={formik.errors?.academicFiles?.[index]?.dateTaken}
-              touched={formik.touched?.academicFiles?.[index]?.dateTaken}
+              errors={formik.errors?.applicantFiles?.[index]?.dateTaken}
+              touched={formik.touched?.applicantFiles?.[index]?.dateTaken}
             />
             <TextBox
               width='100%'
               label='Registration No'
               required={true}
-              name={`academicFiles[${index}].registrationNumber`}
+              name={`applicantFiles[${index}].registrationNumber`}
               value={section.registrationNumber}
               onChange={(name, value) => {
                 formik.setFieldValue(name, value);
               }}
-              errors={formik.errors?.academicFiles?.[index]?.registrationNumber}
+              errors={formik.errors?.applicantFiles?.[index]?.registrationNumber}
               touched={
-                formik.touched?.academicFiles?.[index]?.registrationNumber
+                formik.touched?.applicantFiles?.[index]?.registrationNumber
               }
             />
             <TextBox
               width='100%'
               label='Total Score'
               required={true}
-              name={`academicFiles[${index}].totalScore`}
+              name={`applicantFiles[${index}].totalScore`}
               value={section.totalScore}
               onChange={(name, value) => {
                 formik.setFieldValue(name, value);
               }}
-              errors={formik.errors?.academicFiles?.[index]?.totalScore}
-              touched={formik.touched?.academicFiles?.[index]?.totalScore}
+              errors={formik.errors?.applicantFiles?.[index]?.totalScore}
+              touched={formik.touched?.applicantFiles?.[index]?.totalScore}
             />
           </div>
         </div>

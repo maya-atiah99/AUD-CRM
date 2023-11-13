@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 const DateTime = ({
   label,
@@ -19,7 +19,9 @@ const DateTime = ({
       onChange(name, newValue);
     }
   };
-
+  useEffect(() => {
+    setInitialValue(value);
+  }, [value]);
   return (
     <div className='textBox-container'>
       <label htmlFor={label}>

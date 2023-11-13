@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 const TextBox = ({
   label,
@@ -22,9 +22,12 @@ const TextBox = ({
 
   const inputStyle = {
     width: width,
-    borderColor: errors && touched && "#F3223C" ,
+    borderColor: errors && touched && "#F3223C",
   };
 
+  useEffect(() => {
+    setInitialValue(value);
+  }, [value]);
   return (
     <div className='textBox-container'>
       <label htmlFor={label}>
@@ -36,7 +39,7 @@ const TextBox = ({
         id={label}
         required={required}
         style={inputStyle}
-        className="text-input"
+        className='text-input'
         onChange={handleChange}
         value={initialValue}
       />

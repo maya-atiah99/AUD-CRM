@@ -7,7 +7,7 @@ const step1ValidationSchema = Yup.object().shape({
   email: Yup.string().email("Invalid Email").required("Email is required"),
   nationality: Yup.string().required("Nationality is required"),
   mobile: Yup.string().required("Mobile is required"),
-  telephone: Yup.number().required("Telephone is required"),
+  applicantTelephone: Yup.number().required("Telephone is required"),
   dob: Yup.date().required("Date of Birth is required"),
   gender: Yup.string().required("Gender is required"),
   titleId: Yup.string().notRequired(),

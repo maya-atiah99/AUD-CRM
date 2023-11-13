@@ -11,7 +11,9 @@ import PersonalStatement from "./PersonalStatement";
 import { FormikProvider, useFormik } from "formik";
 import Step2ValidationSchema from "../../../ValidationSchemas/Step2ValidationSchema";
 import { useAddApplicantStageThree } from "../../../Hooks/Appplicant";
+
 const RegisterFormStep2 = forwardRef(({ applicantId, fetchedData }, ref) => {
+ 
   const [init, setInit] = useState({
     CurrentUniversityCountry:
       fetchedData?.data?.stage2?.currentUniversityCountry || "",
@@ -36,10 +38,13 @@ const RegisterFormStep2 = forwardRef(({ applicantId, fetchedData }, ref) => {
       },
     ],
     PersonalStatement: fetchedData?.data?.stage2?.personalStatement || "",
+    applingAs: fetchedData?.data?.stage1?.applicationStart || "",
   });
   const { mutate: addApplicantStageThree } = useAddApplicantStageThree();
 
   useEffect(() => {
+    console.log("here");
+    console.log(fetchedData?.data?.stage1?.applicationStart);
     const initialvalues = {
       CurrentUniversityCountry:
         fetchedData?.data?.stage2?.currentUniversityCountry || "",
@@ -64,6 +69,7 @@ const RegisterFormStep2 = forwardRef(({ applicantId, fetchedData }, ref) => {
         },
       ],
       PersonalStatement: fetchedData?.data?.stage2?.personalStatement || "",
+      applingAs: localStorage.getItem("applyingAs"),
     };
     setInit(initialvalues);
   }, [fetchedData]);
@@ -76,7 +82,7 @@ const RegisterFormStep2 = forwardRef(({ applicantId, fetchedData }, ref) => {
       },
       onError: (error) => {
         console.error("An error occurred:", error);
-        setInit({})
+        setInit({});
       },
     });
   };

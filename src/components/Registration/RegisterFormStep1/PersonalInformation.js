@@ -129,13 +129,13 @@ const PersonalInformation = () => {
         <PhoneNumber
           width='100%'
           label='Telephone'
-          name='telephone'
+          name='applicantTelephone'
           required={true}
-          value={formik.values.telephone}
+          value={formik.values.applicantTelephone}
           onChange={(name, value) => {
             formik.setFieldValue(name, value);
           }}
-          errors={formik.errors?.telephone}
+          errors={formik.errors?.applicantTelephone}
           touched={formik.touched.telephone}
         />
       </div>

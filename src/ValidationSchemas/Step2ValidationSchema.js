@@ -5,9 +5,9 @@ const Step2ValidationSchema = Yup.object().shape({
   SchoolCountry: Yup.string().required("University Name is required"),
   DiplomaType: Yup.string().required("High school diploma is required"),
   GraduationYear: Yup.date().required("Graduation year is required"),
-  ListAdvancedCources: Yup.string(),
-  DiplomaFile: Yup.string().required("Academic is required"),
-  ActivitiesNotEnrolled: Yup.string(),
+  ListAdvancedCources: Yup.string().notRequired(),
+  DiplomaFile: Yup.string().notRequired(),
+  ActivitiesNotEnrolled: Yup.string().notRequired(),
   applicantFiles: Yup.array().of(
     Yup.object().shape({
       testType: Yup.string().required("Chosen test is required"),
@@ -20,6 +20,7 @@ const Step2ValidationSchema = Yup.object().shape({
     })
   ),
   PersonalStatement: Yup.mixed(),
+  applingAs:Yup.string().notRequired()
 });
 
 export default Step2ValidationSchema;

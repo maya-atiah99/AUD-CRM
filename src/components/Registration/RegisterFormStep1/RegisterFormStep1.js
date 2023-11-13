@@ -27,7 +27,7 @@ const RegisterFormStep1 = forwardRef(
           email: fetchedData?.data?.email || "",
           nationality: fetchedData?.data?.nationalityId || "",
           mobile: fetchedData?.data?.phoneNumber || "",
-          telephone: fetchedData?.data?.telephone || "",
+          applicantTelephone: fetchedData?.data?.phoneNumber || "",
           dob: fetchedData?.data?.dob || "",
           gender: "",
           titleId: fetchedData?.data?.titleId || "",
@@ -63,7 +63,7 @@ const RegisterFormStep1 = forwardRef(
           email: fetchedData?.data?.stage1?.email || "",
           nationality: fetchedData?.data?.stage1?.nationalityId || "",
           mobile: fetchedData?.data?.stage1?.mobile || "",
-          telephone: fetchedData?.data?.stage1?.telephone || "",
+          applicantTelephone: fetchedData?.data?.stage1?.phoneNumber || "",
           dob: fetchedData?.data?.stage1?.dob
             ? new Date(fetchedData?.data?.stage1?.dob)
                 .toISOString()
@@ -99,7 +99,10 @@ const RegisterFormStep1 = forwardRef(
         setInit(initialStage2);
       }
     }, [fetchedData]);
-
+    console.log(
+      "fetchedData?.data?.stage1?.applicationStart",
+      fetchedData?.data?.stage1?.applicationStart
+    );
     const handleAddStageTwo = (values) => {
       addApplicantStagetwo(
         {
@@ -108,7 +111,6 @@ const RegisterFormStep1 = forwardRef(
         },
         {
           onSuccess: (data) => {
-            console.log("A dataa:", data);
             setInit({});
           },
           onError: (error) => {
@@ -128,6 +130,12 @@ const RegisterFormStep1 = forwardRef(
       validationSchema: ValidationSchema,
       enableReinitialize: true,
       onSubmit: (values) => {
+        console.log("onsumbit");
+        localStorage.setItem(
+          "applicationStart",
+          fetchedData?.data?.stage1?.applicationStart
+        );
+
         handleAddStageTwo(values);
       },
     });

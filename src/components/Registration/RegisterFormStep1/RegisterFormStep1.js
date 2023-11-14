@@ -18,6 +18,7 @@ const RegisterFormStep1 = forwardRef(
   ({ fetchedData, applicantId, showInterest }, ref) => {
     const [init, setInit] = useState({});
     const { mutate: addApplicantStagetwo } = useAddApplicantStageTwo();
+    console.log("valuess", fetchedData);
     useEffect(() => {
       if (showInterest) {
         const initialOne = {
@@ -27,7 +28,7 @@ const RegisterFormStep1 = forwardRef(
           email: fetchedData?.data?.email || "",
           nationality: fetchedData?.data?.nationalityId || "",
           mobile: fetchedData?.data?.phoneNumber || "",
-          applicantTelephone: fetchedData?.data?.phoneNumber || "",
+          applicantTelephone: "",
           dob: fetchedData?.data?.dob || "",
           gender: "",
           titleId: fetchedData?.data?.titleId || "",
@@ -76,7 +77,7 @@ const RegisterFormStep1 = forwardRef(
           country: fetchedData?.data?.address?.country || "",
           pobox: fetchedData?.data?.address?.pobox || "",
           zipCode: fetchedData?.data?.address?.zipCode || "",
-          applingAs: fetchedData?.data?.stage2?.applingAs || "",
+          applingAs: fetchedData?.data?.stage2?.applingAs.toString() || "",
           programOfInterest: fetchedData?.data?.stage2?.programOfInterest || "",
           currentPlaceOfStudy:
             fetchedData?.data?.stage2?.currentPlaceOfStudy || "",
@@ -99,10 +100,7 @@ const RegisterFormStep1 = forwardRef(
         setInit(initialStage2);
       }
     }, [fetchedData]);
-    console.log(
-      "fetchedData?.data?.stage1?.applicationStart",
-      fetchedData?.data?.stage1?.applicationStart
-    );
+
     const handleAddStageTwo = (values) => {
       addApplicantStagetwo(
         {
@@ -130,16 +128,48 @@ const RegisterFormStep1 = forwardRef(
       validationSchema: ValidationSchema,
       enableReinitialize: true,
       onSubmit: (values) => {
-        console.log("onsumbit");
-        localStorage.setItem(
-          "applicationStart",
-          fetchedData?.data?.stage1?.applicationStart
-        );
+        if (showInterest) {
+          localStorage.setItem(
+            "applicationStart",
+            fetchedData?.data?.applicationStart
+          );
+        } else {
+          localStorage.setItem(
+            "applicationStart",
+            fetchedData?.data?.stage1?.applicationStart
+          );
+        }
 
-        handleAddStageTwo(values);
+        const excludeFields = {
+          guardianRelation1:
+            values.guardianRelation1 === ""
+              ? undefined
+              : values.guardianRelation1,
+          guardianName1:
+            values.guardianName1 === "" ? undefined : values.guardianName1,
+          guardianEmail1:
+            values.guardianEmail1 === "" ? undefined : values.guardianEmail1,
+          guardianRelation2:
+            values.guardianRelation2 === ""
+              ? undefined
+              : values.guardianRelation2,
+          guardianName2:
+            values.guardianName2 === "" ? undefined : values.guardianName2,
+          guardianEmail2:
+            values.guardianEmail2 === "" ? undefined : values.guardianEmail2,
+          fathersName:
+            values.fathersName === "" ? undefined : values.fathersName,
+          mothersName:
+            values.mothersName === "" ? undefined : values.mothersName,
+          othersName: values.othersName === "" ? undefined : values.othersName,
+          address1: values.address1 === "" ? undefined : values.address1,
+        };
+        const valuesToSend = { ...values, ...excludeFields };
+        handleAddStageTwo(valuesToSend);
+        setInit({});
       },
     });
-
+    console.log(fetchedData);
     useImperativeHandle(ref, () => ({
       submitForm: () => {
         formik.submitForm();

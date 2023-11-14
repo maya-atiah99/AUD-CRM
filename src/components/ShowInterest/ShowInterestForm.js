@@ -49,6 +49,7 @@ const ShowInterestForm = ({
         localStorage.setItem("applicantId", data?.data?.applicantId);
         setApplicantId(data?.data?.applicantId);
         navigate("/register", { state: { showInterest: true } });
+        localStorage.removeItem("message");
       },
       onError: (error) => {
         console.error("An error occurred:", error);
@@ -58,7 +59,7 @@ const ShowInterestForm = ({
   const handleSubmitForm = (values) => {
     addShowInterest(values, {
       onSuccess: () => {
-        console.log(" show interest submitted");
+        console.log("show interest submitted");
         openVerifiedModal("Submit");
       },
       onError: (error) => {
@@ -71,12 +72,14 @@ const ShowInterestForm = ({
     <Formik
       initialValues={initialValues}
       validationSchema={showInterestValidationSchema}
-      onSubmit={(values) => {
-        console.log("test", values);
+      onSubmit={(values, { resetForm }) => {
+        const valuesToSend =
+          values.titleId === "" ? { ...values, titleId: undefined } : values;
         if (clickedButton === "continueToApply") {
-          handleContinueToApply(values);
+          handleContinueToApply(valuesToSend);
         } else if (clickedButton === "submitForm") {
-          handleSubmitForm(values);
+          handleSubmitForm(valuesToSend);
+          resetForm()
         }
       }}
     >

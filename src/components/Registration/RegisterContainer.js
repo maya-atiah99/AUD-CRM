@@ -18,6 +18,7 @@ const RegisterContainer = forwardRef(
       fetchedData,
       applicantId,
       showInterest,
+      showThree
     },
     ref
   ) => {
@@ -45,6 +46,7 @@ const RegisterContainer = forwardRef(
               ref={refStep2}
               applicantId={applicantId}
               fetchedData={fetchedData}
+              showThree={showThree}
             />
           ) : activeStep == "2" ? (
             <RegisterFormStep3

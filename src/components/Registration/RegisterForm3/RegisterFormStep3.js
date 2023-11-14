@@ -11,33 +11,38 @@ import ModalComponent from "../../ModalComponent";
 import Agreement from "../../Agreements/Agreement";
 import { FormikProvider, useFormik } from "formik";
 import Step3ValidationSchema from "../../../ValidationSchemas/Step3ValidationSchema";
-import { useAddApplicantStageFour } from "../../../Hooks/Appplicant";
+import {
+  useAddApplicantStageFour,
+  useFetchApplicantStageFour,
+} from "../../../Hooks/Appplicant";
 const RegisterFormStep3 = forwardRef(({ applicantId, fetchedData }, ref) => {
+  const { data: applicantStageFour, refetch: refetchStageFour } =
+    useFetchApplicantStageFour(applicantId);
   const [showModal, setShowModal] = useState(false);
   const { mutate: addApplicantStageFour } = useAddApplicantStageFour();
   const [init, setInit] = useState({
     ProgramInformationCheck:
-      fetchedData?.data?.stage2?.programInformationCheck || false,
+      applicantStageFour?.data?.stage2?.programInformationCheck || false,
     ImportantNotesCheck:
-      fetchedData?.data?.stage2?.importantNotesCheck || false,
+      applicantStageFour?.data?.stage2?.importantNotesCheck || false,
     TermAndConditionCheck:
-      fetchedData?.data?.stage2?.termAndConditionCheck || false,
+      applicantStageFour?.data?.stage2?.termAndConditionCheck || false,
     UndergroundCatalogCheck:
-      fetchedData?.data?.stage2?.undergroundCatalogCheck || false,
+      applicantStageFour?.data?.stage2?.undergroundCatalogCheck || false,
   });
   useEffect(() => {
     const initialvalues = {
       ProgramInformationCheck:
-        fetchedData?.data?.stage2?.programInformationCheck || false,
+        applicantStageFour?.data?.stage2?.programInformationCheck || false,
       ImportantNotesCheck:
-        fetchedData?.data?.stage2?.importantNotesCheck || false,
+        applicantStageFour?.data?.stage2?.importantNotesCheck || false,
       TermAndConditionCheck:
-        fetchedData?.data?.stage2?.termAndConditionCheck || false,
+        applicantStageFour?.data?.stage2?.termAndConditionCheck || false,
       UndergroundCatalogCheck:
-        fetchedData?.data?.stage2?.undergroundCatalogCheck || false,
+        applicantStageFour?.data?.stage2?.undergroundCatalogCheck || false,
     };
     setInit(initialvalues);
-  }, [fetchedData]);
+  }, []);
   const handleAddStageFour = (values) => {
     addApplicantStageFour(values, {
       onSuccess: (data) => {
@@ -56,7 +61,6 @@ const RegisterFormStep3 = forwardRef(({ applicantId, fetchedData }, ref) => {
     initialValues: init,
     validationSchema: Step3ValidationSchema,
     onSubmit: (values) => {
-      console.log("hiiii", values);
       const formData = new FormData();
       formData.append("ApplicantId", applicantId);
       formData.append(
@@ -88,6 +92,9 @@ const RegisterFormStep3 = forwardRef(({ applicantId, fetchedData }, ref) => {
     ref.current = formik;
   }, [ref, formik]);
 
+  useEffect(() => {
+    refetchStageFour();
+  }, []);
   return (
     <>
       <div className='form-subcontainer'>

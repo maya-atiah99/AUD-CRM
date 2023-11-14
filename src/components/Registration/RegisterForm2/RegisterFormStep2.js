@@ -10,25 +10,31 @@ import AcadamicInformation from "./AcadamicInformation";
 import PersonalStatement from "./PersonalStatement";
 import { FormikProvider, useFormik } from "formik";
 import Step2ValidationSchema from "../../../ValidationSchemas/Step2ValidationSchema";
-import { useAddApplicantStageThree } from "../../../Hooks/Appplicant";
+import {
+  useAddApplicantStageThree,
+  useFetchApplicantStageThree,
+} from "../../../Hooks/Appplicant";
 
-const RegisterFormStep2 = forwardRef(({ applicantId, fetchedData }, ref) => {
- 
+const RegisterFormStep2 = forwardRef(({ applicantId, showThree }, ref) => {
+  const { data: applicantStageThree, refetch: refetchStageThree } =
+    useFetchApplicantStageThree(applicantId, { enable: showThree });
+  console.log("applicantStageThree", applicantStageThree);
   const [init, setInit] = useState({
     CurrentUniversityCountry:
-      fetchedData?.data?.stage2?.currentUniversityCountry || "",
-    SchoolCountry: fetchedData?.data?.stage2?.schoolCountry || "",
-    DiplomaType: fetchedData?.data?.stage2?.diplomaType || "",
-    GraduationYear: fetchedData?.data?.stage2?.graduationYear
-      ? new Date(fetchedData?.data?.stage2?.graduationYear)
+      applicantStageThree?.data?.stage2?.currentUniversityCountry || "",
+    SchoolCountry: applicantStageThree?.data?.stage2?.schoolCountry || "",
+    DiplomaType: applicantStageThree?.data?.stage2?.diplomaType || "",
+    GraduationYear: applicantStageThree?.data?.stage2?.graduationYear
+      ? new Date(applicantStageThree?.data?.stage2?.graduationYear)
           .toISOString()
           .split("T")[0]
       : "",
-    ListAdvancedCources: fetchedData?.data?.stage2?.listAdvancedCources || "",
-    DiplomaFile: fetchedData?.data?.stage2?.diplomaDocumentId || "",
+    ListAdvancedCources:
+      applicantStageThree?.data?.stage2?.listAdvancedCources || "",
+    DiplomaFile: applicantStageThree?.data?.diploma?.fileName || "",
     ActivitiesNotEnrolled:
-      fetchedData?.data?.stage2?.activitiesNotEnrolled || "",
-    applicantFiles: fetchedData?.data?.stage2?.applicantFiles || [
+      applicantStageThree?.data?.stage2?.activitiesNotEnrolled || "",
+    applicantFiles: applicantStageThree?.data?.stage2?.applicantFiles || [
       {
         testType: "",
         academicDocument: "",
@@ -37,29 +43,28 @@ const RegisterFormStep2 = forwardRef(({ applicantId, fetchedData }, ref) => {
         totalScore: "",
       },
     ],
-    PersonalStatement: fetchedData?.data?.stage2?.personalStatement || "",
-    applingAs: fetchedData?.data?.stage1?.applicationStart || "",
+    PersonalStatement:
+      applicantStageThree?.data?.stage2?.personalStatement || "",
+    applingAs: localStorage.getItem("applyingAs"),
   });
   const { mutate: addApplicantStageThree } = useAddApplicantStageThree();
-
   useEffect(() => {
-    console.log("here");
-    console.log(fetchedData?.data?.stage1?.applicationStart);
     const initialvalues = {
       CurrentUniversityCountry:
-        fetchedData?.data?.stage2?.currentUniversityCountry || "",
-      SchoolCountry: fetchedData?.data?.stage2?.schoolCountry || "",
-      DiplomaType: fetchedData?.data?.stage2?.diplomaType || "",
-      GraduationYear: fetchedData?.data?.stage2?.graduationYear
-        ? new Date(fetchedData?.data?.stage2?.graduationYear)
+        applicantStageThree?.data?.stage2?.currentUniversityCountry || "",
+      SchoolCountry: applicantStageThree?.data?.stage2?.schoolCountry || "",
+      DiplomaType: applicantStageThree?.data?.stage2?.diplomaType || "",
+      GraduationYear: applicantStageThree?.data?.stage2?.graduationYear
+        ? new Date(applicantStageThree?.data?.stage2?.graduationYear)
             .toISOString()
             .split("T")[0]
         : "",
-      ListAdvancedCources: fetchedData?.data?.stage2?.listAdvancedCources || "",
-      DiplomaFile: fetchedData?.data?.stage2?.diplomaDocumentId || "",
+      ListAdvancedCources:
+        applicantStageThree?.data?.stage2?.listAdvancedCources || "",
+      DiplomaFile: applicantStageThree?.data?.diploma?.fileName || "" || "",
       ActivitiesNotEnrolled:
-        fetchedData?.data?.stage2?.activitiesNotEnrolled || "",
-      applicantFiles: fetchedData?.data?.stage2?.applicantFiles || [
+        applicantStageThree?.data?.stage2?.activitiesNotEnrolled || "",
+      applicantFiles: applicantStageThree?.data?.stage2?.applicantFiles || [
         {
           testType: "",
           academicDocument: "",
@@ -68,13 +73,13 @@ const RegisterFormStep2 = forwardRef(({ applicantId, fetchedData }, ref) => {
           totalScore: "",
         },
       ],
-      PersonalStatement: fetchedData?.data?.stage2?.personalStatement || "",
+      PersonalStatement:
+        applicantStageThree?.data?.stage2?.personalStatement || "",
       applingAs: localStorage.getItem("applyingAs"),
     };
     setInit(initialvalues);
-  }, [fetchedData]);
+  }, [applicantStageThree]);
 
-  console.log("inirrrrrrrrr", init.CurrentUniversityCountry);
   const handleAddStageThree = (values) => {
     addApplicantStageThree(values, {
       onSuccess: (data) => {
@@ -105,10 +110,26 @@ const RegisterFormStep2 = forwardRef(({ applicantId, fetchedData }, ref) => {
       formData.append("SchoolCountry", values.SchoolCountry);
       formData.append("DiplomaType", values.DiplomaType);
       formData.append("GraduationYear", values.GraduationYear);
-      formData.append("ListAdvancedCources", values.ListAdvancedCources);
-      formData.append("ActivitiesNotEnrolled", values.ActivitiesNotEnrolled);
-      formData.append("PersonalStatement", values.PersonalStatement);
-      formData.append("DiplomaFile", values.DiplomaFile);
+      if (values.ListAdvancedCources === "") {
+        formData.append("ListAdvancedCources", undefined);
+      } else {
+        formData.append("ListAdvancedCources", values.ListAdvancedCources);
+      }
+      if (values.ActivitiesNotEnrolled === "") {
+        formData.append("ActivitiesNotEnrolled", undefined);
+      } else {
+        formData.append("ActivitiesNotEnrolled", values.ActivitiesNotEnrolled);
+      }
+      if (values.DiplomaFile === "") {
+        formData.append("DiplomaFile", undefined);
+      } else {
+        formData.append("DiplomaFile", values.DiplomaFile);
+      }
+      if (values.PersonalStatement === "") {
+        formData.append("PersonalStatement", undefined);
+      } else {
+        formData.append("PersonalStatement", values.PersonalStatement);
+      }
       formData.append("applicantFiles", values.applicantFiles);
       // var i = 0;
       // //someting.map{}
@@ -130,7 +151,10 @@ const RegisterFormStep2 = forwardRef(({ applicantId, fetchedData }, ref) => {
     ref.current = formik;
   }, [ref, formik]);
 
-  console.log("twooo", formik.values);
+  // useEffect(()=>{
+  //   refetchStageThree()
+  // },[])
+  console.log("formik step 2", formik.values);
   return (
     <div className='form-subcontainer '>
       <FormikProvider

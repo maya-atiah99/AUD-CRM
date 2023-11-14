@@ -25,7 +25,7 @@ const DocumentUpload = ({
     setSelectedFile(null);
     formik.setFieldValue(name, null);
   };
-
+  console.log("formikkkkkkkk", formik);
   // Conditionally set border color to red if there are errors and the input has been touched
   const containerStyle = {
     width: width,
@@ -50,7 +50,13 @@ const DocumentUpload = ({
         <input type='file' className='file-input' onChange={handleFileChange} />
         <p className='p-style'>
           {selectedFile ? selectedFile.name : text}
-
+          
+{/*  
+          { formik.values.DiplomaFile
+            ? formik.values.DiplomaFile
+            : selectedFile
+            ? selectedFile.name
+            : text} */}
           {errors && touched && <span className='error-message'>{errors}</span>}
         </p>
 

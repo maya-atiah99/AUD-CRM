@@ -12,12 +12,12 @@ const step1ValidationSchema = Yup.object().shape({
   gender: Yup.string().required("Gender is required"),
   titleId: Yup.string().notRequired(),
   address: Yup.string().required("Address is required"),
-  cityState: Yup.number().required("City/State is required"),
+  cityState: Yup.string().required("City/State is required"),
   country: Yup.string().required("Country is required"),
   pobox: Yup.string().required("P.O.Box is required"),
   zipCode: Yup.number().required("Zip Code is required"),
   // startYourApp: Yup.string().required("Start your application is required"),
-  applingAs: Yup.number().required("Applying as is required"),
+  applingAs: Yup.string().required("Applying as is required"),
   programOfInterest: Yup.string().required("Program Of interest is required"),
   currentPlaceOfStudy: Yup.string().required(
     "Current place of study is required"

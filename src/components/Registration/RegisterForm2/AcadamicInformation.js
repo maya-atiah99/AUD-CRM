@@ -10,7 +10,7 @@ const AcadamicInformation = () => {
   const applicationStart = localStorage.getItem("applicationStart");
 
   return (
-    <div className='form-subcontainers'>
+    <div className='form-subcontainers academic-container'>
       <SectionTitle title='ACADEMIC INFORMATION' />
       <div className='grid-academic-cont'>
         <DropDown
@@ -23,7 +23,7 @@ const AcadamicInformation = () => {
               : "Country Your Current University "
           }
           required={true}
-          type='4'
+          type='9'
           name='CurrentUniversityCountry'
           value={formik.values.CurrentUniversityCountry}
           onChange={(name, value) => {
@@ -42,7 +42,8 @@ const AcadamicInformation = () => {
               : "School/University "
           }
           required={true}
-          type='4'
+          type='11'
+          parent={formik.values.CurrentUniversityCountry}
           name='SchoolCountry'
           value={formik.values.SchoolCountry}
           onChange={(name, value) => {
@@ -106,6 +107,7 @@ const AcadamicInformation = () => {
               height='100px'
               label='Upload Document'
               name='DiplomaFile'
+             
               errors={formik.errors?.DiplomaFile}
               touched={formik.touched?.DiplomaFile}
             />{" "}

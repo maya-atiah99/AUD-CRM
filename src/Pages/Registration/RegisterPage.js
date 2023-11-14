@@ -23,17 +23,14 @@ const RegisterPage = ({ applicantId }) => {
   const [showInterest, setShowInterest] = useState(
     location?.state?.showInterest || false
   );
+  const [showThree,setShowThree]=useState(false)
   const [fetchedData, setfetchedData] = useState({});
   const { data: applicantStageOne, refetch: refetchStageOne } =
     useFetchApplicantStageOne(applicantId);
   const { data: applicantStageTwo, refetch: refetchStageTwo } =
     useFetchApplicantStageTwo(applicantId);
-  const { data: applicantStageThree, refetch: refetchStageThree } =
-    useFetchApplicantStageThree(applicantId);
-  const { data: applicantStageFour, refetch: refetchStageFour } =
-    useFetchApplicantStageFour(applicantId);
-  console.log("fetchedData register page ", fetchedData);
-  console.log("applicantStageTwo", applicantStageTwo);
+
+ 
   const steps = [
     {
       step: 1,
@@ -52,28 +49,15 @@ const RegisterPage = ({ applicantId }) => {
       title: "Pay & Submit",
     },
   ];
-  console.log("acive", activeStep);
 
   useEffect(() => {
     refreshPage();
-  }, [
-    showInterest,
-    activeStep,
-    applicantStageOne,
-    applicantStageTwo,
-    applicantStageThree,
-    applicantStageFour,
-  ]);
+  }, [showInterest, activeStep, applicantStageOne, applicantStageTwo]);
   const refreshPage = () => {
-    console.log(applicantStageOne);
     if (showInterest === true && applicantStageOne) {
       setfetchedData(applicantStageOne);
     } else if (activeStep === 0 && applicantStageTwo) {
       setfetchedData(applicantStageTwo);
-    } else if (activeStep === 2 && applicantStageThree) {
-      setfetchedData(applicantStageThree);
-    } else if (activeStep === 3 && applicantStageFour) {
-      setfetchedData(applicantStageFour);
     }
   };
 
@@ -107,6 +91,7 @@ const RegisterPage = ({ applicantId }) => {
             window.scrollTo(0, 0);
           }
         } else if (activeStep === 2 && formikRefStep3.current?.isValid) {
+          
           if (activeStep < steps.length - 1) {
             setActiveStep(activeStep + 1);
             window.scrollTo(0, 0);
@@ -118,25 +103,24 @@ const RegisterPage = ({ applicantId }) => {
       }
     }, [100]);
   };
-
   useEffect(() => {
-    if (showInterest === true) {
+    if (showInterest === true && activeStep === 0) {
       refetchStageOne();
     } else if (activeStep === 0) {
       refetchStageTwo();
-    } else if (activeStep === 2) {
-      refetchStageThree();
-    } else if (activeStep === 3) {
-      refetchStageFour();
     }
-  }, [activeStep, applicantId]);
-
+  }, [activeStep, showInterest, applicantId]);
   return (
     <div>
       <UpperHeader />
       <div className='registerPage-container'>
         {activeStep === 0 && (
-          <AUDButton text='Back To Main' to='/' icon='/images/homeicon.svg' />
+          <AUDButton
+            text='Back To Main'
+            to='/'
+            icon='/images/homeicon.svg'
+            handleOnClick={() => setShowInterest(true)}
+          />
         )}
         {activeStep !== 0 && (
           <AUDButton
@@ -168,6 +152,7 @@ const RegisterPage = ({ applicantId }) => {
           applicantId={applicantId}
           fetchedData={fetchedData}
           showInterest={showInterest}
+          showThree={showThree}
         />
         <div style={{ marginLeft: "auto" }}>
           {activeStep !== steps.length - 1 && (
@@ -179,7 +164,11 @@ const RegisterPage = ({ applicantId }) => {
           {activeStep === 3 && (
             <AUDButton
               text='Go Back To Programs Page'
-              handleOnClick={() => setActiveStep(0)}
+              handleOnClick={() => {
+                setActiveStep(0);
+                setShowThree(activeStep === 2 ? true : false);
+              }}
+              
             />
           )}
         </div>

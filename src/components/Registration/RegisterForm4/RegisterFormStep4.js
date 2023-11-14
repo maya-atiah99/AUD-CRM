@@ -24,8 +24,6 @@ const RegisterFormStep4 = () => {
     },
   });
 
-  console.log(formik.values);
-
   return (
     <div className='payment-container'>
       <FormikProvider value={formik} validationSchema={step4ValidationSchema}>

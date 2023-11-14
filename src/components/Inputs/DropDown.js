@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import Select from "react-select";
 import {
   useFetchAcademicTerms,
+  useFetchDropDownFromParent,
   useFetchDropDownTypes,
 } from "../../Hooks/DropDownTypes";
 
@@ -18,12 +19,15 @@ const DropDown = ({
   touched,
   isYear,
   isMonth,
+  parent,
 }) => {
   const { data: options, refetch: refetchTypes } = useFetchDropDownTypes(
     type || null
   );
   const { data: academicOptions, refetch: refetchTerms } =
     useFetchAcademicTerms();
+  const { data: parentOptions, refetch: refetchParentOptions } =
+    useFetchDropDownFromParent(type, parent);
 
   const currentYear = new Date().getFullYear();
   const yearOptions = Array.from(
@@ -68,6 +72,14 @@ const DropDown = ({
     value: index + 1,
     label: month,
   }));
+
+  const formattedParentOptions = parentOptions?.data
+    ? parentOptions?.data?.map((option) => ({
+        value: option.value,
+        label: option.text,
+      }))
+    : [];
+
   useEffect(() => {
     if (type) {
       refetchTypes();
@@ -103,7 +115,6 @@ const DropDown = ({
       display: "none",
     }),
   };
-
   return (
     <div className='textBox-container' style={{ width: width }}>
       <label htmlFor={label}>
@@ -118,6 +129,8 @@ const DropDown = ({
             ? formattedYear
             : isMonth
             ? formattedMonth
+            : parent
+            ? formattedParentOptions
             : formattedOptions
         }
         required={required}

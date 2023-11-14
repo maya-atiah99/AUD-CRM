@@ -74,17 +74,15 @@ export const useFetchApplicantStageTwo = (applicantId) => {
 
 /***************Fetch  Applicant stage 3 ***************/
 const fetchApplicantStageThree = async (applicantId) => {
-  if (applicantId) {
-    return await axios.get(
-      API_URL + `/api/Applicant/GetApplicantStage/Stage3/${applicantId}`
-    );
-  }
+  return await axios.get(
+    API_URL + `/api/Applicant/GetApplicantStage/Stage3/${applicantId}`
+  );
 };
 export const useFetchApplicantStageThree = (applicantId) => {
   return useQuery({
     queryKey: ["stage3", applicantId],
     queryFn: () => fetchApplicantStageThree(applicantId),
-    enabled: true,
+    enabled: false,
   });
 };
 /***************Fetch  Applicant stage 4 ***************/
@@ -97,6 +95,5 @@ export const useFetchApplicantStageFour = (applicantId) => {
   return useQuery({
     queryKey: ["stage4", applicantId],
     queryFn: () => fetchApplicantStageFour(applicantId),
-    enabled: true,
   });
 };

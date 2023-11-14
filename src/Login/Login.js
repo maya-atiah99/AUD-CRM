@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import ModalComponent from "../components/ModalComponent";
 import TextBox from "../components/Inputs/TextBox";
 import AUDButton from "../components/Buttons/AUDButton";
@@ -14,8 +14,10 @@ const Login = ({
   setApplicantId,
   setMessage,
 }) => {
+  const [manageShowInterest, setManageshowInterest] = useState(false);
   const navigate = useNavigate();
   const { mutate: login } = useApplicantLogin();
+
   const initialValues = {
     username: "",
     password: "",
@@ -42,6 +44,7 @@ const Login = ({
                 "message",
                 (() => {
                   if (data?.data?.message === "Stage1") {
+                    setManageshowInterest(true);
                     return 0;
                   } else if (data?.data?.message === "Stage2") {
                     return 1;
@@ -51,11 +54,17 @@ const Login = ({
                   return 3;
                 })()
               );
+              localStorage.setItem("applicationStart", data?.data?.appliyingAs);
+              console.log(
+                "manageShowInterest,manageShowInterest",
+                manageShowInterest
+              );
               navigate("/register", {
-                state: { activeStep: localStorage.getItem("message") },
+                state: {
+                  activeStep: localStorage.getItem("message"),
+                  showInterest: data?.data?.message === "Stage1" ? true : false,
+                },
               });
-              localStorage.removeItem("message");
-
             },
             onError: (error) => {
               console.error("An error occurred:", error);
@@ -89,7 +98,7 @@ const Login = ({
                 />
                 <TextBox
                   label='Password'
-                  type="password"
+                  type='password'
                   required={true}
                   name='password'
                   value={values.password}

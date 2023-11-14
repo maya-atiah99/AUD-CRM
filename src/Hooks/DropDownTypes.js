@@ -12,6 +12,14 @@ const fetchAcademicTerms = async () => {
   return await axios.get(API_URL + "/api/Setting/GetAcadmicTerms");
 };
 
+const fetchDropDownFromPArent = async (typeId, parentId) => {
+  if (typeId && parentId) {
+    return await axios.get(
+      API_URL + `/api/Setting/GetDrowDownFromParent/${typeId}/${parentId}`
+    );
+  }
+};
+
 export const useFetchDropDownTypes = (typeId) => {
   return useQuery({
     queryKey: ["Types", typeId],
@@ -24,6 +32,14 @@ export const useFetchAcademicTerms = () => {
   return useQuery({
     queryKey: ["Terms"],
     queryFn: () => fetchAcademicTerms(),
+    enabled: true,
+  });
+};
+
+export const useFetchDropDownFromParent = (typeId, parentId) => {
+  return useQuery({
+    queryKey: ["Types", typeId, parentId],
+    queryFn: () => fetchDropDownFromPArent(typeId, parentId),
     enabled: true,
   });
 };

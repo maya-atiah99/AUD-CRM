@@ -10,7 +10,6 @@ const RadioButtonGroup = ({
   name,
   onRadioChange,
 }) => {
-  console.log("Selected Value:", selectedValue);
 
   return (
     <div className='radio-buttons-container'>

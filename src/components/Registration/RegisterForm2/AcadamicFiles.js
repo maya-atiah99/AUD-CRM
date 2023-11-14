@@ -46,9 +46,8 @@ const AcadamicFiles = () => {
     ]);
     setSections(sections + 1);
   };
-console.log('formik.values',formik.values.applicantFiles)
   return (
-    <div className='form-subcontainers'>
+    <div className='form-subcontainers academic-container'>
       <SectionTitle
         title='ACADEMIC IELTS/TOEFL/EMSAT/PTE SCORE/SAT'
         isTaken={true}

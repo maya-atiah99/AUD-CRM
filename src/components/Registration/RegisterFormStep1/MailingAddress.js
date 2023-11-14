@@ -5,6 +5,9 @@ import { useFormikContext } from "formik";
 import Dropdown from "../../../components/Inputs/DropDown";
 const MailingAddress = () => {
   const formik = useFormikContext();
+  console.log('formik.values.country',formik.values.country)
+  console.log('formik',formik)
+
   return (
     <div className='form-subcontainers'>
       <SectionTitle title='MAILING ADDRESS (TO BE USED FOR ALL ADMISSIONS CORRESPONDENCE)' />
@@ -25,7 +28,7 @@ const MailingAddress = () => {
           width='100%'
           label='Country'
           required={true}
-          type='4'
+          type='9'
           name='country'
           value={formik.values.country}
           onChange={(name, value) => {
@@ -34,10 +37,23 @@ const MailingAddress = () => {
           errors={formik.errors?.country}
           touched={formik.touched?.country}
         />
-        {/* <Dropdown
+        <Dropdown
           width='100%'
           label='City/State'
-          type='4'
+          type='10'
+          parent={formik.values.country}
+          required={true}
+          name='cityState'
+          value={formik.values.cityState}
+          onChange={(name, value) => {
+            formik.setFieldValue(name, value);
+          }}
+          errors={formik.errors?.cityState}
+          touched={formik.touched?.cityState}
+        />
+        {/* <TextBox
+          width='100%'
+          label='City/State'
           required={true}
           name='cityState'
           value={formik.values.cityState}
@@ -47,18 +63,6 @@ const MailingAddress = () => {
           errors={formik.errors?.cityState}
           touched={formik.touched?.cityState}
         /> */}
-        <TextBox
-          width='100%'
-          label='City/State'
-          required={true}
-          name='cityState'
-          value={formik.values.cityState}
-          onChange={(name, value) => {
-            formik.setFieldValue(name, value);
-          }}
-          errors={formik.errors?.cityState}
-          touched={formik.touched?.cityState}
-        />
         <TextBox
           width='100%'
           label='P.O. Box'

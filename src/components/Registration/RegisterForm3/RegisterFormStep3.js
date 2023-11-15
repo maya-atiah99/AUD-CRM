@@ -15,22 +15,15 @@ import {
   useAddApplicantStageFour,
   useFetchApplicantStageFour,
 } from "../../../Hooks/Appplicant";
-const RegisterFormStep3 = forwardRef(({ applicantId, fetchedData }, ref) => {
+const RegisterFormStep3 = forwardRef(({ applicantId }, ref) => {
   const { data: applicantStageFour, refetch: refetchStageFour } =
     useFetchApplicantStageFour(applicantId);
   const [showModal, setShowModal] = useState(false);
   const { mutate: addApplicantStageFour } = useAddApplicantStageFour();
-  const [init, setInit] = useState({
-    ProgramInformationCheck:
-      applicantStageFour?.data?.stage2?.programInformationCheck || false,
-    ImportantNotesCheck:
-      applicantStageFour?.data?.stage2?.importantNotesCheck || false,
-    TermAndConditionCheck:
-      applicantStageFour?.data?.stage2?.termAndConditionCheck || false,
-    UndergroundCatalogCheck:
-      applicantStageFour?.data?.stage2?.undergroundCatalogCheck || false,
-  });
+  const [init, setInit] = useState({});
+
   useEffect(() => {
+    console.log("initiallll", init);
     const initialvalues = {
       ProgramInformationCheck:
         applicantStageFour?.data?.stage2?.programInformationCheck || false,
@@ -41,8 +34,17 @@ const RegisterFormStep3 = forwardRef(({ applicantId, fetchedData }, ref) => {
       UndergroundCatalogCheck:
         applicantStageFour?.data?.stage2?.undergroundCatalogCheck || false,
     };
+    console.log(
+      "cdcsc",
+      applicantStageFour?.data?.stage2?.undergroundCatalogCheck
+    );
+
+    console.log("rferferf", initialvalues);
+
     setInit(initialvalues);
-  }, []);
+    console.log("initiferferferferallll", initialvalues);
+  }, [applicantStageFour]);
+
   const handleAddStageFour = (values) => {
     addApplicantStageFour(values, {
       onSuccess: (data) => {
@@ -54,12 +56,15 @@ const RegisterFormStep3 = forwardRef(({ applicantId, fetchedData }, ref) => {
       },
     });
   };
+
   useEffect(() => {
-    console.log(init);
+    console.log("sxsjkcnksksncsc", init);
   }, [init]);
+
   const formik = useFormik({
     initialValues: init,
     validationSchema: Step3ValidationSchema,
+    enableReinitialize: true,
     onSubmit: (values) => {
       const formData = new FormData();
       formData.append("ApplicantId", applicantId);
@@ -88,13 +93,15 @@ const RegisterFormStep3 = forwardRef(({ applicantId, fetchedData }, ref) => {
       formik.submitForm();
     },
   }));
+
   useEffect(() => {
     ref.current = formik;
   }, [ref, formik]);
 
-  useEffect(() => {
-    refetchStageFour();
-  }, []);
+  // useEffect(() => {
+  //   refetchStageFour();
+  // }, []);
+
   return (
     <>
       <div className='form-subcontainer'>

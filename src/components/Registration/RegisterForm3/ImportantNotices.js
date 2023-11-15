@@ -28,7 +28,7 @@ const details = [
 ];
 const ImportantNotices = () => {
   const formik = useFormikContext();
-
+console.log('formik.csdcsc',formik.values.ImportantNotesCheck)
   return (
     <div className='form-subcontainers important-notices-container'>
       <SectionTitle title='IMPORTANT NOTICES' />

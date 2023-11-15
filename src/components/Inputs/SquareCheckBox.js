@@ -1,7 +1,6 @@
 import React, { useEffect } from "react";
 
 const SquareCheckBox = ({ text, value, onChange, errors, touched }) => {
-
   
   return (
     <label className='checkbox-container'>

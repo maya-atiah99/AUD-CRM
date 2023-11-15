@@ -82,7 +82,8 @@ export const useFetchApplicantStageThree = (applicantId) => {
   return useQuery({
     queryKey: ["stage3", applicantId],
     queryFn: () => fetchApplicantStageThree(applicantId),
-    enabled: false,
+    enabled:true
+
   });
 };
 /***************Fetch  Applicant stage 4 ***************/
@@ -95,5 +96,6 @@ export const useFetchApplicantStageFour = (applicantId) => {
   return useQuery({
     queryKey: ["stage4", applicantId],
     queryFn: () => fetchApplicantStageFour(applicantId),
+    enabled:true
   });
 };

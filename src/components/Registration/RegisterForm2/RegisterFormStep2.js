@@ -18,7 +18,9 @@ import {
 const RegisterFormStep2 = forwardRef(({ applicantId, showThree }, ref) => {
   const { data: applicantStageThree, refetch: refetchStageThree } =
     useFetchApplicantStageThree(applicantId, { enable: showThree });
-  console.log("applicantStageThree", applicantStageThree);
+  const { mutate: addApplicantStageThree } = useAddApplicantStageThree();
+
+  console.log("applicantStageThree 1", applicantStageThree);
   const [init, setInit] = useState({
     CurrentUniversityCountry:
       applicantStageThree?.data?.stage2?.currentUniversityCountry || "",
@@ -47,8 +49,10 @@ const RegisterFormStep2 = forwardRef(({ applicantId, showThree }, ref) => {
       applicantStageThree?.data?.stage2?.personalStatement || "",
     applingAs: localStorage.getItem("applyingAs"),
   });
-  const { mutate: addApplicantStageThree } = useAddApplicantStageThree();
+
   useEffect(() => {
+    console.log('tesdsxcdsccsdc')
+    console.log('fdvdvdvddfv',init)
     const initialvalues = {
       CurrentUniversityCountry:
         applicantStageThree?.data?.stage2?.currentUniversityCountry || "",
@@ -77,7 +81,9 @@ const RegisterFormStep2 = forwardRef(({ applicantId, showThree }, ref) => {
         applicantStageThree?.data?.stage2?.personalStatement || "",
       applingAs: localStorage.getItem("applyingAs"),
     };
+    console.log('cdscscsdcdscdsc',initialvalues)
     setInit(initialvalues);
+    console.log('dscscscs',init)
   }, [applicantStageThree]);
 
   const handleAddStageThree = (values) => {
@@ -151,9 +157,9 @@ const RegisterFormStep2 = forwardRef(({ applicantId, showThree }, ref) => {
     ref.current = formik;
   }, [ref, formik]);
 
-  // useEffect(()=>{
-  //   refetchStageThree()
-  // },[])
+  // useEffect(() => {
+  //   refetchStageThree();
+  // }, []);
   console.log("formik step 2", formik.values);
   return (
     <div className='form-subcontainer '>

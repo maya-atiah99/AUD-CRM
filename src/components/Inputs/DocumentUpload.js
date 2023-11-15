@@ -25,8 +25,7 @@ const DocumentUpload = ({
     setSelectedFile(null);
     formik.setFieldValue(name, null);
   };
-  console.log("formikkkkkkkk", formik);
-  // Conditionally set border color to red if there are errors and the input has been touched
+
   const containerStyle = {
     width: width,
     height: height,
@@ -42,16 +41,20 @@ const DocumentUpload = ({
 
       <label
         className={`file-input-container ${
-          selectedFile ? "file-input-container-upl" : "file-input-container"
+          selectedFile || formik.values[name] ? "file-input-container-upl" : "file-input-container"
         }`}
         style={containerStyle}
       >
         <img src='/images/Layer 25.svg' alt='layer' />
         <input type='file' className='file-input' onChange={handleFileChange} />
         <p className='p-style'>
+          {/* {formik.values[name] !== ""
+            ? formik.values[name]
+            : selectedFile
+            ? selectedFile.name
+            : text} */}
           {selectedFile ? selectedFile.name : text}
-          
-{/*  
+          {/*  
           { formik.values.DiplomaFile
             ? formik.values.DiplomaFile
             : selectedFile

@@ -51,8 +51,6 @@ const RegisterFormStep2 = forwardRef(({ applicantId, showThree }, ref) => {
   });
 
   useEffect(() => {
-    console.log('tesdsxcdsccsdc')
-    console.log('fdvdvdvddfv',init)
     const initialvalues = {
       CurrentUniversityCountry:
         applicantStageThree?.data?.stage2?.currentUniversityCountry || "",
@@ -81,9 +79,8 @@ const RegisterFormStep2 = forwardRef(({ applicantId, showThree }, ref) => {
         applicantStageThree?.data?.stage2?.personalStatement || "",
       applingAs: localStorage.getItem("applyingAs"),
     };
-    console.log('cdscscsdcdscdsc',initialvalues)
+    console.log("cdscscsdcdscdsc", initialvalues);
     setInit(initialvalues);
-    console.log('dscscscs',init)
   }, [applicantStageThree]);
 
   const handleAddStageThree = (values) => {

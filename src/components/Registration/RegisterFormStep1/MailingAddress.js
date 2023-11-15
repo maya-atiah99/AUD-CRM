@@ -5,8 +5,6 @@ import { useFormikContext } from "formik";
 import Dropdown from "../../../components/Inputs/DropDown";
 const MailingAddress = () => {
   const formik = useFormikContext();
-  console.log('formik.values.country',formik.values.country)
-  console.log('formik',formik)
 
   return (
     <div className='form-subcontainers'>

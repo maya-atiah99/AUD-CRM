@@ -8,8 +8,6 @@ import { useFormikContext } from "formik";
 
 const PersonalInformation = () => {
   const formik = useFormikContext();
-  const [teststate, setTest] = useState(false);
-
   return (
     <div className='form-subcontainers'>
       <SectionTitle title='PERSONAL INFORMATION OF THE APPLICANT' />

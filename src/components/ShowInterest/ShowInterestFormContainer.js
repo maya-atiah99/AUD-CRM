@@ -13,12 +13,12 @@ const ShowInterestFormContainer = ({
     <div className='show-interest-form'>
       <div>
         <TextComponent
-          text='WELCOME TO THE ONLINE ADMISSIONS PORTAL '
+          text='Welcome to the online admissions portal '
           font='800'
           classfont='classfont-show'
         />
         <TextComponent
-          text='AT THE AMERICAN UNIVERSITY IN DUBAI!'
+          text='At the american university in Dubai'
           font='800'
           classfont='classfont-show'
         />
@@ -30,7 +30,6 @@ const ShowInterestFormContainer = ({
         setShowLoginModal={setShowLoginModal}
         openVerifiedModal={openVerifiedModal}
         setApplicantId={setApplicantId}
-
       />
     </div>
   );

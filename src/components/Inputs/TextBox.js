@@ -9,15 +9,21 @@ const TextBox = ({
   name,
   errors,
   touched,
-  type
+  type,
 }) => {
   const [initialValue, setInitialValue] = useState(value);
 
   const handleChange = (event) => {
     const newValue = event.target.value;
     setInitialValue(newValue);
-    if (onChange) {
-      onChange(name, newValue);
+    if (name) {
+      if (onChange) {
+        onChange(name, newValue);
+      }
+    } else {
+      if (onChange) {
+        onChange(newValue);
+      }
     }
   };
 

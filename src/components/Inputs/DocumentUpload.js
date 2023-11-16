@@ -11,6 +11,7 @@ const DocumentUpload = ({
   height,
   errors,
   touched,
+  fileName,
 }) => {
   const formik = useFormikContext();
   const [selectedFile, setSelectedFile] = useState(null);
@@ -41,7 +42,9 @@ const DocumentUpload = ({
 
       <label
         className={`file-input-container ${
-          selectedFile || formik.values[name] ? "file-input-container-upl" : "file-input-container"
+          selectedFile || formik.values[name]
+            ? "file-input-container-upl"
+            : "file-input-container"
         }`}
         style={containerStyle}
       >
@@ -54,12 +57,9 @@ const DocumentUpload = ({
             ? selectedFile.name
             : text} */}
           {selectedFile ? selectedFile.name : text}
-          {/*  
-          { formik.values.DiplomaFile
-            ? formik.values.DiplomaFile
-            : selectedFile
-            ? selectedFile.name
-            : text} */}
+
+          {/* {fileName ? fileName : text} */}
+
           {errors && touched && <span className='error-message'>{errors}</span>}
         </p>
 

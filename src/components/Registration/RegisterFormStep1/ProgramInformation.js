@@ -8,21 +8,27 @@ import { ErrorMessage, useFormikContext } from "formik";
 const ProgramInformation = ({ fetchedData }) => {
   const formik = useFormikContext();
   const [applyingAsOptions, setApplyingAsOptions] = useState([]);
-
+  const startYourApplicationOptions = [
+    { label: "Undergraduate", value: "0" },
+    { label: "Graduate", value: "1" },
+    { label: "Visiting", value: "2" },
+  ];
   useEffect(() => {
     if (
-      fetchedData?.data?.applicationStart === 0 ||
-      fetchedData?.data?.stage1?.applicationStart === 0
+      fetchedData?.data?.applicationStart === "0" ||
+      fetchedData?.data?.stage1?.applicationStart === "0" ||
+      formik.values.startYourApp === "0"
     ) {
       setApplyingAsOptions([
-        { label: "Visiting High School", value: "0" },
+        { label: "High School", value: "0" },
         { label: "Transfer", value: "1" },
         { label: "Audit", value: "2" },
         { label: "Non-Degree Seeker", value: "3" },
       ]);
     } else if (
-      fetchedData?.data?.applicationStart === 1 ||
-      fetchedData?.data?.stage1?.applicationStart === 1
+      fetchedData?.data?.applicationStart === "1" ||
+      fetchedData?.data?.stage1?.applicationStart === "1" ||
+      formik.values.startYourApp === "1"
     ) {
       setApplyingAsOptions([
         { label: "Graduate", value: "0" },
@@ -35,33 +41,52 @@ const ProgramInformation = ({ fetchedData }) => {
         { label: "Clinton Scholar", value: "2" },
       ]);
     }
-  }, [fetchedData]);
+  }, [fetchedData, formik.values.applicationStart]);
 
+  useEffect(() => {
+    if (formik.values.applicationStart === "0") {
+      setApplyingAsOptions([
+        { label: "High School", value: "0" },
+        { label: "Transfer", value: "1" },
+        { label: "Audit", value: "2" },
+        { label: "Non-Degree Seeker", value: "3" },
+      ]);
+    } else if (formik.values.applicationStart === "1") {
+      setApplyingAsOptions([
+        { label: "Graduate", value: "0" },
+        { label: "Transfer", value: "1" },
+      ]);
+    } else {
+      setApplyingAsOptions([
+        { label: "Visiting Student", value: "0" },
+        { label: "Exchange Student", value: "1" },
+        { label: "Clinton Scholar", value: "2" },
+      ]);
+    }
+  }, [formik.values.applicationStart]);
+  
   const onRadioChange = (name, value) => {
     formik.setFieldValue(name, value);
   };
 
-  useEffect(() => {
-    formik.setFieldValue("applingAs", fetchedData?.data?.stage2?.applingAs);
-  }, [fetchedData]);
-
   return (
     <div className='form-subcontainers'>
       <SectionTitle title='PROGRAM INFORMATION' dotted={true} />
-      {/* <RadioButtonGroup
+      <RadioButtonGroup
         options={startYourApplicationOptions}
-        name='startYourApp'
-        selectedValue={formik.values.startYourApp}
+        name='applicationStart'
+        selectedValue={formik.values.applicationStart}
         label='Start Your Application'
         required={true}
         onRadioChange={onRadioChange}
       />
-      {formik.errors?.startYourApp &&
-      formik.touched?.startYourApp ? (
-        <span className="span-required">Start Your Application is required</span>
+      {formik.errors?.applicationStart && formik.touched?.applicationStart ? (
+        <span className='span-required'>
+          Start Your Application is required
+        </span>
       ) : (
         ""
-      )} */}
+      )}
 
       <RadioButtonGroup
         options={applyingAsOptions}
@@ -90,6 +115,7 @@ const ProgramInformation = ({ fetchedData }) => {
           errors={formik.errors?.programOfInterest}
           touched={formik.touched?.programOfInterest}
         />
+
         <TextBox
           width='100%'
           label='Your Current Place Of Study'

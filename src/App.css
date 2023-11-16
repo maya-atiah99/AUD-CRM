@@ -788,6 +788,11 @@ ul {
   letter-spacing: 0px;
 }
 
+.button-cont-register {
+  gap: 0.5rem;
+  display: flex;
+  margin-left: auto;
+}
 /***************************************verticsl line*****/
 .vertical-container {
   height: 10vh;
@@ -1576,18 +1581,16 @@ td:first-child {
 /********************************/
 /****************/
 /*********/
-@media screen and (max-width:1630px){
-  
+@media screen and (max-width: 1630px) {
   .academic-container .textBox-container label {
     font-size: 11px;
-    
-}
-.academic-container  label{
-  font-size: 11px;
-}
-.file-input-container p{
-  font-size: 13px;
-}
+  }
+  .academic-container label {
+    font-size: 11px;
+  }
+  .file-input-container p {
+    font-size: 13px;
+  }
 }
 @media screen and (max-width: 1490px) {
   .app-details div:first-child {
@@ -1793,4 +1796,3 @@ td:first-child {
   }
   /******step4 media query********************************/
 }
-

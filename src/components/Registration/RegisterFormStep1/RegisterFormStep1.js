@@ -29,6 +29,7 @@ const RegisterFormStep1 = forwardRef(
           nationality: fetchedData?.data?.nationalityId || "",
           mobile: fetchedData?.data?.phoneNumber || "",
           applicantTelephone: "",
+          applicationStart: fetchedData?.data?.applicationStart.toString() || "",
           dob: fetchedData?.data?.dob || "",
           gender: "",
           titleId: fetchedData?.data?.titleId || "",
@@ -72,6 +73,8 @@ const RegisterFormStep1 = forwardRef(
             : "",
           gender: fetchedData?.data?.stage1?.gender || "",
           titleId: fetchedData?.data?.stage1?.titleId || "",
+          applicationStart:
+            fetchedData?.data?.stage1?.applicationStart.toString() || "",
           address: fetchedData?.data?.stage2?.address || "",
           cityState: fetchedData?.data?.address?.cityState || "",
           country: fetchedData?.data?.address?.country || "",
@@ -139,8 +142,12 @@ const RegisterFormStep1 = forwardRef(
             fetchedData?.data?.stage1?.applicationStart
           );
         }
-
+        localStorage.setItem("applingAs", formik.values?.applingAs.toString());
         const excludeFields = {
+          currentPlaceOfStudy:
+          values.currentPlaceOfStudy === ""
+            ? undefined
+            : values.currentPlaceOfStudy,
           guardianRelation1:
             values.guardianRelation1 === ""
               ? undefined
@@ -179,6 +186,7 @@ const RegisterFormStep1 = forwardRef(
     useEffect(() => {
       ref.current = formik;
     }, [ref, formik]);
+    console.log("formik", formik.values);
 
     return (
       <div className='form-subcontainer'>

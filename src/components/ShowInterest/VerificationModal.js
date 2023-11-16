@@ -6,7 +6,10 @@ import LinkButton from "../Buttons/LinkButton";
 
 const VerificationModal = ({
   setshowVerifiedModal,
-  handleDone
+  handleDone,
+  otpCode,
+  setOtpCode,
+  handleOnClickLink
 }) => {
   const data = [
     {
@@ -14,7 +17,7 @@ const VerificationModal = ({
       phone: "0362548",
     },
   ];
-
+  
   return (
     <ModalComponent
       onClose={() => setshowVerifiedModal(false)}
@@ -38,8 +41,9 @@ const VerificationModal = ({
           <LinkButton
             title='Click Here To Resend'
             text='Please type the number you received or '
+            handleOnClick={handleOnClickLink}
           />
-          <TextBox />
+          <TextBox value={otpCode} onChange={setOtpCode} />
         </div>
       </div>
     </ModalComponent>

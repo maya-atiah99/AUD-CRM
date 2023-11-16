@@ -48,7 +48,8 @@ const ShowInterestForm = ({
         console.log(data?.data?.applicantId);
         localStorage.setItem("applicantId", data?.data?.applicantId);
         setApplicantId(data?.data?.applicantId);
-        navigate("/register", { state: { showInterest: true } });
+        // navigate("/register", { state: { showInterest: true } });
+        openVerifiedModal("Continue");
         localStorage.removeItem("message");
       },
       onError: (error) => {
@@ -56,11 +57,14 @@ const ShowInterestForm = ({
       },
     });
   };
+
   const handleSubmitForm = (values) => {
     addShowInterest(values, {
-      onSuccess: () => {
+      onSuccess: (data) => {
         console.log("show interest submitted");
         openVerifiedModal("Submit");
+        console.log("data11", data);
+        setApplicantId(data?.data?.applicantId);
       },
       onError: (error) => {
         console.error("An error occured:", error);
@@ -79,8 +83,8 @@ const ShowInterestForm = ({
           handleContinueToApply(valuesToSend);
         } else if (clickedButton === "submitForm") {
           handleSubmitForm(valuesToSend);
-          resetForm()
         }
+        resetForm();
       }}
     >
       {({
@@ -260,15 +264,12 @@ const ShowInterestForm = ({
                 <div className='d-flex flex-column gap-2'>
                   <LinkButton
                     title='CONTINUE TO APPLY'
-                    // handleOnClick={() => {
-                    //   openVerifiedModal("Continue");
-                    // }}
-                    // linkTo='/register'
                     underlined={true}
                     required={true}
                     handleOnClick={() => {
                       setClickedButton("continueToApply");
                       handleSubmit();
+                      openVerifiedModal("Continue");
                     }}
                   />
                   <LinkButton

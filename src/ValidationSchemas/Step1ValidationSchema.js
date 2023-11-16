@@ -16,12 +16,10 @@ const step1ValidationSchema = Yup.object().shape({
   country: Yup.string().required("Country is required"),
   pobox: Yup.string().required("P.O.Box is required"),
   zipCode: Yup.number().required("Zip Code is required"),
-  // startYourApp: Yup.string().required("Start your application is required"),
+  applicationStart: Yup.string().required("Start your application is required"),
   applingAs: Yup.string().required("Applying as is required"),
   programOfInterest: Yup.string().required("Program Of interest is required"),
-  currentPlaceOfStudy: Yup.string().required(
-    "Current place of study is required"
-  ),
+  currentPlaceOfStudy: Yup.string().notRequired(),
   guardianMobile1: Yup.number().required("Mobile is required"),
   guardianRelation1: Yup.string(),
   guardianName1: Yup.string(),

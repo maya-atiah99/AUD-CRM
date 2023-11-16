@@ -9,7 +9,7 @@ import {
   useFetchApplicantStageThree,
   useFetchApplicantStageTwo,
 } from "../../Hooks/Appplicant";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 
 const RegisterPage = ({ applicantId }) => {
   const [activeStep, setActiveStep] = useState(
@@ -20,17 +20,17 @@ const RegisterPage = ({ applicantId }) => {
   const formikRefStep3 = useRef();
   const formikRefStep4 = useRef();
   const location = useLocation();
+  const navigate = useNavigate();
   const [showInterest, setShowInterest] = useState(
     location?.state?.showInterest || false
   );
-  const [showThree,setShowThree]=useState(false)
+  const [showThree, setShowThree] = useState(false);
   const [fetchedData, setfetchedData] = useState({});
   const { data: applicantStageOne, refetch: refetchStageOne } =
     useFetchApplicantStageOne(applicantId);
   const { data: applicantStageTwo, refetch: refetchStageTwo } =
     useFetchApplicantStageTwo(applicantId);
 
- 
   const steps = [
     {
       step: 1,
@@ -91,7 +91,6 @@ const RegisterPage = ({ applicantId }) => {
             window.scrollTo(0, 0);
           }
         } else if (activeStep === 2 && formikRefStep3.current?.isValid) {
-          
           if (activeStep < steps.length - 1) {
             setActiveStep(activeStep + 1);
             window.scrollTo(0, 0);
@@ -103,6 +102,33 @@ const RegisterPage = ({ applicantId }) => {
       }
     }, [100]);
   };
+  const handleSave = (next) => {
+    if (next) handeleSubmit(activeStep);
+    setTimeout(() => {
+      if (next) {
+        if (activeStep === 0 && formikRefStep1.current?.isValid) {
+          if (activeStep < steps.length - 1) {
+            navigate("/");
+            localStorage.clear();
+          }
+        } else if (activeStep === 1 && formikRefStep2.current?.isValid) {
+          if (activeStep < steps.length - 1) {
+            navigate("/");
+            localStorage.clear();
+          }
+        } else if (activeStep === 2 && formikRefStep3.current?.isValid) {
+          if (activeStep < steps.length - 1) {
+            navigate("/");
+            localStorage.clear();
+          }
+        } else {
+          // toast.error("Fill all the required fields")
+          window.scrollTo(0, 0);
+        }
+      }
+    }, [100]);
+  };
+
   useEffect(() => {
     if (showInterest === true && activeStep === 0) {
       refetchStageOne();
@@ -154,13 +180,19 @@ const RegisterPage = ({ applicantId }) => {
           showInterest={showInterest}
           showThree={showThree}
         />
-        <div style={{ marginLeft: "auto" }}>
+        <div className='button-cont-register '>
+          <AUDButton
+            text='Save & Logout'
+            handleOnClick={() => handleSave(true)}
+          />
+
           {activeStep !== steps.length - 1 && (
             <AUDButton
               text='Continue To The Next Step'
               handleOnClick={() => handleChange(true)}
             />
           )}
+
           {activeStep === 3 && (
             <AUDButton
               text='Go Back To Programs Page'
@@ -168,7 +200,6 @@ const RegisterPage = ({ applicantId }) => {
                 setActiveStep(0);
                 setShowThree(activeStep === 2 ? true : false);
               }}
-              
             />
           )}
         </div>

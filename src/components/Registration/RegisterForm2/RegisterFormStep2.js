@@ -36,7 +36,7 @@ const RegisterFormStep2 = forwardRef(({ applicantId, showThree }, ref) => {
       : "",
     ListAdvancedCources:
       applicantStageThree?.data?.stage2?.listAdvancedCources || "",
-    DiplomaFile: applicantStageThree?.data?.diploma?.fileName || "",
+    DiplomaFile: applicantStageThree?.data?.diploma[0] || "",
     ActivitiesNotEnrolled:
       applicantStageThree?.data?.stage2?.activitiesNotEnrolled || "",
     applicantFiles: applicantStageThree?.data?.stage2?.applicantFiles || [
@@ -66,7 +66,7 @@ const RegisterFormStep2 = forwardRef(({ applicantId, showThree }, ref) => {
         : "",
       ListAdvancedCources:
         applicantStageThree?.data?.stage2?.listAdvancedCources || "",
-      DiplomaFile: applicantStageThree?.data?.diploma?.fileName || "" || "",
+      DiplomaFile: applicantStageThree?.data?.diploma[0] || "",
       ActivitiesNotEnrolled:
         applicantStageThree?.data?.stage2?.activitiesNotEnrolled || "",
       CurrentUniversityCountry2:
@@ -87,6 +87,8 @@ const RegisterFormStep2 = forwardRef(({ applicantId, showThree }, ref) => {
     };
     setInit(initialvalues);
   }, [applicantStageThree]);
+
+console.log('applicantStageThree?.data?.diploma[0]',applicantStageThree?.data?.diploma[0])
 
   const handleAddStageThree = (values) => {
     addApplicantStageThree(values, {

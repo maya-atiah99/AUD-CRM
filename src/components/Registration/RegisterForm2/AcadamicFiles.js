@@ -81,6 +81,7 @@ const AcadamicFiles = () => {
             label='Upload Document'
             name={`applicantFiles[${index}].academicDocument`}
             value={section.academicDocument}
+            filName={`applicantFiles[${index}].academicDocument`}
             onChange={(name, value) => {
               formik.setFieldValue(name, value);
             }}

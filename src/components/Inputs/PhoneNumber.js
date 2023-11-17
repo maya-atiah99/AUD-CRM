@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import PhoneInput from "react-phone-input-2";
+import PhoneInput , { isValidPhoneNumber } from "react-phone-input-2";
 import "react-phone-input-2/lib/style.css";
 
 const PhoneNumber = ({
@@ -23,6 +23,13 @@ const PhoneNumber = ({
     setInitialValue(phone);
     onChange(name, phone);
   };
+
+  const handleValidate = (value) => {
+    const isValid = isValidPhoneNumber(value);
+    console.log({ isValid })
+    return isValid
+  }
+
   useEffect(() => {
     setInitialValue(value);
   }, [value]);
@@ -45,6 +52,7 @@ const PhoneNumber = ({
         autoComplete='off'
         required={required}
         inputStyle={inputStyle}
+        
       />
     </div>
   );

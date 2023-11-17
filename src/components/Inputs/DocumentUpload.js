@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { AiFillCloseCircle } from "react-icons/ai";
 import { useFormikContext } from "formik";
 
@@ -14,10 +14,11 @@ const DocumentUpload = ({
   fileName,
 }) => {
   const formik = useFormikContext();
-  const [selectedFile, setSelectedFile] = useState(null);
-
+  const [selectedFile, setSelectedFile] = useState(fileName);
+  console.log("formikkkkkkkkk", formik);
   const handleFileChange = (event) => {
     const file = event.target.files[0];
+    console.log("fileeee", file);
     setSelectedFile(file);
     formik.setFieldValue(name, file);
   };
@@ -32,6 +33,13 @@ const DocumentUpload = ({
     height: height,
     border: errors && touched ? "1px solid red" : "1px solid #1b224c31",
   };
+
+//   useEffect(() => {
+//     if (formik.values.DocumentUpload) {
+//       setSelectedFile(formik.values.DocumentUpload);
+//     }
+//   }, [formik.values.DocumentUpload]);
+// console.log(selectedFile)
 
   return (
     <div>

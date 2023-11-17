@@ -74,7 +74,7 @@ const ShowInterestForm = ({
     <Formik
       initialValues={init}
       validationSchema={showInterestValidationSchema}
-      onSubmit={(values, { resetForm }) => {
+      onSubmit={(values, { resetForm, setFieldError }) => {
         setPhoneNumber(values.mobile);
         const valuesToSend =
           values.titleId === "" ? { ...values, titleId: undefined } : values;
@@ -270,8 +270,7 @@ const ShowInterestForm = ({
                     setFieldValue(name, value);
                   }}
                 />
-                {errors?.applicationStart &&
-                touched?.applicationStart ? (
+                {errors?.applicationStart && touched?.applicationStart ? (
                   <span className='span-required'>
                     Start Your Application is required
                   </span>

@@ -10,7 +10,6 @@ const AcadamicInformation = () => {
   const formik = useFormikContext();
   const applicationStart = localStorage.getItem("applicationStart");
   const applingAS = localStorage.getItem("applingAs");
-  console.log("formik.values.DiplomaFile.name0", formik.values.DiplomaFile);
   return (
     <div className='form-subcontainers academic-container'>
       <SectionTitle title='ACADEMIC INFORMATION' />
@@ -147,7 +146,7 @@ const AcadamicInformation = () => {
           height='100px'
           label='Upload Document'
           name='DiplomaFile'
-          fileName={formik.values.DiplomaFile.name}
+          fileName={formik.values.DiplomaFile}
           errors={formik.errors?.DiplomaFile}
           touched={formik.touched?.DiplomaFile}
         />{" "}

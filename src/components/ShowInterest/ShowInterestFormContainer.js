@@ -7,7 +7,8 @@ const ShowInterestFormContainer = ({
   setshowVerifiedModal,
   setShowLoginModal,
   openVerifiedModal,
-  setApplicantId
+  setApplicantId,
+  setPhoneNumber
 }) => {
   return (
     <div className='show-interest-form'>
@@ -30,6 +31,7 @@ const ShowInterestFormContainer = ({
         setShowLoginModal={setShowLoginModal}
         openVerifiedModal={openVerifiedModal}
         setApplicantId={setApplicantId}
+        setPhoneNumber={setPhoneNumber}
       />
     </div>
   );

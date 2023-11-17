@@ -8,6 +8,8 @@ const Step2ValidationSchema = Yup.object().shape({
   ListAdvancedCources: Yup.string().notRequired(),
   DiplomaFile: Yup.string().notRequired(),
   ActivitiesNotEnrolled: Yup.string().notRequired(),
+  CurrentUniversityCountry2: Yup.string().notRequired(),
+  SchoolCountry2: Yup.string().notRequired(),
   applicantFiles: Yup.array().of(
     Yup.object()
       .shape({

@@ -13,11 +13,11 @@ const ProgramInformation = ({ fetchedData }) => {
     { label: "Graduate", value: "1" },
     { label: "Visiting", value: "2" },
   ];
+
   useEffect(() => {
     if (
-      fetchedData?.data?.applicationStart === "0" ||
-      fetchedData?.data?.stage1?.applicationStart === "0" ||
-      formik.values.startYourApp === "0"
+      fetchedData?.data?.applicationStart === 0 ||
+      fetchedData?.data?.stage1?.applicationStart === 0
     ) {
       setApplyingAsOptions([
         { label: "High School", value: "0" },
@@ -26,9 +26,8 @@ const ProgramInformation = ({ fetchedData }) => {
         { label: "Non-Degree Seeker", value: "3" },
       ]);
     } else if (
-      fetchedData?.data?.applicationStart === "1" ||
-      fetchedData?.data?.stage1?.applicationStart === "1" ||
-      formik.values.startYourApp === "1"
+      fetchedData?.data?.applicationStart === 1 ||
+      fetchedData?.data?.stage1?.applicationStart === 1
     ) {
       setApplyingAsOptions([
         { label: "Graduate", value: "0" },
@@ -41,7 +40,7 @@ const ProgramInformation = ({ fetchedData }) => {
         { label: "Clinton Scholar", value: "2" },
       ]);
     }
-  }, [fetchedData, formik.values.applicationStart]);
+  }, [fetchedData]);
 
   useEffect(() => {
     if (formik.values.applicationStart === "0") {
@@ -64,7 +63,7 @@ const ProgramInformation = ({ fetchedData }) => {
       ]);
     }
   }, [formik.values.applicationStart]);
-  
+
   const onRadioChange = (name, value) => {
     formik.setFieldValue(name, value);
   };
@@ -116,18 +115,30 @@ const ProgramInformation = ({ fetchedData }) => {
           touched={formik.touched?.programOfInterest}
         />
 
-        <TextBox
-          width='100%'
-          label='Your Current Place Of Study'
-          required={true}
-          name='currentPlaceOfStudy'
-          value={formik.values.currentPlaceOfStudy}
-          onChange={(name, value) => {
-            formik.setFieldValue(name, value);
-          }}
-          errors={formik.errors?.currentPlaceOfStudy}
-          touched={formik.touched?.currentPlaceOfStudy}
-        />
+        {(formik.values.applicationStart === "0" &&
+          formik.values.applingAs === "1") ||
+        (formik.values.applicationStart === "1" &&
+          formik.values.applingAs === "1") ? (
+          <TextBox
+            width='100%'
+            label='Your Current Place Of Study'
+            required={true}
+            name='currentPlaceOfStudy'
+            value={
+              (formik.values.applicationStart === "0" &&
+                formik.values.applingAs === "1") ||
+              (formik.values.applicationStart === "1" &&
+                formik.values.applingAs === "1")
+                ? formik.values.currentPlaceOfStudy
+                : ""
+            }
+            onChange={(name, value) => {
+              formik.setFieldValue(name, value);
+            }}
+            errors={formik.errors?.currentPlaceOfStudy}
+            touched={formik.touched?.currentPlaceOfStudy}
+          />
+        ) : null}
       </div>
     </div>
   );

@@ -20,11 +20,10 @@ const ShowInterestForm = ({
   setShowLoginModal,
   openVerifiedModal,
   setApplicantId,
+  setPhoneNumber,
 }) => {
   const [clickedButton, setClickedButton] = useState(null);
-  const navigate = useNavigate();
-
-  const initialValues = {
+  const [init, setInit] = useState({
     firstName: "",
     middleName: "",
     lastName: "",
@@ -36,7 +35,7 @@ const ShowInterestForm = ({
     selectedTerm: "",
     fieldOfInterest: "",
     applicationStart: "",
-  };
+  });
 
   const { mutate: addShowInterest } = useAddApplicantToShowInterest();
   const { mutate: addApplicant } = useAddApplicant();
@@ -48,7 +47,6 @@ const ShowInterestForm = ({
         console.log(data?.data?.applicantId);
         localStorage.setItem("applicantId", data?.data?.applicantId);
         setApplicantId(data?.data?.applicantId);
-        // navigate("/register", { state: { showInterest: true } });
         openVerifiedModal("Continue");
         localStorage.removeItem("message");
       },
@@ -74,9 +72,10 @@ const ShowInterestForm = ({
 
   return (
     <Formik
-      initialValues={initialValues}
+      initialValues={init}
       validationSchema={showInterestValidationSchema}
       onSubmit={(values, { resetForm }) => {
+        setPhoneNumber(values.mobile);
         const valuesToSend =
           values.titleId === "" ? { ...values, titleId: undefined } : values;
         if (clickedButton === "continueToApply") {
@@ -85,6 +84,19 @@ const ShowInterestForm = ({
           handleSubmitForm(valuesToSend);
         }
         resetForm();
+        setInit({
+          firstName: "",
+          middleName: "",
+          lastName: "",
+          email: "",
+          nationality: "",
+          mobile: "",
+          titleId: "",
+          howDidYouHear: "",
+          selectedTerm: "",
+          fieldOfInterest: "",
+          applicationStart: "",
+        });
       }}
     >
       {({
@@ -258,18 +270,34 @@ const ShowInterestForm = ({
                     setFieldValue(name, value);
                   }}
                 />
+                {errors?.applicationStart &&
+                touched?.applicationStart ? (
+                  <span className='span-required'>
+                    Start Your Application is required
+                  </span>
+                ) : (
+                  ""
+                )}
               </div>
 
-              <div className='d-flex justify-content-between mt-3'>
+              <div className='d-flex justify-content-between mt-1 '>
                 <div className='d-flex flex-column gap-2'>
-                  <LinkButton
+                  {/* <LinkButton
                     title='CONTINUE TO APPLY'
                     underlined={true}
                     required={true}
                     handleOnClick={() => {
                       setClickedButton("continueToApply");
                       handleSubmit();
-                      openVerifiedModal("Continue");
+                    }}
+                  /> */}
+                  <AUDButton
+                    text='CONTINUE TO APPLY'
+                    type='submit'
+                    required={true}
+                    handleOnClick={() => {
+                      setClickedButton("continueToApply");
+                      handleSubmit();
                     }}
                   />
                   <LinkButton

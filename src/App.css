@@ -7,7 +7,7 @@
 /**************************************Buttons*****/
 .aud-button {
   border-radius: 5px;
-  padding: 12px;
+  padding: 10px;
   background-color: #1b224c;
   color: #ffffff;
   border: none;
@@ -96,7 +96,9 @@
 input[type="date"] {
   color: transparent;
 }
-
+.authorize-class{
+ color: #F3223C
+}
 .text-input {
   background-color: transparent;
   border-radius: 5px;

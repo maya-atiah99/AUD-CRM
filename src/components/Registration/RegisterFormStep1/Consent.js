@@ -61,8 +61,9 @@ const Consent = () => {
           errors={formik.errors?.consent?.authorizeToReleaseRecord}
           touched={formik.errors?.consent?.authorizeToReleaseRecord}
         />
-        <LinkButton title='I Authorize ' />
+        {/* <LinkButton title='I Authorize ' /> */}
         <TextComponent
+          authorize='I Authorize'
           size='18px'
           font='600'
           classfont='consent-text'

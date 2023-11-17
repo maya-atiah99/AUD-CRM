@@ -25,6 +25,9 @@ const RegisterFormStep2 = forwardRef(({ applicantId, showThree }, ref) => {
     CurrentUniversityCountry:
       applicantStageThree?.data?.stage2?.currentUniversityCountry || "",
     SchoolCountry: applicantStageThree?.data?.stage2?.schoolCountry || "",
+    CurrentUniversityCountry2:
+      applicantStageThree?.data?.stage2?.currentUniversityCountry2 || "",
+    SchoolCountry2: applicantStageThree?.data?.stage2?.schoolCountry2 || "",
     DiplomaType: applicantStageThree?.data?.stage2?.diplomaType || "",
     GraduationYear: applicantStageThree?.data?.stage2?.graduationYear
       ? new Date(applicantStageThree?.data?.stage2?.graduationYear)
@@ -66,6 +69,9 @@ const RegisterFormStep2 = forwardRef(({ applicantId, showThree }, ref) => {
       DiplomaFile: applicantStageThree?.data?.diploma?.fileName || "" || "",
       ActivitiesNotEnrolled:
         applicantStageThree?.data?.stage2?.activitiesNotEnrolled || "",
+      CurrentUniversityCountry2:
+        applicantStageThree?.data?.stage2?.currentUniversityCountry2 || "",
+      SchoolCountry2: applicantStageThree?.data?.stage2?.schoolCountry2 || "",
       applicantFiles: applicantStageThree?.data?.stage2?.applicantFiles || [
         {
           testType: "",
@@ -79,7 +85,6 @@ const RegisterFormStep2 = forwardRef(({ applicantId, showThree }, ref) => {
         applicantStageThree?.data?.stage2?.personalStatement || "",
       applingAs: localStorage.getItem("applyingAs"),
     };
-    console.log("cdscscsdcdscdsc", initialvalues);
     setInit(initialvalues);
   }, [applicantStageThree]);
 
@@ -113,6 +118,22 @@ const RegisterFormStep2 = forwardRef(({ applicantId, showThree }, ref) => {
       formData.append("SchoolCountry", values.SchoolCountry);
       formData.append("DiplomaType", values.DiplomaType);
       formData.append("GraduationYear", values.GraduationYear);
+
+      if (values.CurrentUniversityCountry2 === "") {
+        formData.append("CurrentUniversityCountry2", undefined);
+      } else {
+        formData.append(
+          "CurrentUniversityCountry2",
+          values.CurrentUniversityCountry2
+        );
+      }
+
+      if (values.SchoolCountry2 === "") {
+        formData.append("SchoolCountry2", undefined);
+      } else {
+        formData.append("SchoolCountry2", values.SchoolCountry2);
+      }
+
       if (values.ListAdvancedCources === "") {
         formData.append("ListAdvancedCources", undefined);
       } else {
@@ -134,6 +155,7 @@ const RegisterFormStep2 = forwardRef(({ applicantId, showThree }, ref) => {
         formData.append("PersonalStatement", values.PersonalStatement);
       }
       formData.append("applicantFiles", values.applicantFiles);
+
       // var i = 0;
       // //someting.map{}
       // formData.append(`applicantFiles[${i}].academicDocument`, values.DiplomaFile);

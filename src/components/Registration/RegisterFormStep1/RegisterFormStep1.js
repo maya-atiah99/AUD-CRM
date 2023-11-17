@@ -18,7 +18,6 @@ const RegisterFormStep1 = forwardRef(
   ({ fetchedData, applicantId, showInterest }, ref) => {
     const [init, setInit] = useState({});
     const { mutate: addApplicantStagetwo } = useAddApplicantStageTwo();
-    console.log("valuess", fetchedData);
     useEffect(() => {
       if (showInterest) {
         const initialOne = {
@@ -29,7 +28,8 @@ const RegisterFormStep1 = forwardRef(
           nationality: fetchedData?.data?.nationalityId || "",
           mobile: fetchedData?.data?.phoneNumber || "",
           applicantTelephone: "",
-          applicationStart: fetchedData?.data?.applicationStart.toString() || "",
+          applicationStart:
+            fetchedData?.data?.applicationStart.toString() || "",
           dob: fetchedData?.data?.dob || "",
           gender: "",
           titleId: fetchedData?.data?.titleId || "",
@@ -123,6 +123,22 @@ const RegisterFormStep1 = forwardRef(
     };
 
     useEffect(() => {
+      if (showInterest) {
+        console.log("shwowwwwwww are changinggg");
+        localStorage.setItem(
+          "applicationStart",
+          fetchedData?.data?.applicationStart.toString()
+        );
+      } else {
+        console.log("otherrrrrrr are changinggg");
+        localStorage.setItem(
+          "applicationStart",
+          fetchedData?.data?.stage1?.applicationStart.toString()
+        );
+      }
+    }, [fetchedData]);
+
+    useEffect(() => {
       console.log(init);
     }, [init]);
 
@@ -131,23 +147,16 @@ const RegisterFormStep1 = forwardRef(
       validationSchema: ValidationSchema,
       enableReinitialize: true,
       onSubmit: (values) => {
-        if (showInterest) {
-          localStorage.setItem(
-            "applicationStart",
-            fetchedData?.data?.applicationStart
-          );
-        } else {
-          localStorage.setItem(
-            "applicationStart",
-            fetchedData?.data?.stage1?.applicationStart
-          );
-        }
-        localStorage.setItem("applingAs", formik.values?.applingAs.toString());
+        localStorage.setItem(
+          "applicationStart",
+          formik.values?.applicationStart
+        );
+        localStorage.setItem("applingAs", formik.values?.applingAs);
         const excludeFields = {
           currentPlaceOfStudy:
-          values.currentPlaceOfStudy === ""
-            ? undefined
-            : values.currentPlaceOfStudy,
+            values.currentPlaceOfStudy === ""
+              ? undefined
+              : values.currentPlaceOfStudy,
           guardianRelation1:
             values.guardianRelation1 === ""
               ? undefined
@@ -173,10 +182,15 @@ const RegisterFormStep1 = forwardRef(
         };
         const valuesToSend = { ...values, ...excludeFields };
         handleAddStageTwo(valuesToSend);
-        setInit({});
+
       },
     });
-    console.log(fetchedData);
+
+    console.log("fetchedData", fetchedData);
+    console.log("formik values", formik.values);
+    console.log("formik applications", formik.values.applicationStart);
+    console.log("formik applyii", formik.values.applingAs);
+
     useImperativeHandle(ref, () => ({
       submitForm: () => {
         formik.submitForm();
@@ -186,7 +200,12 @@ const RegisterFormStep1 = forwardRef(
     useEffect(() => {
       ref.current = formik;
     }, [ref, formik]);
-    console.log("formik", formik.values);
+
+    useEffect(() => {
+      console.log("valuessss are changinggg");
+      localStorage.setItem("applicationStart", formik.values?.applicationStart);
+      localStorage.setItem("applingAs", formik.values?.applingAs);
+    }, [formik.values]);
 
     return (
       <div className='form-subcontainer'>

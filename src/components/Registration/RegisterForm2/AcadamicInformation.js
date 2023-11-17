@@ -19,11 +19,9 @@ const AcadamicInformation = () => {
           <DropDown
             width='100%'
             label={
-              applicationStart === "0"
-                ? "Country Your Current University"
-                : applicationStart === "1"
-                ? "Country you Graduated from "
-                : "Country Your Current University "
+              applicationStart === "0" && applingAS !== "1"
+                ? "Country you Graduated from"
+                : "Country Your Current University"
             }
             required={true}
             type='9'
@@ -36,13 +34,15 @@ const AcadamicInformation = () => {
             touched={formik.touched?.CurrentUniversityCountry}
           />
 
-          <TextBox
+          <DropDown
             width='100%'
             label={
               applicationStart === "0" && applingAS === "0"
                 ? "School Name"
                 : "University Name "
             }
+            type={applicationStart === "0" && applingAS === "0" ? "12" : "11"}
+            parent={formik.values.CurrentUniversityCountry}
             required={true}
             name='SchoolCountry'
             value={formik.values.SchoolCountry}
@@ -89,6 +89,43 @@ const AcadamicInformation = () => {
           )}
         </div>
       )}
+
+      {(applicationStart === "0" && applingAS === "1") ||
+      (applicationStart === "1" && applingAS === "1") ? (
+        <div className='grid-academic2-cont'>
+          <DropDown
+            width='100%'
+            label={"Country you Graduated From"}
+            required={true}
+            type='9'
+            name='CurrentUniversityCountry2'
+            value={formik.values.CurrentUniversityCountry2}
+            onChange={(name, value) => {
+              formik.setFieldValue(name, value);
+            }}
+            errors={formik.errors?.CurrentUniversityCountry2}
+            touched={formik.touched?.CurrentUniversityCountry2}
+          />
+
+          <DropDown
+            width='100%'
+            label='School Name'
+            required={true}
+            name='SchoolCountry2'
+            type='12'
+            parent={formik.values.CurrentUniversityCountry2}
+            value={formik.values.SchoolCountry2}
+            onChange={(name, value) => {
+              formik.setFieldValue(name, value);
+            }}
+            errors={formik.errors?.SchoolCountry2}
+            touched={formik.touched?.SchoolCountry2}
+          />
+        </div>
+      ) : (
+        ""
+      )}
+
       <div className='grid-academic2-cont'>
         {applicationStart === "0" && (
           <TextArea

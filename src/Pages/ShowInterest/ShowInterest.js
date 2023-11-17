@@ -17,6 +17,7 @@ const ShowInterest = ({ setApplicantId, applicantId, setMessage }) => {
   const [showVerifiedCheckModal, setShowVerifiedCheckModal] = useState(false);
   const [actionOrigin, setActionOrigin] = useState(null);
   const [otpCode, setOtpCode] = useState("");
+  const [phoneNumber,setPhoneNumber]=useState("")
   const navigate = useNavigate();
 
   const openVerifiedModal = (origin) => {
@@ -135,6 +136,7 @@ const ShowInterest = ({ setApplicantId, applicantId, setMessage }) => {
           setShowLoginModal={setShowLoginModal}
           openVerifiedModal={openVerifiedModal}
           setApplicantId={setApplicantId}
+          setPhoneNumber={setPhoneNumber}
         />
       </div>
       {showVerifiedModal && (
@@ -145,6 +147,7 @@ const ShowInterest = ({ setApplicantId, applicantId, setMessage }) => {
           otpCode={otpCode}
           setOtpCode={setOtpCode}
           handleOnClickLink={handleResendEmail}
+          phoneNumber={phoneNumber}
         />
       )}
       {showVerifiedCheckModal && (

@@ -13,18 +13,6 @@ const PhoneNumber = ({
   touched,
 }) => {
   const [initialValue, setInitialValue] = useState(value);
-  // const customStyles = {
-  //   container: (base) => ({
-  //     ...base,
-  //     width: `${width} !important`,
-  //   }),
-  // };
-
-  // const containerClass = `custom-phone-input-${width}`;
-
-  // const phoneInputStyle = {
-  //   width: width
-  // };
 
   const inputStyle = {
     width: "100%",
@@ -38,6 +26,7 @@ const PhoneNumber = ({
   useEffect(() => {
     setInitialValue(value);
   }, [value]);
+
   return (
     <div>
       {label ? (

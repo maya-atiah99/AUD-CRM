@@ -55,7 +55,10 @@ const Login = ({
                   return 3;
                 })()
               );
-              localStorage.setItem("applicationStart", data?.data?.appliyingAs);
+              
+              localStorage.setItem("applicationStart", data?.data?.applicationStart);
+              localStorage.setItem("applingAs", data?.data?.appliyingAs);
+
               console.log(
                 "manageShowInterest,manageShowInterest",
                 manageShowInterest

@@ -9,14 +9,15 @@ const VerificationModal = ({
   handleDone,
   otpCode,
   setOtpCode,
-  handleOnClickLink
+  handleOnClickLink,
+  phoneNumber
 }) => {
-  const data = [
-    {
-      email: "maya@gmail.com",
-      phone: "0362548",
-    },
-  ];
+  // const data = [
+  //   {
+  //     email: "maya@gmail.com",
+  //     phone: "0362548",
+  //   },
+  // ];
   
   return (
     <ModalComponent
@@ -37,7 +38,7 @@ const VerificationModal = ({
             size='15px'
             font='500'
           />
-          <TextComponent text={data[0].phone} size='15px' font='500' />
+          <TextComponent text={phoneNumber} size='15px' font='500' />
           <LinkButton
             title='Click Here To Resend'
             text='Please type the number you received or '

@@ -115,6 +115,17 @@ const DropDown = ({
       display: "none",
     }),
   };
+
+  const optionsSelected = isAcademic
+  ? formattedAcademicOptions
+  : isYear
+  ? formattedYear
+  : isMonth
+  ? formattedMonth
+  : parent
+  ? formattedParentOptions
+  : formattedOptions;
+  
   return (
     <div className='textBox-container' style={{ width: width }}>
       <label htmlFor={label}>
@@ -138,7 +149,9 @@ const DropDown = ({
         components={{
           DropdownIndicator: CustomDropdownArrow,
         }}
-        value={formattedOptions.find((option) => option.value === value)}
+        value={
+          optionsSelected.find((option) => option.value === value) || null
+        }
         onChange={(selectedOption) => {
           onChange(name, selectedOption.value);
         }}

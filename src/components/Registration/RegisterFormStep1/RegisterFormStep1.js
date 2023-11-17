@@ -179,10 +179,13 @@ const RegisterFormStep1 = forwardRef(
             values.mothersName === "" ? undefined : values.mothersName,
           othersName: values.othersName === "" ? undefined : values.othersName,
           address1: values.address1 === "" ? undefined : values.address1,
+          guardianMobile1:
+            values.guardianMobile1 === "" ? undefined : values.guardianMobile1,
+          guardianMobile2:
+            values.guardianMobile2 === "" ? undefined : values.guardianMobile2,
         };
         const valuesToSend = { ...values, ...excludeFields };
         handleAddStageTwo(valuesToSend);
-
       },
     });
 

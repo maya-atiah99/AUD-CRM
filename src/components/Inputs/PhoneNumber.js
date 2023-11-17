@@ -32,7 +32,7 @@ const PhoneNumber = ({
       {label ? (
         <label htmlFor={name}>
           {label}
-          <span className='required'>*</span>
+         {required ? <span className='required'>*</span> : ""} 
         </label>
       ) : (
         ""

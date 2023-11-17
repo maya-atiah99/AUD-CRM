@@ -96,8 +96,8 @@
 input[type="date"] {
   color: transparent;
 }
-.authorize-class{
- color: #F3223C
+.authorize-class {
+  color: #f3223c;
 }
 .text-input {
   background-color: transparent;
@@ -1797,4 +1797,33 @@ td:first-child {
     font-size: 14px;
   }
   /******step4 media query********************************/
+}
+
+/********Mobile
+responsiveness ************/
+
+@media screen and (max-width: 700px) and (max-height: 935px) {
+  .showInterest-subContainer {
+    padding: 10px 10px;
+    height: fit-content;
+    width: 95%;
+    flex-direction: column;
+    justify-content: center;
+    gap: 1%;
+  }
+  .showInterestLogo{
+    display: block;
+  }
+  .subContainer {
+    padding: 10px 10px;
+    height: -moz-fit-content;
+    height: fit-content;
+    width: 95%;
+    flex-direction: column;
+    justify-content: center;
+    gap: 1%;
+  }
+  .classfont-show {
+    font-size: 14px;
+  }
 }

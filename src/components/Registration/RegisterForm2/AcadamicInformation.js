@@ -63,7 +63,7 @@ const AcadamicInformation = () => {
                 : "HS Diploma"
             }
             required={true}
-            type='7'
+            type={applicationStart === "2" ? "13" : "7"}
             name='DiplomaType'
             value={formik.values.DiplomaType}
             onChange={(name, value) => {

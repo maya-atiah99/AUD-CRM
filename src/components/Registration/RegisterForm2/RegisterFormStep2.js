@@ -12,15 +12,19 @@ import { FormikProvider, useFormik } from "formik";
 import Step2ValidationSchema from "../../../ValidationSchemas/Step2ValidationSchema";
 import {
   useAddApplicantStageThree,
+  useAddFiles,
   useFetchApplicantStageThree,
 } from "../../../Hooks/Appplicant";
+import getValidationSchemaStep2 from "../../../ValidationSchemas/Step2ValidationSchema";
 
 const RegisterFormStep2 = forwardRef(({ applicantId, showThree }, ref) => {
   const { data: applicantStageThree, refetch: refetchStageThree } =
     useFetchApplicantStageThree(applicantId, { enable: showThree });
   const { mutate: addApplicantStageThree } = useAddApplicantStageThree();
-
-  console.log("applicantStageThree 1", applicantStageThree);
+  const { mutate: addFiles } = useAddFiles();
+  const applicationStart = localStorage.getItem("applicationStart");
+  const applingAS = localStorage.getItem("applingAs");
+  
   const [init, setInit] = useState({
     CurrentUniversityCountry:
       applicantStageThree?.data?.stage2?.currentUniversityCountry || "",
@@ -88,8 +92,6 @@ const RegisterFormStep2 = forwardRef(({ applicantId, showThree }, ref) => {
     setInit(initialvalues);
   }, [applicantStageThree]);
 
-console.log('applicantStageThree?.data?.diploma[0]',applicantStageThree?.data?.diploma[0])
-
   const handleAddStageThree = (values) => {
     addApplicantStageThree(values, {
       onSuccess: (data) => {
@@ -101,70 +103,114 @@ console.log('applicantStageThree?.data?.diploma[0]',applicantStageThree?.data?.d
       },
     });
   };
+
+  const handleAddFiles = (values) => {
+    addFiles(values, {
+      onSuccess: (data) => {
+        console.log("submitteddddddddddddddddd");
+      },
+      onError: (error) => {
+        console.error("An error occurred:", error);
+      },
+    });
+  };
   useEffect(() => {
     console.log(init);
   }, [init]);
 
   const formik = useFormik({
     initialValues: init,
-    validationSchema: Step2ValidationSchema,
+    validationSchema: getValidationSchemaStep2(applicationStart, applingAS),
     enableReinitialize: true,
     onSubmit: (values) => {
       console.log("hiiii", values);
       const formData = new FormData();
-      formData.append("ApplicantId", applicantId);
-      formData.append(
-        "CurrentUniversityCountry",
-        values.CurrentUniversityCountry
-      );
-      formData.append("SchoolCountry", values.SchoolCountry);
-      formData.append("DiplomaType", values.DiplomaType);
-      formData.append("GraduationYear", values.GraduationYear);
 
-      if (values.CurrentUniversityCountry2 === "") {
-        formData.append("CurrentUniversityCountry2", undefined);
-      } else {
+      formData.append("ApplicantId", applicantId);
+
+      if (values.CurrentUniversityCountry !== undefined) {
+        formData.append(
+          "CurrentUniversityCountry",
+          values.CurrentUniversityCountry
+        );
+      }
+
+      if (values.SchoolCountry !== undefined) {
+        formData.append("SchoolCountry", values.SchoolCountry);
+      }
+
+      if (values.DiplomaType !== undefined) {
+        formData.append("DiplomaType", values.DiplomaType);
+      }
+
+      if (values.GraduationYear !== undefined) {
+        formData.append("GraduationYear", values.GraduationYear);
+      }
+
+      if (values.CurrentUniversityCountry2 !== undefined) {
         formData.append(
           "CurrentUniversityCountry2",
           values.CurrentUniversityCountry2
         );
       }
-
-      if (values.SchoolCountry2 === "") {
-        formData.append("SchoolCountry2", undefined);
-      } else {
+      if (values.SchoolCountry2 !== undefined) {
         formData.append("SchoolCountry2", values.SchoolCountry2);
       }
 
-      if (values.ListAdvancedCources === "") {
-        formData.append("ListAdvancedCources", undefined);
-      } else {
+      if (values.ListAdvancedCources !== undefined) {
         formData.append("ListAdvancedCources", values.ListAdvancedCources);
       }
-      if (values.ActivitiesNotEnrolled === "") {
-        formData.append("ActivitiesNotEnrolled", undefined);
-      } else {
+
+      if (values.ActivitiesNotEnrolled !== undefined) {
         formData.append("ActivitiesNotEnrolled", values.ActivitiesNotEnrolled);
       }
-      if (values.DiplomaFile === "") {
-        formData.append("DiplomaFile", undefined);
+      if (values.PersonalStatement !== undefined) {
+        formData.append("PersonalStatement", values.PersonalStatement);
+      }
+
+      // formData.append("DiplomaFile", values.DiplomaFile);
+
+      if (values.DiplomaFile && "documentContent" in values.DiplomaFile) {
+        const diplomaFileContent = values.DiplomaFile.documentContent;
+        const blob = new Blob([atob(diplomaFileContent)], {
+          type: values.DiplomaFile.contentType,
+        });
+        const file = new File([blob], values.DiplomaFile.fileName, {
+          type: values.DiplomaFile.contentType,
+        });
+
+        formData.append("DiplomaFile", file);
       } else {
         formData.append("DiplomaFile", values.DiplomaFile);
       }
-      if (values.PersonalStatement === "") {
-        formData.append("PersonalStatement", undefined);
-      } else {
-        formData.append("PersonalStatement", values.PersonalStatement);
-      }
-      formData.append("applicantFiles", values.applicantFiles);
 
-      // var i = 0;
-      // //someting.map{}
-      // formData.append(`applicantFiles[${i}].academicDocument`, values.DiplomaFile);
-      // formData.append(`applicantFiles[${i}].academicDocument`, values.DiplomaFile);
-      // formData.append(`applicantFiles[${i}].academicDocument`, values.DiplomaFile);
-      // formData.append(`applicantFiles[${i}].academicDocument`, values.DiplomaFile);
-      // formData.append(`applicantFiles[${i}].academicDocument`, values.DiplomaFile);
+      const formDataFile = new FormData();
+
+      values.applicantFiles.forEach((file, index) => {
+        formDataFile.append(
+          `applicantFiles[${index}].applicantId`,
+          applicantId
+        );
+        formDataFile.append(`applicantFiles[${index}].testType`, file.testType);
+        formDataFile.append(
+          `applicantFiles[${index}].academicDocument`,
+          file.academicDocument
+        );
+        formDataFile.append(
+          `applicantFiles[${index}].dateTaken`,
+          file.dateTaken
+        );
+        formDataFile.append(
+          `applicantFiles[${index}].registrationNumber`,
+          file.registrationNumber
+        );
+        formDataFile.append(
+          `applicantFiles[${index}].totalScore`,
+          file.totalScore
+        );
+      });
+
+      handleAddFiles(formDataFile);
       handleAddStageThree(formData);
     },
   });
@@ -177,17 +223,12 @@ console.log('applicantStageThree?.data?.diploma[0]',applicantStageThree?.data?.d
   useEffect(() => {
     ref.current = formik;
   }, [ref, formik]);
-
-  // useEffect(() => {
-  //   refetchStageThree();
-  // }, []);
-  console.log("formik step 2", formik.values);
+  console.log(formik.values);
   return (
     <div className='form-subcontainer '>
       <FormikProvider
         value={formik}
         innerRef={ref}
-        validationSchema={Step2ValidationSchema}
       >
         <SubmitText />
         <AcadamicInformation />

@@ -11,6 +11,7 @@ const PhoneNumber = ({
   width,
   errors,
   touched,
+  validate
 }) => {
   const [initialValue, setInitialValue] = useState(value);
 
@@ -52,7 +53,9 @@ const PhoneNumber = ({
         autoComplete='off'
         required={required}
         inputStyle={inputStyle}
-        
+        // isValid={(value, country) => {
+        //   return validate(value, country);
+        // }}
       />
     </div>
   );

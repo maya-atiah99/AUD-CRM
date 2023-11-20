@@ -6,10 +6,12 @@ import DocumentUpload from "../../Inputs/DocumentUpload";
 import TextArea from "../../Inputs/TextArea";
 import { useFormikContext } from "formik";
 import TextBox from "../../Inputs/TextBox";
+
 const AcadamicInformation = () => {
   const formik = useFormikContext();
   const applicationStart = localStorage.getItem("applicationStart");
   const applingAS = localStorage.getItem("applingAs");
+  console.log('formikkkkkkkkk',formik.values)
   return (
     <div className='form-subcontainers academic-container'>
       <SectionTitle title='ACADEMIC INFORMATION' />

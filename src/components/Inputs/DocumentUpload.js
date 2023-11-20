@@ -14,13 +14,17 @@ const DocumentUpload = ({
   fileName,
 }) => {
   const formik = useFormikContext();
-  const [selectedFile, setSelectedFile] = useState(fileName);
-  console.log("formikkkkkkkkk", formik);
+  const [selectedFile, setSelectedFile] = useState(null);
+
   const handleFileChange = (event) => {
     const file = event.target.files[0];
-    console.log("fileeee", file);
-    setSelectedFile(file);
-    formik.setFieldValue(name, file);
+    if (file) {
+      setSelectedFile(file);
+      formik.setFieldValue(name, file);
+    } else if (fileName) {
+      setSelectedFile(fileName);
+      formik.setFieldValue(name, fileName.toString());
+    }
   };
 
   const handleRemoveFile = () => {
@@ -34,12 +38,12 @@ const DocumentUpload = ({
     border: errors && touched ? "1px solid red" : "1px solid #1b224c31",
   };
 
-//   useEffect(() => {
-//     if (formik.values.DocumentUpload) {
-//       setSelectedFile(formik.values.DocumentUpload);
-//     }
-//   }, [formik.values.DocumentUpload]);
-// console.log(selectedFile)
+  useEffect(() => {
+    if (fileName) {
+      setSelectedFile(fileName);
+      formik.setFieldValue(name, fileName);
+    }
+  }, [fileName]);
 
   return (
     <div>
@@ -50,9 +54,7 @@ const DocumentUpload = ({
 
       <label
         className={`file-input-container ${
-          selectedFile || formik.values[name]
-            ? "file-input-container-upl"
-            : "file-input-container"
+          selectedFile ? "file-input-container-upl" : "file-input-container"
         }`}
         style={containerStyle}
       >
@@ -64,7 +66,7 @@ const DocumentUpload = ({
             : selectedFile
             ? selectedFile.name
             : text} */}
-          {selectedFile ? selectedFile.name : text}
+          {selectedFile ? selectedFile?.name || selectedFile?.fileName : text}
 
           {/* {fileName ? fileName : text} */}
 

@@ -58,8 +58,8 @@ const Consent = () => {
           onChange={(checked) => {
             formik.setFieldValue("authorizeToReleaseRecord", checked);
           }}
-          errors={formik.errors?.consent?.authorizeToReleaseRecord}
-          touched={formik.errors?.consent?.authorizeToReleaseRecord}
+          errors={formik.errors?.authorizeToReleaseRecord}
+          touched={formik.errors?.authorizeToReleaseRecord}
         />
         {/* <LinkButton title='I Authorize ' /> */}
         <TextComponent

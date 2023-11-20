@@ -13,11 +13,14 @@ import ValidationSchema from "../../../ValidationSchemas/Step1ValidationSchema";
 import { FormikProvider, useFormik } from "formik";
 import step1ValidationSchema from "../../../ValidationSchemas/Step1ValidationSchema";
 import { useAddApplicantStageTwo } from "../../../Hooks/Appplicant";
+import getValidationSchemaStep1 from "../../../ValidationSchemas/Step1ValidationSchema";
 
 const RegisterFormStep1 = forwardRef(
   ({ fetchedData, applicantId, showInterest }, ref) => {
     const [init, setInit] = useState({});
     const { mutate: addApplicantStagetwo } = useAddApplicantStageTwo();
+    const applicationStart = localStorage.getItem("applicationStart");
+    const applingAS = localStorage.getItem("applingAs");
     useEffect(() => {
       if (showInterest) {
         const initialOne = {
@@ -144,7 +147,7 @@ const RegisterFormStep1 = forwardRef(
 
     const formik = useFormik({
       initialValues: init,
-      validationSchema: ValidationSchema,
+      validationSchema: getValidationSchemaStep1(applicationStart,applingAS),
       enableReinitialize: true,
       onSubmit: (values) => {
         localStorage.setItem(

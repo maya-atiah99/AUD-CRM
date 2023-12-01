@@ -16,6 +16,7 @@
   font-weight: 500;
   vertical-align: middle;
   justify-content: center;
+  align-items: center
 }
 .aud-button>.button-icon{
   vertical-align: middle !important;
@@ -134,11 +135,13 @@ input[type="text"]:hover {
   border: 0.5px solid #1b224c5c;
   transition: 0.2s ease-in-out;
 }
-input[type="text"]:focus-visible {
-  outline: 0.8px solid #1b224c;
+input:focus-visible {
+  outline: 0.8px solid #1b224c98;
   border: none;
 }
-
+.checkbox-container p{
+  margin-bottom: 0;
+}
 label {
   font-weight: 600;
   font-size: 17px;

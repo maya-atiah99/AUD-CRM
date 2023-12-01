@@ -5,6 +5,8 @@ import TextBox from "../../Inputs/TextBox";
 import DateTime from "../../Inputs/DateTime";
 import PhoneNumber from "../../Inputs/PhoneNumber";
 import { useFormikContext } from "formik";
+import HorizantalLine from "../../Texts/HorizantalLine";
+import DocumentUpload from "../../Inputs/DocumentUpload";
 
 const PersonalInformation = () => {
   const formik = useFormikContext();
@@ -136,6 +138,49 @@ const PersonalInformation = () => {
           errors={formik.errors?.applicantTelephone}
           touched={formik.touched.telephone}
         />
+      </div>
+      <div style={{ paddingTop: "0.7rem" }}>
+        <HorizantalLine width='100%' />
+        <div className='grid-personal1-cont'>
+          <TextBox
+            width='100%'
+            label='Passport No.'
+            name='email'
+            value={formik.values.email}
+            onChange={(name, value) => {
+              formik.setFieldValue(name, value);
+            }}
+            errors={formik.errors?.email}
+            touched={formik.touched?.email}
+          />
+          <DocumentUpload
+            text='Upload Passport'
+            height='70px'
+            name='DiplomaFile'
+            fileName={formik.values.DiplomaFile}
+            errors={formik.errors?.DiplomaFile}
+            touched={formik.touched?.DiplomaFile}
+          />{" "}
+          <TextBox
+            width='100%'
+            label='Email'
+            name='email'
+            value={formik.values.email}
+            onChange={(name, value) => {
+              formik.setFieldValue(name, value);
+            }}
+            errors={formik.errors?.email}
+            touched={formik.touched?.email}
+          />
+          <DocumentUpload
+            text='Upload Emirates ID (Front & Back)'
+            height='70px'
+            name='DiplomaFile'
+            fileName={formik.values.DiplomaFile}
+            errors={formik.errors?.DiplomaFile}
+            touched={formik.touched?.DiplomaFile}
+          />{" "}
+        </div>
       </div>
     </div>
   );

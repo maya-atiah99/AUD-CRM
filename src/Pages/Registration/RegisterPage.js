@@ -163,7 +163,11 @@ const RegisterPage = ({ applicantId }) => {
               refetchStageOne(),
               refetchStageTwo()
             )}
-            icon='/images/homeicon.svg'
+            icon={
+              activeStep !== 0
+                ? "/images/backarrowForbutton.svg"
+                : "/images/homeicon.svg"
+            }
           />
         )}
         <TextComponent

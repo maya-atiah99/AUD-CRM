@@ -14,6 +14,8 @@ import { FormikProvider, useFormik } from "formik";
 import step1ValidationSchema from "../../../ValidationSchemas/Step1ValidationSchema";
 import { useAddApplicantStageTwo } from "../../../Hooks/Appplicant";
 import getValidationSchemaStep1 from "../../../ValidationSchemas/Step1ValidationSchema";
+import WorkExperience from "./WorkExperience";
+import Reference from "./Reference";
 
 const RegisterFormStep1 = forwardRef(
   ({ fetchedData, applicantId, showInterest }, ref) => {
@@ -223,6 +225,8 @@ const RegisterFormStep1 = forwardRef(
           <PersonalInformation />
           <MailingAddress />
           <ProgramInformation fetchedData={fetchedData} />
+          <WorkExperience/>
+          <Reference/>
           <ParentInformation />
           <Consent />
         </FormikProvider>

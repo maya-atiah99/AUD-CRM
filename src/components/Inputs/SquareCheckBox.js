@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 
-const SquareCheckBox = ({ text, value, onChange, errors, touched }) => {
+const SquareCheckBox = ({ text, value, onChange, errors, touched ,fontWeight}) => {
   
   return (
     <label className='checkbox-container'>
@@ -12,7 +12,7 @@ const SquareCheckBox = ({ text, value, onChange, errors, touched }) => {
       <span
         className={`${errors && touched ? "red-checkmark " : "checkmark"}`}
       ></span>
-      <p>{text}</p>
+      <p style={{fontWeight:fontWeight}}>{text}</p>
     </label>
   );
 };

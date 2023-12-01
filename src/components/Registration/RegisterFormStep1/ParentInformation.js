@@ -4,6 +4,7 @@ import TextBox from "../../Inputs/TextBox";
 import DropDown from "../../Inputs/DropDown";
 import PhoneNumber from "../../Inputs/PhoneNumber";
 import { useFormikContext } from "formik";
+import SquareCheckBox from "../../Inputs/SquareCheckBox";
 
 const ParentInformation = () => {
   const formik = useFormikContext();
@@ -105,6 +106,17 @@ const ParentInformation = () => {
           touched={formik.touched?.guardianEmail2}
         />
       </div>
+      <SquareCheckBox
+        text='I am a Legacy Applicant. I have a parent who graduated from AUD'
+        name='ProgramInformationCheck'
+        fontWeight="700"
+        value={formik.values.ProgramInformationCheck}
+        onChange={(checked) => {
+          formik.setFieldValue("ProgramInformationCheck", checked);
+        }}
+        errors={formik.errors?.ProgramInformationCheck}
+        touched={formik.errors?.ProgramInformationCheck}
+      />
     </div>
   );
 };

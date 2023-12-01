@@ -122,7 +122,6 @@ const RegisterPage = ({ applicantId }) => {
             localStorage.clear();
           }
         } else {
-          // toast.error("Fill all the required fields")
           window.scrollTo(0, 0);
         }
       }
@@ -150,7 +149,15 @@ const RegisterPage = ({ applicantId }) => {
         )}
         {activeStep !== 0 && (
           <AUDButton
-            text='Back To Previous Page'
+            text={
+              activeStep == 1
+                ? "Back To Personal Info"
+                : activeStep == 2
+                ? "Back To Academic Info"
+                : activeStep === 0
+                ? "Back To Main"
+                : "Beck To Declaration"
+            }
             handleOnClick={() => (
               setActiveStep(activeStep - 1),
               refetchStageOne(),
@@ -182,7 +189,7 @@ const RegisterPage = ({ applicantId }) => {
         />
         <div className='button-cont-register '>
           <AUDButton
-            text='Save & Logout'
+            text='Save & Continue Later'
             handleOnClick={() => handleSave(true)}
           />
 

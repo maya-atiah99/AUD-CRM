@@ -6,23 +6,34 @@
 
 /**************************************Buttons*****/
 .aud-button {
+  display: flex;
   border-radius: 5px;
   padding: 10px;
   background-color: #1b224c;
   color: #ffffff;
   border: none;
-  /* margin: 10px; */
   font-size: 18px;
   font-weight: 500;
+  vertical-align: middle;
+  justify-content: center;
 }
+.aud-button>.button-icon{
+  vertical-align: middle !important;
+  width: 25px !important;
 
+}
+a{
+  text-decoration: none !important;
+
+}
 .aud-button:hover {
   background-color: #f3223c;
   cursor: pointer;
 }
 
-.aud-button img {
-  width: 25px !important;
+.blue-link a{
+  color: #3886bd;
+  text-decoration: none;
 }
 /************/
 .span-required {

@@ -9,7 +9,6 @@ import AcadamicFiles from "./AcadamicFiles";
 import AcadamicInformation from "./AcadamicInformation";
 import PersonalStatement from "./PersonalStatement";
 import { FormikProvider, useFormik } from "formik";
-import Step2ValidationSchema from "../../../ValidationSchemas/Step2ValidationSchema";
 import {
   useAddApplicantStageThree,
   useAddFiles,
@@ -24,7 +23,7 @@ const RegisterFormStep2 = forwardRef(({ applicantId, showThree }, ref) => {
   const { mutate: addFiles } = useAddFiles();
   const applicationStart = localStorage.getItem("applicationStart");
   const applingAS = localStorage.getItem("applingAs");
-  
+  console.log("applicantStageThree", applicantStageThree);
   const [init, setInit] = useState({
     CurrentUniversityCountry:
       applicantStageThree?.data?.stage2?.currentUniversityCountry || "",
@@ -43,20 +42,20 @@ const RegisterFormStep2 = forwardRef(({ applicantId, showThree }, ref) => {
     DiplomaFile: applicantStageThree?.data?.diploma[0] || "",
     ActivitiesNotEnrolled:
       applicantStageThree?.data?.stage2?.activitiesNotEnrolled || "",
-    applicantFiles: applicantStageThree?.data?.stage2?.applicantFiles || [
-      {
-        testType: "",
-        academicDocument: "",
-        dateTaken: "",
-        registrationNumber: "",
-        totalScore: "",
-      },
-    ],
+    applicantFiles: (applicantStageThree?.data?.applicantTest || []).map(
+      (test) => ({
+        testType: test.testType.toString(),
+        academicDocument: test.academicDocument || "",
+        dateTaken: new Date(test.dateTaken).toISOString().split("T")[0], 
+        registrationNumber: test.registrationNumber || "",
+        totalScore: test.totalScore || "",
+      })
+    ),
+
     PersonalStatement:
       applicantStageThree?.data?.stage2?.personalStatement || "",
     applingAs: localStorage.getItem("applyingAs"),
   });
-
   useEffect(() => {
     const initialvalues = {
       CurrentUniversityCountry:
@@ -76,15 +75,16 @@ const RegisterFormStep2 = forwardRef(({ applicantId, showThree }, ref) => {
       CurrentUniversityCountry2:
         applicantStageThree?.data?.stage2?.currentUniversityCountry2 || "",
       SchoolCountry2: applicantStageThree?.data?.stage2?.schoolCountry2 || "",
-      applicantFiles: applicantStageThree?.data?.stage2?.applicantFiles || [
-        {
-          testType: "",
-          academicDocument: "",
-          dateTaken: "",
-          registrationNumber: "",
-          totalScore: "",
-        },
-      ],
+      applicantFiles: (applicantStageThree?.data?.applicantTest || []).map(
+        (test) => ({
+          testType: test.testType.toString(),
+          academicDocument: test.academicDocument || "",
+          dateTaken: new Date(test.dateTaken).toISOString().split("T")[0],
+          registrationNumber: test.registrationNumber || "",
+          totalScore: test.totalScore || "",
+        })
+      ),
+
       PersonalStatement:
         applicantStageThree?.data?.stage2?.personalStatement || "",
       applingAs: localStorage.getItem("applyingAs"),
@@ -223,13 +223,10 @@ const RegisterFormStep2 = forwardRef(({ applicantId, showThree }, ref) => {
   useEffect(() => {
     ref.current = formik;
   }, [ref, formik]);
-  console.log(formik.values);
+  console.log("step3333333333333333333", formik.values);
   return (
     <div className='form-subcontainer '>
-      <FormikProvider
-        value={formik}
-        innerRef={ref}
-      >
+      <FormikProvider value={formik} innerRef={ref}>
         <SubmitText />
         <AcadamicInformation />
         <AcadamicFiles />

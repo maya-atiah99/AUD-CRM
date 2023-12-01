@@ -43,7 +43,8 @@ const Reservation = ({ handleClick }) => {
             touched={formik.errors?.UndergroundCatalogCheck}
           />
           <div className='blue-link'>
-            Undergraduate Catalog <span>online</span>
+            <a href="https://aud.edu/media/catalogs/undergraduate/index.html" target="_blank"> Undergraduate Catalog </a>
+            <span>online</span>
           </div>
         </div>
       </div>

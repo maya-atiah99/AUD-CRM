@@ -55,7 +55,7 @@ const AcadamicFiles = () => {
       <ExpandableBox title='Further Details'>
         <BulletedText items={details} />
       </ExpandableBox>
-      {formik.values.applicantFiles.map((section, index) => (
+      {formik.values.applicantFiles && formik.values.applicantFiles.map((section, index) => (
         <div key={index} className='form-subcontainers my-3'>
           <RadioButtonGroup
             label='Choose Test :'

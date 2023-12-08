@@ -18,7 +18,12 @@ const RegisterContainer = forwardRef(
       fetchedData,
       applicantId,
       showInterest,
-      showThree
+      showThree,
+      applicationId,
+      setApplicationStart,
+      applingAs,
+      applicationStart,
+      setApplingAs
     },
     ref
   ) => {
@@ -40,6 +45,11 @@ const RegisterContainer = forwardRef(
               applicantId={applicantId}
               showInterest={showInterest}
               activeStep={activeStep}
+              applicationId={applicationId}
+              setApplicationStart={setApplicationStart}
+              applingAs={applingAs}
+              setApplingAs={setApplingAs}
+              applicationStart={applicationStart}
             />
           ) : activeStep == "1" ? (
             <RegisterFormStep2
@@ -47,12 +57,18 @@ const RegisterContainer = forwardRef(
               applicantId={applicantId}
               fetchedData={fetchedData}
               showThree={showThree}
+              applicationId={applicationId}
+              setApplicationStart={setApplicationStart}
+              applingAs={applingAs}
+              setApplingAs={setApplingAs}
+              applicationStart={applicationStart}
             />
           ) : activeStep == "2" ? (
             <RegisterFormStep3
               ref={refStep3}
               applicantId={applicantId}
               fetchedData={fetchedData}
+              applicationId={applicationId}
             />
           ) : activeStep == "3" ? (
             <RegisterFormStep4 />

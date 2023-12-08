@@ -5,14 +5,14 @@ import AUDButton from "./Buttons/AUDButton";
 const ModalComponent = ({
   title,
   description,
-  isOpen,
   onClose,
   handleOnClick,
   width,
   height,
   children,
   isButton,
-  classFont
+  classFont,
+  text
 }) => {
   return (
     <div className='modal-container'>
@@ -21,7 +21,7 @@ const ModalComponent = ({
         style={{ width: width, height: height }}
       >
         <div>
-          <h2 style={{ paddingLeft: "20px", paddingTop: "30px" }} className={classFont}>{title}</h2>
+          <h2 className={classFont}>{title}</h2>
           <img
             src='/images/closeicon.svg'
             alt='close icon'
@@ -34,7 +34,6 @@ const ModalComponent = ({
             className='py-4'
             style={{ paddingLeft: "20px", paddingTop: "30px" }}
           >
-            {" "}
             <TextComponent text={description} size='18px' font='500' />{" "}
           </div>
         ) : (
@@ -44,7 +43,7 @@ const ModalComponent = ({
         <div className='modal-content'>{children}</div>
         {isButton && (
           <div className='submit-modal-button'>
-            <AUDButton text='Done' handleOnClick={handleOnClick} />
+            <AUDButton text={text} handleOnClick={handleOnClick} />
           </div>
         )}
       </div>

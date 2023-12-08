@@ -14,74 +14,74 @@ const WorkExperience = () => {
       <SectionTitle title='WORK EXPERIENCE' />
       <div className='grid-personal1-cont'>
         <DropDown
+          type='14'
           width='100%'
           label='Employment Status'
-          type='6'
-          name='guardianRelation1'
-          value={formik.values.guardianRelation1}
+          name='EmploymentStatus'
+          value={formik.values.EmploymentStatus}
           onChange={(name, value) => {
             formik.setFieldValue(name, value);
           }}
-          errors={formik.errors?.guardianRelation1}
-          touched={formik.touched?.guardianRelation1}
+          errors={formik.errors?.EmploymentStatus}
+          touched={formik.touched?.EmploymentStatus}
         />
 
         <DropDown
+          type='15'
           width='100%'
           label='Employment Sector'
-          type='6'
-          name='guardianRelation1'
-          value={formik.values.guardianRelation1}
+          name='EmploymentSector'
+          value={formik.values.EmploymentSector}
           onChange={(name, value) => {
             formik.setFieldValue(name, value);
           }}
-          errors={formik.errors?.guardianRelation1}
-          touched={formik.touched?.guardianRelation1}
+          errors={formik.errors?.EmploymentSector}
+          touched={formik.touched?.EmploymentSector}
         />
 
         <TextBox
           width='100%'
           label='Company Name'
-          name='guardianEmail1'
-          value={formik.values.guardianEmail1}
+          name='CompanyName'
+          value={formik.values.CompanyName}
           onChange={(name, value) => {
             formik.setFieldValue(name, value);
           }}
-          errors={formik.errors?.guardianEmail1}
-          touched={formik.touched?.guardianEmail1}
+          errors={formik.errors?.CompanyName}
+          touched={formik.touched?.CompanyName}
         />
         <TextBox
           width='100%'
           label='Job Title'
-          name='guardianEmail1'
-          value={formik.values.guardianEmail1}
+          name='JobTitle'
+          value={formik.values.JobTitle}
           onChange={(name, value) => {
             formik.setFieldValue(name, value);
           }}
-          errors={formik.errors?.guardianEmail1}
-          touched={formik.touched?.guardianEmail1}
+          errors={formik.errors?.JobTitle}
+          touched={formik.touched?.JobTitle}
         />
       </div>
       <div className='grid-programInfo-cont'>
-        <DateTime
+        <TextBox
           width='100%'
           label='Year of Experience'
           required={true}
-          name='dob'
-          value={formik.values.dob}
+          name='YearsOfExperience'
+          value={formik.values.YearsOfExperience}
           onChange={(name, value) => {
             formik.setFieldValue(name, value);
           }}
-          errors={formik.errors?.dob}
-          touched={formik.touched?.dob}
+          errors={formik.errors?.YearsOfExperience}
+          touched={formik.touched?.YearsOfExperience}
         />
         <DocumentUpload
           text='Upload CV'
           height='73px'
-          name='DiplomaFile'
-          fileName={formik.values.DiplomaFile}
-          errors={formik.errors?.DiplomaFile}
-          touched={formik.touched?.DiplomaFile}
+          name='CV'
+          fileName={formik.values.CV}
+          errors={formik.errors?.CV}
+          touched={formik.touched?.CV}
         />{" "}
       </div>
     </div>

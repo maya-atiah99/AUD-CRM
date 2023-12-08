@@ -7,6 +7,7 @@ import LinkButton from "../../Buttons/LinkButton";
 import TextBox from "../../Inputs/TextBox";
 import { useFormikContext } from "formik";
 import PhoneNumber from "../../Inputs/PhoneNumber";
+import DropDown from "../../Inputs/DropDown";
 
 const Consent = () => {
   const formik = useFormikContext();
@@ -54,12 +55,12 @@ const Consent = () => {
       />
       <div className='d-flex'>
         <SquareCheckBox
-          value={formik.values.authorizeToReleaseRecord}
+          value={formik.values.AuthorizeToReleaseRecord}
           onChange={(checked) => {
-            formik.setFieldValue("authorizeToReleaseRecord", checked);
+            formik.setFieldValue("AuthorizeToReleaseRecord", checked);
           }}
-          errors={formik.errors?.authorizeToReleaseRecord}
-          touched={formik.errors?.authorizeToReleaseRecord}
+          errors={formik.errors?.AuthorizeToReleaseRecord}
+          touched={formik.errors?.AuthorizeToReleaseRecord}
         />
         {/* <LinkButton title='I Authorize ' /> */}
         <TextComponent
@@ -73,60 +74,50 @@ const Consent = () => {
       <div className='grid-consent1-cont'>
         <TextBox
           width='100%'
-          label='Father’s Name'
-          // required={true}
-          name='fathersName'
-          value={formik.values.fathersName}
+          label='Guardian’s Name'
+          required={true}
+          name='Authorize_GuardianName'
+          value={formik.values.Authorize_GuardianName}
           onChange={(name, value) => {
             formik.setFieldValue(name, value);
           }}
-          errors={formik.errors["fathersName"]}
-          touched={formik.touched["fathersName"]}
+          errors={formik.errors["Authorize_GuardianName"]}
+          touched={formik.touched["Authorize_GuardianName"]}
         />
-        <TextBox
+
+        <DropDown
           width='100%'
-          label='Mother’s Name'
-          // required={true}
-          name='mothersName'
-          value={formik.values.mothersName}
+          label='Guardian Relation'
+          type='6'
+          required={true}
+          name='Authorize_GuardianRelation'
+          value={formik.values.Authorize_GuardianRelation}
           onChange={(name, value) => {
             formik.setFieldValue(name, value);
           }}
-          errors={formik.errors["mothersName"]}
-          touched={formik.touched["mothersName"]}
+          errors={formik.errors?.Authorize_GuardianRelation}
+          touched={formik.touched?.Authorize_GuardianRelation}
         />
-        <TextBox
-          width='100%'
-          label='Other’s Name'
-          // required={true}
-          name='othersName'
-          value={formik.values.othersName}
-          onChange={(name, value) => {
-            formik.setFieldValue(name, value);
-          }}
-          errors={formik.errors["othersName"]}
-          touched={formik.touched["othersName"]}
-        />
-      </div>
-      <div className='grid-consent2-cont'>
         <TextBox
           width='100%'
           label='Address'
-          // required={true}
-          name='address1'
-          value={formik.values.address1}
+          required={true}
+          name='Authorize_Address'
+          value={formik.values.Authorize_Address}
           onChange={(name, value) => {
             formik.setFieldValue(name, value);
           }}
-          errors={formik.errors["address1"]}
-          touched={formik.touched["address1"]}
+          errors={formik.errors["Authorize_Address"]}
+          touched={formik.touched["Authorize_Address"]}
         />
+      </div>
+      <div className='grid-consent2-cont'>
         <PhoneNumber
           width='100%'
           label='Telephone'
           required={true}
-          name='phone1'
-          value={formik.values.phone1}
+          name='Authorize_Telephone'
+          value={formik.values.Authorize_Telephone}
           onChange={(name, value) => {
             formik.setFieldValue(name, value);
           }}

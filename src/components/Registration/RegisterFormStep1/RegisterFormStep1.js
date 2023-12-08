@@ -18,130 +18,199 @@ import WorkExperience from "./WorkExperience";
 import Reference from "./Reference";
 
 const RegisterFormStep1 = forwardRef(
-  ({ fetchedData, applicantId, showInterest }, ref) => {
+  (
+    {
+      fetchedData,
+      applicantId,
+      showInterest,
+      applicationId,
+      setApplicationStart,
+      applingAs,
+      applicationStart,
+      setApplingAs,
+    },
+    ref
+  ) => {
     const [init, setInit] = useState({});
     const { mutate: addApplicantStagetwo } = useAddApplicantStageTwo();
-    const applicationStart = localStorage.getItem("applicationStart");
-    const applingAS = localStorage.getItem("applingAs");
+
     useEffect(() => {
       if (showInterest) {
         const initialOne = {
-          firstName: fetchedData?.data?.firstName || "",
-          middleName: fetchedData?.data?.middleName || "",
-          lastName: fetchedData?.data?.lastName || "",
-          email: fetchedData?.data?.email || "",
-          nationality: fetchedData?.data?.nationalityId || "",
-          mobile: fetchedData?.data?.phoneNumber || "",
-          applicantTelephone: "",
-          applicationStart:
-            fetchedData?.data?.applicationStart.toString() || "",
-          dob: fetchedData?.data?.dob || "",
-          gender: "",
-          titleId: fetchedData?.data?.titleId || "",
-          address: "",
-          cityState: "",
-          country: "",
-          pobox: "",
-          zipCode: "",
-          applingAs: "",
-          programOfInterest: "",
-          currentPlaceOfStudy: "",
-          guardianMobile1: "",
-          guardianRelation1: "",
-          guardianName1: "",
-          guardianEmail1: "",
-          guardianMobile2: "",
-          guardianRelation2: "",
-          guardianName2: "",
-          guardianEmail2: "",
-          authorizeToReleaseRecord: "",
-          fathersName: "",
-          mothersName: "",
-          othersName: "",
-          address1: "",
-          phone1: "",
+          TitleId: fetchedData?.data?.applicant?.titleId || "",
+          FirstName: fetchedData?.data?.applicant?.firstName || "",
+          MiddleName: fetchedData?.data?.applicant?.middleName || "",
+          LastName: fetchedData?.data?.applicant?.lastName || "",
+          Email: fetchedData?.data?.applicant?.email || "",
+          Nationality: fetchedData?.data?.applicant?.nationalityId || "",
+          DOB: fetchedData?.data?.dob
+            ? new Date(fetchedData?.data?.dob).toISOString().split("T")[0]
+            : "",
+          Gender: "",
+          Mobile: fetchedData?.data?.applicant?.phoneNumber || "",
+          ApplicantTelephone: "",
+          ApplingAs: "",
+          SelectedTerm: "",
+          ApplicationStart: "",
+          ProgramOfInterest: "",
+          CurrentPlaceOfStudy: "",
+          GuardianRelation1: "",
+          GuardianName1: "",
+          GuardianMobile1: "",
+          GuardianEmail1: "",
+          GuardianRelation2: "",
+          GuardianName2: "",
+          GuardianMobile2: "",
+          GuardianEmail2: "",
+          AuthorizeToReleaseRecord: false,
+          Authorize_GuardianName: "",
+          Authorize_GuardianRelation: "",
+          Authorize_Address: "",
+          Authorize_Telephone: "",
+          Address1: "",
+          Country: "",
+          CityState: "",
+          Pobox: "",
+          ZipCode: "",
+          LegacyApplicant: false,
+          LegacyFatherName: "",
+          LegacyFatherProgram: "",
+          LegacyFatherGraduationYear: null,
+          LegacyFatherMobile: "",
+          LegacyMotherName: "",
+          LegacyMotherProgram: "",
+          LegacyMotherGraduationYear: null,
+          LegacyMotherMobile: "",
+          PassportNumber: "",
+          EmiratesId: "",
+          Passport_File: "",
+          EmiratesId_File: "",
+          FamilyBook_File: "",
+          EtibharaNo: "",
+          FamilyBookNumber: "",
+          FamilyNo: "",
+          CityNo: "",
+          Visiting_LevelOfStudy: "",
+          StudentVisa: "",
+          UAE_GCC_Resident: "",
+          OnHouseCampus: "",
+          MiddleEasternStudies: "",
+          SemestersAtAUD: "",
         };
         setInit(initialOne);
       } else {
         const initialStage2 = {
-          firstName: fetchedData?.data?.stage1?.firstName || "",
-          middleName: fetchedData?.data?.stage1?.middleName || "",
-          lastName: fetchedData?.data?.stage1?.lastName || "",
-          email: fetchedData?.data?.stage1?.email || "",
-          nationality: fetchedData?.data?.stage1?.nationalityId || "",
-          mobile: fetchedData?.data?.stage1?.mobile || "",
-          applicantTelephone: fetchedData?.data?.stage1?.phoneNumber || "",
-          dob: fetchedData?.data?.stage1?.dob
+          TitleId: fetchedData?.data?.stage1?.titleId || "",
+          FirstName: fetchedData?.data?.stage1?.firstName || "",
+          MiddleName: fetchedData?.data?.stage1?.middleName || "",
+          LastName: fetchedData?.data?.stage1?.lastName || "",
+          Email: fetchedData?.data?.stage1?.email || "",
+          Nationality: fetchedData?.data?.stage1?.nationalityId || "",
+          DOB: fetchedData?.data?.stage1?.dob
             ? new Date(fetchedData?.data?.stage1?.dob)
                 .toISOString()
                 .split("T")[0]
             : "",
-          gender: fetchedData?.data?.stage1?.gender || "",
-          titleId: fetchedData?.data?.stage1?.titleId || "",
-          applicationStart:
-            fetchedData?.data?.stage1?.applicationStart.toString() || "",
-          address: fetchedData?.data?.stage2?.address || "",
-          cityState: fetchedData?.data?.address?.cityState || "",
-          country: fetchedData?.data?.address?.country || "",
-          pobox: fetchedData?.data?.address?.pobox || "",
-          zipCode: fetchedData?.data?.address?.zipCode || "",
-          applingAs: fetchedData?.data?.stage2?.applingAs.toString() || "",
-          programOfInterest: fetchedData?.data?.stage2?.programOfInterest || "",
-          currentPlaceOfStudy:
+          Gender: fetchedData?.data?.stage1?.gender || "",
+          Mobile: fetchedData?.data?.stage1?.phoneNumber || "",
+          ApplicantTelephone: fetchedData?.data?.stage1?.mobile || "",
+          ApplingAs: fetchedData?.data?.application?.applyingAs || "",
+          SelectedTerm: fetchedData?.data?.application?.term || "",
+          ApplicationStart:
+            fetchedData?.data?.application?.startYourApplication?.toString() ||
+            "",
+          ProgramOfInterest:
+            fetchedData?.data?.stage2?.programApplicationId || "",
+          CurrentPlaceOfStudy:
             fetchedData?.data?.stage2?.currentPlaceOfStudy || "",
-          guardianMobile1: fetchedData?.data?.stage2?.guardianMobile1 || "",
-          guardianRelation1: fetchedData?.data?.stage2?.guardianRelation1 || "",
-          guardianName1: fetchedData?.data?.stage2?.guardianName1 || "",
-          guardianEmail1: fetchedData?.data?.stage2?.guardianEmail1 || "",
-          guardianMobile2: fetchedData?.data?.stage2?.guardianMobile2 || "",
-          guardianRelation2: fetchedData?.data?.stage2?.guardianRelation2 || "",
-          guardianName2: fetchedData?.data?.stage2?.guardianName2 || "",
-          guardianEmail2: fetchedData?.data?.stage2?.guardianEmail2 || "",
-          authorizeToReleaseRecord:
+          GuardianRelation1: fetchedData?.data?.stage2?.guardianRelation1 || "",
+          GuardianName1: fetchedData?.data?.stage2?.guardianName1 || "",
+          GuardianMobile1: fetchedData?.data?.stage2?.guardianMobile1 || "",
+          GuardianEmail1: fetchedData?.data?.stage2?.guardianEmail1 || "",
+          GuardianRelation2: fetchedData?.data?.stage2?.guardianRelation2 || "",
+          GuardianName2: fetchedData?.data?.stage2?.guardianName2 || "",
+          GuardianMobile2: fetchedData?.data?.stage2?.guardianMobile2 || "",
+          GuardianEmail2: fetchedData?.data?.stage2?.guardianEmail2 || "",
+          AuthorizeToReleaseRecord:
             fetchedData?.data?.stage2?.authorizeToReleaseRecord || "",
-          fathersName: fetchedData?.data?.stage2?.fathersName || "",
-          mothersName: fetchedData?.data?.stage2?.mothersName || "",
-          othersName: fetchedData?.data?.stage2?.othersName || "",
-          address1: fetchedData?.data?.address?.address1 || "",
-          phone1: fetchedData?.data?.address?.phone1 || "",
+          Authorize_GuardianName:
+            fetchedData?.data?.stage2?.authorize_GuardianName || "",
+          Authorize_GuardianRelation:
+            fetchedData?.data?.stage2?.authorize_GuardianRelation || "",
+          Authorize_Address: fetchedData?.data?.stage2?.authorize_Address || "",
+          Authorize_Telephone:
+            fetchedData?.data?.stage2?.authorize_Telephone || "",
+          Address1: fetchedData?.data?.address?.address1 || "",
+          Country: fetchedData?.data?.address?.country || "",
+          CityState: fetchedData?.data?.address?.cityState || "",
+          Pobox: fetchedData?.data?.address?.pobox || "",
+          ZipCode: fetchedData?.data?.address?.zipCode || "",
+          LegacyApplicant: fetchedData?.data?.stage2?.legacyApplicant || "",
+          LegacyFatherName: fetchedData?.data?.stage2?.legacyFatherName || "",
+          LegacyFatherProgram:
+            fetchedData?.data?.stage2?.legacyFatherProgram || "",
+          LegacyFatherGraduationYear:
+            fetchedData?.data?.stage2?.legacyFatherGraduationYear || "",
+          LegacyFatherMobile:
+            fetchedData?.data?.stage2?.legacyFatherMobile || "",
+          LegacyMotherName: fetchedData?.data?.stage2?.legacyMotherName || "",
+          LegacyMotherProgram:
+            fetchedData?.data?.stage2?.legacyMotherProgram || "",
+          LegacyMotherGraduationYear:
+            fetchedData?.data?.stage2?.legacyMotherGraduationYear || "",
+          LegacyMotherMobile:
+            fetchedData?.data?.stage2?.legacyMotherMobile || "",
+          PassportNumber: fetchedData?.data?.stage2?.legacyApplicant || "",
+          EmiratesId: fetchedData?.data?.stage2?.passportNumber || "",
+          Passport_File: fetchedData?.data?.stage2?.legacyApplicant || "",
+          EmiratesId_File: fetchedData?.data?.stage2?.legacyApplicant || "",
+          FamilyBook_File: fetchedData?.data?.stage2?.legacyApplicant || "",
+          EtibharaNo: fetchedData?.data?.stage2?.legacyApplicant || "",
+          FamilyBookNumber: fetchedData?.data?.stage2?.legacyApplicant || "",
+          FamilyNo: fetchedData?.data?.stage2?.legacyApplicant || "",
+          CityNo: fetchedData?.data?.stage2?.legacyApplicant || "",
+          Visiting_LevelOfStudy:
+            fetchedData?.data?.stage2?.visiting_LevelOfStudy || "",
+          StudentVisa: fetchedData?.data?.stage2?.studentVisa || "",
+          UAE_GCC_Resident: fetchedData?.data?.stage2?.uaE_GCC_Resident || "",
+          OnHouseCampus: fetchedData?.data?.stage2?.onHouseCampus || "",
+          MiddleEasternStudies:
+            fetchedData?.data?.stage2?.middleEasternStudies || "",
+          SemestersAtAUD: fetchedData?.data?.stage2?.semestersAtAUD || "",
         };
         setInit(initialStage2);
       }
     }, [fetchedData]);
 
     const handleAddStageTwo = (values) => {
-      addApplicantStagetwo(
-        {
-          ...values,
-          applicantId: applicantId,
+      addApplicantStagetwo(values, {
+        onSuccess: (data) => {
+          setInit({});
         },
-        {
-          onSuccess: (data) => {
-            setInit({});
-          },
-          onError: (error) => {
-            console.error("An error occurred:", error);
-            setInit({});
-          },
-        }
-      );
+        onError: (error) => {
+          console.error("An error occurred:", error);
+          setInit({});
+        },
+      });
     };
 
     useEffect(() => {
       if (showInterest) {
-        console.log("shwowwwwwww are changinggg");
         localStorage.setItem(
           "applicationStart",
-          fetchedData?.data?.applicationStart.toString()
+          fetchedData?.data?.applicationStart?.toString()
         );
       } else {
-        console.log("otherrrrrrr are changinggg");
         localStorage.setItem(
           "applicationStart",
-          fetchedData?.data?.stage1?.applicationStart.toString()
+          fetchedData?.data?.application?.startYourApplication?.toString()
+        );
+        localStorage.setItem(
+          "applingAs",
+          fetchedData?.data?.application?.applyingAs
         );
       }
-    }, [fetchedData]);
+    }, [fetchedData, showInterest]);
 
     useEffect(() => {
       console.log(init);
@@ -149,55 +218,36 @@ const RegisterFormStep1 = forwardRef(
 
     const formik = useFormik({
       initialValues: init,
-      validationSchema: getValidationSchemaStep1(applicationStart,applingAS),
+      validationSchema: getValidationSchemaStep1(applicationStart, applingAs),
       enableReinitialize: true,
       onSubmit: (values) => {
+        console.log(values);
+        localStorage.setItem("applingAs", formik.values?.ApplingAs);
         localStorage.setItem(
           "applicationStart",
-          formik.values?.applicationStart
+          formik.values?.ApplicationStart
         );
-        localStorage.setItem("applingAs", formik.values?.applingAs);
-        const excludeFields = {
-          currentPlaceOfStudy:
-            values.currentPlaceOfStudy === ""
-              ? undefined
-              : values.currentPlaceOfStudy,
-          guardianRelation1:
-            values.guardianRelation1 === ""
-              ? undefined
-              : values.guardianRelation1,
-          guardianName1:
-            values.guardianName1 === "" ? undefined : values.guardianName1,
-          guardianEmail1:
-            values.guardianEmail1 === "" ? undefined : values.guardianEmail1,
-          guardianRelation2:
-            values.guardianRelation2 === ""
-              ? undefined
-              : values.guardianRelation2,
-          guardianName2:
-            values.guardianName2 === "" ? undefined : values.guardianName2,
-          guardianEmail2:
-            values.guardianEmail2 === "" ? undefined : values.guardianEmail2,
-          fathersName:
-            values.fathersName === "" ? undefined : values.fathersName,
-          mothersName:
-            values.mothersName === "" ? undefined : values.mothersName,
-          othersName: values.othersName === "" ? undefined : values.othersName,
-          address1: values.address1 === "" ? undefined : values.address1,
-          guardianMobile1:
-            values.guardianMobile1 === "" ? undefined : values.guardianMobile1,
-          guardianMobile2:
-            values.guardianMobile2 === "" ? undefined : values.guardianMobile2,
-        };
-        const valuesToSend = { ...values, ...excludeFields };
-        handleAddStageTwo(valuesToSend);
+        setApplicationStart(formik.values?.ApplicationStart);
+        setApplingAs(formik.values?.ApplingAs);
+        const formData = new FormData();
+        formData.append("ApplicantId", applicantId);
+        formData.append("ApplicationId", applicationId);
+        for (const key in values) {
+          console.log("key", key);
+          if (values[key] !== undefined || values[key] !== "") {
+            if (key === "DOB") {
+              formData.append(
+                key,
+                new Date(values[key]).toISOString().split("T")[0]
+              );
+            } else {
+              formData.append(key, values[key]);
+            }
+          }
+        }
+        handleAddStageTwo(formData);
       },
     });
-
-    console.log("fetchedData", fetchedData);
-    console.log("formik values", formik.values);
-    console.log("formik applications", formik.values.applicationStart);
-    console.log("formik applyii", formik.values.applingAs);
 
     useImperativeHandle(ref, () => ({
       submitForm: () => {
@@ -210,10 +260,12 @@ const RegisterFormStep1 = forwardRef(
     }, [ref, formik]);
 
     useEffect(() => {
-      console.log("valuessss are changinggg");
       localStorage.setItem("applicationStart", formik.values?.applicationStart);
       localStorage.setItem("applingAs", formik.values?.applingAs);
     }, [formik.values]);
+
+    console.log("stage222", fetchedData);
+    console.log("stage222 formik", formik);
 
     return (
       <div className='form-subcontainer'>
@@ -225,8 +277,6 @@ const RegisterFormStep1 = forwardRef(
           <PersonalInformation />
           <MailingAddress />
           <ProgramInformation fetchedData={fetchedData} />
-          <WorkExperience/>
-          <Reference/>
           <ParentInformation />
           <Consent />
         </FormikProvider>

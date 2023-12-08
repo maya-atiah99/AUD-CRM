@@ -10,74 +10,73 @@ const Reference = () => {
 
   return (
     <div className='form-subcontainers'>
-      <SectionTitle title='WORK EXPERIENCE' />
+      <SectionTitle title='Reference' />
       <div className='grid-personal1-cont'>
         <DropDown
+          type='1'
           width='100%'
           label='Title'
-          type='1'
-          name='titleId'
-          value={formik.values.titleId}
+          name='ReferanceTitle'
+          value={formik.values.ReferanceTitle}
           onChange={(name, value) => {
             formik.setFieldValue(name, value);
           }}
+          errors={formik.errors?.ReferanceTitle}
+          touched={formik.touched?.ReferanceTitle}
         />
         <TextBox
           width='100%'
           label='Name'
-          required={true}
-          name='firstName'
-          value={formik.values.firstName}
+          name='ReferanceName'
+          value={formik.values.ReferanceName}
           onChange={(name, value) => {
             formik.setFieldValue(name, value);
           }}
-          errors={formik.errors?.firstName}
-          touched={formik.touched?.firstName}
+          errors={formik.errors?.ReferanceName}
+          touched={formik.touched?.ReferanceName}
         />
         <TextBox
           width='100%'
           label='Email'
-          required={true}
-          name='middleName'
-          value={formik.values.middleName}
+          name='ReferanceEmail'
+          value={formik.values.ReferanceEmail}
           onChange={(name, value) => {
             formik.setFieldValue(name, value);
           }}
-          errors={formik.errors?.middleName}
-          touched={formik.touched?.middleName}
+          errors={formik.errors?.ReferanceEmail}
+          touched={formik.touched?.ReferanceEmail}
         />
         <TextBox
           width='100%'
           label='How do you know the reference?'
-          name='lastName'
-          required={true}
-          value={formik.values.lastName}
+          name='KnowTheReferance'
+          value={formik.values.KnowTheReferance}
           onChange={(name, value) => {
             formik.setFieldValue(name, value);
           }}
-          errors={formik.errors?.lastName}
-          touched={formik.touched?.lastName}
+          errors={formik.errors?.KnowTheReferance}
+          touched={formik.touched?.KnowTheReferance}
         />
       </div>
       <SquareCheckBox
         text='A request of "Letter of Recommendation" will be sent via email to the reference you provided us'
-        name='ProgramInformationCheck'
-        value={formik.values.ProgramInformationCheck}
+        name='SendTheLetterRecomendation'
+        value={formik.values.SendTheLetterRecomendation}
         onChange={(checked) => {
-          formik.setFieldValue("ProgramInformationCheck", checked);
+          formik.setFieldValue("SendTheLetterRecomendation", checked);
         }}
-        errors={formik.errors?.ProgramInformationCheck}
-        touched={formik.errors?.ProgramInformationCheck}
+        errors={formik.errors?.SendTheLetterRecomendation}
+        touched={formik.errors?.SendTheLetterRecomendation}
       />
       <SquareCheckBox
         text='I have read and understand the above information'
-        name='ProgramInformationCheck'
-        value={formik.values.ProgramInformationCheck}
+        name='ReadAndUnderstand'
+        value={formik.values.ReadAndUnderstand}
         onChange={(checked) => {
-          formik.setFieldValue("ProgramInformationCheck", checked);
+          formik.setFieldValue("ReadAndUnderstand", checked);
         }}
-        errors={formik.errors?.ProgramInformationCheck}
-        touched={formik.errors?.ProgramInformationCheck}
+        errors={formik.errors?.ReadAndUnderstand}
+        touched={formik.errors?.ReadAndUnderstand}
       />
     </div>
   );

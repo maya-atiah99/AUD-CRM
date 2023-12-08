@@ -9,7 +9,9 @@ import HorizantalLine from "../../Texts/HorizantalLine";
 import DocumentUpload from "../../Inputs/DocumentUpload";
 
 const PersonalInformation = () => {
+  const [showEmirate, setShowEmirate] = useState(false);
   const formik = useFormikContext();
+
   return (
     <div className='form-subcontainers'>
       <SectionTitle title='PERSONAL INFORMATION OF THE APPLICANT' />
@@ -18,8 +20,8 @@ const PersonalInformation = () => {
           width='100%'
           label='Title'
           type='1'
-          name='titleId'
-          value={formik.values.titleId}
+          name='TitleId'
+          value={formik.values.TitleId}
           onChange={(name, value) => {
             formik.setFieldValue(name, value);
           }}
@@ -28,37 +30,37 @@ const PersonalInformation = () => {
           width='100%'
           label='First Name'
           required={true}
-          name='firstName'
-          value={formik.values.firstName}
+          name='FirstName'
+          value={formik.values.FirstName}
           onChange={(name, value) => {
             formik.setFieldValue(name, value);
           }}
-          errors={formik.errors?.firstName}
-          touched={formik.touched?.firstName}
+          errors={formik.errors?.FirstName}
+          touched={formik.touched?.FirstName}
         />
         <TextBox
           width='100%'
           label='Middle Name'
           required={true}
-          name='middleName'
-          value={formik.values.middleName}
+          name='MiddleName'
+          value={formik.values.MiddleName}
           onChange={(name, value) => {
             formik.setFieldValue(name, value);
           }}
-          errors={formik.errors?.middleName}
-          touched={formik.touched?.middleName}
+          errors={formik.errors?.MiddleName}
+          touched={formik.touched?.MiddleName}
         />
         <TextBox
           width='100%'
           label='Last Name'
-          name='lastName'
+          name='LastName'
           required={true}
-          value={formik.values.lastName}
+          value={formik.values.LastName}
           onChange={(name, value) => {
             formik.setFieldValue(name, value);
           }}
-          errors={formik.errors?.lastName}
-          touched={formik.touched?.lastName}
+          errors={formik.errors?.LastName}
+          touched={formik.touched?.LastName}
         />
       </div>
       <div className='grid-personal2-cont'>
@@ -66,51 +68,52 @@ const PersonalInformation = () => {
           width='100%'
           label='Email'
           required={true}
-          name='email'
-          value={formik.values.email}
+          name='Email'
+          value={formik.values.Email}
           onChange={(name, value) => {
             formik.setFieldValue(name, value);
           }}
-          errors={formik.errors?.email}
-          touched={formik.touched?.email}
+          errors={formik.errors?.Email}
+          touched={formik.touched?.Email}
         />
         <DateTime
           width='100%'
           label='Date Of Birth'
           required={true}
-          name='dob'
-          value={formik.values.dob}
+          name='DOB'
+          value={formik.values.DOB}
           onChange={(name, value) => {
             formik.setFieldValue(name, value);
           }}
-          errors={formik.errors?.dob}
-          touched={formik.touched?.dob}
+          errors={formik.errors?.DOB}
+          touched={formik.touched?.DOB}
         />
         <Dropdown
           width='100%'
           label='Gender'
           required={true}
           type='3'
-          name='gender'
-          value={formik.values.gender}
+          name='Gender'
+          value={formik.values.Gender}
           onChange={(name, value) => {
             formik.setFieldValue(name, value);
           }}
-          errors={formik.errors?.gender}
-          touched={formik.touched?.gender}
+          errors={formik.errors?.Gender}
+          touched={formik.touched?.Gender}
         />
         <Dropdown
           width='100%'
           label='Nationality'
           required={true}
           type='4'
-          name='nationality'
-          value={formik.values.nationality}
+          name='Nationality'
+          value={formik.values.Nationality}
           onChange={(name, value) => {
             formik.setFieldValue(name, value);
           }}
-          errors={formik.errors?.nationality}
-          touched={formik.touched?.nationality}
+          errors={formik.errors?.Nationality}
+          touched={formik.touched?.Nationality}
+          setShowEmirate={setShowEmirate}
         />
       </div>
       <div className='grid-personal2-cont'>
@@ -118,70 +121,130 @@ const PersonalInformation = () => {
           width='50%'
           label='Mobile'
           required={true}
-          name='mobile'
-          value={formik.values.mobile}
+          name='Mobile'
+          value={formik.values.Mobile}
           onChange={(name, value) => {
             formik.setFieldValue(name, value);
           }}
-          errors={formik.errors?.mobile}
-          touched={formik.touched?.mobile}
+          errors={formik.errors?.Mobile}
+          touched={formik.touched?.Mobile}
         />
         <PhoneNumber
           width='100%'
           label='Telephone'
-          name='applicantTelephone'
+          name='ApplicantTelephone'
           required={true}
-          value={formik.values.applicantTelephone}
+          value={formik.values.ApplicantTelephone}
           onChange={(name, value) => {
             formik.setFieldValue(name, value);
           }}
-          errors={formik.errors?.applicantTelephone}
-          touched={formik.touched.telephone}
+          errors={formik.errors?.ApplicantTelephone}
+          touched={formik.touched.ApplicantTelephone}
         />
       </div>
-      <div style={{ paddingTop: "0.7rem" }}>
-        <HorizantalLine width='100%' />
-        <div className='grid-personal1-cont'>
-          <TextBox
-            width='100%'
-            label='Passport No.'
-            name='email'
-            value={formik.values.email}
-            onChange={(name, value) => {
-              formik.setFieldValue(name, value);
-            }}
-            errors={formik.errors?.email}
-            touched={formik.touched?.email}
-          />
-          <DocumentUpload
-            text='Upload Passport'
-            height='70px'
-            name='DiplomaFile'
-            fileName={formik.values.DiplomaFile}
-            errors={formik.errors?.DiplomaFile}
-            touched={formik.touched?.DiplomaFile}
-          />{" "}
-          <TextBox
-            width='100%'
-            label='Email'
-            name='email'
-            value={formik.values.email}
-            onChange={(name, value) => {
-              formik.setFieldValue(name, value);
-            }}
-            errors={formik.errors?.email}
-            touched={formik.touched?.email}
-          />
-          <DocumentUpload
-            text='Upload Emirates ID (Front & Back)'
-            height='70px'
-            name='DiplomaFile'
-            fileName={formik.values.DiplomaFile}
-            errors={formik.errors?.DiplomaFile}
-            touched={formik.touched?.DiplomaFile}
-          />{" "}
+      {showEmirate ? (
+        <div style={{ paddingTop: "0.7rem" }}>
+          <HorizantalLine width='100%' />
+          <div className='grid-personal1-cont'>
+            <TextBox
+              width='100%'
+              label='Passport No.'
+              name='PassportNumber'
+              value={formik.values.PassportNumber}
+              onChange={(name, value) => {
+                formik.setFieldValue(name, value);
+              }}
+              errors={formik.errors?.PassportNumber}
+              touched={formik.touched?.PassportNumber}
+            />
+            <DocumentUpload
+              text='Upload Passport'
+              height='70px'
+              name='Passport_File'
+              fileName={formik.values.Passport_File}
+              errors={formik.errors?.Passport_File}
+              touched={formik.touched?.Passport_File}
+            />{" "}
+            <TextBox
+              width='100%'
+              label='Emirates ID No.'
+              name='EmiratesId'
+              value={formik.values.EmiratesId}
+              onChange={(name, value) => {
+                formik.setFieldValue(name, value);
+              }}
+              errors={formik.errors?.EmiratesId}
+              touched={formik.touched?.EmiratesId}
+            />
+            <DocumentUpload
+              text='Upload Emirates ID (Front & Back)'
+              height='70px'
+              name='EmiratesId_File'
+              fileName={formik.values.EmiratesId_File}
+              errors={formik.errors?.EmiratesId_File}
+              touched={formik.touched?.EmiratesId_File}
+            />{" "}
+          </div>
+          <div className='grid-personal1-cont'>
+            <TextBox
+              width='100%'
+              label='Ethbara No.'
+              name='EtibharaNo'
+              value={formik.values.EtibharaNo}
+              onChange={(name, value) => {
+                formik.setFieldValue(name, value);
+              }}
+              errors={formik.errors?.EtibharaNo}
+              touched={formik.touched?.EtibharaNo}
+            />
+            <TextBox
+              width='100%'
+              label='Family Book No.'
+              name='FamilyBookNumber'
+              value={formik.values.FamilyBookNumber}
+              onChange={(name, value) => {
+                formik.setFieldValue(name, value);
+              }}
+              errors={formik.errors?.FamilyBookNumber}
+              touched={formik.touched?.FamilyBookNumber}
+            />
+            <TextBox
+              width='100%'
+              label='Family No.'
+              name='FamilyNo'
+              value={formik.values.FamilyNo}
+              onChange={(name, value) => {
+                formik.setFieldValue(name, value);
+              }}
+              errors={formik.errors?.FamilyNo}
+              touched={formik.touched?.FamilyNo}
+            />
+            <TextBox
+              width='100%'
+              label='City No.'
+              name='CityNo'
+              value={formik.values.CityNo}
+              onChange={(name, value) => {
+                formik.setFieldValue(name, value);
+              }}
+              errors={formik.errors?.CityNo}
+              touched={formik.touched?.CityNo}
+            />
+          </div>
+          <div className='grid-personal1-cont'>
+            <DocumentUpload
+              text='Upload Family Book'
+              height='70px'
+              name='FamilyBook_File'
+              fileName={formik.values.FamilyBook_File}
+              errors={formik.errors?.FamilyBook_File}
+              touched={formik.touched?.FamilyBook_File}
+            />{" "}
+          </div>
         </div>
-      </div>
+      ) : (
+        ""
+      )}
     </div>
   );
 };

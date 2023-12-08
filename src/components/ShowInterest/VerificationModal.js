@@ -3,6 +3,7 @@ import ModalComponent from "../ModalComponent";
 import TextBox from "../Inputs/TextBox";
 import TextComponent from "../Texts/TextComponent";
 import LinkButton from "../Buttons/LinkButton";
+import HorizantalLine from "../Texts/HorizantalLine";
 
 const VerificationModal = ({
   setshowVerifiedModal,
@@ -10,41 +11,64 @@ const VerificationModal = ({
   otpCode,
   setOtpCode,
   handleOnClickLink,
-  phoneNumber
+  phoneNumber,
+  emailotp,
+  setEmailOtp,
+  email,
 }) => {
-  // const data = [
-  //   {
-  //     email: "maya@gmail.com",
-  //     phone: "0362548",
-  //   },
-  // ];
-  
+
   return (
     <ModalComponent
       onClose={() => setshowVerifiedModal(false)}
       handleOnClick={handleDone}
       isButton={true}
-      height='30rem'
       width='60rem'
       title='OTP'
-      description='Before we continue the application we need to authenticate the phone number you provided'
+      text='Confirm'
     >
-      <div style={{ paddingLeft: "20px", paddingRight: "30px" }}>
+      <div>
         <div className='expandable-card'>
-          <TextComponent text='Phone Number' size='20px' font='700' />
-          {/* <TextComponent text={data[0].phone} size='15px' font='500' /> */}
-          <TextComponent
-            text='We have sent the OTP to your phone as a text to authenticate you mobile number'
-            size='15px'
-            font='500'
+          <div className='d-flex gap-1'>
+            <TextComponent
+              text='We have send the OTP on '
+              size='18px'
+              font='500'
+            />{" "}
+            <TextComponent text={phoneNumber} size='18px' font='700' />
+          </div>
+
+          <TextBox
+            value={otpCode}
+            onChange={setOtpCode}
+            label='Enter Mobile Verification Code'
           />
-          <TextComponent text={phoneNumber} size='15px' font='500' />
           <LinkButton
-            title='Click Here To Resend'
-            text='Please type the number you received or '
+            title='Resend'
+            text='Didn’t receive the code? '
             handleOnClick={handleOnClickLink}
+            underlined={true}
           />
-          <TextBox value={otpCode} onChange={setOtpCode} />
+          <HorizantalLine width='100%' />
+          <div className='d-flex gap-1'>
+            <TextComponent
+              text='We have send the OTP on'
+              size='18px'
+              font='500'
+            />
+            <TextComponent text={email} size='18px' font='700' />
+          </div>
+
+          <TextBox
+            value={emailotp}
+            onChange={setEmailOtp}
+            label='Enter Email Verification Code'
+          />
+          <LinkButton
+            title='Resend'
+            text='Didn’t receive the code? '
+            handleOnClick={handleOnClickLink}
+            underlined={true}
+          />
         </div>
       </div>
     </ModalComponent>

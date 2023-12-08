@@ -10,14 +10,24 @@ import { useMutation } from "react-query";
 import { API_URL } from "../../Constants.js";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import ApplicationsModal from "../../Login/ApplicationsModal.js";
 
-const ShowInterest = ({ setApplicantId, applicantId, setMessage }) => {
+const ShowInterest = ({
+  setApplicantId,
+  applicantId,
+  setMessage,
+  applicationId,
+  setApplicationId,
+}) => {
   const [showVerifiedModal, setshowVerifiedModal] = useState(false);
   const [showLoginModal, setShowLoginModal] = useState(false);
+  const [showApplicationsModal, setShowApplicatiosModal] = useState(false);
   const [showVerifiedCheckModal, setShowVerifiedCheckModal] = useState(false);
   const [actionOrigin, setActionOrigin] = useState(null);
   const [otpCode, setOtpCode] = useState("");
-  const [phoneNumber,setPhoneNumber]=useState("")
+  const [emailotp, setEmailOtp] = useState("");
+  const [phoneNumber, setPhoneNumber] = useState("");
+  const [email, setEmail] = useState("");
   const navigate = useNavigate();
 
   const openVerifiedModal = (origin) => {
@@ -25,11 +35,12 @@ const ShowInterest = ({ setApplicantId, applicantId, setMessage }) => {
     setshowVerifiedModal(true);
   };
 
+  /**************Validate show interest */
   const validateShowInterest = useMutation({
     mutationFn: () => {
       return axios.post(
         API_URL +
-          `/api/Applicant/ValidateShowingInterest/${applicantId}/${otpCode}`
+          `/api/Applicant/ValidateShowingInterest/${applicantId}/${otpCode}/${emailotp}`
       );
     },
     onSuccess: async (data) => {
@@ -38,13 +49,14 @@ const ShowInterest = ({ setApplicantId, applicantId, setMessage }) => {
         setshowVerifiedModal(false);
         setShowVerifiedCheckModal(true);
         setOtpCode("");
+        setEmailOtp("");
       }
     },
     onError: (error) => {
       console.log("error: ", error);
     },
   });
-
+  /**************resend otp show interest */
   const resenfShowingInterest = useMutation({
     mutationFn: () => {
       return axios.post(
@@ -59,10 +71,12 @@ const ShowInterest = ({ setApplicantId, applicantId, setMessage }) => {
     },
   });
 
+  /*****************Validate for registeration */
   const validateApplicant = useMutation({
     mutationFn: () => {
       return axios.post(
-        API_URL + `/api/Applicant/ValidateApplicant/${applicantId}/${otpCode}`
+        API_URL +
+          `/api/Applicant/ValidateApplicant/${applicantId}/${otpCode}/${emailotp}`
       );
     },
     onSuccess: async (data) => {
@@ -80,6 +94,7 @@ const ShowInterest = ({ setApplicantId, applicantId, setMessage }) => {
     },
   });
 
+  /*************resend otp for registeration */
   const resendApplicantOtp = useMutation({
     mutationFn: () => {
       return axios.post(
@@ -96,17 +111,16 @@ const ShowInterest = ({ setApplicantId, applicantId, setMessage }) => {
     },
   });
 
+  /***************handle done in verification model for otp */
   const handleDone = () => {
     if (actionOrigin === "Submit") {
+      console.log("jsndjcndjncjdncdcdc");
       validateShowInterest.mutate();
     } else if (actionOrigin === "Continue") {
-      console.log("hellloooooooo");
       validateApplicant.mutate();
     }
   };
-
-  console.log("testtttttttttt", actionOrigin);
-
+  /***************handle resend otp  */
   const handleResendEmail = () => {
     if (actionOrigin === "Submit") {
       resenfShowingInterest.mutate();
@@ -114,8 +128,6 @@ const ShowInterest = ({ setApplicantId, applicantId, setMessage }) => {
       resendApplicantOtp.mutate();
     }
   };
-
-  console.log("otpCode", otpCode);
 
   return (
     <div className='showInterest-container'>
@@ -137,6 +149,7 @@ const ShowInterest = ({ setApplicantId, applicantId, setMessage }) => {
           openVerifiedModal={openVerifiedModal}
           setApplicantId={setApplicantId}
           setPhoneNumber={setPhoneNumber}
+          setEmail={setEmail}
         />
       </div>
       {showVerifiedModal && (
@@ -146,8 +159,11 @@ const ShowInterest = ({ setApplicantId, applicantId, setMessage }) => {
           applicantId={applicantId}
           otpCode={otpCode}
           setOtpCode={setOtpCode}
+          emailotp={emailotp}
+          setEmailOtp={setEmailOtp}
           handleOnClickLink={handleResendEmail}
           phoneNumber={phoneNumber}
+          email={email}
         />
       )}
       {showVerifiedCheckModal && (
@@ -161,6 +177,13 @@ const ShowInterest = ({ setApplicantId, applicantId, setMessage }) => {
           applicantId={applicantId}
           setApplicantId={setApplicantId}
           setMessage={setMessage}
+          setShowApplicatiosModal={setShowApplicatiosModal}
+        />
+      )}
+      {showApplicationsModal && (
+        <ApplicationsModal
+          setShowApplicatiosModal={setShowApplicatiosModal}
+          applicantId={applicantId}
         />
       )}
     </div>

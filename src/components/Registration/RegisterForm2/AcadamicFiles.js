@@ -52,7 +52,7 @@ const AcadamicFiles = () => {
         title='ACADEMIC IELTS/TOEFL/EMSAT/PTE SCORE/SAT'
         isTaken={true}
       />
-      <ExpandableBox title='Further Details'>
+      <ExpandableBox title='Further Details' backgroundColor={true}>
         <BulletedText items={details} />
       </ExpandableBox>
       {formik.values.applicantFiles && formik.values.applicantFiles.map((section, index) => (
@@ -88,6 +88,7 @@ const AcadamicFiles = () => {
             errors={formik.errors?.applicantFiles?.[index]?.academicDocument}
             touched={formik.touched?.applicantFiles?.[index]?.academicDocument}
           />
+         
           <div className='grid-acd-cont'>
             <DateTime
               width='100%'

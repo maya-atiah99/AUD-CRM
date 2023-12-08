@@ -2,6 +2,8 @@ import React from "react";
 import TextComponent from "../Texts/TextComponent";
 
 const Stepper = ({ activeStep, fontSize, steps, lastStep, length }) => {
+
+  
   return (
     <div className='stepper'>
       {steps.map((step, index) => (
@@ -13,10 +15,10 @@ const Stepper = ({ activeStep, fontSize, steps, lastStep, length }) => {
               className={`step ${index === activeStep ? "active" : "inactive"}`}
             >
               <TextComponent
-                text={step.step}
+                text={step.visibleStep}
                 font='800'
                 className='inactive '
-                classfont="stepper-font-number-inact"
+                classfont='stepper-font-number-inact'
               />
             </div>
           )}
@@ -25,7 +27,7 @@ const Stepper = ({ activeStep, fontSize, steps, lastStep, length }) => {
             text={step.title}
             font='600'
             color='white'
-            classfont="stepper-font-number-title"
+            classfont='stepper-font-number-title'
             opacity={index === activeStep ? "1" : "0.4"}
           />
           <div className={!lastStep ? "activeLine" : ""}></div>

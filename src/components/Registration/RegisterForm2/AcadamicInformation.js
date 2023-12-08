@@ -6,12 +6,14 @@ import DocumentUpload from "../../Inputs/DocumentUpload";
 import TextArea from "../../Inputs/TextArea";
 import { useFormikContext } from "formik";
 import TextBox from "../../Inputs/TextBox";
+import Reference from "../RegisterFormStep1/Reference";
+import WorkExperience from "../RegisterFormStep1/WorkExperience";
 
 const AcadamicInformation = () => {
   const formik = useFormikContext();
   const applicationStart = localStorage.getItem("applicationStart");
-  const applingAS = localStorage.getItem("applingAs");
-  console.log('formikkkkkkkkk',formik.values)
+  const applingAS = parseInt(localStorage.getItem("applingAs"));
+  console.log("formikkkkkkkkk", formik.values);
   return (
     <div className='form-subcontainers academic-container'>
       <SectionTitle title='ACADEMIC INFORMATION' />
@@ -38,11 +40,11 @@ const AcadamicInformation = () => {
           <DropDown
             width='100%'
             label={
-              applicationStart === "0" && applingAS === "0"
+              applicationStart === "0" && applingAS === 0
                 ? "School Name"
                 : "University Name "
             }
-            type={applicationStart === "0" && applingAS === "0" ? "12" : "11"}
+            type={applicationStart === "0" && applingAS === 0 ? "12" : "11"}
             parent={formik.values.CurrentUniversityCountry}
             required={true}
             name='SchoolCountry'
@@ -57,8 +59,8 @@ const AcadamicInformation = () => {
             width='100%'
             label={
               applicationStart === "1" ||
-              (applicationStart === "0" && applingAS === "3")
-                ? "Degree Earned"
+              (applicationStart === "0" && applingAS === 3)
+                ? "Degree Earned Major"
                 : applicationStart === "2"
                 ? "Level of study"
                 : "HS Diploma"
@@ -74,7 +76,7 @@ const AcadamicInformation = () => {
             touched={formik.touched?.DiplomaType}
           />
 
-          {applicationStart !== "2" && (
+          {(applicationStart !== "2" && applingAS !== 5) && (
             <DateTime
               width='100%'
               label='Graduation Year'
@@ -91,8 +93,8 @@ const AcadamicInformation = () => {
         </div>
       )}
 
-      {(applicationStart === "0" && applingAS === "1") ||
-      (applicationStart === "1" && applingAS === "1") ? (
+      {(applicationStart === "0" && applingAS === 1) ||
+      (applicationStart === "1" && applingAS === "3") ? (
         <div className='grid-academic2-cont'>
           <DropDown
             width='100%'
@@ -143,7 +145,7 @@ const AcadamicInformation = () => {
           />
         )}
         <DocumentUpload
-          text='Upload The Academic Document'
+          text='Upload Diploma'
           required={true}
           height='100px'
           label='Upload Document'
@@ -151,6 +153,16 @@ const AcadamicInformation = () => {
           fileName={formik.values.DiplomaFile}
           errors={formik.errors?.DiplomaFile}
           touched={formik.touched?.DiplomaFile}
+        />
+        <DocumentUpload
+          text='Upload The Academic Document'
+          required={true}
+          height='100px'
+          label='Upload Document'
+          name='AcademicDocument'
+          fileName={formik.values.AcademicDocument}
+          errors={formik.errors?.AcademicDocument}
+          touched={formik.touched?.AcademicDocument}
         />{" "}
       </div>
       {applicationStart === "0" && (

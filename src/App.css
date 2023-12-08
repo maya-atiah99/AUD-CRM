@@ -16,23 +16,27 @@
   font-weight: 500;
   vertical-align: middle;
   justify-content: center;
-  align-items: center
+  align-items: center;
 }
-.aud-button>.button-icon{
+.aud-button > .button-icon {
   vertical-align: middle !important;
   width: 25px !important;
-
 }
-a{
+.showinterest-btn-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin-top: 0.4rem;
+}
+a {
   text-decoration: none !important;
-
 }
 .aud-button:hover {
   background-color: #f3223c;
   cursor: pointer;
 }
 
-.blue-link a{
+.blue-link a {
   color: #3886bd;
   text-decoration: none;
 }
@@ -139,7 +143,7 @@ input:focus-visible {
   outline: 0.8px solid #1b224c98;
   border: none;
 }
-.checkbox-container p{
+.checkbox-container p {
   margin-bottom: 0;
 }
 label {
@@ -315,14 +319,11 @@ textarea:focus-visible {
 
 .inner-modal-container {
   position: relative;
-  /* padding: 30px 50px; */
   background-color: #ffffff;
   border-radius: 10px;
-  /* height: 50rem; */
-  /* width: 60rem; */
   display: flex;
   flex-direction: column;
-  /* align-items: center; */
+  padding: 30px 20px;
 }
 
 .inner-modal-container .close-icon {
@@ -341,13 +342,8 @@ textarea:focus-visible {
 }
 
 .inner-modal-container .submit-modal-button {
-  position: absolute;
-  bottom: 30px;
-  right: 40px;
-}
-.modal-content {
-  height: 95%;
-  overflow: auto;
+  align-self: flex-end;
+  padding-right: 50px;
 }
 
 /****************************************Text component ***/
@@ -377,12 +373,15 @@ textarea:focus-visible {
 }
 .expandable-card {
   width: 100%;
-  background-color: #020a581a;
+  /* background-color: #020a581a; */
   padding: 15px 29px;
   margin: 10px 0;
   cursor: pointer;
   border-radius: 5px;
   position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
 }
 .close-icon-exp {
   z-index: 1;
@@ -471,7 +470,7 @@ textarea:focus-visible {
 }
 
 .underlined-link {
-  text-decoration: underline;
+  text-decoration: underline !important;
   color: #f3223c;
   font-size: 18px;
   font-weight: bold;
@@ -861,13 +860,41 @@ ul {
   grid-template-columns: 1.5fr 2fr;
   grid-column-gap: 10px;
 }
-
+.showInterestForm-inner-cont p {
+  color: #1b224c;
+  font-family: Raleway;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+  margin: 0;
+}
 .grid-container2 {
   display: grid;
   grid-template-columns: 2fr 2fr;
   grid-column-gap: 10px;
 }
-
+.grid-container3 {
+  display: grid;
+  grid-template-columns: 2fr 2fr;
+  grid-column-gap: 10px;
+  align-items: start;
+}
+.showInterestForm-inner-cont .error-span {
+  border-radius: 4px;
+  background-color: #fff !important;
+  opacity: 1 !important;
+  padding: 6px;
+  box-shadow: 0px 0px 4px 0px rgba(0, 0, 0, 0.25);
+}
+.error-container {
+  background-color: #fff;
+  opacity: 1 !important;
+  padding-top: 5px;
+}
+.error-container p{
+  font-size: 12px;
+}
 /***********************************Upper Header*************/
 .upperHeader-container {
   /* position: fixed; */
@@ -946,6 +973,10 @@ ul {
   grid-template-columns: 2fr 2fr 2fr 1fr;
   grid-column-gap: 10px;
 }
+.classfont-p{
+  color:#1B224C;
+  font-size: 18px;
+}
 
 /************************************Consent****************/
 .grid-consent1-cont {
@@ -971,7 +1002,7 @@ ul {
 
 .grid-academic2-cont {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 1fr 1fr 1fr;
   grid-column-gap: 10px;
 }
 
@@ -1000,7 +1031,7 @@ ul {
   gap: 3rem;
 }
 
-/************************8***Agreement table***************/
+/***************************Agreement table***************/
 table {
   border: none;
   border-collapse: collapse;
@@ -1320,6 +1351,41 @@ td:first-child {
 .login-container .test222 {
   align-self: center;
 }
+
+/*****************Applications table****/
+.applications-table-cont{
+  padding-top: 20px;
+}
+.applications-table-cont table {
+  border: none;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+.applications-table-cont table thead  tr th{
+padding: 10px;
+}
+.applications-table-cont th {
+  background-color: #1b224c1e;
+  color: #1b224c;
+  font-size: 16px;
+  font-weight: 700;
+  text-align: left;
+}
+
+.applications-table-cont td {
+  color: #1b224c;
+  opacity: 1;
+  font-size: 16px;
+  font-weight: 600;
+  text-align: start;
+  padding: 10px;
+}
+.applications-table-cont tr:nth-child(even) {
+  border-radius: 10px;
+  background-color: #fafafc;
+}
+
 /****************Media Query****************************/
 /**************************************/
 /*****************************/
@@ -1825,7 +1891,7 @@ responsiveness ************/
     justify-content: center;
     gap: 1%;
   }
-  .showInterestLogo{
+  .showInterestLogo {
     display: block;
   }
   .subContainer {

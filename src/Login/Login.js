@@ -13,6 +13,7 @@ const Login = ({
   applicantId,
   setApplicantId,
   setMessage,
+  setShowApplicatiosModal,
 }) => {
   const [manageShowInterest, setManageshowInterest] = useState(false);
   const navigate = useNavigate();
@@ -25,7 +26,6 @@ const Login = ({
 
   return (
     <ModalComponent
-      height='28rem'
       width='37rem'
       title='Login'
       onClose={() => setShowLoginModal(false)}
@@ -35,40 +35,45 @@ const Login = ({
         validationSchema={LoginValidationSchema}
         onSubmit={(values) => {
           console.log("test", values);
-          
+
           login(values, {
             onSuccess: (data) => {
-              console.log("login dataa", data);
               setApplicantId(data?.data?.applicantId);
               localStorage.setItem("applicantId", data?.data?.applicantId);
+              localStorage.setItem("fullName", data?.data?.fullName);
+              // localStorage.setItem(
+              //   "message",
+              //   (() => {
+              //     if (data?.data?.message === "Stage1") {
+              //       setManageshowInterest(true);
+              //       return 0;
+              //     } else if (data?.data?.message === "Stage2") {
+              //       return 1;
+              //     } else if (data?.data?.message === "Stage3") {
+              //       return 2;
+              //     }
+              //     return 3;
+              //   })()
+              // );
+
               localStorage.setItem(
-                "message",
-                (() => {
-                  if (data?.data?.message === "Stage1") {
-                    setManageshowInterest(true);
-                    return 0;
-                  } else if (data?.data?.message === "Stage2") {
-                    return 1;
-                  } else if (data?.data?.message === "Stage3") {
-                    return 2;
-                  }
-                  return 3;
-                })()
+                "applicationStart",
+                data?.data?.applicationStart
               );
-              
-              localStorage.setItem("applicationStart", data?.data?.applicationStart);
               localStorage.setItem("applingAs", data?.data?.appliyingAs);
 
               console.log(
                 "manageShowInterest,manageShowInterest",
                 manageShowInterest
               );
-              navigate("/register", {
-                state: {
-                  activeStep: localStorage.getItem("message"),
-                  showInterest: data?.data?.message === "Stage1" ? true : false,
-                },
-              });
+              // navigate("/register", {
+              //   state: {
+              //     activeStep: localStorage.getItem("message"),
+              //     showInterest: data?.data?.message === "Stage1" ? true : false,
+              //   },
+              // });
+              setShowApplicatiosModal(true);
+              setShowLoginModal(false)
             },
             onError: (error) => {
               console.error("An error occurred:", error);

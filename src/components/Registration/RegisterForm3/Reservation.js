@@ -28,7 +28,7 @@ const Reservation = ({ handleClick }) => {
             Here
           </div>
         </div>
-        <div className='d-flex'>
+        {/* <div className='d-flex'>
           <SquareCheckBox
             text='I have read the'
             name='UndergroundCatalogCheck'
@@ -46,7 +46,7 @@ const Reservation = ({ handleClick }) => {
             <a href="https://aud.edu/media/catalogs/undergraduate/index.html" target="_blank"> Undergraduate Catalog </a>
             <span>online</span>
           </div>
-        </div>
+        </div> */}
       </div>
     </>
   );

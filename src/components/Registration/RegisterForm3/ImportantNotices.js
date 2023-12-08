@@ -31,9 +31,10 @@ const ImportantNotices = () => {
   return (
     <div className='form-subcontainers important-notices-container'>
       <SectionTitle title='IMPORTANT NOTICES' />
-      <BulletedText items={details} size='18px' font='600' />
+      {/* <BulletedText items={details} size='18px' font='600' /> */}
+      <div className="d-flex gap-1">
       <SquareCheckBox
-        text='If I am accepted by The American University in Dubai (AUD),'
+        text='A deposit (non-refundable) of AED 2,000, which is fully applied toward tuition, is required upon acceptance for admissions. The full balance of tuition is required at least one month prior to the beginning of the term of enrollment. No full refunds will be given after Drop/Add week. Refunds will be processed as per terms and conditions stated in our '
         name='ImportantNotesCheck'
         value={formik.values.ImportantNotesCheck}
         onChange={(checked) => {
@@ -42,6 +43,12 @@ const ImportantNotices = () => {
         errors={formik.errors?.ImportantNotesCheck}
         touched={formik.errors?.ImportantNotesCheck}
       />
+       <div className='blue-link'>
+            <a href="https://www.aud.edu/university-overview/administrative-offices/office-of-finance/refunds/" target="_blank"> policy </a>
+            
+          </div>
+      </div>
+    
     </div>
   );
 };

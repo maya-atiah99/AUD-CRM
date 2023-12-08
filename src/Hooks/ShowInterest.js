@@ -14,11 +14,3 @@ export const useAddApplicantToShowInterest = () => {
 };
 
 
-/*************Email */
-// const validateShowingInterest = (applicantId,otpCode) => {
-//   axios.post(API_URL + `/api/Applicant/ValidateShowingInterest/${applicantId}/${otpCode}`);
-// };
-
-// export const useValidateShowingInterest = () => {
-//   return useMutation(validateShowingInterest);
-// };

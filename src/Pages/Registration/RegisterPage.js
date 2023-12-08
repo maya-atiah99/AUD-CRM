@@ -4,9 +4,7 @@ import AUDButton from "../../components/Buttons/AUDButton";
 import RegisterContainer from "../../components/Registration/RegisterContainer";
 import TextComponent from "../../components/Texts/TextComponent";
 import {
-  useFetchApplicantStageFour,
   useFetchApplicantStageOne,
-  useFetchApplicantStageThree,
   useFetchApplicantStageTwo,
 } from "../../Hooks/Appplicant";
 import { useLocation, useNavigate } from "react-router-dom";
@@ -15,6 +13,16 @@ const RegisterPage = ({ applicantId }) => {
   const [activeStep, setActiveStep] = useState(
     parseInt(localStorage.getItem("message"), 10) || 0
   );
+  const [applicationStart, setApplicationStart] = useState(
+    localStorage.getItem("applicationStart") || null
+  );
+  const [applingAs, setApplingAS] = useState(
+    parseInt(localStorage.getItem("applingAs"))|| null
+  );
+  const [applicationId, setApplicationId] = useState(
+    localStorage.getItem("applicationId") || null
+  );
+  const [steps, setSteps] = useState([]);
   const formikRefStep1 = useRef();
   const formikRefStep2 = useRef();
   const formikRefStep3 = useRef();
@@ -29,30 +37,83 @@ const RegisterPage = ({ applicantId }) => {
   const { data: applicantStageOne, refetch: refetchStageOne } =
     useFetchApplicantStageOne(applicantId);
   const { data: applicantStageTwo, refetch: refetchStageTwo } =
-    useFetchApplicantStageTwo(applicantId);
+    useFetchApplicantStageTwo(applicantId, applicationId);
 
-  const steps = [
-    {
-      step: 1,
-      title: "Personal Info",
-    },
-    {
-      step: 2,
-      title: "Academic",
-    },
-    {
-      step: 3,
-      title: "Declaration",
-    },
-    {
-      step: 4,
-      title: "Pay & Submit",
-    },
-  ];
+  useEffect(() => {
+    applicationStart === "2"
+      ? setSteps([
+          {
+            step: 1,
+            visibleStep: 1,
+            title: "Personal Info",
+          },
+          {
+            step: 2,
+            visibleStep: 2,
+            title: "Academic",
+          },
+          {
+            step: 6,
+            visibleStep: 3,
+            title: "Waiver & Release",
+          },
+          {
+            step: 3,
+            visibleStep: 4,
+            title: "Declaration",
+          },
+          {
+            step: 4,
+            visibleStep: 5,
+            title: "Pay & Submit",
+          },
+        ])
+      : applicationStart === "0" && applingAs === 2
+      ? setSteps([
+          {
+            step: 1,
+            visibleStep: 1,
+            title: "Personal Info",
+          },
+          {
+            step: 3,
+            visibleStep: 2,
+            title: "Declaration",
+          },
+          {
+            step: 4,
+            visibleStep: 3,
+            title: "Pay & Submit",
+          },
+        ])
+      : setSteps([
+          {
+            step: 1,
+            visibleStep: 1,
+            title: "Personal Info",
+          },
+          {
+            step: 2,
+            visibleStep: 2,
+            title: "Academic",
+          },
+          {
+            step: 3,
+            visibleStep: 3,
+            title: "Declaration",
+          },
+          {
+            step: 4,
+            visibleStep: 4,
+            title: "Pay & Submit",
+          },
+        ]);
+  }, [applicationStart, fetchedData, applingAs]);
 
   useEffect(() => {
     refreshPage();
   }, [showInterest, activeStep, applicantStageOne, applicantStageTwo]);
+
   const refreshPage = () => {
     if (showInterest === true && applicantStageOne) {
       setfetchedData(applicantStageOne);
@@ -63,6 +124,8 @@ const RegisterPage = ({ applicantId }) => {
 
   useEffect(() => {
     refreshPage();
+    setApplicationStart(localStorage.getItem("applicationStart"));
+    setApplingAS(localStorage.getItem("applingAs"));
   }, []);
 
   const handeleSubmit = (step) => {
@@ -96,12 +159,12 @@ const RegisterPage = ({ applicantId }) => {
             window.scrollTo(0, 0);
           }
         } else {
-          // toast.error("Fill all the required fields")
           window.scrollTo(0, 0);
         }
       }
     }, [100]);
   };
+
   const handleSave = (next) => {
     if (next) handeleSubmit(activeStep);
     setTimeout(() => {
@@ -135,6 +198,11 @@ const RegisterPage = ({ applicantId }) => {
       refetchStageTwo();
     }
   }, [activeStep, showInterest, applicantId]);
+
+  console.log('activeStep',activeStep)
+  console.log('message', localStorage.getItem("message"))
+  console.log(steps)
+
   return (
     <div>
       <UpperHeader />
@@ -187,9 +255,14 @@ const RegisterPage = ({ applicantId }) => {
           refStep3={formikRefStep3}
           refStep4={formikRefStep4}
           applicantId={applicantId}
+          applicationId={applicationId}
           fetchedData={fetchedData}
           showInterest={showInterest}
           showThree={showThree}
+          setApplicationStart={setApplicationStart}
+          applingAs={applingAs}
+          setApplingAs={setApplingAS}
+          applicationStart={applicationStart}
         />
         <div className='button-cont-register '>
           <AUDButton

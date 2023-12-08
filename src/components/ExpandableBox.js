@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { AiOutlineClose } from "react-icons/ai";
 import TextComponent from "./Texts/TextComponent";
 
-const ExpandableBox = ({ isRounded, children, title, text }) => {
+const ExpandableBox = ({ isRounded, children, title, text,backgroundColor }) => {
   const [isExpanded, setIsExpanded] = useState(false);
 
   const containerClassName = `expandable-card ${
@@ -22,6 +22,7 @@ const ExpandableBox = ({ isRounded, children, title, text }) => {
       className={`expandable-card ${isRounded ? "roundedRadius" : ""} ${
         isExpanded ? "expanded" : ""
       }`}
+      style={backgroundColor ? {backgroundColor:" #020a581a"} : ""}
     >
       {isExpanded && (
         <AiOutlineClose onClick={toggleCollapse} className='close-icon-exp' />

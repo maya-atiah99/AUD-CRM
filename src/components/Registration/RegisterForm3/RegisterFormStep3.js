@@ -15,6 +15,7 @@ import {
   useAddApplicantStageFour,
   useFetchApplicantStageFour,
 } from "../../../Hooks/Appplicant";
+import Declaration from "./Declaration";
 const RegisterFormStep3 = forwardRef(({ applicantId }, ref) => {
   const { data: applicantStageFour, refetch: refetchStageFour } =
     useFetchApplicantStageFour(applicantId);
@@ -111,6 +112,7 @@ const RegisterFormStep3 = forwardRef(({ applicantId }, ref) => {
           validationSchema={Step3ValidationSchema}
         >
           <ProgramInformation />
+          <Declaration/>
           <ImportantNotices />
           <Reservation handleClick={() => setShowModal(true)} />
         </FormikProvider>

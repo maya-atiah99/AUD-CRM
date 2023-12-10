@@ -14,6 +14,10 @@ const Login = ({
   setApplicantId,
   setMessage,
   setShowApplicatiosModal,
+  applicationStart,
+  setApplicationStart,
+  applingAs,
+  setApplyingAs,
 }) => {
   const [manageShowInterest, setManageshowInterest] = useState(false);
   const navigate = useNavigate();
@@ -61,7 +65,8 @@ const Login = ({
                 data?.data?.applicationStart
               );
               localStorage.setItem("applingAs", data?.data?.appliyingAs);
-
+              setApplicationStart(data?.data?.applicationStart);
+              setApplyingAs(data?.data?.appliyingAs);
               console.log(
                 "manageShowInterest,manageShowInterest",
                 manageShowInterest
@@ -73,7 +78,7 @@ const Login = ({
               //   },
               // });
               setShowApplicatiosModal(true);
-              setShowLoginModal(false)
+              setShowLoginModal(false);
             },
             onError: (error) => {
               console.error("An error occurred:", error);

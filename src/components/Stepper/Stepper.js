@@ -15,7 +15,7 @@ const Stepper = ({ activeStep, fontSize, steps, lastStep, length }) => {
               className={`step ${index === activeStep ? "active" : "inactive"}`}
             >
               <TextComponent
-                text={step.visibleStep}
+                text={step.step}
                 font='800'
                 className='inactive '
                 classfont='stepper-font-number-inact'

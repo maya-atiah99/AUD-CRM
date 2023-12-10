@@ -1,84 +1,38 @@
-import React, { forwardRef, useEffect, useRef } from "react";
+import React, { forwardRef, useEffect } from "react";
 import Stepper from "../Stepper/Stepper";
-import RegisterFormStep1 from "./RegisterFormStep1/RegisterFormStep1";
-import RegisterFormStep2 from "./RegisterForm2/RegisterFormStep2";
-import RegisterFormStep3 from "./RegisterForm3/RegisterFormStep3";
-import RegisterFormStep4 from "./RegisterForm4/RegisterFormStep4";
 
-const RegisterContainer = forwardRef(
-  (
-    {
-      activeStep,
-      steps,
-      lastStep,
-      refStep1,
-      refStep2,
-      refStep3,
-      refStep4,
-      fetchedData,
-      applicantId,
-      showInterest,
-      showThree,
-      applicationId,
-      setApplicationStart,
-      applingAs,
-      applicationStart,
-      setApplingAs
-    },
-    ref
-  ) => {
-    return (
-      <div>
-        <div className='aud-app-header'>
-          <img
-            src='/images/Group 103.png'
-            alt='Logo'
-            className='aud-header-logo'
-          />
-          <Stepper activeStep={activeStep} steps={steps} lastStep={lastStep} />
-        </div>
-        <div className='registerForms-container'>
-          {activeStep == "0" ? (
-            <RegisterFormStep1
-              ref={refStep1}
-              fetchedData={fetchedData}
-              applicantId={applicantId}
-              showInterest={showInterest}
-              activeStep={activeStep}
-              applicationId={applicationId}
-              setApplicationStart={setApplicationStart}
-              applingAs={applingAs}
-              setApplingAs={setApplingAs}
-              applicationStart={applicationStart}
-            />
-          ) : activeStep == "1" ? (
-            <RegisterFormStep2
-              ref={refStep2}
-              applicantId={applicantId}
-              fetchedData={fetchedData}
-              showThree={showThree}
-              applicationId={applicationId}
-              setApplicationStart={setApplicationStart}
-              applingAs={applingAs}
-              setApplingAs={setApplingAs}
-              applicationStart={applicationStart}
-            />
-          ) : activeStep == "2" ? (
-            <RegisterFormStep3
-              ref={refStep3}
-              applicantId={applicantId}
-              fetchedData={fetchedData}
-              applicationId={applicationId}
-            />
-          ) : activeStep == "3" ? (
-            <RegisterFormStep4 />
-          ) : (
-            ""
-          )}
-        </div>
+const RegisterContainer = forwardRef(({ activeStep, steps, lastStep }, ref) => {
+  const activeForm = () => {
+    if (activeStep !== -1) {
+      const activeStepForm = steps[activeStep]?.form;
+      return activeStepForm;
+    }
+    return null;
+  };
+  useEffect(() => {
+    activeForm();
+  }, [activeStep, steps]);
+
+  console.log("steps", steps);
+  console.log("activeStep", activeStep);
+  console.log("steps[activeStep]?.step", steps[activeStep]?.step);
+  console.log("steps[activeStep]?.title", steps[activeStep]?.title);
+  console.log("steps[activeStep]?.ref", steps[activeStep]?.ref);
+  console.log("steps?.length", steps?.length);
+  console.log("steps?.previos", steps[activeStep]?.previousStep);
+  return (
+    <div>
+      <div className='aud-app-header'>
+        <img
+          src='/images/Group 103.png'
+          alt='Logo'
+          className='aud-header-logo'
+        />
+        <Stepper activeStep={activeStep} steps={steps} lastStep={lastStep} />
       </div>
-    );
-  }
-);
+      <div className='registerForms-container'>{activeForm()}</div>
+    </div>
+  );
+});
 
 export default RegisterContainer;

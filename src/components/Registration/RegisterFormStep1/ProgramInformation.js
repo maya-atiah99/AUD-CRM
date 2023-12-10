@@ -25,8 +25,6 @@ const ProgramInformation = ({ fetchedData }) => {
       }))
     : [];
 
-   
-
   useEffect(() => {
     setApplicationStartValue(
       fetchedData?.data?.applicationStart ||
@@ -46,6 +44,7 @@ const ProgramInformation = ({ fetchedData }) => {
   const onRadioChange = (name, value) => {
     formik.setFieldValue(name, value);
   };
+
   return (
     <div className='form-subcontainers'>
       <SectionTitle title='PROGRAM INFORMATION' dotted={true} />
@@ -117,9 +116,9 @@ const ProgramInformation = ({ fetchedData }) => {
             name='CurrentPlaceOfStudy'
             value={
               (formik.values.ApplicationStart === "0" &&
-                formik.values.ApplingAs === "1") ||
+                formik.values.ApplingAs === 1) ||
               (formik.values.ApplicationStart === "1" &&
-                formik.values.ApplingAs === "1")
+                formik.values.ApplingAs ===1)
                 ? formik.values.CurrentPlaceOfStudy
                 : ""
             }

@@ -18,6 +18,10 @@ const ShowInterest = ({
   setMessage,
   applicationId,
   setApplicationId,
+  applicationStart,
+  setApplicationStart,
+  applingAs,
+  setApplyingAs,
 }) => {
   const [showVerifiedModal, setshowVerifiedModal] = useState(false);
   const [showLoginModal, setShowLoginModal] = useState(false);
@@ -178,12 +182,20 @@ const ShowInterest = ({
           setApplicantId={setApplicantId}
           setMessage={setMessage}
           setShowApplicatiosModal={setShowApplicatiosModal}
+          applicationStart={applicationStart}
+          setApplicationStart={setApplicationStart}
+          applingAs={applingAs}
+          setApplyingAs={setApplyingAs}
         />
       )}
       {showApplicationsModal && (
         <ApplicationsModal
           setShowApplicatiosModal={setShowApplicatiosModal}
           applicantId={applicantId}
+          applicationStart={applicationStart}
+          setApplicationStart={setApplicationStart}
+          applingAs={applingAs}
+          setApplyingAs={setApplyingAs}
         />
       )}
     </div>

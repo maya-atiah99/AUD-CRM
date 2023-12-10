@@ -20,24 +20,24 @@ const Declaration = () => {
       />
       <SquareCheckBox
         text='I am aware that all records, letters, and other original documents provided to AUD as part of the admissions process will remain university property. The university reserves the right to evaluate the adequacy of all credentials submitted for admissions. Students who are not granted admission to AUD or who withdrew their application should collect their documents within two (2) years; otherwise, their physical records will be discarded'
-        name='ProgramInformationCheck'
-        value={formik.values.ProgramInformationCheck}
+        name='RecordsCheck'
+        value={formik.values.RecordsCheck}
         onChange={(checked) => {
-          formik.setFieldValue("ProgramInformationCheck", checked);
+          formik.setFieldValue("RecordsCheck", checked);
         }}
-        errors={formik.errors?.ProgramInformationCheck}
-        touched={formik.errors?.ProgramInformationCheck}
+        errors={formik.errors?.RecordsCheck}
+        touched={formik.errors?.RecordsCheck}
       />
       <div className='d-flex gap-1 flex-wrap'>
         <SquareCheckBox
           text='I have read and agree to abide by the regulations and policies set forth in the University’s'
-          name='ProgramInformationCheck'
-          value={formik.values.ProgramInformationCheck}
+          name='UndergroundCatalogCheck'
+          value={formik.values.UndergroundCatalogCheck}
           onChange={(checked) => {
-            formik.setFieldValue("ProgramInformationCheck", checked);
+            formik.setFieldValue("UndergroundCatalogCheck", checked);
           }}
-          errors={formik.errors?.ProgramInformationCheck}
-          touched={formik.errors?.ProgramInformationCheck}
+          errors={formik.errors?.UndergroundCatalogCheck}
+          touched={formik.errors?.UndergroundCatalogCheck}
         />
         <div className='blue-link'>
           <a
@@ -73,13 +73,13 @@ const Declaration = () => {
 
       <SquareCheckBox
         text='I understand that it is my responsibility to consult with the U.A.E. Ministry of Education for the requirements of high school equivalency prior to commencing studies at AUD. Please note that upon graduation from AUD, attestation of your degree will be linked to the high school equivalency. I understand that a letter of equivalency is required from the U.A.E. Ministry of Education.'
-        name='ProgramInformationCheck'
-        value={formik.values.ProgramInformationCheck}
+        name='AcceptResponsibilitiesCheck'
+        value={formik.values.AcceptResponsibilitiesCheck}
         onChange={(checked) => {
-          formik.setFieldValue("ProgramInformationCheck", checked);
+          formik.setFieldValue("AcceptResponsibilitiesCheck", checked);
         }}
-        errors={formik.errors?.ProgramInformationCheck}
-        touched={formik.errors?.ProgramInformationCheck}
+        errors={formik.errors?.AcceptResponsibilitiesCheck}
+        touched={formik.errors?.AcceptResponsibilitiesCheck}
       />
     </div>
   );

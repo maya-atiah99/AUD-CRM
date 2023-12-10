@@ -16,9 +16,9 @@ import {
   useFetchApplicantStageFour,
 } from "../../../Hooks/Appplicant";
 import Declaration from "./Declaration";
-const RegisterFormStep3 = forwardRef(({ applicantId }, ref) => {
+const RegisterFormStep3 = forwardRef(({ applicantId, applicationId }, ref) => {
   const { data: applicantStageFour, refetch: refetchStageFour } =
-    useFetchApplicantStageFour(applicantId);
+    useFetchApplicantStageFour(applicantId,applicationId);
   const [showModal, setShowModal] = useState(false);
   const { mutate: addApplicantStageFour } = useAddApplicantStageFour();
   const [init, setInit] = useState({});
@@ -34,11 +34,11 @@ const RegisterFormStep3 = forwardRef(({ applicantId }, ref) => {
         applicantStageFour?.data?.stage2?.termAndConditionCheck || false,
       UndergroundCatalogCheck:
         applicantStageFour?.data?.stage2?.undergroundCatalogCheck || false,
+      Details: "",
+      FullHealthCheck: false,
+      AcceptResponsibilitiesCheck: false,
+      RecordsCheck: false,
     };
-    console.log(
-      "cdcsc",
-      applicantStageFour?.data?.stage2?.undergroundCatalogCheck
-    );
 
     console.log("rferferf", initialvalues);
 
@@ -47,6 +47,7 @@ const RegisterFormStep3 = forwardRef(({ applicantId }, ref) => {
   }, [applicantStageFour]);
 
   const handleAddStageFour = (values) => {
+    console.log("yeeeeeeeeeeeeeeeyyyyyyyyyyyyyyyyyyyy");
     addApplicantStageFour(values, {
       onSuccess: (data) => {
         setInit({});
@@ -59,7 +60,7 @@ const RegisterFormStep3 = forwardRef(({ applicantId }, ref) => {
   };
 
   useEffect(() => {
-    console.log("sxsjkcnksksncsc", init);
+    console.log("init", init);
   }, [init]);
 
   const formik = useFormik({
@@ -67,8 +68,11 @@ const RegisterFormStep3 = forwardRef(({ applicantId }, ref) => {
     validationSchema: Step3ValidationSchema,
     enableReinitialize: true,
     onSubmit: (values) => {
+      console.log("yeeeeeeeeeeeeeeeyyyyyyyyyyyyyyyyyyyy");
+
       const formData = new FormData();
       formData.append("ApplicantId", applicantId);
+      formData.append("ApplicationId", applicationId);
       formData.append(
         "ProgramInformationCheck",
         values.ProgramInformationCheck
@@ -79,7 +83,6 @@ const RegisterFormStep3 = forwardRef(({ applicantId }, ref) => {
         "UndergroundCatalogCheck",
         values.UndergroundCatalogCheck
       );
-      formData.append("ApplicantId", applicantId);
       handleAddStageFour(formData);
     },
   });
@@ -102,7 +105,7 @@ const RegisterFormStep3 = forwardRef(({ applicantId }, ref) => {
   // useEffect(() => {
   //   refetchStageFour();
   // }, []);
-
+  console.log(formik);
   return (
     <>
       <div className='form-subcontainer'>
@@ -112,7 +115,7 @@ const RegisterFormStep3 = forwardRef(({ applicantId }, ref) => {
           validationSchema={Step3ValidationSchema}
         >
           <ProgramInformation />
-          <Declaration/>
+          <Declaration />
           <ImportantNotices />
           <Reservation handleClick={() => setShowModal(true)} />
         </FormikProvider>

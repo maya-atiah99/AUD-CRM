@@ -12,7 +12,7 @@
   background-color: #1b224c;
   color: #ffffff;
   border: none;
-  font-size: 18px;
+  font-size: 15px;
   font-weight: 500;
   vertical-align: middle;
   justify-content: center;
@@ -676,7 +676,7 @@ ul {
 }
 
 .stepper .step.active ~ .activeLine {
-  width: 200px;
+  width: 130px;
   opacity: 1;
 }
 
@@ -924,7 +924,7 @@ ul {
 .registerPage-container {
   display: flex;
   flex-direction: column;
-  margin: 7rem;
+  margin: 7rem 4rem;
   gap: 1.5rem;
 }
 .register-title {
@@ -1850,7 +1850,10 @@ padding: 10px;
   .blue-link span {
     font-size: 12px;
   }
-
+  .classfont-p{
+    font-size: 12px;
+    margin: 0;
+  }
   th,
   td {
     font-size: 9px;

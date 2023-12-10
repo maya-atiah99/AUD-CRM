@@ -27,7 +27,7 @@ const RegisterFormStep1 = forwardRef(
       setApplicationStart,
       applingAs,
       applicationStart,
-      setApplingAs,
+      setApplyingAs,
     },
     ref
   ) => {
@@ -49,7 +49,8 @@ const RegisterFormStep1 = forwardRef(
           Gender: "",
           Mobile: fetchedData?.data?.applicant?.phoneNumber || "",
           ApplicantTelephone: "",
-          ApplingAs: "",
+        
+          ApplingAs: fetchedData?.data?.applicant?.applyingAs || "",
           SelectedTerm: "",
           ApplicationStart: "",
           ProgramOfInterest: "",
@@ -119,6 +120,7 @@ const RegisterFormStep1 = forwardRef(
           ApplicationStart:
             fetchedData?.data?.application?.startYourApplication?.toString() ||
             "",
+          ApplingAs:fetchedData?.data?.application?.applyingAs || "",
           ProgramOfInterest:
             fetchedData?.data?.stage2?.programApplicationId || "",
           CurrentPlaceOfStudy:
@@ -212,9 +214,9 @@ const RegisterFormStep1 = forwardRef(
       }
     }, [fetchedData, showInterest]);
 
-    useEffect(() => {
-      console.log(init);
-    }, [init]);
+    // useEffect(() => {
+    //   console.log(init);
+    // }, [init]);
 
     const formik = useFormik({
       initialValues: init,
@@ -228,7 +230,7 @@ const RegisterFormStep1 = forwardRef(
           formik.values?.ApplicationStart
         );
         setApplicationStart(formik.values?.ApplicationStart);
-        setApplingAs(formik.values?.ApplingAs);
+        setApplyingAs(formik.values?.ApplingAs);
         const formData = new FormData();
         formData.append("ApplicantId", applicantId);
         formData.append("ApplicationId", applicationId);
@@ -258,15 +260,14 @@ const RegisterFormStep1 = forwardRef(
     useEffect(() => {
       ref.current = formik;
     }, [ref, formik]);
+    
+    console.log("stage222", fetchedData);
+    console.log("stage222 formik", formik);
 
     useEffect(() => {
       localStorage.setItem("applicationStart", formik.values?.applicationStart);
       localStorage.setItem("applingAs", formik.values?.applingAs);
     }, [formik.values]);
-
-    console.log("stage222", fetchedData);
-    console.log("stage222 formik", formik);
-
     return (
       <div className='form-subcontainer'>
         <FormikProvider

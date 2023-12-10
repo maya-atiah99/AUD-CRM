@@ -93,8 +93,7 @@ const AcadamicInformation = () => {
         </div>
       )}
 
-      {(applicationStart === "0" && applingAS === 1) ||
-      (applicationStart === "1" && applingAS === "3") ? (
+      {(applicationStart === "0" && applingAS === 1) ? (
         <div className='grid-academic2-cont'>
           <DropDown
             width='100%'

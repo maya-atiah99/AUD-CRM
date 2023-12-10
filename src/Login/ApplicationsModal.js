@@ -5,13 +5,20 @@ import RoundedButton from "../components/Buttons/RoundedButtons";
 import { useFetchApplicationsById } from "../Hooks/Login";
 import { useNavigate } from "react-router-dom";
 
-const ApplicationsModal = ({ setShowApplicatiosModal, applicantId }) => {
+const ApplicationsModal = ({
+  setShowApplicatiosModal,
+  applicantId,
+  applicationStart,
+  setApplicationStart,
+  applingAs,
+  setApplyingAs,
+}) => {
   const [name, setName] = useState(localStorage.getItem("fullName"));
   const { data: applications } = useFetchApplicationsById(applicantId);
   const [manageShowInterest, setManageshowInterest] = useState(false);
   const navigate = useNavigate();
 
-  const applicationStart = (applicationType) => {
+  const applicationStartFunction = (applicationType) => {
     switch (applicationType) {
       case 0:
         return "Undergraduate";
@@ -29,7 +36,8 @@ const ApplicationsModal = ({ setShowApplicatiosModal, applicantId }) => {
     localStorage.setItem("applicantId", item.applicantId);
     localStorage.setItem("applingAs", item.applyingAs);
     localStorage.setItem("applicationStart", item.startYourApplication);
-
+    setApplicationStart(item.startYourApplication);
+    setApplyingAs(item.applyingAs);
     for (let i = 1; i <= 4; i++) {
       const currentStageKey = `stage${i}Completed`;
       const currentStageDate = item[currentStageKey];
@@ -39,7 +47,7 @@ const ApplicationsModal = ({ setShowApplicatiosModal, applicantId }) => {
           console.log(`Moving to Stage ${i + 1}`);
         } else {
           console.log("All stages are completed.");
-          localStorage.setItem("message", 4);
+          localStorage.setItem("message", i-1);
         }
       } else {
         console.log(`Stage ${i} is not completed. Returning to Stage ${i}`);
@@ -75,7 +83,7 @@ const ApplicationsModal = ({ setShowApplicatiosModal, applicantId }) => {
               return (
                 <tr key={item.applicantId}>
                   <td>{name}</td>
-                  <td>{applicationStart(item.startYourApplication)}</td>
+                  <td>{applicationStartFunction(item.startYourApplication)}</td>
                   <td>{item.createdOn.substring(0, 10)}</td>
                   <td>
                     <RoundedButton

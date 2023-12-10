@@ -1,8 +1,6 @@
 import * as Yup from "yup";
 
 const getValidationSchemaStep1 = (applicationStart, applingAs) => {
-
-
   const baseSchema = {
     TitleId: Yup.string().notRequired("TitleId is required"),
     FirstName: Yup.string().required("First Name is required"),
@@ -18,6 +16,7 @@ const getValidationSchemaStep1 = (applicationStart, applingAs) => {
     ),
     SelectedTerm: Yup.string().required("Selected Term is required"),
     ApplicationStart: Yup.number().required("Application Start is required"),
+    ApplingAs: Yup.number().required("Applying as  is required"),
     ProgramOfInterest: Yup.string().required("Program Of Interest is required"),
     CurrentPlaceOfStudy: Yup.string(),
     GuardianRelation1: Yup.string().required("GuardianRelation1 is required"),
@@ -68,20 +67,26 @@ const getValidationSchemaStep1 = (applicationStart, applingAs) => {
     SemestersAtAUD: Yup.number(),
   };
 
-  
   if (applicationStart === "2") {
     baseSchema.Visiting_LevelOfStudy =
-      baseSchema.Visiting_LevelOfStudy.required(".Visiting_LevelOfStudy  is required");
-    baseSchema.StudentVisa = baseSchema.StudentVisa.required("StudentVisa  is required");
-    baseSchema.UAE_GCC_Resident =
-      baseSchema.UAE_GCC_Resident.required("UAE_GCC_Resident  is required");
-    baseSchema.OnHouseCampus =
-      baseSchema.OnHouseCampus.required("OnHouseCampus  is required");
+      baseSchema.Visiting_LevelOfStudy.required(
+        ".Visiting_LevelOfStudy  is required"
+      );
+    baseSchema.StudentVisa = baseSchema.StudentVisa.required(
+      "StudentVisa  is required"
+    );
+    baseSchema.UAE_GCC_Resident = baseSchema.UAE_GCC_Resident.required(
+      "UAE_GCC_Resident  is required"
+    );
+    baseSchema.OnHouseCampus = baseSchema.OnHouseCampus.required(
+      "OnHouseCampus  is required"
+    );
     baseSchema.MiddleEasternStudies = baseSchema.MiddleEasternStudies.required(
       "MiddleEasternStudies"
     );
-    baseSchema.SemestersAtAUD =
-      baseSchema.SemestersAtAUD.required("SemestersAtAUD  is required");
+    baseSchema.SemestersAtAUD = baseSchema.SemestersAtAUD.required(
+      "SemestersAtAUD  is required"
+    );
   } else {
     baseSchema.Visiting_LevelOfStudy =
       baseSchema.Visiting_LevelOfStudy.notRequired();

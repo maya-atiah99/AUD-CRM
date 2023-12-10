@@ -71,8 +71,7 @@ const getValidationSchemaStep2 = (applicationStart, applingAs) => {
   }
 
   if (
-    (applicationStart === "0" && applingAs === 1) ||
-    (applicationStart === "1" && applingAs === 5)
+    (applicationStart === "0" && applingAs === 1)
   ) {
     baseSchema.CurrentUniversityCountry2 =
       baseSchema.CurrentUniversityCountry2.required(
@@ -81,6 +80,14 @@ const getValidationSchemaStep2 = (applicationStart, applingAs) => {
     baseSchema.SchoolCountry2 = baseSchema.SchoolCountry2.required(
       "SchoolCountry Year is required"
     );
+  }else{
+    baseSchema.CurrentUniversityCountry2 =
+    baseSchema.CurrentUniversityCountry2.notRequired(
+      "CurrentUniversityCountry Year is required"
+    );
+  baseSchema.SchoolCountry2 = baseSchema.SchoolCountry2.notRequired(
+    "SchoolCountry Year is required"
+  );
   }
 
   if (applingAs === 5) {

@@ -27,12 +27,12 @@ const RegisterFormStep2 = forwardRef(
       setApplicationStart,
       applingAs,
       applicationStart,
-      setApplingAs,
+      setApplyingAs,
     },
     ref
   ) => {
     const { data: applicantStageThree, refetch: refetchStageThree } =
-      useFetchApplicantStageThree(applicantId, { enable: showThree });
+      useFetchApplicantStageThree(applicantId,applicationId, { enable: showThree });
     const { mutate: addApplicantStageThree } = useAddApplicantStageThree();
     const { mutate: addFiles } = useAddFiles();
     console.log("app;", applicationStart);
@@ -66,7 +66,7 @@ const RegisterFormStep2 = forwardRef(
           }))
         : [
             {
-              testType: " test.testType.toString()",
+              testType: "",
               academicDocument: "",
               dateTaken: "",
               registrationNumber: "",
@@ -108,7 +108,7 @@ const RegisterFormStep2 = forwardRef(
         CurrentUniversityCountry2:
           applicantStageThree?.data?.stage2?.currentUniversityCountry2 || "",
         SchoolCountry2: applicantStageThree?.data?.stage2?.schoolCountry2 || "",
-        applicantFiles: applicantStageThree?.data?.applicantTest
+        applicantFiles: applicantStageThree?.data?.applicantTest > 0 
           ? applicantStageThree?.data?.applicantTest?.map((test) => ({
               testType: test.testType.toString(),
               academicDocument: test.academicDocument || "",
@@ -118,7 +118,7 @@ const RegisterFormStep2 = forwardRef(
             }))
           : [
               {
-                testType: " test.testType.toString()",
+                testType: "",
                 academicDocument: "",
                 dateTaken: "",
                 registrationNumber: "",
@@ -156,7 +156,7 @@ const RegisterFormStep2 = forwardRef(
         },
       });
     };
-
+console.log('stage3',applicantStageThree)
     const handleAddFiles = (values) => {
       addFiles(values, {
         onSuccess: (data) => {
@@ -251,10 +251,10 @@ const RegisterFormStep2 = forwardRef(
     }, [ref, formik]);
 
     useEffect(() => {
-      setApplingAs(parseInt(localStorage.getItem("applingAs")));
+      setApplyingAs(parseInt(localStorage.getItem("applingAs")));
       setApplicationStart(localStorage.getItem("applicationStart"));
     }, []);
-    
+    console.log('formik',formik)
     return (
       <div className='form-subcontainer '>
         <FormikProvider value={formik} innerRef={ref}>

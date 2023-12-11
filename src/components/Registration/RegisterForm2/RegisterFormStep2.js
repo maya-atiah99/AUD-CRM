@@ -199,7 +199,7 @@ const RegisterFormStep2 = forwardRef(
       validationSchema: getValidationSchemaStep2(applicationStart, applingAs),
       enableReinitialize: true,
       onSubmit: (values) => {
-        console.log("submit valuesssssssssssssssss", values);
+        console.log("submit valuessssssss", values);
         const formData = new FormData();
 
         formData.append("ApplicantId", applicantId);

@@ -90,7 +90,7 @@ const getValidationSchemaStep2 = (applicationStart, applingAs) => {
   );
   }
 
-  if (applingAs === 5) {
+  if (applicationStart === "1") {
     baseSchema.EmploymentStatus = baseSchema.EmploymentStatus.required(
       "Employment Status is required"
     );

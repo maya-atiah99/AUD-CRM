@@ -273,6 +273,7 @@ const RegisterPage = ({
     const newSteps = generateSteps(applicationStart, applingAs);
     setSteps(newSteps);
   }, []);
+  
   const handeleSubmit = (step) => {
     steps[step].ref.current?.submitForm();
   };
@@ -343,7 +344,6 @@ const RegisterPage = ({
     }
   };
 
- 
   return (
     <div>
       <UpperHeader />

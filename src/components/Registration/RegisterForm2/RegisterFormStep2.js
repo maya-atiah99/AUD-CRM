@@ -32,62 +32,15 @@ const RegisterFormStep2 = forwardRef(
     ref
   ) => {
     const { data: applicantStageThree, refetch: refetchStageThree } =
-      useFetchApplicantStageThree(applicantId,applicationId, { enable: showThree });
+      useFetchApplicantStageThree(applicantId, applicationId, {
+        enable: showThree,
+      });
     const { mutate: addApplicantStageThree } = useAddApplicantStageThree();
     const { mutate: addFiles } = useAddFiles();
     console.log("app;", applicationStart);
     console.log("app;", applingAs);
 
     const [init, setInit] = useState({
-      CurrentUniversityCountry:
-        applicantStageThree?.data?.stage2?.currentUniversityCountry || "",
-      SchoolCountry: applicantStageThree?.data?.stage2?.schoolCountry || "",
-      CurrentUniversityCountry2:
-        applicantStageThree?.data?.stage2?.currentUniversityCountry2 || "",
-      SchoolCountry2: applicantStageThree?.data?.stage2?.schoolCountry2 || "",
-      DiplomaType: applicantStageThree?.data?.stage2?.diplomaType || "",
-      GraduationYear: applicantStageThree?.data?.stage2?.graduationYear
-        ? new Date(applicantStageThree?.data?.stage2?.graduationYear)
-            .toISOString()
-            .split("T")[0]
-        : "",
-      ListAdvancedCources:
-        applicantStageThree?.data?.stage2?.listAdvancedCources || "",
-      DiplomaFile: applicantStageThree?.data?.diploma[0] || "",
-      ActivitiesNotEnrolled:
-        applicantStageThree?.data?.stage2?.activitiesNotEnrolled || "",
-      applicantFiles: applicantStageThree?.data?.applicantTest
-        ? applicantStageThree?.data?.applicantTest?.map((test) => ({
-            testType: test.testType.toString(),
-            academicDocument: test.academicDocument || "",
-            dateTaken: new Date(test.dateTaken).toISOString().split("T")[0],
-            registrationNumber: test.registrationNumber || "",
-            totalScore: test.totalScore || "",
-          }))
-        : [
-            {
-              testType: "",
-              academicDocument: "",
-              dateTaken: "",
-              registrationNumber: "",
-              totalScore: "",
-            },
-          ],
-      PersonalStatement:
-        applicantStageThree?.data?.stage2?.personalStatement || "",
-      applingAs: localStorage.getItem("applyingAs"),
-      EmploymentStatus: "",
-      EmploymentSector: "",
-      CompanyName: "",
-      JobTitle: "",
-      YearsOfExperience: "",
-      ReferanceTitle: "",
-      ReferanceName: "",
-      ReferanceEmail: "",
-      KnowTheReferance: "",
-      SendTheLetterRecomendation: "",
-      ReadAndUnderstand: "",
-      CV: "",
     });
     useEffect(() => {
       const initialvalues = {
@@ -108,46 +61,56 @@ const RegisterFormStep2 = forwardRef(
         CurrentUniversityCountry2:
           applicantStageThree?.data?.stage2?.currentUniversityCountry2 || "",
         SchoolCountry2: applicantStageThree?.data?.stage2?.schoolCountry2 || "",
-        applicantFiles: applicantStageThree?.data?.applicantTest > 0 
-          ? applicantStageThree?.data?.applicantTest?.map((test) => ({
-              testType: test.testType.toString(),
-              academicDocument: test.academicDocument || "",
-              dateTaken: new Date(test.dateTaken).toISOString().split("T")[0],
-              registrationNumber: test.registrationNumber || "",
-              totalScore: test.totalScore || "",
-            }))
-          : [
-              {
-                testType: "",
-                academicDocument: "",
-                dateTaken: "",
-                registrationNumber: "",
-                totalScore: "",
-              },
-            ],
+        applicantFiles:
+          applicantStageThree?.data?.applicantTest > 0
+            ? applicantStageThree?.data?.applicantTest?.map((test) => ({
+                testType: test.testType.toString(),
+                academicDocument: test.academicDocument || "",
+                dateTaken: new Date(test.dateTaken).toISOString().split("T")[0],
+                registrationNumber: test.registrationNumber || "",
+                totalScore: test.totalScore || "",
+              }))
+            : [
+                {
+                  testType: "",
+                  academicDocument: "",
+                  dateTaken: "",
+                  registrationNumber: "",
+                  totalScore: "",
+                },
+              ],
 
         PersonalStatement:
           applicantStageThree?.data?.stage2?.personalStatement || "",
         applingAs: localStorage.getItem("applyingAs"),
-        EmploymentStatus: "",
-        EmploymentSector: "",
-        CompanyName: "",
-        JobTitle: "",
-        YearsOfExperience: "",
-        ReferanceTitle: "",
-        ReferanceName: "",
-        ReferanceEmail: "",
-        KnowTheReferance: "",
-        SendTheLetterRecomendation: "",
-        ReadAndUnderstand: "",
-        CV: "",
+        EmploymentStatus:
+          applicantStageThree?.data?.stage2?.employmentStatus || "",
+        EmploymentSector:
+          applicantStageThree?.data?.stage2?.employmentSector || "",
+        CompanyName: applicantStageThree?.data?.stage2?.companyName || "",
+        JobTitle: applicantStageThree?.data?.stage2?.jobTitle || "",
+        YearsOfExperience:
+          applicantStageThree?.data?.stage2?.yearsOfExperience || "",
+        ReferanceTitle: applicantStageThree?.data?.stage2?.referanceTitle || "",
+        ReferanceName: applicantStageThree?.data?.stage2?.referanceName || "",
+        ReferanceEmail: applicantStageThree?.data?.stage2?.referanceEmail || "",
+        KnowTheReferance:
+          applicantStageThree?.data?.stage2?.knowTheReferance || "",
+        SendTheLetterRecomendation:
+          applicantStageThree?.data?.stage2?.sendTheLetterRecomendation || "",
+        ReadAndUnderstand:
+          applicantStageThree?.data?.stage2?.readAndUnderstand || "",
+        CV: applicantStageThree?.data?.stage2?.personalStatement || "",
       };
       setInit(initialvalues);
     }, [applicantStageThree]);
 
+    
     const handleAddStageThree = (values) => {
       addApplicantStageThree(values, {
         onSuccess: (data) => {
+          console.log("submitteddddddddddddddd");
+
           setInit({});
         },
         onError: (error) => {
@@ -156,7 +119,7 @@ const RegisterFormStep2 = forwardRef(
         },
       });
     };
-console.log('stage3',applicantStageThree)
+    console.log("stage3", applicantStageThree);
     const handleAddFiles = (values) => {
       addFiles(values, {
         onSuccess: (data) => {
@@ -171,7 +134,6 @@ console.log('stage3',applicantStageThree)
       console.log(init);
     }, [init]);
 
-   
     const formik = useFormik({
       initialValues: init,
       validationSchema: getValidationSchemaStep2(applicationStart, applingAs),
@@ -183,16 +145,39 @@ console.log('stage3',applicantStageThree)
         formData.append("ApplicantId", applicantId);
         formData.append("ApplicationId", applicationId);
 
-        for (const key in values) {
-          console.log("key", key);
-          if (
-            (values[key] !== undefined || values[key] !== "") &&
-            key !== "DiplomaFile"
-          ) {
-            formData.append(key, values[key]);
-          }
+        if (values.EmploymentSector !== undefined) {
+          formData.append("EmploymentSector",values.EmploymentSector );
         }
-
+        if (values.EmploymentStatus !== undefined) {
+          formData.append("EmploymentStatus",values.EmploymentStatus );
+        }
+        if (values.GraduationYear !== undefined) {
+          formData.append("GraduationYear",values.GraduationYear);
+        }
+        if (values.JobTitle !== undefined) {
+          formData.append("JobTitle",values.JobTitle );
+        }
+        if (values.KnowTheReferance !== undefined) {
+          formData.append("KnowTheReferance",values.KnowTheReferance);
+        }
+        if (values.ReadAndUnderstand !== undefined) {
+          formData.append("ReadAndUnderstand",values.ReadAndUnderstand);
+        }
+        if (values.ReferanceEmail !== undefined) {
+          formData.append("ReferanceEmail",values.ReferanceEmail);
+        }
+        if (values.ReferanceTitle !== undefined) {
+          formData.append("ReferanceTitle",values.ReferanceTitle);
+        }
+        if (values.ReferanceName !== undefined) {
+          formData.append("ReferanceName",values.ReferanceName );
+        }
+        if (values.SendTheLetterRecomendation !== undefined) {
+          formData.append("SendTheLetterRecomendation",values.SendTheLetterRecomendation );
+        }
+        if (values.CV !== undefined) {
+          formData.append("CV",values.CV);
+        }
         if (values.DiplomaFile && "documentContent" in values.DiplomaFile) {
           const diplomaFileContent = values.DiplomaFile.documentContent;
           const blob = new Blob([atob(diplomaFileContent)], {
@@ -207,6 +192,7 @@ console.log('stage3',applicantStageThree)
           formData.append("DiplomaFile", values.DiplomaFile);
         }
 
+        /**************form data for files */
         const formDataFile = new FormData();
 
         values.applicantFiles.forEach((file, index) => {
@@ -254,14 +240,14 @@ console.log('stage3',applicantStageThree)
       setApplyingAs(parseInt(localStorage.getItem("applingAs")));
       setApplicationStart(localStorage.getItem("applicationStart"));
     }, []);
-    console.log('formik',formik)
+    console.log("formik", formik);
     return (
       <div className='form-subcontainer '>
         <FormikProvider value={formik} innerRef={ref}>
           <SubmitText />
           <AcadamicInformation />
           <AcadamicFiles />
-          {applingAs === 5 ? (
+          {applicationStart === "1" ? (
             <>
               <WorkExperience />
               <Reference />

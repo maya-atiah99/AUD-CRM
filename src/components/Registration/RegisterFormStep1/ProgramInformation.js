@@ -10,7 +10,7 @@ const ProgramInformation = ({ fetchedData }) => {
   const formik = useFormikContext();
   const [applyingAsOptions, setApplyingAsOptions] = useState([]);
   const [applicationStartValue, setApplicationStartValue] = useState();
-  const { data: applyingAs } = useFetchApplyingAs(applicationStartValue);
+  const { data: applyingAs,refetch:refetchApplyinAs } = useFetchApplyingAs(applicationStartValue);
 
   const startYourApplicationOptions = [
     { label: "Undergraduate", value: "0" },
@@ -31,10 +31,12 @@ const ProgramInformation = ({ fetchedData }) => {
         fetchedData?.data?.stage1?.applicationStart
     );
     setApplyingAsOptions(formattedApplyingAsOptions);
+    refetchApplyinAs()
   }, [fetchedData, applyingAs]);
 
   useEffect(() => {
     setApplicationStartValue(formik.values.ApplicationStart);
+    refetchApplyinAs()
   }, [formik.values.ApplicationStart, applyingAs]);
 
   useEffect(() => {
@@ -45,6 +47,9 @@ const ProgramInformation = ({ fetchedData }) => {
     formik.setFieldValue(name, value);
   };
 
+  useEffect(()=>{
+refetchApplyinAs()
+  },[])
   return (
     <div className='form-subcontainers'>
       <SectionTitle title='PROGRAM INFORMATION' dotted={true} />

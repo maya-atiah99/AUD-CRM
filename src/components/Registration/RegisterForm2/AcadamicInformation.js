@@ -17,12 +17,12 @@ const AcadamicInformation = () => {
   return (
     <div className='form-subcontainers academic-container'>
       <SectionTitle title='ACADEMIC INFORMATION' />
-      {!(applicationStart === "0" && applingAS === "2") && (
+      {!(applicationStart === "0" && applingAS === 2) && (
         <div className='grid-academic-cont'>
           <DropDown
             width='100%'
             label={
-              applicationStart === "0" && applingAS !== "1"
+              applicationStart === "0" && applingAS !== 1
                 ? "Country you Graduated from"
                 : "Country Your Current University"
             }

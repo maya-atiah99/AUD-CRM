@@ -9,13 +9,10 @@ import MailingAddress from "./MailingAddress";
 import ProgramInformation from "./ProgramInformation";
 import ParentInformation from "./ParentInformation";
 import Consent from "./Consent";
-import ValidationSchema from "../../../ValidationSchemas/Step1ValidationSchema";
 import { FormikProvider, useFormik } from "formik";
 import step1ValidationSchema from "../../../ValidationSchemas/Step1ValidationSchema";
 import { useAddApplicantStageTwo } from "../../../Hooks/Appplicant";
 import getValidationSchemaStep1 from "../../../ValidationSchemas/Step1ValidationSchema";
-import WorkExperience from "./WorkExperience";
-import Reference from "./Reference";
 
 const RegisterFormStep1 = forwardRef(
   (

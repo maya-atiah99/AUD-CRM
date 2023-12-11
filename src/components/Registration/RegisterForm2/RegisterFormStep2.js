@@ -163,7 +163,7 @@ const RegisterFormStep2 = forwardRef(
     }, [applicantStageThree]);
 
     const handleAddStageThree = (values) => {
-      console.log('valuessssssssssssssssssssssssssssssssss,values',values)
+      console.log("valuessssssssssssssssssssssssssssssssss,values", values);
       addApplicantStageThree(values, {
         onSuccess: (data) => {
           console.log("submitteddddddddddddddd");
@@ -187,9 +187,9 @@ const RegisterFormStep2 = forwardRef(
         },
       });
     };
-    useEffect(()=>{
-      refetchStageThree()
-    },[])
+    useEffect(() => {
+      refetchStageThree();
+    }, []);
     useEffect(() => {
       console.log(init);
     }, [init]);
@@ -205,39 +205,36 @@ const RegisterFormStep2 = forwardRef(
         formData.append("ApplicantId", applicantId);
         formData.append("ApplicationId", applicationId);
 
-        if (values.EmploymentSector !== undefined) {
-          formData.append("EmploymentSector", values.EmploymentSector);
+        function appendIfDefined(formData, key, value) {
+          if (value !== undefined) {
+            formData.append(key, value);
+          }
         }
-        if (values.EmploymentStatus !== undefined) {
-          formData.append("EmploymentStatus", values.EmploymentStatus);
-        }
-        if (values.GraduationYear !== undefined) {
-          formData.append("GraduationYear", values.GraduationYear);
-        }
-        if (values.JobTitle !== undefined) {
-          formData.append("JobTitle", values.JobTitle);
-        }
-        if (values.KnowTheReferance !== undefined) {
-          formData.append("KnowTheReferance", values.KnowTheReferance);
-        }
-        if (values.ReadAndUnderstand !== undefined) {
-          formData.append("ReadAndUnderstand", values.ReadAndUnderstand);
-        }
-        if (values.ReferanceEmail !== undefined) {
-          formData.append("ReferanceEmail", values.ReferanceEmail);
-        }
-        if (values.ReferanceTitle !== undefined) {
-          formData.append("ReferanceTitle", values.ReferanceTitle);
-        }
-        if (values.ReferanceName !== undefined) {
-          formData.append("ReferanceName", values.ReferanceName);
-        }
-        if (values.SendTheLetterRecomendation !== undefined) {
-          formData.append(
-            "SendTheLetterRecomendation",
-            values.SendTheLetterRecomendation
-          );
-        }
+        const fieldsToAppend = [
+          "CurrentUniversityCountry",
+          "SchoolCountry",
+          "DiplomaType",
+          "GraduationYear",
+          "ListAdvancedCources",
+          "ActivitiesNotEnrolled",
+          "CurrentUniversityCountry2",
+          "SchoolCountry2",
+          "EmploymentSector",
+          "EmploymentStatus",
+          "JobTitle",
+          "KnowTheReferance",
+          "ReadAndUnderstand",
+          "ReferanceEmail",
+          "ReferanceTitle",
+          "ReferanceName",
+          "SendTheLetterRecomendation",
+          "PersonalStatement"
+        ];
+        
+        fieldsToAppend.forEach(field => {
+          appendIfDefined(formData, field, values[field]);
+        });
+        
         if (values.CV !== undefined) {
           formData.append("CV", values.CV);
         }
@@ -284,7 +281,7 @@ const RegisterFormStep2 = forwardRef(
             file.totalScore
           );
         });
-
+        console.log("form data", formData);
         handleAddFiles(formDataFile);
         handleAddStageThree(formData);
       },

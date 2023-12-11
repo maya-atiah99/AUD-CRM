@@ -781,7 +781,7 @@ ul {
 }
 
 .showInterestLogo {
-  width: 40%;
+  width: 38%;
 }
 #background-video {
   position: absolute;
@@ -802,7 +802,22 @@ ul {
   font-weight: 18px;
   letter-spacing: 0px;
 }
-
+.applicant-loginp{
+  font-size: 16px !important;
+  padding-top: 5px;
+}
+.applicant-loginp span{
+  cursor: pointer;
+  color: #3886BD;
+  font-family: Raleway;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+  text-decoration-line: underline;
+  text-transform: capitalize; 
+  text-decoration: underline;
+}
 .button-cont-register {
   gap: 0.5rem;
   display: flex;
@@ -973,6 +988,7 @@ ul {
   grid-template-columns: 2fr 2fr 2fr 1fr;
   grid-column-gap: 10px;
 }
+
 .classfont-p{
   color:#1B224C;
   font-size: 18px;

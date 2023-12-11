@@ -21,6 +21,7 @@ const ShowInterestForm = ({
   setApplicantId,
   setPhoneNumber,
   setEmail,
+  setApplicationStart,
 }) => {
   const [submissionSuccess, setSubmissionSuccess] = useState(false);
 
@@ -35,7 +36,7 @@ const ShowInterestForm = ({
     mobile: "",
     titleId: "",
     howDidYouHear: "",
-    selectedTerm: "", 
+    selectedTerm: "",
     fieldOfInterest: "",
     applicationStart: "",
   });
@@ -46,9 +47,9 @@ const ShowInterestForm = ({
   const handleContinueToApply = (values, { setFieldError }) => {
     addApplicant(values, {
       onSuccess: (data) => {
-        console.log("submitted");
-        console.log(data?.data?.applicantId);
         localStorage.setItem("applicantId", data?.data?.applicantId);
+        localStorage.setItem("applicationStart", values.applicationStart);
+        setApplicationStart(values.applicationStart);
         setApplicantId(data?.data?.applicantId);
         openVerifiedModal("Continue");
         localStorage.removeItem("message");
@@ -319,7 +320,7 @@ const ShowInterestForm = ({
 
               <div className='showinterest-btn-container'>
                 <AUDButton
-                  text='CONTINUE TO APPLY'
+                  text='Submit an Application'
                   type='submit'
                   required={true}
                   handleOnClick={() => {
@@ -328,7 +329,7 @@ const ShowInterestForm = ({
                   }}
                 />
                 <AUDButton
-                  text='Submit Form'
+                  text='Submit your Inquiry'
                   type='submit'
                   required={true}
                   handleOnClick={() => {
@@ -338,19 +339,17 @@ const ShowInterestForm = ({
                 />
               </div>
 
-              <div className='d-flex'>
-                <p>If you already started an application and wish to apply, </p>
-
-                <LinkButton
-                  title='Login here'
-                  handleOnClick={() => {
+              <p className='applicant-loginp'>
+                Returning applicant:{" "}
+                <span
+                  onClick={() => {
                     setShowLoginModal(true);
                   }}
-                  required={true}
-                  underlined={true}
-                  color='#245590'
-                />
-              </div>
+                >
+                  Login
+                </span>{" "}
+                to continue an application
+              </p>
             </div>
           </Form>
         );

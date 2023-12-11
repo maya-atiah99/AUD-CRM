@@ -10,7 +10,8 @@ const ProgramInformation = ({ fetchedData }) => {
   const formik = useFormikContext();
   const [applyingAsOptions, setApplyingAsOptions] = useState([]);
   const [applicationStartValue, setApplicationStartValue] = useState();
-  const { data: applyingAs,refetch:refetchApplyinAs } = useFetchApplyingAs(applicationStartValue);
+  const { data: applyingAsData, refetch: refetchApplyinAs } =
+    useFetchApplyingAs(applicationStartValue);
 
   const startYourApplicationOptions = [
     { label: "Undergraduate", value: "0" },
@@ -18,8 +19,8 @@ const ProgramInformation = ({ fetchedData }) => {
     { label: "Visiting", value: "2" },
   ];
 
-  const formattedApplyingAsOptions = applyingAs?.data
-    ? applyingAs?.data?.map((option) => ({
+  const formattedApplyingAsOptions = applyingAsData?.data
+    ? applyingAsData?.data?.map((option) => ({
         value: option.applyingAsId,
         label: option.applyingAsText,
       }))
@@ -31,25 +32,30 @@ const ProgramInformation = ({ fetchedData }) => {
         fetchedData?.data?.stage1?.applicationStart
     );
     setApplyingAsOptions(formattedApplyingAsOptions);
-    refetchApplyinAs()
-  }, [fetchedData, applyingAs]);
+  }, [fetchedData, applyingAsData]);
 
   useEffect(() => {
     setApplicationStartValue(formik.values.ApplicationStart);
-    refetchApplyinAs()
-  }, [formik.values.ApplicationStart, applyingAs]);
+  }, [formik.values.ApplicationStart, applyingAsData]);
 
   useEffect(() => {
     setApplyingAsOptions(formattedApplyingAsOptions);
-  }, [applyingAs]);
+  }, [applyingAsData]);
+
+ 
+  useEffect(() => {
+    refetchApplyinAs(applicationStartValue);
+  }, []);
+
+  useEffect(() => {
+    refetchApplyinAs(applicationStartValue);
+  }, [fetchedData, applicationStartValue]);
 
   const onRadioChange = (name, value) => {
     formik.setFieldValue(name, value);
   };
 
-  useEffect(()=>{
-refetchApplyinAs()
-  },[])
+  console.log("formik.values.ApplingAs", formik.values.ApplingAs);
   return (
     <div className='form-subcontainers'>
       <SectionTitle title='PROGRAM INFORMATION' dotted={true} />
@@ -123,7 +129,7 @@ refetchApplyinAs()
               (formik.values.ApplicationStart === "0" &&
                 formik.values.ApplingAs === 1) ||
               (formik.values.ApplicationStart === "1" &&
-                formik.values.ApplingAs ===1)
+                formik.values.ApplingAs === 1)
                 ? formik.values.CurrentPlaceOfStudy
                 : ""
             }
@@ -156,6 +162,7 @@ refetchApplyinAs()
               width='100%'
               label='Do You Require A Student Visa?'
               bolean={true}
+              required={true}
               name='StudentVisa'
               value={formik.values.StudentVisa}
               onChange={(name, value) => {
@@ -166,7 +173,7 @@ refetchApplyinAs()
             />
             <DropDown
               width='100%'
-              label='Are You a UAE/GCC national or a UAE resident?'
+              label='Are you a UAE/GCC national or UAE resident?'
               required={true}
               bolean={true}
               name='UAE_GCC_Resident'
@@ -178,20 +185,19 @@ refetchApplyinAs()
               errors={formik.errors?.UAE_GCC_Resident}
               touched={formik.touched?.UAE_GCC_Resident}
             />
-             <TextBox
-            width='100%'
-            label='How many semesters are you planning on attending AUD?'
-            required={true}
-            name='SemestersAtAUD'
-            value={formik.values.SemestersAtAUD}
-            onChange={(name, value) => {
-              formik.setFieldValue(name, value);
-            }}
-            errors={formik.errors?.SemestersAtAUD}
-            touched={formik.touched?.SemestersAtAUD}
-          />
-          </div>
-          <div className='grid-programInfo-cont'>
+            <TextBox
+              width='100%'
+              label='How many semesters are you planning on attending AUD?'
+              required={true}
+              name='SemestersAtAUD'
+              value={formik.values.SemestersAtAUD}
+              onChange={(name, value) => {
+                formik.setFieldValue(name, value);
+              }}
+              errors={formik.errors?.SemestersAtAUD}
+              touched={formik.touched?.SemestersAtAUD}
+            />
+
             <DropDown
               required={true}
               bolean={true}

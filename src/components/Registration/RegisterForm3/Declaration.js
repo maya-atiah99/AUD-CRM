@@ -3,8 +3,9 @@ import SquareCheckBox from "../../Inputs/SquareCheckBox";
 import SectionTitle from "../../Texts/SectionTitle";
 import { useFormikContext } from "formik";
 
-const Declaration = () => {
+const Declaration = ({ applingAs, applicationStart }) => {
   const formik = useFormikContext();
+  console.log('applicationsxxxxxxxxxxxxxxxxxx',applicationStart)
   return (
     <div className='form-subcontainers'>
       <SectionTitle title='Declaration' size='18px' font='600' />
@@ -41,11 +42,18 @@ const Declaration = () => {
         />
         <div className='blue-link'>
           <a
-            href='https://aud.edu/media/catalogs/undergraduate/index.html'
+            href={applicationStart === "0"
+              ? 'https://aud.edu/media/catalogs/undergraduate/index.html'
+              : applicationStart === "1"
+              ? "https://aud.edu/media/catalogs/graduate/index.html"
+              : "https://www.aud.edu/media/catalogs/undergraduate/index.html"}
             target='_blank'
           >
-            {" "}
-            Undergaduate Catalog,{" "}
+            {applicationStart === "0"
+              ? "Undergaduate Catalog, "
+              : applicationStart === "1"
+              ? "Graduate Catalog, "
+              : "Level Of Study, "}
           </a>
         </div>
         <div className='blue-link'>
@@ -72,7 +80,11 @@ const Declaration = () => {
       </div>
 
       <SquareCheckBox
-        text='I understand that it is my responsibility to consult with the U.A.E. Ministry of Education for the requirements of high school equivalency prior to commencing studies at AUD. Please note that upon graduation from AUD, attestation of your degree will be linked to the high school equivalency. I understand that a letter of equivalency is required from the U.A.E. Ministry of Education.'
+        text={
+          applicationStart === 0
+            ? "I understand that it is my responsibility to consult with the U.A.E. Ministry of Education for the requirements of high school equivalency prior to commencing studies at AUD. Please note that upon graduation from AUD, attestation of your degree will be linked to the high school equivalency. I understand that a letter of equivalency is required from the U.A.E. Ministry of Education."
+            : "I understand that the Certificate of Recognition is required from the U.A.E. Ministry of Education, and it is my responsibility to consult with the Ministry for the requirements of the certificate prior to commencing studies at AUD. Upon my graduation from AUD, attestation of my degree will be linked to the equivalency."
+        }
         name='AcceptResponsibilitiesCheck'
         value={formik.values.AcceptResponsibilitiesCheck}
         onChange={(checked) => {

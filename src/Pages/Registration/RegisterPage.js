@@ -47,10 +47,7 @@ const RegisterPage = ({
     useFetchApplicantStageTwo(applicantId, applicationId);
 
   const generateSteps = (applicationStart, applingAs) => {
-    console.log("hiiiiiiiiiiiiiiiiiiiiiifdfrfrfr");
     if (applicationStart === "2") {
-      console.log("testtttttttttttt");
-
       return [
         {
           step: 1,
@@ -112,6 +109,8 @@ const RegisterPage = ({
               applicantId={applicantId}
               fetchedData={fetchedData}
               applicationId={applicationId}
+              applingAs={applingAs}
+              applicationStart={applicationStart}
             />
           ),
           ref: formikRefStep3,
@@ -161,6 +160,8 @@ const RegisterPage = ({
               applicantId={applicantId}
               fetchedData={fetchedData}
               applicationId={applicationId}
+              applingAs={applingAs}
+              applicationStart={applicationStart}
             />
           ),
           ref: formikRefStep3,
@@ -230,6 +231,8 @@ const RegisterPage = ({
               applicantId={applicantId}
               fetchedData={fetchedData}
               applicationId={applicationId}
+              applingAs={applingAs}
+              applicationStart={applicationStart}
             />
           ),
           ref: formikRefStep3,
@@ -273,28 +276,38 @@ const RegisterPage = ({
     const newSteps = generateSteps(applicationStart, applingAs);
     setSteps(newSteps);
   }, []);
-  
+
   const handeleSubmit = (step) => {
+    console.log("handleSubmittttttttt");
     steps[step].ref.current?.submitForm();
   };
 
   const handleChange = (next) => {
+    console.log("handlechangeeeeeeeeeeeee");
     if (next) handeleSubmit(activeStep);
     setTimeout(() => {
+      console.log("before nextt");
       if (next) {
-        if (activeStep === 0 && steps[activeStep].ref.current?.isValid) {
+        console.log(
+          "steps[activeStep].ref.current?.isValid",
+          steps[activeStep].ref.current?.isValid
+        );
+
+        if (steps[activeStep].ref.current?.isValid) {
+          console.log(
+            "steps[activeStep].ref.current?.isValid",
+            steps[activeStep].ref.current?.isValid
+          );
           if (activeStep < steps.length - 1) {
-            setActiveStep(activeStep + 1);
-            window.scrollTo(0, 0);
-            setShowInterest(false);
-          }
-        } else if (activeStep !== 0 && steps[activeStep].ref.current?.isValid) {
-          
-          if (activeStep < steps.length - 1) {
+            if (activeStep === 0) {
+              setShowInterest(false);
+            }
             setActiveStep(activeStep + 1);
             window.scrollTo(0, 0);
           }
         } else {
+          console.log("errrorrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr");
+
           window.scrollTo(0, 0);
         }
       }

@@ -16,19 +16,14 @@ const Reservation = ({ handleClick }) => {
             name='TermAndConditionCheck'
             value={formik.values.TermAndConditionCheck}
             onChange={(checked) => {
-              formik.setFieldValue(
-                "TermAndConditionCheck",
-                checked
-              );
+              formik.setFieldValue("TermAndConditionCheck", checked);
             }}
+            policy='here'
+            href='https://www.aud.edu/media/q2acttic/graduate-re-agreement-terms.pdf'
             errors={formik.errors?.TermAndConditionCheck}
             touched={formik.errors?.TermAndConditionCheck}
           />
-          <div className='blue-link' onClick={handleClick}>
-            Here
-          </div>
         </div>
-       
       </div>
     </>
   );

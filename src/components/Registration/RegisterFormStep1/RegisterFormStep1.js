@@ -73,11 +73,11 @@ const RegisterFormStep1 = forwardRef(
           LegacyApplicant: false,
           LegacyFatherName: "",
           LegacyFatherProgram: "",
-          LegacyFatherGraduationYear: null,
+          LegacyFatherGraduationYear: "",
           LegacyFatherMobile: "",
           LegacyMotherName: "",
           LegacyMotherProgram: "",
-          LegacyMotherGraduationYear: null,
+          LegacyMotherGraduationYear: "",
           LegacyMotherMobile: "",
           PassportNumber: "",
           EmiratesId: "",
@@ -220,7 +220,6 @@ const RegisterFormStep1 = forwardRef(
       validationSchema: getValidationSchemaStep1(applicationStart, applingAs),
       enableReinitialize: true,
       onSubmit: (values) => {
-        console.log(values);
         localStorage.setItem("applingAs", formik.values?.ApplingAs);
         localStorage.setItem(
           "applicationStart",
@@ -232,7 +231,6 @@ const RegisterFormStep1 = forwardRef(
         formData.append("ApplicantId", applicantId);
         formData.append("ApplicationId", applicationId);
         for (const key in values) {
-          console.log("key", key);
           if (values[key] !== undefined || values[key] !== "") {
             if (key === "DOB") {
               formData.append(
@@ -258,13 +256,13 @@ const RegisterFormStep1 = forwardRef(
       ref.current = formik;
     }, [ref, formik]);
     
-    console.log("stage222", fetchedData);
-    console.log("stage222 formik", formik);
-
+   console.log(formik)
+console.log(fetchedData)
     useEffect(() => {
       localStorage.setItem("applicationStart", formik.values?.applicationStart);
       localStorage.setItem("applingAs", formik.values?.applingAs);
     }, [formik.values]);
+    
     return (
       <div className='form-subcontainer'>
         <FormikProvider

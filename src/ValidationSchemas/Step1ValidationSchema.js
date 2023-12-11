@@ -97,11 +97,13 @@ const getValidationSchemaStep1 = (applicationStart, applingAs) => {
       baseSchema.MiddleEasternStudies.notRequired();
     baseSchema.SemestersAtAUD = baseSchema.SemestersAtAUD.notRequired();
   }
-  if (applingAs === 2) {
+  if (applingAs === 1) {
     baseSchema.CurrentPlaceOfStudy = baseSchema.CurrentPlaceOfStudy.required(
       "Current Place Of study is required"
     );
   }
+
+  
   return Yup.object().shape(baseSchema);
 };
 export default getValidationSchemaStep1;

@@ -24,6 +24,7 @@ const DropDown = ({
   setShowEmirate,
   bolean,
 }) => {
+  console.log(name,type)
   const { data: options, refetch: refetchTypes } = useFetchDropDownTypes(
     type || null
   );

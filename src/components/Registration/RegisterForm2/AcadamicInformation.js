@@ -5,14 +5,13 @@ import DateTime from "../../Inputs/DateTime";
 import DocumentUpload from "../../Inputs/DocumentUpload";
 import TextArea from "../../Inputs/TextArea";
 import { useFormikContext } from "formik";
-import TextBox from "../../Inputs/TextBox";
-import Reference from "../RegisterFormStep1/Reference";
-import WorkExperience from "../RegisterFormStep1/WorkExperience";
 
 const AcadamicInformation = () => {
   const formik = useFormikContext();
   const applicationStart = localStorage.getItem("applicationStart");
   const applingAS = parseInt(localStorage.getItem("applingAs"));
+  console.log(applicationStart)
+  console.log(applingAS)
   console.log("formikkkkkkkkk", formik.values);
   return (
     <div className='form-subcontainers academic-container'>

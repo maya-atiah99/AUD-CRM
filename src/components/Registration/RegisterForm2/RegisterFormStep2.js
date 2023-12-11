@@ -41,6 +41,63 @@ const RegisterFormStep2 = forwardRef(
     console.log("app;", applingAs);
 
     const [init, setInit] = useState({
+      CurrentUniversityCountry:
+        applicantStageThree?.data?.stage2?.currentUniversityCountry || "",
+      SchoolCountry: applicantStageThree?.data?.stage2?.schoolCountry || "",
+      DiplomaType: applicantStageThree?.data?.stage2?.diplomaType || "",
+      GraduationYear: applicantStageThree?.data?.stage2?.graduationYear
+        ? new Date(applicantStageThree?.data?.stage2?.graduationYear)
+            .toISOString()
+            .split("T")[0]
+        : "",
+      ListAdvancedCources:
+        applicantStageThree?.data?.stage2?.listAdvancedCources || "",
+      DiplomaFile: applicantStageThree?.data?.diploma[0] || "",
+      ActivitiesNotEnrolled:
+        applicantStageThree?.data?.stage2?.activitiesNotEnrolled || "",
+      CurrentUniversityCountry2:
+        applicantStageThree?.data?.stage2?.currentUniversityCountry2 || "",
+      SchoolCountry2: applicantStageThree?.data?.stage2?.schoolCountry2 || "",
+      applicantFiles:
+        applicantStageThree?.data?.applicantTest > 0
+          ? applicantStageThree?.data?.applicantTest?.map((test) => ({
+              testType: test.testType.toString(),
+              academicDocument: test.academicDocument || "",
+              dateTaken: new Date(test.dateTaken).toISOString().split("T")[0],
+              registrationNumber: test.registrationNumber || "",
+              totalScore: test.totalScore || "",
+            }))
+          : [
+              {
+                testType: "",
+                academicDocument: "",
+                dateTaken: "",
+                registrationNumber: "",
+                totalScore: "",
+              },
+            ],
+
+      PersonalStatement:
+        applicantStageThree?.data?.stage2?.personalStatement || "",
+      applingAs: localStorage.getItem("applyingAs"),
+      EmploymentStatus:
+        applicantStageThree?.data?.stage2?.employmentStatus || "",
+      EmploymentSector:
+        applicantStageThree?.data?.stage2?.employmentSector || "",
+      CompanyName: applicantStageThree?.data?.stage2?.companyName || "",
+      JobTitle: applicantStageThree?.data?.stage2?.jobTitle || "",
+      YearsOfExperience:
+        applicantStageThree?.data?.stage2?.yearsOfExperience || "",
+      ReferanceTitle: applicantStageThree?.data?.stage2?.referanceTitle || "",
+      ReferanceName: applicantStageThree?.data?.stage2?.referanceName || "",
+      ReferanceEmail: applicantStageThree?.data?.stage2?.referanceEmail || "",
+      KnowTheReferance:
+        applicantStageThree?.data?.stage2?.knowTheReferance || "",
+      SendTheLetterRecomendation:
+        applicantStageThree?.data?.stage2?.sendTheLetterRecomendation || "",
+      ReadAndUnderstand:
+        applicantStageThree?.data?.stage2?.readAndUnderstand || "",
+      CV: applicantStageThree?.data?.stage2?.personalStatement || "",
     });
     useEffect(() => {
       const initialvalues = {
@@ -105,8 +162,8 @@ const RegisterFormStep2 = forwardRef(
       setInit(initialvalues);
     }, [applicantStageThree]);
 
-    
     const handleAddStageThree = (values) => {
+      console.log('valuessssssssssssssssssssssssssssssssss,values',values)
       addApplicantStageThree(values, {
         onSuccess: (data) => {
           console.log("submitteddddddddddddddd");
@@ -130,6 +187,9 @@ const RegisterFormStep2 = forwardRef(
         },
       });
     };
+    useEffect(()=>{
+      refetchStageThree()
+    },[])
     useEffect(() => {
       console.log(init);
     }, [init]);
@@ -139,44 +199,47 @@ const RegisterFormStep2 = forwardRef(
       validationSchema: getValidationSchemaStep2(applicationStart, applingAs),
       enableReinitialize: true,
       onSubmit: (values) => {
-        console.log("hiiii", values);
+        console.log("submit valuesssssssssssssssss", values);
         const formData = new FormData();
 
         formData.append("ApplicantId", applicantId);
         formData.append("ApplicationId", applicationId);
 
         if (values.EmploymentSector !== undefined) {
-          formData.append("EmploymentSector",values.EmploymentSector );
+          formData.append("EmploymentSector", values.EmploymentSector);
         }
         if (values.EmploymentStatus !== undefined) {
-          formData.append("EmploymentStatus",values.EmploymentStatus );
+          formData.append("EmploymentStatus", values.EmploymentStatus);
         }
         if (values.GraduationYear !== undefined) {
-          formData.append("GraduationYear",values.GraduationYear);
+          formData.append("GraduationYear", values.GraduationYear);
         }
         if (values.JobTitle !== undefined) {
-          formData.append("JobTitle",values.JobTitle );
+          formData.append("JobTitle", values.JobTitle);
         }
         if (values.KnowTheReferance !== undefined) {
-          formData.append("KnowTheReferance",values.KnowTheReferance);
+          formData.append("KnowTheReferance", values.KnowTheReferance);
         }
         if (values.ReadAndUnderstand !== undefined) {
-          formData.append("ReadAndUnderstand",values.ReadAndUnderstand);
+          formData.append("ReadAndUnderstand", values.ReadAndUnderstand);
         }
         if (values.ReferanceEmail !== undefined) {
-          formData.append("ReferanceEmail",values.ReferanceEmail);
+          formData.append("ReferanceEmail", values.ReferanceEmail);
         }
         if (values.ReferanceTitle !== undefined) {
-          formData.append("ReferanceTitle",values.ReferanceTitle);
+          formData.append("ReferanceTitle", values.ReferanceTitle);
         }
         if (values.ReferanceName !== undefined) {
-          formData.append("ReferanceName",values.ReferanceName );
+          formData.append("ReferanceName", values.ReferanceName);
         }
         if (values.SendTheLetterRecomendation !== undefined) {
-          formData.append("SendTheLetterRecomendation",values.SendTheLetterRecomendation );
+          formData.append(
+            "SendTheLetterRecomendation",
+            values.SendTheLetterRecomendation
+          );
         }
         if (values.CV !== undefined) {
-          formData.append("CV",values.CV);
+          formData.append("CV", values.CV);
         }
         if (values.DiplomaFile && "documentContent" in values.DiplomaFile) {
           const diplomaFileContent = values.DiplomaFile.documentContent;
@@ -221,7 +284,7 @@ const RegisterFormStep2 = forwardRef(
             file.totalScore
           );
         });
-
+console.log('formData,formDA',formData)
         handleAddFiles(formDataFile);
         handleAddStageThree(formData);
       },

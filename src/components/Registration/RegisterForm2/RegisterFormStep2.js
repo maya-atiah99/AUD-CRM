@@ -284,7 +284,7 @@ const RegisterFormStep2 = forwardRef(
             file.totalScore
           );
         });
-console.log('formData,formDA',formData)
+
         handleAddFiles(formDataFile);
         handleAddStageThree(formData);
       },

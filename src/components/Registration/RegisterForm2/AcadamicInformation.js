@@ -10,9 +10,6 @@ const AcadamicInformation = () => {
   const formik = useFormikContext();
   const applicationStart = localStorage.getItem("applicationStart");
   const applingAS = parseInt(localStorage.getItem("applingAs"));
-  console.log(applicationStart)
-  console.log(applingAS)
-  console.log("formikkkkkkkkk", formik.values);
   return (
     <div className='form-subcontainers academic-container'>
       <SectionTitle title='ACADEMIC INFORMATION' />
@@ -22,8 +19,8 @@ const AcadamicInformation = () => {
             width='100%'
             label={
               applicationStart === "0" && applingAS !== 1
-                ? "Country you Graduated from"
-                : "Country Your Current University"
+                ? "Country You Graduated from"
+                : "Country of Your Current University"
             }
             required={true}
             type='9'
@@ -60,7 +57,7 @@ const AcadamicInformation = () => {
               applicationStart === "1" ||
               (applicationStart === "0" && applingAS === 3)
                 ? "Degree Earned Major"
-                : applicationStart === "2"
+                : applicationStart === "2" && applingAS==6
                 ? "Level of study"
                 : "HS Diploma"
             }
@@ -96,7 +93,7 @@ const AcadamicInformation = () => {
         <div className='grid-academic2-cont'>
           <DropDown
             width='100%'
-            label={"Country you Graduated From"}
+            label={"Country You Graduated From"}
             required={true}
             type='9'
             name='CurrentUniversityCountry2'
@@ -130,7 +127,7 @@ const AcadamicInformation = () => {
       <div className='grid-academic2-cont'>
         {applicationStart === "0" && (
           <TextArea
-            label='Please List Any Advanced Courses Such As: ‘A’ Levels, Ap.'
+            label='Please List Any Advanced Courses Such As: ‘A’ Levels, Ap, Clep, Ib Diploma. '
             rows='4'
             cols='3'
             name='ListAdvancedCources'
@@ -152,7 +149,7 @@ const AcadamicInformation = () => {
           errors={formik.errors?.DiplomaFile}
           touched={formik.touched?.DiplomaFile}
         />
-        <DocumentUpload
+        {/* <DocumentUpload
           text='Upload The Academic Document'
           required={true}
           height='100px'
@@ -161,7 +158,7 @@ const AcadamicInformation = () => {
           fileName={formik.values.AcademicDocument}
           errors={formik.errors?.AcademicDocument}
           touched={formik.touched?.AcademicDocument}
-        />{" "}
+        />{" "} */}
       </div>
       {applicationStart === "0" && (
         <TextArea

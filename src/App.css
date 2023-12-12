@@ -1656,7 +1656,7 @@ padding: 10px;
     font-size: 10px;
   }
   .stepper .step.active ~ .activeLine {
-    width: 125px;
+    width: 85px;
   }
   .stepper .step {
     padding: 0px 7px 2px 7px;

@@ -42,20 +42,18 @@ const ProgramInformation = ({ fetchedData }) => {
     setApplyingAsOptions(formattedApplyingAsOptions);
   }, [applyingAsData]);
 
- 
   useEffect(() => {
     refetchApplyinAs(applicationStartValue);
   }, []);
 
   useEffect(() => {
     refetchApplyinAs(applicationStartValue);
-  }, [fetchedData, applicationStartValue]);
+  }, [fetchedData, applicationStartValue,formik.values.ApplicationStart]);
 
   const onRadioChange = (name, value) => {
     formik.setFieldValue(name, value);
   };
 
-  console.log("formik.values.ApplingAs", formik.values.ApplingAs);
   return (
     <div className='form-subcontainers'>
       <SectionTitle title='PROGRAM INFORMATION' dotted={true} />

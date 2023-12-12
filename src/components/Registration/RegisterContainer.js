@@ -1,7 +1,7 @@
 import React, { forwardRef, useEffect } from "react";
 import Stepper from "../Stepper/Stepper";
 
-const RegisterContainer = forwardRef(({ activeStep, steps, lastStep }, ref) => {
+const RegisterContainer = forwardRef(({ activeStep, steps, lastStep , setActiveStep}, ref) => {
   const activeForm = () => {
     if (activeStep !== -1) {
       const activeStepForm = steps[activeStep]?.form;
@@ -21,7 +21,7 @@ const RegisterContainer = forwardRef(({ activeStep, steps, lastStep }, ref) => {
           alt='Logo'
           className='aud-header-logo'
         />
-        <Stepper activeStep={activeStep} steps={steps} lastStep={lastStep} />
+        <Stepper activeStep={activeStep} steps={steps} lastStep={lastStep}   setActiveStep={setActiveStep}/>
       </div>
       <div className='registerForms-container'>{activeForm()}</div>
     </div>

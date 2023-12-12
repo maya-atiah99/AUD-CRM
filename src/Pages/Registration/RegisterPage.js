@@ -81,6 +81,7 @@ const RegisterPage = ({
               applicantId={applicantId}
               fetchedData={fetchedData}
               showThree={showThree}
+              activeStep={activeStep}
               applicationId={applicationId}
               setApplicationStart={setApplicationStart}
               applingAs={applingAs}
@@ -110,6 +111,7 @@ const RegisterPage = ({
               fetchedData={fetchedData}
               applicationId={applicationId}
               applingAs={applingAs}
+              activeStep={activeStep}
               applicationStart={applicationStart}
             />
           ),
@@ -120,13 +122,11 @@ const RegisterPage = ({
           title: "Pay & Submit",
           previousStep: "Back to Declaration",
           NextStep: "Submit",
-          form: <RegisterFormStep4 />,
+          form: <RegisterFormStep4 activeStep={activeStep} />,
           ref: formikRefStep4,
         },
       ];
     } else if (applicationStart === "0" && applingAs === 2) {
-      console.log("tesdscsdcdscdcdscdsttttttttttttt");
-
       return [
         {
           step: 1,
@@ -161,6 +161,7 @@ const RegisterPage = ({
               fetchedData={fetchedData}
               applicationId={applicationId}
               applingAs={applingAs}
+              activeStep={activeStep}
               applicationStart={applicationStart}
             />
           ),
@@ -171,13 +172,11 @@ const RegisterPage = ({
           title: "Pay & Submit",
           previousStep: "Back to Declaration",
           NextStep: "Submit",
-          form: <RegisterFormStep4 />,
+          form: <RegisterFormStep4 activeStep={activeStep} />,
           ref: formikRefStep4,
         },
       ];
     } else {
-      console.log("tesdtttttttttttttttttttttttttttsttttttttttttt");
-
       return [
         {
           step: 1,
@@ -216,6 +215,7 @@ const RegisterPage = ({
               applingAs={applingAs}
               setApplyingAs={setApplyingAs}
               applicationStart={applicationStart}
+              activeStep={activeStep}
             />
           ),
           ref: formikRefStep2,
@@ -233,6 +233,7 @@ const RegisterPage = ({
               applicationId={applicationId}
               applingAs={applingAs}
               applicationStart={applicationStart}
+              activeStep={activeStep}
             />
           ),
           ref: formikRefStep3,
@@ -242,7 +243,7 @@ const RegisterPage = ({
           title: "Pay & Submit",
           previousStep: "Back to Declaration",
           NextStep: "Submit",
-          form: <RegisterFormStep4 />,
+          form: <RegisterFormStep4 activeStep={activeStep} />,
           ref: formikRefStep4,
         },
       ];
@@ -275,18 +276,15 @@ const RegisterPage = ({
   useEffect(() => {
     const newSteps = generateSteps(applicationStart, applingAs);
     setSteps(newSteps);
-  }, []);
+  }, [applicationStart, applingAs]);
 
   const handeleSubmit = (step) => {
-    console.log("handleSubmittttttttt");
     steps[step].ref.current?.submitForm();
   };
 
   const handleChange = (next) => {
-    console.log("handlechangeeeeeeeeeeeee");
     if (next) handeleSubmit(activeStep);
     setTimeout(() => {
-      console.log("before nextt");
       if (next) {
         console.log(
           "steps[activeStep].ref.current?.isValid",
@@ -306,8 +304,6 @@ const RegisterPage = ({
             window.scrollTo(0, 0);
           }
         } else {
-          console.log("errrorrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr");
-
           window.scrollTo(0, 0);
         }
       }
@@ -384,6 +380,7 @@ const RegisterPage = ({
           activeStep={activeStep}
           steps={steps}
           lastStep={activeStep === steps.length - 1}
+          setActiveStep={setActiveStep}
         />
         <div className='button-cont-register '>
           <AUDButton

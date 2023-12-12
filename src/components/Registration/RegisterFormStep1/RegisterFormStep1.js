@@ -25,6 +25,7 @@ const RegisterFormStep1 = forwardRef(
       applingAs,
       applicationStart,
       setApplyingAs,
+      activeStep
     },
     ref
   ) => {
@@ -46,7 +47,7 @@ const RegisterFormStep1 = forwardRef(
           Gender: "",
           Mobile: fetchedData?.data?.applicant?.phoneNumber || "",
           ApplicantTelephone: "",
-        
+
           ApplingAs: fetchedData?.data?.applicant?.applyingAs || "",
           SelectedTerm: "",
           ApplicationStart: "",
@@ -117,7 +118,7 @@ const RegisterFormStep1 = forwardRef(
           ApplicationStart:
             fetchedData?.data?.application?.startYourApplication?.toString() ||
             "",
-          ApplingAs:fetchedData?.data?.application?.applyingAs || "",
+          ApplingAs: fetchedData?.data?.application?.applyingAs || "",
           ProgramOfInterest:
             fetchedData?.data?.stage2?.programApplicationId || "",
           CurrentPlaceOfStudy:
@@ -230,6 +231,8 @@ const RegisterFormStep1 = forwardRef(
         const formData = new FormData();
         formData.append("ApplicantId", applicantId);
         formData.append("ApplicationId", applicationId);
+        formData.append("IsSaved", true);
+        formData.append("NextActiveStep", activeStep+1);
         for (const key in values) {
           if (values[key] !== undefined || values[key] !== "") {
             if (key === "DOB") {
@@ -255,14 +258,12 @@ const RegisterFormStep1 = forwardRef(
     useEffect(() => {
       ref.current = formik;
     }, [ref, formik]);
-    
-   console.log(formik)
-console.log(fetchedData)
+
     useEffect(() => {
       localStorage.setItem("applicationStart", formik.values?.applicationStart);
       localStorage.setItem("applingAs", formik.values?.applingAs);
     }, [formik.values]);
-    
+
     return (
       <div className='form-subcontainer'>
         <FormikProvider

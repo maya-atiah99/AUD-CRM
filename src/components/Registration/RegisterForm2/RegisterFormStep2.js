@@ -28,6 +28,7 @@ const RegisterFormStep2 = forwardRef(
       applingAs,
       applicationStart,
       setApplyingAs,
+      activeStep,
     },
     ref
   ) => {
@@ -37,68 +38,8 @@ const RegisterFormStep2 = forwardRef(
       });
     const { mutate: addApplicantStageThree } = useAddApplicantStageThree();
     const { mutate: addFiles } = useAddFiles();
-    console.log("app;", applicationStart);
-    console.log("app;", applingAs);
 
-    const [init, setInit] = useState({
-      CurrentUniversityCountry:
-        applicantStageThree?.data?.stage2?.currentUniversityCountry || "",
-      SchoolCountry: applicantStageThree?.data?.stage2?.schoolCountry || "",
-      DiplomaType: applicantStageThree?.data?.stage2?.diplomaType || "",
-      GraduationYear: applicantStageThree?.data?.stage2?.graduationYear
-        ? new Date(applicantStageThree?.data?.stage2?.graduationYear)
-            .toISOString()
-            .split("T")[0]
-        : "",
-      ListAdvancedCources:
-        applicantStageThree?.data?.stage2?.listAdvancedCources || "",
-      DiplomaFile: applicantStageThree?.data?.diploma[0] || "",
-      ActivitiesNotEnrolled:
-        applicantStageThree?.data?.stage2?.activitiesNotEnrolled || "",
-      CurrentUniversityCountry2:
-        applicantStageThree?.data?.stage2?.currentUniversityCountry2 || "",
-      SchoolCountry2: applicantStageThree?.data?.stage2?.schoolCountry2 || "",
-      applicantFiles:
-        applicantStageThree?.data?.applicantTest > 0
-          ? applicantStageThree?.data?.applicantTest?.map((test) => ({
-              testType: test.testType.toString(),
-              academicDocument: test.academicDocument || "",
-              dateTaken: new Date(test.dateTaken).toISOString().split("T")[0],
-              registrationNumber: test.registrationNumber || "",
-              totalScore: test.totalScore || "",
-            }))
-          : [
-              {
-                testType: "",
-                academicDocument: "",
-                dateTaken: "",
-                registrationNumber: "",
-                totalScore: "",
-              },
-            ],
-
-      PersonalStatement:
-        applicantStageThree?.data?.stage2?.personalStatement || "",
-      applingAs: localStorage.getItem("applyingAs"),
-      EmploymentStatus:
-        applicantStageThree?.data?.stage2?.employmentStatus || "",
-      EmploymentSector:
-        applicantStageThree?.data?.stage2?.employmentSector || "",
-      CompanyName: applicantStageThree?.data?.stage2?.companyName || "",
-      JobTitle: applicantStageThree?.data?.stage2?.jobTitle || "",
-      YearsOfExperience:
-        applicantStageThree?.data?.stage2?.yearsOfExperience || "",
-      ReferanceTitle: applicantStageThree?.data?.stage2?.referanceTitle || "",
-      ReferanceName: applicantStageThree?.data?.stage2?.referanceName || "",
-      ReferanceEmail: applicantStageThree?.data?.stage2?.referanceEmail || "",
-      KnowTheReferance:
-        applicantStageThree?.data?.stage2?.knowTheReferance || "",
-      SendTheLetterRecomendation:
-        applicantStageThree?.data?.stage2?.sendTheLetterRecomendation || "",
-      ReadAndUnderstand:
-        applicantStageThree?.data?.stage2?.readAndUnderstand || "",
-      CV: applicantStageThree?.data?.stage2?.personalStatement || "",
-    });
+    const [init, setInit] = useState({});
     useEffect(() => {
       const initialvalues = {
         CurrentUniversityCountry:
@@ -119,7 +60,7 @@ const RegisterFormStep2 = forwardRef(
           applicantStageThree?.data?.stage2?.currentUniversityCountry2 || "",
         SchoolCountry2: applicantStageThree?.data?.stage2?.schoolCountry2 || "",
         applicantFiles:
-          applicantStageThree?.data?.applicantTest > 0
+          applicantStageThree?.data?.applicantTest.length > 0
             ? applicantStageThree?.data?.applicantTest?.map((test) => ({
                 testType: test.testType.toString(),
                 academicDocument: test.academicDocument || "",
@@ -141,33 +82,39 @@ const RegisterFormStep2 = forwardRef(
           applicantStageThree?.data?.stage2?.personalStatement || "",
         applingAs: localStorage.getItem("applyingAs"),
         EmploymentStatus:
-          applicantStageThree?.data?.stage2?.employmentStatus || "",
+          applicantStageThree?.data?.applicantReferance?.employmentStatus || "",
         EmploymentSector:
-          applicantStageThree?.data?.stage2?.employmentSector || "",
-        CompanyName: applicantStageThree?.data?.stage2?.companyName || "",
-        JobTitle: applicantStageThree?.data?.stage2?.jobTitle || "",
+          applicantStageThree?.data?.applicantReferance?.employmentSector || "",
+        CompanyName:
+          applicantStageThree?.data?.applicantReferance?.companyName || "",
+        JobTitle: applicantStageThree?.data?.applicantReferance?.jobTitle || "",
         YearsOfExperience:
-          applicantStageThree?.data?.stage2?.yearsOfExperience || "",
-        ReferanceTitle: applicantStageThree?.data?.stage2?.referanceTitle || "",
-        ReferanceName: applicantStageThree?.data?.stage2?.referanceName || "",
-        ReferanceEmail: applicantStageThree?.data?.stage2?.referanceEmail || "",
+          applicantStageThree?.data?.applicantReferance?.yearsOfExperience ||
+          "",
+        ReferanceTitle:
+          applicantStageThree?.data?.applicantReferance?.referanceTitle || "",
+        ReferanceName:
+          applicantStageThree?.data?.applicantReferance?.referanceName || "",
+        ReferanceEmail:
+          applicantStageThree?.data?.applicantReferance?.referanceEmail || "",
         KnowTheReferance:
-          applicantStageThree?.data?.stage2?.knowTheReferance || "",
+          applicantStageThree?.data?.applicantReferance?.knowTheReferance || "",
         SendTheLetterRecomendation:
-          applicantStageThree?.data?.stage2?.sendTheLetterRecomendation || "",
+          applicantStageThree?.data?.applicantReferance
+            ?.sendTheLetterRecomendation || "",
         ReadAndUnderstand:
-          applicantStageThree?.data?.stage2?.readAndUnderstand || "",
-        CV: applicantStageThree?.data?.stage2?.personalStatement || "",
+          applicantStageThree?.data?.applicantReferance?.readAndUnderstand ||
+          "",
+        CV:
+          applicantStageThree?.data?.applicantReferance?.personalStatement ||
+          "",
       };
       setInit(initialvalues);
     }, [applicantStageThree]);
 
     const handleAddStageThree = (values) => {
-      console.log("valuessssssssssssssssssssssssssssssssss,values", values);
       addApplicantStageThree(values, {
         onSuccess: (data) => {
-          console.log("submitteddddddddddddddd");
-
           setInit({});
         },
         onError: (error) => {
@@ -179,9 +126,7 @@ const RegisterFormStep2 = forwardRef(
     console.log("stage3", applicantStageThree);
     const handleAddFiles = (values) => {
       addFiles(values, {
-        onSuccess: (data) => {
-          console.log("submitteddddddddddddddddd");
-        },
+        onSuccess: (data) => {},
         onError: (error) => {
           console.error("An error occurred:", error);
         },
@@ -190,9 +135,9 @@ const RegisterFormStep2 = forwardRef(
     useEffect(() => {
       refetchStageThree();
     }, []);
-    useEffect(() => {
-      console.log(init);
-    }, [init]);
+    // useEffect(() => {
+    //   console.log(init);
+    // }, [init]);
 
     const formik = useFormik({
       initialValues: init,
@@ -204,7 +149,8 @@ const RegisterFormStep2 = forwardRef(
 
         formData.append("ApplicantId", applicantId);
         formData.append("ApplicationId", applicationId);
-
+        formData.append("IsSaved", true);
+        formData.append("NextActiveStep", activeStep + 1);
         function appendIfDefined(formData, key, value) {
           if (value !== undefined) {
             formData.append(key, value);
@@ -228,13 +174,15 @@ const RegisterFormStep2 = forwardRef(
           "ReferanceTitle",
           "ReferanceName",
           "SendTheLetterRecomendation",
-          "PersonalStatement"
+          "PersonalStatement",
+          "CompanyName",
+          "YearsOfExperience",
         ];
-        
-        fieldsToAppend.forEach(field => {
+
+        fieldsToAppend.forEach((field) => {
           appendIfDefined(formData, field, values[field]);
         });
-        
+
         if (values.CV !== undefined) {
           formData.append("CV", values.CV);
         }
@@ -259,6 +207,10 @@ const RegisterFormStep2 = forwardRef(
           formDataFile.append(
             `applicantFiles[${index}].applicantId`,
             applicantId
+          );
+          formDataFile.append(
+            `applicantFiles[${index}].applicationId`,
+            applicationId
           );
           formDataFile.append(
             `applicantFiles[${index}].testType`,
@@ -300,7 +252,7 @@ const RegisterFormStep2 = forwardRef(
       setApplyingAs(parseInt(localStorage.getItem("applingAs")));
       setApplicationStart(localStorage.getItem("applicationStart"));
     }, []);
-    console.log("formik", formik);
+
     return (
       <div className='form-subcontainer '>
         <FormikProvider value={formik} innerRef={ref}>

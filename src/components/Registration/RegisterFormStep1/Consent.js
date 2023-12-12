@@ -29,22 +29,22 @@ const Consent = () => {
       />
       <div className='d-flex justify-content-between'>
         <BulletedText
-          items={[{ text: "Student name" }, { text: "address(es)" }]}
+          items={[{ text: "Student name" }, { text: "Address(es)" }]}
         />
         <BulletedText
           items={[
-            { text: "telephone number(s)" },
-            { text: "e-mail address(es)" },
+            { text: "Telephone Number(s)" },
+            { text: "E-mail Address(es)" },
           ]}
         />
         <BulletedText
           items={[
-            { text: "birth date and place" },
-            { text: "program of study" },
+            { text: "Birth Date and Place" },
+            { text: "Program of Study" },
           ]}
         />
         <BulletedText
-          items={[{ text: "dates of attendance and credentials awarded." }]}
+          items={[{ text: "ates of Attendance and Credentials AAwarded." }]}
         />
       </div>
       <TextComponent

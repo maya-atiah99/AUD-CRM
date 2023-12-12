@@ -61,16 +61,13 @@ const DocumentUpload = ({
         <img src='/images/Layer 25.svg' alt='layer' />
         <input type='file' className='file-input' onChange={handleFileChange} />
         <p className='p-style'>
-          {/* {formik.values[name] !== ""
-            ? formik.values[name]
-            : selectedFile
-            ? selectedFile.name
-            : text} */}
-          {selectedFile ? selectedFile?.name || selectedFile?.fileName : text}
-
-          {/* {fileName ? fileName : text} */}
-
-          {errors && touched && <span className='error-message'>{errors}</span>}
+          {errors && touched ? (
+            <span className='error-message'>{errors}</span>
+          ) : selectedFile ? (
+            selectedFile.name || selectedFile.fileName
+          ) : (
+            text
+          )}
         </p>
 
         {selectedFile ? (

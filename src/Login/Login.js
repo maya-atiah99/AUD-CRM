@@ -7,6 +7,7 @@ import { useApplicantLogin } from "../Hooks/Login";
 import LoginValidationSchema from "../ValidationSchemas/loginValidationSchema";
 import { Formik, Form } from "formik";
 import { useNavigate } from "react-router-dom";
+import toast from "react-hot-toast";
 
 const Login = ({
   setShowLoginModal,
@@ -20,9 +21,8 @@ const Login = ({
   setApplyingAs,
 }) => {
   const [manageShowInterest, setManageshowInterest] = useState(false);
-  const navigate = useNavigate();
   const { mutate: login } = useApplicantLogin();
-
+  const [errorMessage, setErrorMessage] = useState("");
   const initialValues = {
     username: "",
     password: "",
@@ -37,7 +37,7 @@ const Login = ({
       <Formik
         initialValues={initialValues}
         validationSchema={LoginValidationSchema}
-        onSubmit={(values) => {
+        onSubmit={(values, { setFieldError }) => {
           console.log("test", values);
 
           login(values, {
@@ -82,6 +82,9 @@ const Login = ({
             },
             onError: (error) => {
               console.error("An error occurred:", error);
+              toast.error("Wrong Email or Password");
+              setFieldError("error");
+              setErrorMessage("error");
             },
           });
         }}
@@ -95,7 +98,6 @@ const Login = ({
           handleSubmit,
           isSubmitting,
         }) => {
-          console.log(values);
           return (
             <Form>
               <div className='login-container'>
@@ -107,7 +109,7 @@ const Login = ({
                   onChange={(name, value) => {
                     setFieldValue(name, value);
                   }}
-                  errors={errors.username}
+                  errors={errors.username || errorMessage}
                   touched={touched.username}
                 />
                 <TextBox
@@ -119,7 +121,7 @@ const Login = ({
                   onChange={(name, value) => {
                     setFieldValue(name, value);
                   }}
-                  errors={errors.password}
+                  errors={errors.password || errorMessage}
                   touched={touched.password}
                 />
                 <AUDButton

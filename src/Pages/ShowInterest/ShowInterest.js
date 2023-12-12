@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import LogoContainer from "../../components/LogoContainer.js";
 import ShowInterestFormContainer from "../../components/ShowInterest/ShowInterestFormContainer.js";
 import ShowInterestVideo from "../../assets/video/background-video.mp4";
 import VerticalLine from "../../components/Texts/VerticalLine.js";
@@ -11,6 +10,7 @@ import { API_URL } from "../../Constants.js";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import ApplicationsModal from "../../Login/ApplicationsModal.js";
+import { Toaster } from "react-hot-toast";
 
 const ShowInterest = ({
   setApplicantId,
@@ -199,6 +199,7 @@ const ShowInterest = ({
           setApplyingAs={setApplyingAs}
         />
       )}
+      <Toaster />
     </div>
   );
 };

@@ -101,6 +101,10 @@ const getValidationSchemaStep1 = (applicationStart, applingAs) => {
     baseSchema.CurrentPlaceOfStudy = baseSchema.CurrentPlaceOfStudy.required(
       "Current Place Of study is required"
     );
+  }else{
+    baseSchema.CurrentPlaceOfStudy = baseSchema.CurrentPlaceOfStudy.notRequired(
+      "Current Place Of study is required"
+    );
   }
 
   

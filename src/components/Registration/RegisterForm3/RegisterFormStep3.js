@@ -17,7 +17,10 @@ import {
 } from "../../../Hooks/Appplicant";
 import Declaration from "./Declaration";
 const RegisterFormStep3 = forwardRef(
-  ({ applicantId, applicationId, applingAs, applicationStart }, ref) => {
+  (
+    { applicantId, applicationId, applingAs, applicationStart, activeStep },
+    ref
+  ) => {
     const { data: applicantStageFour, refetch: refetchStageFour } =
       useFetchApplicantStageFour(applicantId, applicationId);
     const [showModal, setShowModal] = useState(false);
@@ -71,6 +74,8 @@ const RegisterFormStep3 = forwardRef(
         const formData = new FormData();
         formData.append("ApplicantId", applicantId);
         formData.append("ApplicationId", applicationId);
+        formData.append("IsSaved", true);
+        formData.append("NextActiveStep", activeStep + 1);
         formData.append(
           "ProgramInformationCheck",
           values.ProgramInformationCheck

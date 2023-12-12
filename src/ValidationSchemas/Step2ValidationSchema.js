@@ -5,7 +5,7 @@ const getValidationSchemaStep2 = (applicationStart, applingAs) => {
     CurrentUniversityCountry: Yup.string().notRequired("Country is required"),
     SchoolCountry: Yup.string().notRequired("University Name is required"),
     DiplomaType: Yup.string().notRequired("High school diploma is required"),
-    GraduationYear: Yup.date().notRequired(),
+    GraduationYear: Yup.date(),
     ListAdvancedCources: Yup.string().notRequired(),
     DiplomaFile: Yup.mixed().required(),
     ActivitiesNotEnrolled: Yup.string().notRequired(),
@@ -22,7 +22,6 @@ const getValidationSchemaStep2 = (applicationStart, applingAs) => {
         totalScore: Yup.number().required("Total score is required"),
       })
     ),
-    AcademicDocument: Yup.mixed(),
     PersonalStatement: Yup.mixed(),
     EmploymentStatus: Yup.string(),
     EmploymentSector: Yup.string(),
@@ -38,7 +37,7 @@ const getValidationSchemaStep2 = (applicationStart, applingAs) => {
     CV: Yup.mixed(),
   };
 
-  if (applicationStart !== "2") {
+  if (applicationStart !== "2" && applingAs!==5) {
     baseSchema.GraduationYear = baseSchema.GraduationYear.required(
       "Graduation Year is required"
     );

@@ -41,6 +41,7 @@ const RegisterPage = ({
   );
   const [showThree, setShowThree] = useState(false);
   const [fetchedData, setfetchedData] = useState({});
+  const [isSaved, setIsSaved] = useState(true);
   const { data: applicantStageOne, refetch: refetchStageOne } =
     useFetchApplicantStageOne(applicantId);
   const { data: applicantStageTwo, refetch: refetchStageTwo } =
@@ -66,6 +67,8 @@ const RegisterPage = ({
               applingAs={applingAs}
               setApplyingAs={setApplyingAs}
               applicationStart={applicationStart}
+              isSaved={isSaved}
+              setIsSaved={setIsSaved}
             />
           ),
           ref: formikRefStep1,
@@ -87,6 +90,8 @@ const RegisterPage = ({
               applingAs={applingAs}
               setApplyingAs={setApplyingAs}
               applicationStart={applicationStart}
+              isSaved={isSaved}
+              setIsSaved={setIsSaved}
             />
           ),
           ref: formikRefStep2,
@@ -113,6 +118,8 @@ const RegisterPage = ({
               applingAs={applingAs}
               activeStep={activeStep}
               applicationStart={applicationStart}
+              isSaved={isSaved}
+              setIsSaved={setIsSaved}
             />
           ),
           ref: formikRefStep3,
@@ -145,6 +152,8 @@ const RegisterPage = ({
               applingAs={applingAs}
               setApplyingAs={setApplyingAs}
               applicationStart={applicationStart}
+              isSaved={isSaved}
+              setIsSaved={setIsSaved}
             />
           ),
           ref: formikRefStep1,
@@ -163,6 +172,8 @@ const RegisterPage = ({
               applingAs={applingAs}
               activeStep={activeStep}
               applicationStart={applicationStart}
+              isSaved={isSaved}
+              setIsSaved={setIsSaved}
             />
           ),
           ref: formikRefStep3,
@@ -195,6 +206,8 @@ const RegisterPage = ({
               applingAs={applingAs}
               setApplyingAs={setApplyingAs}
               applicationStart={applicationStart}
+              isSaved={isSaved}
+              setIsSaved={setIsSaved}
             />
           ),
           ref: formikRefStep1,
@@ -216,6 +229,8 @@ const RegisterPage = ({
               setApplyingAs={setApplyingAs}
               applicationStart={applicationStart}
               activeStep={activeStep}
+              isSaved={isSaved}
+              setIsSaved={setIsSaved}
             />
           ),
           ref: formikRefStep2,
@@ -234,6 +249,8 @@ const RegisterPage = ({
               applingAs={applingAs}
               applicationStart={applicationStart}
               activeStep={activeStep}
+              isSaved={isSaved}
+              setIsSaved={setIsSaved}
             />
           ),
           ref: formikRefStep3,
@@ -279,6 +296,8 @@ const RegisterPage = ({
   }, [applicationStart, applingAs]);
 
   const handeleSubmit = (step) => {
+    console.log(step);
+    console.log("entereeeddddddddddd");
     steps[step].ref.current?.submitForm();
   };
 
@@ -286,16 +305,7 @@ const RegisterPage = ({
     if (next) handeleSubmit(activeStep);
     setTimeout(() => {
       if (next) {
-        console.log(
-          "steps[activeStep].ref.current?.isValid",
-          steps[activeStep].ref.current?.isValid
-        );
-
         if (steps[activeStep].ref.current?.isValid) {
-          console.log(
-            "steps[activeStep].ref.current?.isValid",
-            steps[activeStep].ref.current?.isValid
-          );
           if (activeStep < steps.length - 1) {
             if (activeStep === 0) {
               setShowInterest(false);
@@ -311,27 +321,17 @@ const RegisterPage = ({
   };
 
   const handleSave = (next) => {
-    if (next) handeleSubmit(activeStep);
+    setIsSaved(!isSaved);
+    console.log(isSaved)
+    console.log('fdjfdfnjrnfjrnjgnrjngjrngjrn')
+    console.log('78527827832')
+
     setTimeout(() => {
+    if (next) handeleSubmit(activeStep);
+
       if (next) {
-        if (activeStep === 0 && formikRefStep1.current?.isValid) {
-          if (activeStep < steps.length - 1) {
-            navigate("/");
-            localStorage.clear();
-          }
-        } else if (activeStep === 1 && formikRefStep2.current?.isValid) {
-          if (activeStep < steps.length - 1) {
-            navigate("/");
-            localStorage.clear();
-          }
-        } else if (activeStep === 2 && formikRefStep3.current?.isValid) {
-          if (activeStep < steps.length - 1) {
-            navigate("/");
-            localStorage.clear();
-          }
-        } else {
-          window.scrollTo(0, 0);
-        }
+        navigate("/");
+        localStorage.clear();
       }
     }, [100]);
   };

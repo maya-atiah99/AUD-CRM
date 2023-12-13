@@ -18,7 +18,8 @@ import {
 import Declaration from "./Declaration";
 const RegisterFormStep3 = forwardRef(
   (
-    { applicantId, applicationId, applingAs, applicationStart, activeStep },
+    { applicantId, applicationId, applingAs, applicationStart, activeStep, isSaved,
+      setIsSaved },
     ref
   ) => {
     const { data: applicantStageFour, refetch: refetchStageFour } =
@@ -58,6 +59,7 @@ const RegisterFormStep3 = forwardRef(
         onError: (error) => {
           console.error("An error occurred:", error);
           setInit({});
+          setIsSaved(false)
         },
       });
     };
@@ -74,7 +76,7 @@ const RegisterFormStep3 = forwardRef(
         const formData = new FormData();
         formData.append("ApplicantId", applicantId);
         formData.append("ApplicationId", applicationId);
-        formData.append("IsSaved", true);
+        formData.append("IsSaved", isSaved);
         formData.append("NextActiveStep", activeStep + 1);
         formData.append(
           "ProgramInformationCheck",

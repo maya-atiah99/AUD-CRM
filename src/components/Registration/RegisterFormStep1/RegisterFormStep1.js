@@ -25,7 +25,9 @@ const RegisterFormStep1 = forwardRef(
       applingAs,
       applicationStart,
       setApplyingAs,
-      activeStep
+      activeStep,
+      isSaved,
+      setIsSaved,
     },
     ref
   ) => {
@@ -183,9 +185,12 @@ const RegisterFormStep1 = forwardRef(
     }, [fetchedData]);
 
     const handleAddStageTwo = (values) => {
+      console.log("entered hereeeeeeeeeeeeeeeeee");
+      console.log(values);
       addApplicantStagetwo(values, {
         onSuccess: (data) => {
           setInit({});
+          setIsSaved(true);
         },
         onError: (error) => {
           console.error("An error occurred:", error);
@@ -215,12 +220,14 @@ const RegisterFormStep1 = forwardRef(
     // useEffect(() => {
     //   console.log(init);
     // }, [init]);
-
+    console.log(isSaved);
     const formik = useFormik({
       initialValues: init,
       validationSchema: getValidationSchemaStep1(applicationStart, applingAs),
       enableReinitialize: true,
       onSubmit: (values) => {
+        console.log("entered dubmittttttttttttttttttt hereeeeeeeeeeeeeeeeee");
+
         localStorage.setItem("applingAs", formik.values?.ApplingAs);
         localStorage.setItem(
           "applicationStart",
@@ -231,8 +238,8 @@ const RegisterFormStep1 = forwardRef(
         const formData = new FormData();
         formData.append("ApplicantId", applicantId);
         formData.append("ApplicationId", applicationId);
-        formData.append("IsSaved", true);
-        formData.append("NextActiveStep", activeStep+1);
+        formData.append("IsSaved", isSaved);
+        formData.append("NextActiveStep", activeStep + 1);
         for (const key in values) {
           if (values[key] !== undefined || values[key] !== "") {
             if (key === "DOB") {

@@ -29,6 +29,8 @@ const RegisterFormStep2 = forwardRef(
       applicationStart,
       setApplyingAs,
       activeStep,
+      isSaved,
+      setIsSaved
     },
     ref
   ) => {
@@ -116,6 +118,7 @@ const RegisterFormStep2 = forwardRef(
       addApplicantStageThree(values, {
         onSuccess: (data) => {
           setInit({});
+          setIsSaved(true)
         },
         onError: (error) => {
           console.error("An error occurred:", error);
@@ -133,8 +136,9 @@ const RegisterFormStep2 = forwardRef(
       });
     };
     useEffect(() => {
-      refetchStageThree();
+      refetchStageThree(applicantId, applicationId);
     }, []);
+
     // useEffect(() => {
     //   console.log(init);
     // }, [init]);
@@ -149,7 +153,7 @@ const RegisterFormStep2 = forwardRef(
 
         formData.append("ApplicantId", applicantId);
         formData.append("ApplicationId", applicationId);
-        formData.append("IsSaved", true);
+        formData.append("IsSaved", isSaved);
         formData.append("NextActiveStep", activeStep + 1);
         function appendIfDefined(formData, key, value) {
           if (value !== undefined) {

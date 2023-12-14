@@ -34,24 +34,24 @@ const ProgramInformation = () => {
       </div>
       <SquareCheckBox
         text='Yes'
-        name='FullHealthCheck'
-        value={formik.values.FullHealthCheck}
+        name='HealthChalenges'
+        value={formik.values.HealthChalenges}
         onChange={(checked) => {
-          formik.setFieldValue("FullHealthCheck", checked);
+          formik.setFieldValue("HealthChalenges", checked);
         }}
-        errors={formik.errors?.FullHealthCheck}
-        touched={formik.errors?.FullHealthCheck}
+        errors={formik.errors?.HealthChalenges}
+        touched={formik.errors?.HealthChalenges}
       />
       <TextArea
         label='Please Provide Details:'
         rows='5'
-        name='Details'
-        value={formik.values.Details}
+        name='HealthComments'
+        value={formik.values.HealthComments}
         onChange={(name, value) => {
           formik.setFieldValue(name, value);
         }}
-        errors={formik.errors?.Details}
-        touched={formik.touched?.Details}
+        errors={formik.errors?.HealthComments}
+        touched={formik.touched?.HealthComments}
       />
     </div>
   );

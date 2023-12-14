@@ -18,8 +18,7 @@ import {
 import Declaration from "./Declaration";
 const RegisterFormStep3 = forwardRef(
   (
-    { applicantId, applicationId, applingAs, applicationStart, activeStep, isSaved,
-      setIsSaved },
+    { applicantId, applicationId, applingAs, applicationStart, activeStep },
     ref
   ) => {
     const { data: applicantStageFour, refetch: refetchStageFour } =
@@ -29,8 +28,8 @@ const RegisterFormStep3 = forwardRef(
     const [init, setInit] = useState({});
 
     useEffect(() => {
-      console.log("initiallll", init);
       const initialvalues = {
+        isSaved: true,
         ProgramInformationCheck:
           applicantStageFour?.data?.stage2?.programInformationCheck || false,
         ImportantNotesCheck:
@@ -39,16 +38,13 @@ const RegisterFormStep3 = forwardRef(
           applicantStageFour?.data?.stage2?.termAndConditionCheck || false,
         UndergroundCatalogCheck:
           applicantStageFour?.data?.stage2?.undergroundCatalogCheck || false,
-        Details: "",
-        FullHealthCheck: false,
+        HealthComments: applicantStageFour?.data?.stage2?.healthComments || "",
+        HealthChalenges:
+          applicantStageFour?.data?.stage2?.healthChalenges || false,
         AcceptResponsibilitiesCheck: false,
         RecordsCheck: false,
       };
-
-      console.log("rferferf", initialvalues);
-
       setInit(initialvalues);
-      console.log("initiferferferferallll", initialvalues);
     }, [applicantStageFour]);
 
     const handleAddStageFour = (values) => {
@@ -59,7 +55,6 @@ const RegisterFormStep3 = forwardRef(
         onError: (error) => {
           console.error("An error occurred:", error);
           setInit({});
-          setIsSaved(false)
         },
       });
     };
@@ -76,8 +71,10 @@ const RegisterFormStep3 = forwardRef(
         const formData = new FormData();
         formData.append("ApplicantId", applicantId);
         formData.append("ApplicationId", applicationId);
-        formData.append("IsSaved", isSaved);
+        formData.append("IsSaved",formik.values.isSaved);
         formData.append("NextActiveStep", activeStep + 1);
+        formData.append("HealthChalenges", values.HealthChalenges);
+        formData.append("HealthComments", values.HealthComments);
         formData.append(
           "ProgramInformationCheck",
           values.ProgramInformationCheck
@@ -88,6 +85,11 @@ const RegisterFormStep3 = forwardRef(
           "UndergroundCatalogCheck",
           values.UndergroundCatalogCheck
         );
+        for (const key in values) {
+          if (values[key] !== undefined || values[key] !== "") {
+            formData.append(key, values[key]);
+          }
+        }
         handleAddStageFour(formData);
       },
     });
@@ -110,6 +112,7 @@ const RegisterFormStep3 = forwardRef(
     // useEffect(() => {
     //   refetchStageFour();
     // }, []);
+    console.log(applicantStageFour);
     return (
       <>
         <div className='form-subcontainer'>

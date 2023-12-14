@@ -7,7 +7,7 @@ import { useFormikContext } from "formik";
 
 const CardDetails = () => {
   const formik = useFormikContext();
-  const cardType = formik.values.paymentDetails.cardDetails.cardType;
+  const cardType = formik.values.paymentDetails.cardDetails.CardType;
 
   return (
     <div className='payment-subcontainer'>
@@ -21,7 +21,7 @@ const CardDetails = () => {
             icon='/images/visa.png'
             handleOnClick={() =>
               formik.setFieldValue(
-                "paymentDetails.cardDetails.cardType",
+                "paymentDetails.cardDetails.CardType",
                 "visa"
               )
             }
@@ -31,7 +31,7 @@ const CardDetails = () => {
             icon='/images/masterCard.png'
             handleOnClick={() =>
               formik.setFieldValue(
-                "paymentDetails.cardDetails.cardType",
+                "paymentDetails.cardDetails.CardType",
                 "master card"
               )
             }
@@ -41,49 +41,49 @@ const CardDetails = () => {
       <TextBox
         label='Card Number'
         required={true}
-        name='paymentDetails.cardDetails.cardNumber'
-        value={formik.values.paymentDetails.cardDetails.cardNumber}
+        name='paymentDetails.cardDetails.EncryptedCardNumber'
+        value={formik.values.paymentDetails.cardDetails.EncryptedCardNumber}
         onChange={(name, value) => {
           formik.setFieldValue(name, value);
         }}
-        errors={formik.errors?.paymentDetails?.cardDetails?.cardNumber}
-        touched={formik.touched?.paymentDetails?.cardDetails?.cardNumber}
+        errors={formik.errors?.paymentDetails?.cardDetails?.EncryptedCardNumber}
+        touched={formik.touched?.paymentDetails?.cardDetails?.EncryptedCardNumber}
       />
       <div className='d-flex gap-1'>
         <DropDown
           label='Expiration Year'
           required={true}
           isYear={true}
-          name='paymentDetails.cardDetails.expirationYear'
-          value={formik.values.paymentDetails.cardDetails.expirationYear}
+          name='paymentDetails.cardDetails.ExpirationYear'
+          value={formik.values.paymentDetails.cardDetails.ExpirationYear}
           onChange={(name, value) => {
             formik.setFieldValue(name, value);
           }}
-          errors={formik.errors?.paymentDetails?.cardDetails?.expirationYear}
-          touched={formik.touched?.paymentDetails?.cardDetails?.expirationYear}
+          errors={formik.errors?.paymentDetails?.cardDetails?.ExpirationYear}
+          touched={formik.touched?.paymentDetails?.cardDetails?.ExpirationYear}
         />
         <DropDown
           label='Expiration Month'
           required={true}
           isMonth={true}
-          name='paymentDetails.cardDetails.expirationMonth'
-          value={formik.values.paymentDetails.cardDetails.expirationMonth}
+          name='paymentDetails.cardDetails.ExpirationMonth'
+          value={formik.values.paymentDetails.cardDetails.ExpirationMonth}
           onChange={(name, value) => {
             formik.setFieldValue(name, value);
           }}
-          errors={formik.errors?.paymentDetails?.cardDetails?.expirationMonth}
-          touched={formik.touched?.paymentDetails?.cardDetails?.expirationMonth}
+          errors={formik.errors?.paymentDetails?.cardDetails?.ExpirationMonth}
+          touched={formik.touched?.paymentDetails?.cardDetails?.ExpirationMonth}
         />
         <TextBox
           label='CVV'
           required={true}
-          name='paymentDetails.cardDetails.cvv'
-          value={formik.values.paymentDetails.cardDetails.cvv}
+          name='paymentDetails.cardDetails.CVV'
+          value={formik.values.paymentDetails.cardDetails.CVV}
           onChange={(name, value) => {
             formik.setFieldValue(name, value);
           }}
-          errors={formik.errors?.paymentDetails?.cardDetails?.cvv}
-          touched={formik.touched?.paymentDetails?.cardDetails?.cvv}
+          errors={formik.errors?.paymentDetails?.cardDetails?.CVV}
+          touched={formik.touched?.paymentDetails?.cardDetails?.CVV}
         />
       </div>
       <AUDButton

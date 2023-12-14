@@ -45,21 +45,6 @@ const Login = ({
               setApplicantId(data?.data?.applicantId);
               localStorage.setItem("applicantId", data?.data?.applicantId);
               localStorage.setItem("fullName", data?.data?.fullName);
-              // localStorage.setItem(
-              //   "message",
-              //   (() => {
-              //     if (data?.data?.message === "Stage1") {
-              //       setManageshowInterest(true);
-              //       return 0;
-              //     } else if (data?.data?.message === "Stage2") {
-              //       return 1;
-              //     } else if (data?.data?.message === "Stage3") {
-              //       return 2;
-              //     }
-              //     return 3;
-              //   })()
-              // );
-
               localStorage.setItem(
                 "applicationStart",
                 data?.data?.applicationStart
@@ -71,12 +56,6 @@ const Login = ({
                 "manageShowInterest,manageShowInterest",
                 manageShowInterest
               );
-              // navigate("/register", {
-              //   state: {
-              //     activeStep: localStorage.getItem("message"),
-              //     showInterest: data?.data?.message === "Stage1" ? true : false,
-              //   },
-              // });
               setShowApplicatiosModal(true);
               setShowLoginModal(false);
             },
@@ -119,7 +98,14 @@ const Login = ({
                   name='password'
                   value={values.password}
                   onChange={(name, value) => {
-                    setFieldValue(name, value);
+                    var CryptoJS = require("crypto-js");
+                    const secretKey = "AUD-CTS-109812jfgiubfg435345"; // Replace this with your secret key
+                    const encryptedData = CryptoJS.AES.encrypt(
+                      JSON.stringify(value),
+                      secretKey
+                    ).toString();
+
+                    setFieldValue(name, encryptedData);
                   }}
                   errors={errors.password || errorMessage}
                   touched={touched.password}

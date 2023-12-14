@@ -33,10 +33,11 @@ const TextBox = ({
   };
 
   useEffect(() => {
-    setInitialValue(value);
+    {
+      !type && setInitialValue(value);
+    }
   }, [value]);
 
-  
   return (
     <div className='textBox-container'>
       <label htmlFor={label}>

@@ -62,6 +62,20 @@ export const useAddFiles = () => {
   return useMutation(addFiles);
 };
 
+
+/***********************Payment */
+const payment = (applicant) => {
+  return axios.post(API_URL + `/api/Applicant/PostPayment`, applicant, {
+    headers: {
+      "Content-Type": "multipart/form-data",
+    },
+  });
+};
+
+export const usePayment = () => {
+  return useMutation(payment);
+};
+
 /**************Fetch  Applicant stage 1 */
 const fetchApplicantStageOne = async (applicantId) => {
   return await axios.get(

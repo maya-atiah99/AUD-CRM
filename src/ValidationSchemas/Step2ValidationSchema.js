@@ -2,6 +2,7 @@ import * as Yup from "yup";
 
 const getValidationSchemaStep2 = (applicationStart, applingAs) => {
   let baseSchema = {
+   
     CurrentUniversityCountry: Yup.string().notRequired("Country is required"),
     SchoolCountry: Yup.string().notRequired("University Name is required"),
     DiplomaType: Yup.string().notRequired("High school diploma is required"),
@@ -22,6 +23,7 @@ const getValidationSchemaStep2 = (applicationStart, applingAs) => {
         totalScore: Yup.number().required("Total score is required"),
       })
     ),
+    isSaved:Yup.boolean(),
     PersonalStatement: Yup.mixed(),
     EmploymentStatus: Yup.string(),
     EmploymentSector: Yup.string(),
@@ -37,7 +39,7 @@ const getValidationSchemaStep2 = (applicationStart, applingAs) => {
     CV: Yup.mixed(),
   };
 
-  if (applicationStart !== "2" && applingAs!==5) {
+  if (applicationStart !== "2" && applingAs !== 5) {
     baseSchema.GraduationYear = baseSchema.GraduationYear.required(
       "Graduation Year is required"
     );
@@ -69,9 +71,7 @@ const getValidationSchemaStep2 = (applicationStart, applingAs) => {
     );
   }
 
-  if (
-    (applicationStart === "0" && applingAs === 1)
-  ) {
+  if (applicationStart === "0" && applingAs === 1) {
     baseSchema.CurrentUniversityCountry2 =
       baseSchema.CurrentUniversityCountry2.required(
         "CurrentUniversityCountry Year is required"
@@ -79,14 +79,14 @@ const getValidationSchemaStep2 = (applicationStart, applingAs) => {
     baseSchema.SchoolCountry2 = baseSchema.SchoolCountry2.required(
       "SchoolCountry Year is required"
     );
-  }else{
+  } else {
     baseSchema.CurrentUniversityCountry2 =
-    baseSchema.CurrentUniversityCountry2.notRequired(
-      "CurrentUniversityCountry Year is required"
+      baseSchema.CurrentUniversityCountry2.notRequired(
+        "CurrentUniversityCountry Year is required"
+      );
+    baseSchema.SchoolCountry2 = baseSchema.SchoolCountry2.notRequired(
+      "SchoolCountry Year is required"
     );
-  baseSchema.SchoolCountry2 = baseSchema.SchoolCountry2.notRequired(
-    "SchoolCountry Year is required"
-  );
   }
 
   if (applicationStart === "1") {

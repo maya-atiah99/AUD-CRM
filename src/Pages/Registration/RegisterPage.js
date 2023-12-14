@@ -41,7 +41,6 @@ const RegisterPage = ({
   );
   const [showThree, setShowThree] = useState(false);
   const [fetchedData, setfetchedData] = useState({});
-  const [isSaved, setIsSaved] = useState(true);
   const { data: applicantStageOne, refetch: refetchStageOne } =
     useFetchApplicantStageOne(applicantId);
   const { data: applicantStageTwo, refetch: refetchStageTwo } =
@@ -60,15 +59,13 @@ const RegisterPage = ({
               ref={formikRefStep1}
               fetchedData={fetchedData}
               applicantId={applicantId}
+              applicationId={applicationId}
               showInterest={showInterest}
               activeStep={activeStep}
-              applicationId={applicationId}
               setApplicationStart={setApplicationStart}
               applingAs={applingAs}
               setApplyingAs={setApplyingAs}
               applicationStart={applicationStart}
-              isSaved={isSaved}
-              setIsSaved={setIsSaved}
             />
           ),
           ref: formikRefStep1,
@@ -90,8 +87,6 @@ const RegisterPage = ({
               applingAs={applingAs}
               setApplyingAs={setApplyingAs}
               applicationStart={applicationStart}
-              isSaved={isSaved}
-              setIsSaved={setIsSaved}
             />
           ),
           ref: formikRefStep2,
@@ -118,8 +113,6 @@ const RegisterPage = ({
               applingAs={applingAs}
               activeStep={activeStep}
               applicationStart={applicationStart}
-              isSaved={isSaved}
-              setIsSaved={setIsSaved}
             />
           ),
           ref: formikRefStep3,
@@ -129,7 +122,13 @@ const RegisterPage = ({
           title: "Pay & Submit",
           previousStep: "Back to Declaration",
           NextStep: "Submit",
-          form: <RegisterFormStep4 activeStep={activeStep} />,
+          form: (
+            <RegisterFormStep4
+              activeStep={activeStep}
+              applicantId={applicantId}
+              applicationId={applicationId}
+            />
+          ),
           ref: formikRefStep4,
         },
       ];
@@ -152,8 +151,6 @@ const RegisterPage = ({
               applingAs={applingAs}
               setApplyingAs={setApplyingAs}
               applicationStart={applicationStart}
-              isSaved={isSaved}
-              setIsSaved={setIsSaved}
             />
           ),
           ref: formikRefStep1,
@@ -172,8 +169,6 @@ const RegisterPage = ({
               applingAs={applingAs}
               activeStep={activeStep}
               applicationStart={applicationStart}
-              isSaved={isSaved}
-              setIsSaved={setIsSaved}
             />
           ),
           ref: formikRefStep3,
@@ -183,7 +178,13 @@ const RegisterPage = ({
           title: "Pay & Submit",
           previousStep: "Back to Declaration",
           NextStep: "Submit",
-          form: <RegisterFormStep4 activeStep={activeStep} />,
+          form: (
+            <RegisterFormStep4
+              activeStep={activeStep}
+              applicantId={applicantId}
+              applicationId={applicationId}
+            />
+          ),
           ref: formikRefStep4,
         },
       ];
@@ -206,8 +207,6 @@ const RegisterPage = ({
               applingAs={applingAs}
               setApplyingAs={setApplyingAs}
               applicationStart={applicationStart}
-              isSaved={isSaved}
-              setIsSaved={setIsSaved}
             />
           ),
           ref: formikRefStep1,
@@ -229,8 +228,6 @@ const RegisterPage = ({
               setApplyingAs={setApplyingAs}
               applicationStart={applicationStart}
               activeStep={activeStep}
-              isSaved={isSaved}
-              setIsSaved={setIsSaved}
             />
           ),
           ref: formikRefStep2,
@@ -249,8 +246,6 @@ const RegisterPage = ({
               applingAs={applingAs}
               applicationStart={applicationStart}
               activeStep={activeStep}
-              isSaved={isSaved}
-              setIsSaved={setIsSaved}
             />
           ),
           ref: formikRefStep3,
@@ -260,7 +255,13 @@ const RegisterPage = ({
           title: "Pay & Submit",
           previousStep: "Back to Declaration",
           NextStep: "Submit",
-          form: <RegisterFormStep4 activeStep={activeStep} />,
+          form: (
+            <RegisterFormStep4
+              activeStep={activeStep}
+              applicantId={applicantId}
+              applicationId={applicationId}
+            />
+          ),
           ref: formikRefStep4,
         },
       ];
@@ -296,9 +297,13 @@ const RegisterPage = ({
   }, [applicationStart, applingAs]);
 
   const handeleSubmit = (step) => {
-    console.log(step);
-    console.log("entereeeddddddddddd");
-    steps[step].ref.current?.submitForm();
+    try {
+      console.log("Submitting form for step:", step);
+      console.log("Ref:", steps[step].ref.current);
+      steps[step].ref.current?.submitForm();
+    } catch (error) {
+      console.error("Error submitting form:", error);
+    }
   };
 
   const handleChange = (next) => {
@@ -321,19 +326,12 @@ const RegisterPage = ({
   };
 
   const handleSave = (next) => {
-    setIsSaved(!isSaved);
-    console.log(isSaved)
-    console.log('fdjfdfnjrnfjrnjgnrjngjrngjrn')
-    console.log('78527827832')
-
-    setTimeout(() => {
+    steps[activeStep].ref.current?.setFieldValue("isSaved", false);
     if (next) handeleSubmit(activeStep);
-
-      if (next) {
-        navigate("/");
-        localStorage.clear();
-      }
-    }, [100]);
+    // setTimeout(() => {
+    //   navigate("/");
+    //   localStorage.clear();
+    // }, 400);
   };
 
   useEffect(() => {
@@ -383,16 +381,17 @@ const RegisterPage = ({
           setActiveStep={setActiveStep}
         />
         <div className='button-cont-register '>
-          <AUDButton
-            text='Save & Continue Later'
-            handleOnClick={() => handleSave(true)}
-          />
-
           {activeStep !== steps.length - 1 ? (
-            <AUDButton
-              text='Continue To The Next Step'
-              handleOnClick={() => handleChange(true)}
-            />
+            <>
+              <AUDButton
+                text='Save & Continue Later'
+                handleOnClick={() => handleSave(true)}
+              />
+              <AUDButton
+                text='Continue To The Next Step'
+                handleOnClick={() => handleChange(true)}
+              />
+            </>
           ) : (
             <AUDButton
               text='Go Back To Programs Page'

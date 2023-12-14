@@ -32,29 +32,14 @@ const ApplicationsModal = ({
   };
 
   const handleContinueApplication = (item) => {
+    console.log("itemmmmmmmmmmmmm", item);
     localStorage.setItem("applicationId", item.applicationId);
     localStorage.setItem("applicantId", item.applicantId);
     localStorage.setItem("applingAs", item.applyingAs);
     localStorage.setItem("applicationStart", item.startYourApplication);
     setApplicationStart(item.startYourApplication);
     setApplyingAs(item.applyingAs);
-    for (let i = 1; i <= 4; i++) {
-      const currentStageKey = `stage${i}Completed`;
-      const currentStageDate = item[currentStageKey];
-      if (currentStageDate !== null) {
-        console.log(`Stage ${i} is completed on ${currentStageDate}`);
-        if (i < 4) {
-          console.log(`Moving to Stage ${i + 1}`);
-        } else {
-          console.log("All stages are completed.");
-          localStorage.setItem("message", i-1);
-        }
-      } else {
-        console.log(`Stage ${i} is not completed. Returning to Stage ${i}`);
-        localStorage.setItem("message", i - 1);
-        break;
-      }
-    }
+    localStorage.setItem("message", item.nextActiveStep);
     navigate("/register", {
       state: {
         activeStep: localStorage.getItem("message"),
@@ -64,7 +49,7 @@ const ApplicationsModal = ({
   };
   return (
     <ModalComponent
-      width='60%'
+      width='40rem'
       title='Your Previous Applications'
       onClose={() => setShowApplicatiosModal(false)}
     >

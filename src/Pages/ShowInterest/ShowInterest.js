@@ -174,6 +174,9 @@ const ShowInterest = ({
       {showVerifiedCheckModal && (
         <VerifiedCheckModal
           setShowVerifiedCheckModal={setShowVerifiedCheckModal}
+          text="You will receive an email from us very soon"
+          title="Sent Successfully"
+          close={() => setShowVerifiedCheckModal(false)}
         />
       )}
       {showLoginModal && (

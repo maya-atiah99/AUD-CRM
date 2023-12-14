@@ -14,6 +14,7 @@ const getValidationSchemaStep1 = (applicationStart, applingAs) => {
     ApplicantTelephone: Yup.string().required(
       "Applicant Telephone is required"
     ),
+    isSaved:Yup.boolean(),
     SelectedTerm: Yup.string().required("Selected Term is required"),
     ApplicationStart: Yup.number().required("Application Start is required"),
     ApplingAs: Yup.number().required("Applying as  is required"),

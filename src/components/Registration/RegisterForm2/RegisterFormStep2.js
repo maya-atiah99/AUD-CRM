@@ -22,28 +22,24 @@ const RegisterFormStep2 = forwardRef(
   (
     {
       applicantId,
-      showThree,
       applicationId,
       setApplicationStart,
       applingAs,
       applicationStart,
       setApplyingAs,
       activeStep,
-      isSaved,
-      setIsSaved
     },
     ref
   ) => {
     const { data: applicantStageThree, refetch: refetchStageThree } =
-      useFetchApplicantStageThree(applicantId, applicationId, {
-        enable: showThree,
-      });
+      useFetchApplicantStageThree(applicantId, applicationId);
     const { mutate: addApplicantStageThree } = useAddApplicantStageThree();
     const { mutate: addFiles } = useAddFiles();
 
     const [init, setInit] = useState({});
     useEffect(() => {
       const initialvalues = {
+        isSaved: true,
         CurrentUniversityCountry:
           applicantStageThree?.data?.stage2?.currentUniversityCountry || "",
         SchoolCountry: applicantStageThree?.data?.stage2?.schoolCountry || "",
@@ -118,7 +114,6 @@ const RegisterFormStep2 = forwardRef(
       addApplicantStageThree(values, {
         onSuccess: (data) => {
           setInit({});
-          setIsSaved(true)
         },
         onError: (error) => {
           console.error("An error occurred:", error);
@@ -136,7 +131,7 @@ const RegisterFormStep2 = forwardRef(
       });
     };
     useEffect(() => {
-      refetchStageThree(applicantId, applicationId);
+      refetchStageThree();
     }, []);
 
     // useEffect(() => {
@@ -150,10 +145,9 @@ const RegisterFormStep2 = forwardRef(
       onSubmit: (values) => {
         console.log("submit valuessssssss", values);
         const formData = new FormData();
-
         formData.append("ApplicantId", applicantId);
         formData.append("ApplicationId", applicationId);
-        formData.append("IsSaved", isSaved);
+        formData.append("IsSaved", formik.values.isSaved);
         formData.append("NextActiveStep", activeStep + 1);
         function appendIfDefined(formData, key, value) {
           if (value !== undefined) {
@@ -242,7 +236,6 @@ const RegisterFormStep2 = forwardRef(
         handleAddStageThree(formData);
       },
     });
-
     useImperativeHandle(ref, () => ({
       submitForm: () => {
         formik.submitForm();

@@ -36,6 +36,7 @@ const RegisterFormStep1 = forwardRef(
       if (showInterest) {
         const initialOne = {
           isSaved: true,
+          NextActiveStep:"",
           TitleId: fetchedData?.data?.applicant?.titleId || "",
           FirstName: fetchedData?.data?.applicant?.firstName || "",
           MiddleName: fetchedData?.data?.applicant?.middleName || "",
@@ -101,6 +102,7 @@ const RegisterFormStep1 = forwardRef(
       } else {
         const initialStage2 = {
           isSaved: true,
+          NextActiveStep:"",
           TitleId: fetchedData?.data?.stage1?.titleId || "",
           FirstName: fetchedData?.data?.stage1?.firstName || "",
           MiddleName: fetchedData?.data?.stage1?.middleName || "",
@@ -225,10 +227,7 @@ const RegisterFormStep1 = forwardRef(
       validationSchema: getValidationSchemaStep1(applicationStart, applingAs),
       enableReinitialize: true,
       onSubmit: (values) => {
-        console.log("entered dubmittttttttttttttttttt hereeeeeeeeeeeeeeeeee");
-
         localStorage.setItem("applingAs", formik.values?.ApplingAs);
-
         localStorage.setItem(
           "applicationStart",
           formik.values?.ApplicationStart
@@ -238,7 +237,6 @@ const RegisterFormStep1 = forwardRef(
         const formData = new FormData();
         formData.append("ApplicantId", applicantId);
         formData.append("ApplicationId", applicationId);
-        formData.append("NextActiveStep", activeStep + 1);
         for (const key in values) {
           if (values[key] !== undefined || values[key] !== "") {
             if (key === "DOB") {
@@ -269,7 +267,7 @@ const RegisterFormStep1 = forwardRef(
       localStorage.setItem("applicationStart", formik.values?.applicationStart);
       localStorage.setItem("applingAs", formik.values?.applingAs);
     }, [formik.values]);
-    console.log("formik.values", formik.values);
+
 
     return (
       <div className='form-subcontainer'>

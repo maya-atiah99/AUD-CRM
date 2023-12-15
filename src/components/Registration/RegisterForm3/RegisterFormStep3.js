@@ -30,6 +30,7 @@ const RegisterFormStep3 = forwardRef(
     useEffect(() => {
       const initialvalues = {
         isSaved: true,
+        NextActiveStep: "",
         ProgramInformationCheck:
           applicantStageFour?.data?.stage2?.programInformationCheck || false,
         ImportantNotesCheck:
@@ -71,8 +72,8 @@ const RegisterFormStep3 = forwardRef(
         const formData = new FormData();
         formData.append("ApplicantId", applicantId);
         formData.append("ApplicationId", applicationId);
-        formData.append("IsSaved",formik.values.isSaved);
-        formData.append("NextActiveStep", activeStep + 1);
+        formData.append("IsSaved", formik.values.isSaved);
+        formData.append("NextActiveStep", formik.values.NextActiveStep);
         formData.append("HealthChalenges", values.HealthChalenges);
         formData.append("HealthComments", values.HealthComments);
         formData.append(

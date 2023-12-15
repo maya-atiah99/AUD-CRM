@@ -296,17 +296,23 @@ const RegisterPage = ({
     setSteps(newSteps);
   }, [applicationStart, applingAs]);
 
+
+
   const handeleSubmit = (step) => {
     try {
-      console.log("Submitting form for step:", step);
-      console.log("Ref:", steps[step].ref.current);
       steps[step].ref.current?.submitForm();
     } catch (error) {
       console.error("Error submitting form:", error);
     }
   };
 
+
   const handleChange = (next) => {
+    steps[activeStep].ref.current?.setFieldValue(
+      "NextActiveStep",
+      activeStep + 1
+    );
+
     if (next) handeleSubmit(activeStep);
     setTimeout(() => {
       if (next) {
@@ -327,6 +333,8 @@ const RegisterPage = ({
 
   const handleSave = (next) => {
     steps[activeStep].ref.current?.setFieldValue("isSaved", false);
+    steps[activeStep].ref.current?.setFieldValue("NextActiveStep", activeStep);
+
     if (next) handeleSubmit(activeStep);
     // setTimeout(() => {
     //   navigate("/");

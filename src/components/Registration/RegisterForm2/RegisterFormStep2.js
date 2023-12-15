@@ -40,6 +40,7 @@ const RegisterFormStep2 = forwardRef(
     useEffect(() => {
       const initialvalues = {
         isSaved: true,
+        NextActiveStep:"",
         CurrentUniversityCountry:
           applicantStageThree?.data?.stage2?.currentUniversityCountry || "",
         SchoolCountry: applicantStageThree?.data?.stage2?.schoolCountry || "",
@@ -148,7 +149,7 @@ const RegisterFormStep2 = forwardRef(
         formData.append("ApplicantId", applicantId);
         formData.append("ApplicationId", applicationId);
         formData.append("IsSaved", formik.values.isSaved);
-        formData.append("NextActiveStep", activeStep + 1);
+        formData.append("NextActiveStep", formik.values.NextActiveStep);
         function appendIfDefined(formData, key, value) {
           if (value !== undefined) {
             formData.append(key, value);

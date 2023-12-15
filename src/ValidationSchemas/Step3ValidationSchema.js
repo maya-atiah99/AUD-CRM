@@ -2,6 +2,7 @@ import * as Yup from "yup";
 
 const Step3ValidationSchema = Yup.object().shape({
   isSaved: Yup.boolean(),
+  NextActiveStep: Yup.number(),
   HealthChalenges: Yup.boolean()
     .required()
     .oneOf([true], "This field is required"),

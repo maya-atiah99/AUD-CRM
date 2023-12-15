@@ -46,6 +46,8 @@ const AcadamicFiles = () => {
     ]);
     setSections(sections + 1);
   };
+  console.log("formik.values.applicantFiles", formik.values.applicantFiles);
+
   return (
     <div className='form-subcontainers academic-container'>
       <SectionTitle
@@ -56,7 +58,9 @@ const AcadamicFiles = () => {
         <BulletedText items={details} />
       </ExpandableBox>
       {formik.values.applicantFiles &&
-        formik.values.applicantFiles.map((section, index) => (
+        formik.values.applicantFiles.map((section, index) =>{
+          console.log('section.academicDocument',section.academicDocument)
+           return(
           <div key={index} className='form-subcontainers my-3'>
             <RadioButtonGroup
               label='Choose Test :'
@@ -82,7 +86,7 @@ const AcadamicFiles = () => {
               label='Upload Document'
               name={`applicantFiles[${index}].academicDocument`}
               value={section.academicDocument}
-              filName={`applicantFiles[${index}].academicDocument`}
+              filName={section.academicDocument}
               onChange={(name, value) => {
                 formik.setFieldValue(name, value);
               }}
@@ -135,7 +139,7 @@ const AcadamicFiles = () => {
               />
             </div>
           </div>
-        ))}
+        )})}
 
       {/* "Add More" button in the last section */}
       <div className='form-subcontainers'>

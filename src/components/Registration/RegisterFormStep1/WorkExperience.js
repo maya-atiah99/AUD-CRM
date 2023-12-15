@@ -8,6 +8,7 @@ import DateTime from "../../Inputs/DateTime";
 
 const WorkExperience = () => {
   const formik = useFormikContext();
+console.log('formik.cv',formik.values.CV)
 
   return (
     <div className='form-subcontainers'>
@@ -79,7 +80,10 @@ const WorkExperience = () => {
           text='Upload CV'
           height='73px'
           name='CV'
-          fileName={formik.values.CV}
+          value={formik.values.CV}
+          onChange={(name, value) => {
+            formik.setFieldValue(name, value);
+          }}
           errors={formik.errors?.CV}
           touched={formik.touched?.CV}
         />{" "}

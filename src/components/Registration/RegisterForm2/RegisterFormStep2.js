@@ -40,7 +40,7 @@ const RegisterFormStep2 = forwardRef(
     useEffect(() => {
       const initialvalues = {
         isSaved: true,
-        NextActiveStep:"",
+        NextActiveStep: "",
         CurrentUniversityCountry:
           applicantStageThree?.data?.stage2?.currentUniversityCountry || "",
         SchoolCountry: applicantStageThree?.data?.stage2?.schoolCountry || "",
@@ -52,17 +52,22 @@ const RegisterFormStep2 = forwardRef(
           : "",
         ListAdvancedCources:
           applicantStageThree?.data?.stage2?.listAdvancedCources || "",
-        DiplomaFile: applicantStageThree?.data?.diploma[0] || "",
+        DiplomaFile:
+          (applicantStageThree?.data?.diploma &&
+            applicantStageThree?.data?.diploma[0]) ||
+          "",
         ActivitiesNotEnrolled:
           applicantStageThree?.data?.stage2?.activitiesNotEnrolled || "",
         CurrentUniversityCountry2:
           applicantStageThree?.data?.stage2?.currentUniversityCountry2 || "",
         SchoolCountry2: applicantStageThree?.data?.stage2?.schoolCountry2 || "",
         applicantFiles:
+          applicantStageThree?.data?.applicantTest &&
           applicantStageThree?.data?.applicantTest.length > 0
             ? applicantStageThree?.data?.applicantTest?.map((test) => ({
                 testType: test.testType.toString(),
-                academicDocument: test.academicDocument || "",
+                academicDocument:
+                  test.files && test.files[0] ? test.files[0] : null,
                 dateTaken: new Date(test.dateTaken).toISOString().split("T")[0],
                 registrationNumber: test.registrationNumber || "",
                 totalScore: test.totalScore || "",
@@ -76,7 +81,6 @@ const RegisterFormStep2 = forwardRef(
                   totalScore: "",
                 },
               ],
-
         PersonalStatement:
           applicantStageThree?.data?.stage2?.personalStatement || "",
         applingAs: localStorage.getItem("applyingAs"),
@@ -112,7 +116,9 @@ const RegisterFormStep2 = forwardRef(
     }, [applicantStageThree]);
 
     const handleAddStageThree = (values) => {
+      console.log('valuessssssssssssssssssssssssssss',values)
       addApplicantStageThree(values, {
+        
         onSuccess: (data) => {
           setInit({});
         },
@@ -124,6 +130,7 @@ const RegisterFormStep2 = forwardRef(
     };
     console.log("stage3", applicantStageThree);
     const handleAddFiles = (values) => {
+      console.log('sncdjkcnkds',values)
       addFiles(values, {
         onSuccess: (data) => {},
         onError: (error) => {
@@ -135,26 +142,21 @@ const RegisterFormStep2 = forwardRef(
       refetchStageThree();
     }, []);
 
-    // useEffect(() => {
-    //   console.log(init);
-    // }, [init]);
+    useEffect(() => {
+      console.log(init);
+    }, [init]);
 
     const formik = useFormik({
       initialValues: init,
       validationSchema: getValidationSchemaStep2(applicationStart, applingAs),
       enableReinitialize: true,
       onSubmit: (values) => {
-        console.log("submit valuessssssss", values);
         const formData = new FormData();
         formData.append("ApplicantId", applicantId);
         formData.append("ApplicationId", applicationId);
         formData.append("IsSaved", formik.values.isSaved);
         formData.append("NextActiveStep", formik.values.NextActiveStep);
-        function appendIfDefined(formData, key, value) {
-          if (value !== undefined) {
-            formData.append(key, value);
-          }
-        }
+
         const fieldsToAppend = [
           "CurrentUniversityCountry",
           "SchoolCountry",
@@ -179,12 +181,14 @@ const RegisterFormStep2 = forwardRef(
         ];
 
         fieldsToAppend.forEach((field) => {
-          appendIfDefined(formData, field, values[field]);
+          formData.append(field, values[field]);
         });
 
         if (values.CV !== undefined) {
           formData.append("CV", values.CV);
         }
+
+        // Handle DiplomaFile
         if (values.DiplomaFile && "documentContent" in values.DiplomaFile) {
           const diplomaFileContent = values.DiplomaFile.documentContent;
           const blob = new Blob([atob(diplomaFileContent)], {
@@ -199,41 +203,63 @@ const RegisterFormStep2 = forwardRef(
           formData.append("DiplomaFile", values.DiplomaFile);
         }
 
-        /**************form data for files */
-        const formDataFile = new FormData();
-
+        const formDataFiles = new FormData();
+        
         values.applicantFiles.forEach((file, index) => {
-          formDataFile.append(
+          formDataFiles.append(
             `applicantFiles[${index}].applicantId`,
             applicantId
           );
-          formDataFile.append(
+          formDataFiles.append(
             `applicantFiles[${index}].applicationId`,
             applicationId
           );
-          formDataFile.append(
+          formDataFiles.append(
             `applicantFiles[${index}].testType`,
             file.testType
           );
-          formDataFile.append(
-            `applicantFiles[${index}].academicDocument`,
-            file.academicDocument
-          );
-          formDataFile.append(
+
+          if (
+            file.academicDocument &&
+            "documentContent" in file.academicDocument
+          ) {
+            const academicFileContent = file.academicDocument.documentContent;
+            const blob = new Blob([atob(academicFileContent)], {
+              type: file.academicDocument.contentType,
+            });
+            const academicFile = new File(
+              [blob],
+              file.academicDocument.fileName,
+              {
+                type: file.academicDocument.contentType,
+              }
+            );
+
+            formDataFiles.append(
+              `applicantFiles[${index}].academicDocument`,
+              academicFile
+            );
+          } else {
+            formDataFiles.append(
+              `applicantFiles[${index}].academicDocument`,
+              file.academicDocument
+            );
+          }
+
+          formDataFiles.append(
             `applicantFiles[${index}].dateTaken`,
             file.dateTaken
           );
-          formDataFile.append(
+          formDataFiles.append(
             `applicantFiles[${index}].registrationNumber`,
             file.registrationNumber
           );
-          formDataFile.append(
+          formDataFiles.append(
             `applicantFiles[${index}].totalScore`,
             file.totalScore
           );
         });
-        console.log("form data", formData);
-        handleAddFiles(formDataFile);
+        handleAddFiles(formDataFiles);
         handleAddStageThree(formData);
       },
     });
@@ -250,7 +276,7 @@ const RegisterFormStep2 = forwardRef(
       setApplyingAs(parseInt(localStorage.getItem("applingAs")));
       setApplicationStart(localStorage.getItem("applicationStart"));
     }, []);
-
+console.log('formik',formik)
     return (
       <div className='form-subcontainer '>
         <FormikProvider value={formik} innerRef={ref}>

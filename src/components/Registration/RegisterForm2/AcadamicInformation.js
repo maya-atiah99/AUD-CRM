@@ -145,7 +145,11 @@ const AcadamicInformation = () => {
           height='100px'
           label='Upload Document'
           name='DiplomaFile'
-          fileName={formik.values.DiplomaFile}
+          // fileName={formik.values.DiplomaFile} 
+          value={formik.values.DiplomaFile}
+          onChange={(name, value) => {
+            formik.setFieldValue(name, value);
+          }}
           errors={formik.errors?.DiplomaFile}
           touched={formik.touched?.DiplomaFile}
         />

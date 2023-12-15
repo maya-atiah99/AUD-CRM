@@ -2,10 +2,9 @@ import * as Yup from "yup";
 
 const getValidationSchemaStep2 = (applicationStart, applingAs) => {
   let baseSchema = {
-   
     CurrentUniversityCountry: Yup.string().notRequired("Country is required"),
-    SchoolCountry: Yup.string().notRequired("University Name is required"),
-    DiplomaType: Yup.string().notRequired("High school diploma is required"),
+    SchoolCountry: Yup.string().required("University Name is required"),
+    DiplomaType: Yup.string().required("High school diploma is required"),
     GraduationYear: Yup.date(),
     ListAdvancedCources: Yup.string().notRequired(),
     DiplomaFile: Yup.mixed().required(),
@@ -23,9 +22,8 @@ const getValidationSchemaStep2 = (applicationStart, applingAs) => {
         totalScore: Yup.number().required("Total score is required"),
       })
     ),
-    isSaved:Yup.boolean(),
-    
-    NextActiveStep:Yup.number(),
+    isSaved: Yup.boolean(),
+    NextActiveStep: Yup.number(),
     PersonalStatement: Yup.mixed(),
     EmploymentStatus: Yup.string(),
     EmploymentSector: Yup.string(),

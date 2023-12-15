@@ -12,39 +12,39 @@ const ProgramInformation = ({ fetchedData }) => {
   const [applicationStartValue, setApplicationStartValue] = useState();
   const { data: applyingAsData, refetch: refetchApplyinAs } =
     useFetchApplyingAs(applicationStartValue);
-  console.log(applicationStartValue);
   const startYourApplicationOptions = [
     { label: "Undergraduate", value: "0" },
     { label: "Graduate", value: "1" },
     { label: "Visiting", value: "2" },
   ];
 
-  // const formattedApplyingAsOptions = applyingAsData?.data
-  //   ? applyingAsData?.data?.map((option) => ({
-  //       value: option.applyingAsId,
-  //       label: option.applyingAsText,
-  //     }))
-  //   : [];
-
   useEffect(() => {
+    const fetchApplyingAsData = async () => {
+      await refetchApplyinAs();
+      const formattedApplyingAsOptions = applyingAsData?.data
+        ? applyingAsData?.data?.map((option) => ({
+            value: option.applyingAsId,
+            label: option.applyingAsText,
+          }))
+        : [];
+      setApplyingAsOptions(formattedApplyingAsOptions);
+    };
+
     setApplicationStartValue(
       fetchedData?.data?.applicationStart ||
         fetchedData?.data?.stage1?.applicationStart
     );
 
-    refetchApplyinAs(applicationStartValue);
-    const formattedApplyingAsOptions = applyingAsData?.data
-      ? applyingAsData?.data?.map((option) => ({
-          value: option.applyingAsId,
-          label: option.applyingAsText,
-        }))
-      : [];
-    setApplyingAsOptions(formattedApplyingAsOptions);
+    fetchApplyingAsData();
   }, [fetchedData]);
 
   useEffect(() => {
     setApplicationStartValue(formik.values.ApplicationStart);
-  }, [formik.values.ApplicationStart, applyingAsData]);
+  }, [formik.values.ApplicationStart]);
+
+  useEffect(() => {
+    refetchApplyinAs();
+  }, [applicationStartValue]);
 
   useEffect(() => {
     const formattedApplyingAsOptions = applyingAsData?.data
@@ -53,23 +53,12 @@ const ProgramInformation = ({ fetchedData }) => {
           label: option.applyingAsText,
         }))
       : [];
-
     setApplyingAsOptions(formattedApplyingAsOptions);
   }, [applyingAsData]);
-
-  useEffect(() => {
-    refetchApplyinAs(applicationStartValue);
-  }, []);
-
-  useEffect(() => {
-    console.log(formik.values.ApplicationStart);
-    refetchApplyinAs(formik.values.ApplicationStart);
-  }, [fetchedData, applicationStartValue, formik.values.ApplicationStart]);
 
   const onRadioChange = (name, value) => {
     formik.setFieldValue(name, value);
   };
-
   return (
     <div className='form-subcontainers'>
       <SectionTitle title='PROGRAM INFORMATION' dotted={true} />

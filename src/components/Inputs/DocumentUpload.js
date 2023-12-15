@@ -11,27 +11,28 @@ const DocumentUpload = ({
   height,
   errors,
   touched,
-  fileName,
+  onChange,
+  value,
 }) => {
-  const formik = useFormikContext();
   const [selectedFile, setSelectedFile] = useState(null);
-
+ console.log(value)
   const handleFileChange = (event) => {
     const file = event.target.files[0];
     if (file) {
+      console.log('filexasdcdasdaddd',file)
       setSelectedFile(file);
-      formik.setFieldValue(name, file);
-    } else if (fileName) {
-      setSelectedFile(fileName);
-      formik.setFieldValue(name, fileName.toString());
+      onChange(name, file);
+    } else if (value) {
+      setSelectedFile(value);
+      onChange(name, value);
     }
   };
 
   const handleRemoveFile = () => {
     setSelectedFile(null);
-    formik.setFieldValue(name, null);
+    // onChange(name, null);
   };
-
+  console.log("onChange prop type:", typeof onChange);
   const containerStyle = {
     width: width,
     height: height,
@@ -39,11 +40,11 @@ const DocumentUpload = ({
   };
 
   useEffect(() => {
-    if (fileName) {
-      setSelectedFile(fileName);
-      formik.setFieldValue(name, fileName);
+    if (value) {
+      setSelectedFile(value);
+      onChange(name, value);
     }
-  }, [fileName]);
+  }, [value]);
 
   return (
     <div>
@@ -64,7 +65,7 @@ const DocumentUpload = ({
           {errors && touched ? (
             <span className='error-message'>{errors}</span>
           ) : selectedFile ? (
-            selectedFile.name || selectedFile.fileName
+            selectedFile.name || selectedFile.fileName || text
           ) : (
             text
           )}

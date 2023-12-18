@@ -121,8 +121,8 @@ const Consent = () => {
           onChange={(name, value) => {
             formik.setFieldValue(name, value);
           }}
-          // errors={formik.errors?.mobile}
-          // touched={formik.touched?.mobile}
+          errors={formik.errors["Authorize_Telephone"]}
+          touched={formik.touched["Authorize_Telephone"]}
         />
       </div>
     </div>

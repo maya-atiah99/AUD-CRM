@@ -22,6 +22,7 @@ const ShowInterestForm = ({
   setPhoneNumber,
   setEmail,
   setApplicationStart,
+  setApplicationId,
 }) => {
   const [submissionSuccess, setSubmissionSuccess] = useState(false);
 
@@ -44,16 +45,19 @@ const ShowInterestForm = ({
   const { mutate: addShowInterest } = useAddApplicantToShowInterest();
   const { mutate: addApplicant } = useAddApplicant();
 
-  const handleContinueToApply = (values, { setFieldError }) => {
+  const handleContinueToApply = (values, { setFieldError,resetForm }) => {
     addApplicant(values, {
       onSuccess: (data) => {
         localStorage.setItem("applicantId", data?.data?.applicantId);
+        localStorage.setItem("applicantionId", data?.data?.applicationId);
+        setApplicationId(data?.data?.applicationId);
         localStorage.setItem("applicationStart", values.applicationStart);
         setApplicationStart(values.applicationStart);
         setApplicantId(data?.data?.applicantId);
         openVerifiedModal("Continue");
         localStorage.removeItem("message");
         setSubmissionSuccess(true);
+        resetForm()
       },
       onError: (error, data) => {
         console.error("An error occurred:", error?.response?.data);
@@ -77,7 +81,9 @@ const ShowInterestForm = ({
       },
     });
   };
-
+  const handleEmailChange = () => {
+    setErrorMessage("");
+  };
   return (
     <Formik
       initialValues={init}
@@ -193,6 +199,7 @@ const ShowInterestForm = ({
                     value={values.email}
                     onChange={(name, value) => {
                       setFieldValue(name, value);
+                      handleEmailChange();
                     }}
                     errors={errors.email || errorMessage}
                     touched={touched.email}
@@ -340,7 +347,7 @@ const ShowInterestForm = ({
               </div>
 
               <p className='applicant-loginp'>
-                Returning applicant:{" "}
+                RETURNING APPLICANT:{" "}
                 <span
                   onClick={() => {
                     setShowLoginModal(true);

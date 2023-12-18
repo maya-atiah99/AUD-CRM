@@ -20,13 +20,12 @@ const RegisterPage = ({
   setApplicationStart,
   applingAs,
   setApplyingAs,
+  applicationId,
+  setApplicationId,
+  setApplicantId,
 }) => {
   const [activeStep, setActiveStep] = useState(
     parseInt(localStorage.getItem("message"), 10) || 0
-  );
-
-  const [applicationId, setApplicationId] = useState(
-    localStorage.getItem("applicationId") || null
   );
   const [steps, setSteps] = useState([]);
   const formikRefStep1 = useRef();
@@ -284,6 +283,8 @@ const RegisterPage = ({
     refreshPage();
     setApplicationStart(localStorage.getItem("applicationStart"));
     setApplyingAs(parseInt(localStorage.getItem("applingAs")));
+    setApplicationId(localStorage.getItem("applicantionId"));
+    setApplicantId(localStorage.getItem("applicantId"));
   }, []);
 
   useEffect(() => {
@@ -296,24 +297,24 @@ const RegisterPage = ({
     setSteps(newSteps);
   }, [applicationStart, applingAs]);
 
-
-
   const handeleSubmit = (step) => {
     try {
+      console.log("testfhsmaya");
       steps[step].ref.current?.submitForm();
     } catch (error) {
       console.error("Error submitting form:", error);
     }
   };
 
-
   const handleChange = (next) => {
+    localStorage.setItem("save", true);
     steps[activeStep].ref.current?.setFieldValue(
       "NextActiveStep",
       activeStep + 1
     );
 
     if (next) handeleSubmit(activeStep);
+
     setTimeout(() => {
       if (next) {
         if (steps[activeStep].ref.current?.isValid) {
@@ -328,10 +329,11 @@ const RegisterPage = ({
           window.scrollTo(0, 0);
         }
       }
-    }, [100]);
+    }, [500]);
   };
 
   const handleSave = (next) => {
+    localStorage.setItem("save", false);
     steps[activeStep].ref.current?.setFieldValue("isSaved", false);
     steps[activeStep].ref.current?.setFieldValue("NextActiveStep", activeStep);
 

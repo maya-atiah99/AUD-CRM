@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import ModalComponent from "../ModalComponent";
 import TextBox from "../Inputs/TextBox";
 import TextComponent from "../Texts/TextComponent";
@@ -10,13 +10,17 @@ const VerificationModal = ({
   handleDone,
   otpCode,
   setOtpCode,
-  handleOnClickLink,
+  handleOnClickLinkEmail,
+  handleOnClickLinkPhone,
   phoneNumber,
   emailotp,
   setEmailOtp,
   email,
+  otpError,
 }) => {
 
+ console.log(otpError)
+ 
   return (
     <ModalComponent
       onClose={() => setshowVerifiedModal(false)}
@@ -41,11 +45,12 @@ const VerificationModal = ({
             value={otpCode}
             onChange={setOtpCode}
             label='Enter Mobile Verification Code'
+            errors={otpError? "error" : ""}
           />
           <LinkButton
             title='Resend'
             text='Didn’t receive the code? '
-            handleOnClick={handleOnClickLink}
+            handleOnClick={handleOnClickLinkPhone}
             underlined={true}
           />
           <HorizantalLine width='100%' />
@@ -62,11 +67,12 @@ const VerificationModal = ({
             value={emailotp}
             onChange={setEmailOtp}
             label='Enter Email Verification Code'
+            errors={otpError? "error" : ""}
           />
           <LinkButton
             title='Resend'
             text='Didn’t receive the code? '
-            handleOnClick={handleOnClickLink}
+            handleOnClick={handleOnClickLinkEmail}
             underlined={true}
           />
         </div>

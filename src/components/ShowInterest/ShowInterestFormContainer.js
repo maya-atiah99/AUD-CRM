@@ -11,6 +11,7 @@ const ShowInterestFormContainer = ({
   setPhoneNumber,
   setEmail,
   setApplicationStart,
+  setApplicationId,
 }) => {
   return (
     <div className='show-interest-form'>
@@ -36,6 +37,7 @@ const ShowInterestFormContainer = ({
         setPhoneNumber={setPhoneNumber}
         setEmail={setEmail}
         setApplicationStart={setApplicationStart}
+        setApplicationId={setApplicationId}
       />
     </div>
   );

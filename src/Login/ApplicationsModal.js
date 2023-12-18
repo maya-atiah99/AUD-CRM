@@ -4,6 +4,7 @@ import { Button } from "bootstrap";
 import RoundedButton from "../components/Buttons/RoundedButtons";
 import { useFetchApplicationsById } from "../Hooks/Login";
 import { useNavigate } from "react-router-dom";
+import AUDButton from "../components/Buttons/AUDButton";
 
 const ApplicationsModal = ({
   setShowApplicatiosModal,
@@ -81,6 +82,10 @@ const ApplicationsModal = ({
             })}
           </tbody>
         </table>
+        <div>
+        <AUDButton text="Start New Application"/>
+        </div>
+       
       </div>
     </ModalComponent>
   );

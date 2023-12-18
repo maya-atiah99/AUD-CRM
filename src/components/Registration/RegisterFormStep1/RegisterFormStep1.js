@@ -31,12 +31,12 @@ const RegisterFormStep1 = forwardRef(
   ) => {
     const [init, setInit] = useState({});
     const { mutate: addApplicantStagetwo } = useAddApplicantStageTwo();
-
+    const [save, setSave] = useState(localStorage.getItem("save") || true);
     useEffect(() => {
       if (showInterest) {
         const initialOne = {
           isSaved: true,
-          NextActiveStep:"",
+          NextActiveStep: "",
           TitleId: fetchedData?.data?.applicant?.titleId || "",
           FirstName: fetchedData?.data?.applicant?.firstName || "",
           MiddleName: fetchedData?.data?.applicant?.middleName || "",
@@ -52,7 +52,7 @@ const RegisterFormStep1 = forwardRef(
 
           ApplingAs: fetchedData?.data?.applicant?.applyingAs || "",
           SelectedTerm: "",
-          ApplicationStart: "",
+          ApplicationStart: fetchedData?.data?.application?.startYourApplication || "",
           ProgramOfInterest: "",
           CurrentPlaceOfStudy: "",
           GuardianRelation1: "",
@@ -102,7 +102,7 @@ const RegisterFormStep1 = forwardRef(
       } else {
         const initialStage2 = {
           isSaved: true,
-          NextActiveStep:"",
+          NextActiveStep: "",
           TitleId: fetchedData?.data?.stage1?.titleId || "",
           FirstName: fetchedData?.data?.stage1?.firstName || "",
           MiddleName: fetchedData?.data?.stage1?.middleName || "",
@@ -222,6 +222,32 @@ const RegisterFormStep1 = forwardRef(
       console.log(init);
     }, [init]);
 
+    useEffect(() => {
+      console.log("save,save", save);
+      console.log(
+        'localStorage.getItem("save") step 1',
+        localStorage.getItem("save")
+      );
+      const savedValue = localStorage.getItem("save");
+      if (savedValue !== save) {
+        setSave(savedValue);
+      }
+      console.log('savedValue',savedValue)
+    }, [save, localStorage.getItem("save")]);
+
+    useEffect(() => {
+      console.log("save,save", save);
+      console.log(
+        'localStorage.getItem("save") step 1',
+        localStorage.getItem("save")
+      );
+      const savedValue = localStorage.getItem("save");
+      if (savedValue !== save) {
+        setSave(savedValue);
+      }
+      console.log('savedValue',savedValue)
+    }, []);
+
     const formik = useFormik({
       initialValues: init,
       validationSchema: getValidationSchemaStep1(applicationStart, applingAs),
@@ -267,7 +293,6 @@ const RegisterFormStep1 = forwardRef(
       localStorage.setItem("applicationStart", formik.values?.applicationStart);
       localStorage.setItem("applingAs", formik.values?.applingAs);
     }, [formik.values]);
-
 
     return (
       <div className='form-subcontainer'>

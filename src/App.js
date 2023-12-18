@@ -19,7 +19,9 @@ function App() {
   const [applingAs, setApplyingAs] = useState(
     parseInt(localStorage.getItem("applingAs")) || null
   );
-
+  const [applicationId, setApplicationId] = useState(
+    localStorage.getItem("applicationId") || null
+  );
   return (
     <QueryClientProvider client={queryCLient}>
       <div>
@@ -34,6 +36,8 @@ function App() {
                 setApplicationStart={setApplicationStart}
                 applingAs={applingAs}
                 setApplyingAs={setApplyingAs}
+                applicationId={applicationId}
+                setApplicationId={setApplicationStart}
               />
             }
           />
@@ -42,11 +46,14 @@ function App() {
             path='/register'
             element={
               <RegisterPage
+              setApplicantId={setApplicantId}
                 applicantId={applicantId}
                 applicationStart={applicationStart}
                 setApplicationStart={setApplicationStart}
                 applingAs={applingAs}
                 setApplyingAs={setApplyingAs}
+                applicationId={applicationId}
+                setApplicationId={setApplicationStart}
               />
             }
           />

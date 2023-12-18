@@ -6,19 +6,15 @@ import LinkButton from "../components/Buttons/LinkButton";
 import { useApplicantLogin } from "../Hooks/Login";
 import LoginValidationSchema from "../ValidationSchemas/loginValidationSchema";
 import { Formik, Form } from "formik";
-import { useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
 
 const Login = ({
   setShowLoginModal,
-  applicantId,
   setApplicantId,
-  setMessage,
   setShowApplicatiosModal,
-  applicationStart,
   setApplicationStart,
-  applingAs,
   setApplyingAs,
+  setIsForgotPassword
 }) => {
   const [manageShowInterest, setManageshowInterest] = useState(false);
   const { mutate: login } = useApplicantLogin();
@@ -118,8 +114,8 @@ const Login = ({
                 />
                 <div className='test222'>
                   <LinkButton
-                    handleOnClick={() => setShowLoginModal(false)}
-                    title='DON’T HAVE AN ACCOUNT? REGISTER NOW'
+                    title='Forgot Password'
+                    handleOnClick={()=>(setIsForgotPassword(true),setShowLoginModal(false))}
                     underlined={true}
                     type='button'
                   />

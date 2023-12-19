@@ -52,7 +52,6 @@ const ShowInterest = ({
       );
     },
     onSuccess: async (data) => {
-      console.log("data?.data?.verified", data?.data?.verified);
       if (data?.data?.verified === "true") {
         setshowVerifiedModal(false);
         setShowVerifiedCheckModal(true);
@@ -77,7 +76,6 @@ const ShowInterest = ({
       );
     },
     onSuccess: async (data) => {
-      console.log("hiiiiiiii email");
       setEmailOtp("");
     },
     onError: (error) => {
@@ -92,7 +90,6 @@ const ShowInterest = ({
       );
     },
     onSuccess: async (data) => {
-      console.log("hiiiiiii phoneee");
       setOtpCode("");
     },
     onError: (error) => {
@@ -108,7 +105,6 @@ const ShowInterest = ({
       );
     },
     onSuccess: async (data) => {
-      console.log("data?.data?.verified", data?.data?.verified);
       openVerifiedModal("Continue");
       setActionOrigin("Continue");
       if (data?.data?.verified === "true") {
@@ -159,7 +155,6 @@ const ShowInterest = ({
   /***************handle done in verification model for otp */
   const handleDone = () => {
     if (actionOrigin === "Submit") {
-      console.log('helloosxkdsmckndknckdsnckn')
       validateShowInterest.mutate();
     } else if (actionOrigin === "Continue") {
       validateApplicant.mutate();
@@ -168,7 +163,6 @@ const ShowInterest = ({
   /***************handle resend otp  ***/
   const handleResendEmail = () => {
     if (actionOrigin === "Submit") {
-      console.log("submittttttt");
       resendShowInterestEmailOtp.mutate();
     } else if (actionOrigin === "Continue") {
       resendApplicantEmailOtp.mutate();
@@ -176,15 +170,11 @@ const ShowInterest = ({
   };
   const handleResendPhone = () => {
     if (actionOrigin === "Submit") {
-      console.log("submittttttt");
-
       resendShowInterestPhoneOtp.mutate();
     } else if (actionOrigin === "Continue") {
       resendApplicantPhoneOtp.mutate();
     }
   };
-console.log(otpCode)
-console.log(emailotp)
   return (
     <div className='showInterest-container'>
       <video autoPlay loop muted id='background-video'>

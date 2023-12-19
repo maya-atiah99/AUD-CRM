@@ -8,8 +8,7 @@ import VerifiedCheckModal from "../../ShowInterest/VerifiedCheckModal";
 
 const RegisterFormStep4 = ({ applicantId, applicationId }) => {
   const [isSubmitted, setIsSubmitted] = useState(false);
-  console.log("applicantId", applicantId);
-  console.log("applicantId", applicationId);
+ 
 
   const { mutate: payment } = usePayment();
 

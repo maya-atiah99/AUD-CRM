@@ -15,7 +15,7 @@ const DocumentUpload = ({
   value,
 }) => {
   const [selectedFile, setSelectedFile] = useState(null);
- console.log(value)
+
   const handleFileChange = (event) => {
     const file = event.target.files[0];
     if (file) {
@@ -32,7 +32,6 @@ const DocumentUpload = ({
     setSelectedFile(null);
     // onChange(name, null);
   };
-  console.log("onChange prop type:", typeof onChange);
   const containerStyle = {
     width: width,
     height: height,
@@ -61,7 +60,7 @@ const DocumentUpload = ({
       >
         <img src='/images/Layer 25.svg' alt='layer' />
         <input type='file' className='file-input' onChange={handleFileChange} />
-        <p className='p-style'>
+        <p className='p-style' style={{maxWidth:"150px",overflow:"hidden",textOverflow:"ellipsis",whiteSpace:"nowrap"}}>
           {errors && touched ? (
             <span className='error-message'>{errors}</span>
           ) : selectedFile ? (

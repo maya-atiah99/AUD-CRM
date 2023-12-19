@@ -292,45 +292,37 @@ const RegisterPage = ({
     setSteps(newSteps);
   }, [applicationStart, fetchedData, applingAs]);
 
-  useEffect(() => {
-    const newSteps = generateSteps(applicationStart, applingAs);
-    setSteps(newSteps);
-  }, [applicationStart, applingAs]);
-
   const handeleSubmit = (step) => {
     try {
-      console.log("testfhsmaya");
       steps[step].ref.current?.submitForm();
     } catch (error) {
       console.error("Error submitting form:", error);
     }
   };
 
-  const handleChange = (next) => {
+  const handleChange = async (next) => {
     localStorage.setItem("save", true);
-    steps[activeStep].ref.current?.setFieldValue(
-      "NextActiveStep",
-      activeStep + 1
-    );
-
+    steps[activeStep].ref.current?.setFieldValue("NextActiveStep", activeStep + 1);
     if (next) handeleSubmit(activeStep);
-
-    setTimeout(() => {
-      if (next) {
+  
+    if (next) {
+      try {
+        await steps[activeStep].ref.current?.submitForm();
         if (steps[activeStep].ref.current?.isValid) {
-          if (activeStep < steps.length - 1) {
-            if (activeStep === 0) {
-              setShowInterest(false);
-            }
-            setActiveStep(activeStep + 1);
-            window.scrollTo(0, 0);
+          if (activeStep === 0) {
+            setShowInterest(false);
           }
+          setActiveStep((prevActiveStep) => prevActiveStep + 1);
+          window.scrollTo(0, 0);
         } else {
           window.scrollTo(0, 0);
         }
+      } catch (error) {
+        console.error("Error submitting form:", error);
       }
-    }, [500]);
+    }
   };
+  console.log("console.log(activeStepmmmmmmmm", activeStep);
 
   const handleSave = (next) => {
     localStorage.setItem("save", false);

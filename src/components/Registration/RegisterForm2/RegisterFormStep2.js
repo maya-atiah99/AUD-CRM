@@ -116,9 +116,7 @@ const RegisterFormStep2 = forwardRef(
     }, [applicantStageThree]);
 
     const handleAddStageThree = (values) => {
-      console.log('valuessssssssssssssssssssssssssss',values)
       addApplicantStageThree(values, {
-        
         onSuccess: (data) => {
           setInit({});
         },
@@ -128,9 +126,9 @@ const RegisterFormStep2 = forwardRef(
         },
       });
     };
-    console.log("stage3", applicantStageThree);
+
     const handleAddFiles = (values) => {
-      console.log('sncdjkcnkds',values)
+      console.log("sncdjkcnkds", values);
       addFiles(values, {
         onSuccess: (data) => {},
         onError: (error) => {
@@ -138,6 +136,7 @@ const RegisterFormStep2 = forwardRef(
         },
       });
     };
+
     useEffect(() => {
       refetchStageThree();
     }, []);
@@ -145,6 +144,8 @@ const RegisterFormStep2 = forwardRef(
     useEffect(() => {
       console.log(init);
     }, [init]);
+console.log('app',applicantId)
+console.log('app',applicantId)
 
     const formik = useFormik({
       initialValues: init,
@@ -178,6 +179,7 @@ const RegisterFormStep2 = forwardRef(
           "PersonalStatement",
           "CompanyName",
           "YearsOfExperience",
+          "GraduationYear",
         ];
 
         fieldsToAppend.forEach((field) => {
@@ -202,9 +204,8 @@ const RegisterFormStep2 = forwardRef(
         } else {
           formData.append("DiplomaFile", values.DiplomaFile);
         }
-
+        /*********************Appliacnt files post */
         const formDataFiles = new FormData();
-        
         values.applicantFiles.forEach((file, index) => {
           formDataFiles.append(
             `applicantFiles[${index}].applicantId`,
@@ -259,10 +260,12 @@ const RegisterFormStep2 = forwardRef(
             file.totalScore
           );
         });
+
         handleAddFiles(formDataFiles);
         handleAddStageThree(formData);
       },
     });
+
     useImperativeHandle(ref, () => ({
       submitForm: () => {
         formik.submitForm();
@@ -276,13 +279,15 @@ const RegisterFormStep2 = forwardRef(
       setApplyingAs(parseInt(localStorage.getItem("applingAs")));
       setApplicationStart(localStorage.getItem("applicationStart"));
     }, []);
-console.log('formik',formik)
+
+    console.log("formik", formik);
     return (
       <div className='form-subcontainer '>
         <FormikProvider value={formik} innerRef={ref}>
           <SubmitText />
           <AcadamicInformation />
           <AcadamicFiles />
+          <PersonalStatement />
           {applicationStart === "1" ? (
             <>
               <WorkExperience />
@@ -291,7 +296,6 @@ console.log('formik',formik)
           ) : (
             ""
           )}
-          <PersonalStatement />
         </FormikProvider>
       </div>
     );

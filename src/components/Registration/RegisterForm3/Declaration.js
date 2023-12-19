@@ -5,7 +5,6 @@ import { useFormikContext } from "formik";
 
 const Declaration = ({ applingAs, applicationStart }) => {
   const formik = useFormikContext();
-  console.log('applicationsxxxxxxxxxxxxxxxxxx',applicationStart)
   return (
     <div className='form-subcontainers'>
       <SectionTitle title='Declaration' size='18px' font='600' />

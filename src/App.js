@@ -22,6 +22,7 @@ function App() {
   const [applicationId, setApplicationId] = useState(
     localStorage.getItem("applicationId") || null
   );
+  console.log('applicationStartxsddsc',applicationStart)
   return (
     <QueryClientProvider client={queryCLient}>
       <div>

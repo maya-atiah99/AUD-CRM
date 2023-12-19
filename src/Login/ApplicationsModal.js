@@ -43,7 +43,6 @@ const ApplicationsModal = ({
   };
   console.log(applications);
   const handleContinueApplication = (item) => {
-    console.log("itemmmmmmmmmmmmm", item);
     localStorage.setItem("applicationId", item.applicationId);
     localStorage.setItem("applicantId", item.applicantId);
     localStorage.setItem("applingAs", item.applyingAs);

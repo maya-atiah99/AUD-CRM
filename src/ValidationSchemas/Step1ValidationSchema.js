@@ -52,14 +52,14 @@ const getValidationSchemaStep1 = (applicationStart, applingAs) => {
     LegacyMotherProgram: Yup.string(),
     LegacyMotherGraduationYear: Yup.number(),
     LegacyMotherMobile: Yup.string(),
-    PassportNumber: Yup.string(),
-    EmiratesId: Yup.string(),
+    PassportNumber: Yup.string().max(10),
+    EmiratesId: Yup.string().max(10),
     Passport_File: Yup.string(),
     EmiratesId_File: Yup.string(),
     FamilyBook_File: Yup.string(),
     EtibharaNo: Yup.string(),
     FamilyBookNumber: Yup.string(),
-    FamilyNo: Yup.string(),
+    FamilyNo: Yup.string().max(10),
     CityNo: Yup.string(),
     Visiting_LevelOfStudy: Yup.string(),
     StudentVisa: Yup.boolean(),
@@ -99,7 +99,7 @@ const getValidationSchemaStep1 = (applicationStart, applingAs) => {
       baseSchema.MiddleEasternStudies.notRequired();
     baseSchema.SemestersAtAUD = baseSchema.SemestersAtAUD.notRequired();
   }
-  if (applingAs === 1) {
+  if (applingAs === 1 || applingAs ===5) {
     baseSchema.CurrentPlaceOfStudy = baseSchema.CurrentPlaceOfStudy.required(
       "Current Place Of study is required"
     );

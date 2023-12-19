@@ -52,7 +52,8 @@ const RegisterFormStep1 = forwardRef(
 
           ApplingAs: fetchedData?.data?.applicant?.applyingAs || "",
           SelectedTerm: "",
-          ApplicationStart: fetchedData?.data?.application?.startYourApplication || "",
+          ApplicationStart:
+            fetchedData?.data?.application?.startYourApplication || "",
           ProgramOfInterest: "",
           CurrentPlaceOfStudy: "",
           GuardianRelation1: "",
@@ -122,7 +123,6 @@ const RegisterFormStep1 = forwardRef(
           ApplicationStart:
             fetchedData?.data?.application?.startYourApplication?.toString() ||
             "",
-          ApplingAs: fetchedData?.data?.application?.applyingAs || "",
           ProgramOfInterest:
             fetchedData?.data?.stage2?.programApplicationId || "",
           CurrentPlaceOfStudy:
@@ -164,15 +164,15 @@ const RegisterFormStep1 = forwardRef(
             fetchedData?.data?.stage2?.legacyMotherGraduationYear || "",
           LegacyMotherMobile:
             fetchedData?.data?.stage2?.legacyMotherMobile || "",
-          PassportNumber: fetchedData?.data?.stage2?.legacyApplicant || "",
-          EmiratesId: fetchedData?.data?.stage2?.passportNumber || "",
+          PassportNumber: fetchedData?.data?.stage1?.passportNumber || "",
+          EmiratesId: fetchedData?.data?.stage1?.emiratesId || "",
           Passport_File: fetchedData?.data?.stage2?.legacyApplicant || "",
           EmiratesId_File: fetchedData?.data?.stage2?.legacyApplicant || "",
           FamilyBook_File: fetchedData?.data?.stage2?.legacyApplicant || "",
-          EtibharaNo: fetchedData?.data?.stage2?.legacyApplicant || "",
-          FamilyBookNumber: fetchedData?.data?.stage2?.legacyApplicant || "",
-          FamilyNo: fetchedData?.data?.stage2?.legacyApplicant || "",
-          CityNo: fetchedData?.data?.stage2?.legacyApplicant || "",
+          EtibharaNo: fetchedData?.data?.stage1?.etibharaNo || "",
+          FamilyBookNumber: fetchedData?.data?.stage1?.familyBookNumber || "",
+          FamilyNo: fetchedData?.data?.stage1?.familyNo || "",
+          CityNo: fetchedData?.data?.stage1?.cityNo || "",
           Visiting_LevelOfStudy:
             fetchedData?.data?.stage2?.visiting_LevelOfStudy || "",
           StudentVisa: fetchedData?.data?.stage2?.studentVisa || "",
@@ -199,7 +199,7 @@ const RegisterFormStep1 = forwardRef(
         },
       });
     };
-    console.log("fetchedData", fetchedData);
+
     useEffect(() => {
       if (showInterest) {
         localStorage.setItem(
@@ -218,36 +218,35 @@ const RegisterFormStep1 = forwardRef(
       }
     }, [fetchedData, showInterest]);
 
-    useEffect(() => {
-      console.log(init);
-    }, [init]);
+    // useEffect(() => {
+    //   console.log(init);
+    // }, [init]);
 
-    useEffect(() => {
-      console.log("save,save", save);
-      console.log(
-        'localStorage.getItem("save") step 1',
-        localStorage.getItem("save")
-      );
-      const savedValue = localStorage.getItem("save");
-      if (savedValue !== save) {
-        setSave(savedValue);
-      }
-      console.log('savedValue',savedValue)
-    }, [save, localStorage.getItem("save")]);
+    // useEffect(() => {
+    //   console.log("save,save", save);
+    //   console.log(
+    //     'localStorage.getItem("save") step 1',
+    //     localStorage.getItem("save")
+    //   );
+    //   const savedValue = localStorage.getItem("save");
+    //   if (savedValue !== save) {
+    //     setSave(savedValue);
+    //   }
+    //   console.log('savedValue',savedValue)
+    // }, [save, localStorage.getItem("save")]);
 
-    useEffect(() => {
-      console.log("save,save", save);
-      console.log(
-        'localStorage.getItem("save") step 1',
-        localStorage.getItem("save")
-      );
-      const savedValue = localStorage.getItem("save");
-      if (savedValue !== save) {
-        setSave(savedValue);
-      }
-      console.log('savedValue',savedValue)
-    }, []);
-
+    // useEffect(() => {
+    //   console.log("save,save", save);
+    //   console.log(
+    //     'localStorage.getItem("save") step 1',
+    //     localStorage.getItem("save")
+    //   );
+    //   const savedValue = localStorage.getItem("save");
+    //   if (savedValue !== save) {
+    //     setSave(savedValue);
+    //   }
+    //   console.log('savedValue',savedValue)
+    // }, []);
     const formik = useFormik({
       initialValues: init,
       validationSchema: getValidationSchemaStep1(applicationStart, applingAs),
@@ -264,6 +263,7 @@ const RegisterFormStep1 = forwardRef(
         formData.append("ApplicantId", applicantId);
         formData.append("ApplicationId", applicationId);
         for (const key in values) {
+          console.log(key)
           if (values[key] !== undefined || values[key] !== "") {
             if (key === "DOB") {
               formData.append(
@@ -284,16 +284,15 @@ const RegisterFormStep1 = forwardRef(
         formik.submitForm();
       },
     }));
-
     useEffect(() => {
       ref.current = formik;
     }, [ref, formik]);
 
     useEffect(() => {
-      localStorage.setItem("applicationStart", formik.values?.applicationStart);
-      localStorage.setItem("applingAs", formik.values?.applingAs);
+      localStorage.setItem("applicationStart", formik.values?.ApplicationStart);
+      localStorage.setItem("applingAs", formik.values?.ApplingAs);
     }, [formik.values]);
-
+    console.log(fetchedData);
     return (
       <div className='form-subcontainer'>
         <FormikProvider

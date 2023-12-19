@@ -1021,7 +1021,11 @@ ul {
   grid-template-columns: 1fr 1fr 1fr;
   grid-column-gap: 10px;
 }
-
+.grid-academic4-cont {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-column-gap: 10px;
+}
 /*********************************Regulation table******************/
 .regulations-container {
   background: var(--unnamed-color-ffffff) 0% 0% no-repeat padding-box;

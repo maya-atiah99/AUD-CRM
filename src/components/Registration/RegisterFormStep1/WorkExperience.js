@@ -8,7 +8,6 @@ import DateTime from "../../Inputs/DateTime";
 
 const WorkExperience = () => {
   const formik = useFormikContext();
-console.log('formik.cv',formik.values.CV)
 
   return (
     <div className='form-subcontainers'>
@@ -16,6 +15,7 @@ console.log('formik.cv',formik.values.CV)
       <div className='grid-personal1-cont'>
         <DropDown
           type='14'
+          required={true}
           width='100%'
           label='Employment Status'
           name='EmploymentStatus'
@@ -29,6 +29,7 @@ console.log('formik.cv',formik.values.CV)
 
         <DropDown
           type='15'
+          required={true}
           width='100%'
           label='Employment Sector'
           name='EmploymentSector'
@@ -41,6 +42,7 @@ console.log('formik.cv',formik.values.CV)
         />
 
         <TextBox
+          required={true}
           width='100%'
           label='Company Name'
           name='CompanyName'
@@ -52,6 +54,7 @@ console.log('formik.cv',formik.values.CV)
           touched={formik.touched?.CompanyName}
         />
         <TextBox
+          required={true}
           width='100%'
           label='Job Title'
           name='JobTitle'
@@ -65,9 +68,9 @@ console.log('formik.cv',formik.values.CV)
       </div>
       <div className='grid-programInfo-cont'>
         <TextBox
+          required={true}
           width='100%'
           label='Year of Experience'
-          required={true}
           name='YearsOfExperience'
           value={formik.values.YearsOfExperience}
           onChange={(name, value) => {

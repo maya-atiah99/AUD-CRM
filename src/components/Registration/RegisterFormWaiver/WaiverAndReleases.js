@@ -28,7 +28,6 @@ const WaiverAndReleases = forwardRef(({}, ref) => {
     ref.current = formik;
   }, [ref, formik]);
 
-  console.log("formmmmmmmmmmmmmm", formik);
   return (
     <form onSubmit={formik.handleSubmit}>
       <div className='form-subcontainer'>

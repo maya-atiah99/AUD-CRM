@@ -36,11 +36,11 @@ const AcadamicInformation = () => {
           <DropDown
             width='100%'
             label={
-              applicationStart === "0" && applingAS === 0
-                ? "School Name"
+              applicationStart === "0" && (applingAS ===0 || applingAS ===1)
+                ? "High School Name"
                 : "University Name "
             }
-            type={applicationStart === "0" && applingAS === 0 ? "12" : "11"}
+            type={applicationStart === "0" &&  (applingAS ===0 || applingAS ===1 ) ? "12" : "11"}
             parent={formik.values.CurrentUniversityCountry}
             required={true}
             name='SchoolCountry'
@@ -59,7 +59,7 @@ const AcadamicInformation = () => {
                 ? "Degree Earned Major"
                 : applicationStart === "2" && applingAS==6
                 ? "Level of study"
-                : "HS Diploma"
+                : "High School Diploma"
             }
             required={true}
             type={applicationStart === "2" ? "13" : "7"}
@@ -93,7 +93,7 @@ const AcadamicInformation = () => {
         <div className='grid-academic2-cont'>
           <DropDown
             width='100%'
-            label={"Country You Graduated From"}
+            label={"Country of Your Current University"}
             required={true}
             type='9'
             name='CurrentUniversityCountry2'
@@ -107,10 +107,10 @@ const AcadamicInformation = () => {
 
           <DropDown
             width='100%'
-            label='School Name'
+            label='University Name'
             required={true}
             name='SchoolCountry2'
-            type='12'
+            type='11'
             parent={formik.values.CurrentUniversityCountry2}
             value={formik.values.SchoolCountry2}
             onChange={(name, value) => {
@@ -124,7 +124,7 @@ const AcadamicInformation = () => {
         ""
       )}
 
-      <div className='grid-academic2-cont'>
+      <div className='grid-academic4-cont'>
         {applicationStart === "0" && (
           <TextArea
             label='Please List Any Advanced Courses Such As: ‘A’ Levels, Ap, Clep, Ib Diploma. '

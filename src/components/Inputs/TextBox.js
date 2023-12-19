@@ -10,6 +10,7 @@ const TextBox = ({
   errors,
   touched,
   type,
+  disabled,
 }) => {
   const [initialValue, setInitialValue] = useState(value);
 
@@ -30,6 +31,7 @@ const TextBox = ({
   const inputStyle = {
     width: width,
     borderColor: errors && touched && "#F3223C",
+    cursor: disabled ? "no-drop" : "text"
   };
 
   useEffect(() => {
@@ -39,8 +41,8 @@ const TextBox = ({
   }, [value]);
 
   return (
-    <div className='textBox-container'>
-      <label htmlFor={label}>
+    <div className='textBox-container' >
+      <label htmlFor={label} style={{ cursor: disabled ? "no-drop" : "text" }}>
         {label}
         {required && <span className='required'>*</span>}
       </label>
@@ -52,6 +54,7 @@ const TextBox = ({
         className='text-input'
         onChange={handleChange}
         value={initialValue}
+        disabled={disabled ? true : false}
       />
     </div>
   );

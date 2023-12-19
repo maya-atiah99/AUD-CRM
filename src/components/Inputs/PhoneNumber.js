@@ -11,7 +11,8 @@ const PhoneNumber = ({
   width,
   errors,
   touched,
-  validate
+  validate,
+  disabled
 }) => {
   const [initialValue, setInitialValue] = useState(value);
 
@@ -36,7 +37,7 @@ const PhoneNumber = ({
   }, [value]);
 
   return (
-    <div>
+    <div  style={{ color: disabled ? "#1b224c3f" : "#1B224C" }}>
       {label ? (
         <label htmlFor={name}>
           {label}
@@ -56,6 +57,7 @@ const PhoneNumber = ({
         // isValid={(value, country) => {
         //   return validate(value, country);
         // }}
+        disabled={disabled ? true : false}
       />
     </div>
   );

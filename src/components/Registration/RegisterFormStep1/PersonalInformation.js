@@ -75,6 +75,7 @@ const PersonalInformation = () => {
           }}
           errors={formik.errors?.Email}
           touched={formik.touched?.Email}
+          disabled={true}
         />
         <DateTime
           width='100%'
@@ -128,6 +129,7 @@ const PersonalInformation = () => {
           }}
           errors={formik.errors?.Mobile}
           touched={formik.touched?.Mobile}
+          disabled={true}
         />
         <PhoneNumber
           width='100%'

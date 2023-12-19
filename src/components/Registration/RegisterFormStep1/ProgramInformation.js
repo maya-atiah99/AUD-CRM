@@ -9,17 +9,20 @@ import { useFetchApplyingAs } from "../../../Hooks/Appplicant";
 const ProgramInformation = ({ fetchedData }) => {
   const formik = useFormikContext();
   const [applyingAsOptions, setApplyingAsOptions] = useState([]);
-  const [applicationStartValue, setApplicationStartValue] = useState();
+  const [applicationStartValue, setApplicationStartValue] = useState("");
   const { data: applyingAsData, refetch: refetchApplyinAs } =
     useFetchApplyingAs(applicationStartValue);
+    console.log(applyingAsData)
+    console.log(applicationStartValue)
   const startYourApplicationOptions = [
     { label: "Undergraduate", value: "0" },
     { label: "Graduate", value: "1" },
     { label: "Visiting", value: "2" },
   ];
-
+console.log(' fetchedData?.data?.application?.startYourApplication', fetchedData?.data?.application?.startYourApplication)
   useEffect(() => {
     const fetchApplyingAsData = async () => {
+
       await refetchApplyinAs();
       const formattedApplyingAsOptions = applyingAsData?.data
         ? applyingAsData?.data?.map((option) => ({
@@ -29,23 +32,22 @@ const ProgramInformation = ({ fetchedData }) => {
         : [];
       setApplyingAsOptions(formattedApplyingAsOptions);
     };
-
+console.log('hii am here')
     setApplicationStartValue(
-      fetchedData?.data?.applicationStart ||
-        fetchedData?.data?.stage1?.applicationStart
+        fetchedData?.data?.application?.startYourApplication
     );
+console.log('hi i am there')
 
     fetchApplyingAsData();
+console.log('hi i am bla bla bla')
+
   }, [fetchedData]);
 
   useEffect(() => {
     setApplicationStartValue(formik.values.ApplicationStart);
   }, [formik.values.ApplicationStart]);
 
-  useEffect(() => {
-    refetchApplyinAs();
-  }, [applicationStartValue]);
-
+ 
   useEffect(() => {
     const formattedApplyingAsOptions = applyingAsData?.data
       ? applyingAsData?.data?.map((option) => ({

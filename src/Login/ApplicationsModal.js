@@ -31,7 +31,17 @@ const ApplicationsModal = ({
         return "Unknown";
     }
   };
-
+  const applicationStatus = (status) => {
+    switch (status) {
+      case 0:
+        return "Incomplete";
+      case 1:
+        return "Complete";
+      default:
+        return "Unknown";
+    }
+  };
+  console.log(applications);
   const handleContinueApplication = (item) => {
     console.log("itemmmmmmmmmmmmm", item);
     localStorage.setItem("applicationId", item.applicationId);
@@ -50,7 +60,7 @@ const ApplicationsModal = ({
   };
   return (
     <ModalComponent
-      width='40rem'
+      // width='40rem'
       title='Your Previous Applications'
       onClose={() => setShowApplicatiosModal(false)}
     >
@@ -59,7 +69,11 @@ const ApplicationsModal = ({
           <thead>
             <tr>
               <th>Name</th>
-              <th>Application Name</th>
+              <th>Application</th>
+              <th>Program</th>
+              <th>Plan to Join</th>
+              <th>Status</th>
+              <th>Steps</th>
               <th>Createtd On</th>
               <th></th>
             </tr>
@@ -70,7 +84,15 @@ const ApplicationsModal = ({
                 <tr key={item.applicantId}>
                   <td>{name}</td>
                   <td>{applicationStartFunction(item.startYourApplication)}</td>
+
+                  <td style={{ maxWidth: "200px" }}>
+                    {item.fieldOfInterest_Display}
+                  </td>
+                  <td></td>
+                  <td>{applicationStatus(item.applicationStatus)}</td>
+                  <td></td>
                   <td>{item.createdOn.substring(0, 10)}</td>
+
                   <td>
                     <RoundedButton
                       text='Continue'
@@ -83,9 +105,8 @@ const ApplicationsModal = ({
           </tbody>
         </table>
         <div>
-        <AUDButton text="Start New Application"/>
+          <AUDButton text='Start New Application' />
         </div>
-       
       </div>
     </ModalComponent>
   );

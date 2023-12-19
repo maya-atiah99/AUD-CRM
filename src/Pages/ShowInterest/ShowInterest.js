@@ -159,6 +159,7 @@ const ShowInterest = ({
   /***************handle done in verification model for otp */
   const handleDone = () => {
     if (actionOrigin === "Submit") {
+      console.log('helloosxkdsmckndknckdsnckn')
       validateShowInterest.mutate();
     } else if (actionOrigin === "Continue") {
       validateApplicant.mutate();
@@ -182,7 +183,8 @@ const ShowInterest = ({
       resendApplicantPhoneOtp.mutate();
     }
   };
-
+console.log(otpCode)
+console.log(emailotp)
   return (
     <div className='showInterest-container'>
       <video autoPlay loop muted id='background-video'>

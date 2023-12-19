@@ -303,7 +303,7 @@ const RegisterPage = ({
   const handleChange = async (next) => {
     localStorage.setItem("save", true);
     steps[activeStep].ref.current?.setFieldValue("NextActiveStep", activeStep + 1);
-    if (next) handeleSubmit(activeStep);
+    // if (next) handeleSubmit(activeStep);
   
     if (next) {
       try {

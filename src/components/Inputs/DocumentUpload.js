@@ -13,6 +13,7 @@ const DocumentUpload = ({
   touched,
   onChange,
   value,
+  imageHeight
 }) => {
   const [selectedFile, setSelectedFile] = useState(null);
 
@@ -28,7 +29,8 @@ const DocumentUpload = ({
     }
   };
 
-  const handleRemoveFile = () => {
+  const handleRemoveFile = (event) => {
+    event.preventDefault();
     setSelectedFile(null);
     // onChange(name, null);
   };
@@ -58,9 +60,9 @@ const DocumentUpload = ({
         }`}
         style={containerStyle}
       >
-        <img src='/images/Layer 25.svg' alt='layer' />
+        <img src='/images/Layer 25.svg' alt='layer' style={{height:imageHeight,width:imageHeight}}/>
         <input type='file' className='file-input' onChange={handleFileChange} />
-        <p className='p-style' style={{maxWidth:"150px",overflow:"hidden",textOverflow:"ellipsis",whiteSpace:"nowrap"}}>
+        <p className='p-style' style={{maxWidth:"200px",overflow:"hidden",textOverflow:"ellipsis",whiteSpace:"nowrap"}}>
           {errors && touched ? (
             <span className='error-message'>{errors}</span>
           ) : selectedFile ? (

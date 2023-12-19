@@ -10,9 +10,10 @@ const PersonalStatement = () => {
     <div className='form-subcontainers'>
       <SectionTitle title='PERSONAL STATEMENT' />
       <TextArea
-        label='The Personal Statement Is An Opportunity To Highlight Aspects Of Your Background To Support Your Application'
+        label='Personal statement (Minimum of 500 words)'
         rows='4'
         cols='3'
+        required={true}
         name='PersonalStatement'
         value={formik.values.PersonalStatement}
         onChange={(name, value) => {

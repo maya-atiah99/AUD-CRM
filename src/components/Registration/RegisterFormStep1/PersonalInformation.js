@@ -161,7 +161,8 @@ const PersonalInformation = () => {
           />
           <DocumentUpload
             text='Upload Passport'
-            height='70px'
+            height='35px'
+            imageHeight="30px"
             name='Passport_File'
             value={formik.values.Passport_File}
             onChange={(name, value) => {
@@ -184,7 +185,8 @@ const PersonalInformation = () => {
           />
           <DocumentUpload
             text='Upload Emirates ID (Front & Back)'
-            height='70px'
+            height='35px'
+            imageHeight="30px"
             name='EmiratesId_File'
             value={formik.values.EmiratesId_File}
             onChange={(name, value) => {
@@ -249,7 +251,8 @@ const PersonalInformation = () => {
           <div className='grid-personal1-cont'>
             <DocumentUpload
               text='Upload Family Book'
-              height='70px'
+              height='35px'
+              imageHeight="30px"
               name='FamilyBook_File'
               value={formik.values.FamilyBook_File}
               onChange={(name, value) => {

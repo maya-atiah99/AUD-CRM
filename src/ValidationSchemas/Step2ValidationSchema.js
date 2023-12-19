@@ -24,7 +24,7 @@ const getValidationSchemaStep2 = (applicationStart, applingAs) => {
     ),
     isSaved: Yup.boolean(),
     NextActiveStep: Yup.number(),
-    PersonalStatement: Yup.mixed(),
+    PersonalStatement: Yup.string().max(500).required(),
     EmploymentStatus: Yup.string(),
     EmploymentSector: Yup.string(),
     CompanyName: Yup.string(),

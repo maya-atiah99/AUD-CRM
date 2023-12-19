@@ -144,9 +144,7 @@ const RegisterFormStep2 = forwardRef(
     useEffect(() => {
       console.log(init);
     }, [init]);
-console.log('app',applicantId)
-console.log('app',applicantId)
-
+console.log('applicant33333333',applicantStageThree)
     const formik = useFormik({
       initialValues: init,
       validationSchema: getValidationSchemaStep2(applicationStart, applingAs),

@@ -17,6 +17,7 @@ const ParentInformation = () => {
         <DropDown
           width='100%'
           label='Guardian Relation'
+          required={true}
           type='6'
           name='GuardianRelation1'
           value={formik.values.GuardianRelation1}
@@ -28,6 +29,7 @@ const ParentInformation = () => {
         />
         <TextBox
           width='100%'
+          required={true}
           label='Guardian Name'
           name='GuardianName1'
           value={formik.values.GuardianName1}
@@ -40,6 +42,7 @@ const ParentInformation = () => {
         <PhoneNumber
           width='50%'
           label='Mobile'
+          required={true}
           name='GuardianMobile1'
           value={formik.values.GuardianMobile1}
           onChange={(name, value) => {
@@ -51,6 +54,7 @@ const ParentInformation = () => {
         <TextBox
           width='100%'
           label='Email Address'
+          required={true}
           name='GuardianEmail1'
           value={formik.values.GuardianEmail1}
           onChange={(name, value) => {
@@ -144,7 +148,7 @@ const ParentInformation = () => {
               errors={formik.errors?.LegacyFatherProgram}
               touched={formik.touched?.LegacyFatherProgram}
             /> */}
-             <DropDown
+            <DropDown
               width='100%'
               label='Program of Study at AUD'
               name='LegacyFatherProgram'
@@ -180,7 +184,7 @@ const ParentInformation = () => {
               errors={formik.errors?.LegacyFatherGraduationYear}
               touched={formik.touched?.LegacyFatherGraduationYear}
             />
-            <PhoneNumber
+            {/* <PhoneNumber
               width='50%'
               label='Mobile'
               name='LegacyFatherMobile'
@@ -190,7 +194,7 @@ const ParentInformation = () => {
               }}
               errors={formik.errors?.LegacyFatherMobile}
               touched={formik.touched?.LegacyFatherMobile}
-            />
+            /> */}
           </div>
           <div className='grid-personal2-cont'>
             <TextBox
@@ -215,7 +219,7 @@ const ParentInformation = () => {
               errors={formik.errors?.LegacyMotherProgram}
               touched={formik.touched?.LegacyMotherProgram}
             /> */}
-              <DropDown
+            <DropDown
               width='100%'
               label='Program of Study at AUD'
               name='LegacyMotherProgram'
@@ -252,7 +256,7 @@ const ParentInformation = () => {
               errors={formik.errors?.LegacyMotherGraduationYear}
               touched={formik.touched?.LegacyMotherGraduationYear}
             />
-            <PhoneNumber
+            {/* <PhoneNumber
               width='50%'
               label='Mobile'
               name='LegacyMotherMobile'
@@ -262,7 +266,7 @@ const ParentInformation = () => {
               }}
               errors={formik.errors?.LegacyMotherMobile}
               touched={formik.touched?.LegacyMotherMobile}
-            />
+            /> */}
           </div>
         </>
       ) : (

@@ -143,6 +143,8 @@ const AcadamicInformation = () => {
           text='Upload Diploma'
           required={true}
           height='100px'
+          imageHeight="50px"
+          size="50"
           label='Upload Document'
           name='DiplomaFile'
           // fileName={formik.values.DiplomaFile} 

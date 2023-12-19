@@ -83,6 +83,8 @@ const AcadamicFiles = () => {
               text='Upload The Academic Document'
               required={true}
               height='100px'
+              imageHeight="50px"
+              size="50"
               label='Upload Document'
               name={`applicantFiles[${index}].academicDocument`}
               value={section.academicDocument}

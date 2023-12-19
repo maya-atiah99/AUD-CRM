@@ -144,9 +144,11 @@ const PersonalInformation = () => {
           touched={formik.touched.ApplicantTelephone}
         />
       </div>
-
-      <div style={{ paddingTop: "0.7rem" }}>
+      <div style={{ paddingTop: "1rem" }}>
         <HorizantalLine width='100%' />
+      </div>
+
+      <div style={{ paddingTop: "0.5rem" }}>
         <div className='grid-personal1-cont'>
           <TextBox
             width='100%'
@@ -160,9 +162,11 @@ const PersonalInformation = () => {
             touched={formik.touched?.PassportNumber}
           />
           <DocumentUpload
-            text='Upload Passport'
-            height='35px'
-            imageHeight="30px"
+            label='Upload Passport'
+            text='Choose File'
+            height='25px'
+            imageHeight='30px'
+            size="5"
             name='Passport_File'
             value={formik.values.Passport_File}
             onChange={(name, value) => {
@@ -184,9 +188,11 @@ const PersonalInformation = () => {
             touched={formik.touched?.EmiratesId}
           />
           <DocumentUpload
-            text='Upload Emirates ID (Front & Back)'
-            height='35px'
-            imageHeight="30px"
+            label='Upload Emirates ID (Front & Back)'
+            text='Choose File'
+            height='25px'
+            imageHeight='30px'
+            size="5"
             name='EmiratesId_File'
             value={formik.values.EmiratesId_File}
             onChange={(name, value) => {
@@ -198,7 +204,7 @@ const PersonalInformation = () => {
           />{" "}
         </div>
         {showEmirate ? (
-          <div className='grid-personal1-cont'>
+          <div className='grid-personal1-cont' style={{ paddingTop: "0.5rem" }}>
             <TextBox
               width='100%'
               label='Ethbara No.'
@@ -250,9 +256,11 @@ const PersonalInformation = () => {
         {showEmirate ? (
           <div className='grid-personal1-cont'>
             <DocumentUpload
-              text='Upload Family Book'
-              height='35px'
-              imageHeight="30px"
+              label='Upload Family Book'
+              text='Choose File'
+              height='25px'
+              imageHeight='30px'
+              size="5"
               name='FamilyBook_File'
               value={formik.values.FamilyBook_File}
               onChange={(name, value) => {

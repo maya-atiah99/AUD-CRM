@@ -80,8 +80,12 @@ const WorkExperience = () => {
           touched={formik.touched?.YearsOfExperience}
         />
         <DocumentUpload
-          text='Upload CV'
-          height='73px'
+        label="Upload CV"
+          text='Choose File'
+          height='35px'
+          imageHeight="30px"
+          size="50"
+          required={true}
           name='CV'
           value={formik.values.CV}
           onChange={(name, value) => {

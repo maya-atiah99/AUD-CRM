@@ -13,14 +13,15 @@ const DocumentUpload = ({
   touched,
   onChange,
   value,
-  imageHeight
+  imageHeight,
+  size,
 }) => {
   const [selectedFile, setSelectedFile] = useState(null);
 
   const handleFileChange = (event) => {
     const file = event.target.files[0];
     if (file) {
-      console.log('filexasdcdasdaddd',file)
+      console.log("filexasdcdasdaddd", file);
       setSelectedFile(file);
       onChange(name, file);
     } else if (value) {
@@ -32,6 +33,7 @@ const DocumentUpload = ({
   const handleRemoveFile = (event) => {
     event.preventDefault();
     setSelectedFile(null);
+    onChange(name, undefined);
     // onChange(name, null);
   };
   const containerStyle = {
@@ -60,17 +62,32 @@ const DocumentUpload = ({
         }`}
         style={containerStyle}
       >
-        <img src='/images/Layer 25.svg' alt='layer' style={{height:imageHeight,width:imageHeight}}/>
         <input type='file' className='file-input' onChange={handleFileChange} />
-        <p className='p-style' style={{maxWidth:"200px",overflow:"hidden",textOverflow:"ellipsis",whiteSpace:"nowrap"}}>
-          {errors && touched ? (
-            <span className='error-message'>{errors}</span>
-          ) : selectedFile ? (
-            selectedFile.name || selectedFile.fileName || text
-          ) : (
-            text
-          )}
-        </p>
+        <div className="d-flex align-items-center gap-1">
+          <img
+            src='/images/Layer 25.svg'
+            alt='layer'
+            style={{ height: imageHeight, width: imageHeight }}
+          />
+          <p
+            className='p-style'
+            style={{
+              maxWidth: "200px",
+              overflow: "hidden",
+              textOverflow: "ellipsis",
+              whiteSpace: "nowrap",
+            }}
+          >
+            {errors && touched ? (
+              <span className='error-message'>{errors}</span>
+            ) : selectedFile ? (
+              selectedFile.name || selectedFile.fileName || text
+            ) : (
+              text
+            )}
+          </p>
+        </div>
+        <div className="size-upload-dc">Max Size: {size} mb</div>
 
         {selectedFile ? (
           <AiFillCloseCircle

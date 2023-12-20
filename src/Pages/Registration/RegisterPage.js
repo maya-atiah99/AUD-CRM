@@ -328,7 +328,8 @@ const RegisterPage = ({
     localStorage.setItem("save", false);
     steps[activeStep].ref.current?.setFieldValue("isSaved", false);
     steps[activeStep].ref.current?.setFieldValue("NextActiveStep", activeStep);
-
+    // steps[activeStep].ref.current?.isValidating
+   console.log("steps[activeStep].ref.current?.values",   steps[activeStep].ref.current) 
     if (next) handeleSubmit(activeStep);
     // setTimeout(() => {
     //   navigate("/");

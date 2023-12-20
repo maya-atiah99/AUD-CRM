@@ -3,7 +3,7 @@ import * as Yup from "yup";
 const getValidationSchemaStep1 = (applicationStart, applingAs) => {
   const baseSchema = {
     TitleId: Yup.string().notRequired("TitleId is required"),
-    FirstName: Yup.string().max(50, "First Name must be at most 50 characters"),
+    FirstName: Yup.string().max(50, "First Name must be at most 50 characters").required("First Name is required"),
     MiddleName: Yup.string().max(50, "Middle Name must be at most 50 characters").required("Middle Name is required"),
     LastName: Yup.string().max(50, "Last Name must be at most 50 characters"),
     Email: Yup.string().email("Invalid Email").required("Email is required"),

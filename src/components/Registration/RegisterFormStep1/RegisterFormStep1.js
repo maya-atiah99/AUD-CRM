@@ -166,9 +166,9 @@ const RegisterFormStep1 = forwardRef(
             fetchedData?.data?.stage2?.legacyMotherMobile || "",
           PassportNumber: fetchedData?.data?.stage1?.passportNumber || "",
           EmiratesId: fetchedData?.data?.stage1?.emiratesId || "",
-          Passport_File: fetchedData?.data?.stage2?.legacyApplicant || "",
-          EmiratesId_File: fetchedData?.data?.stage2?.legacyApplicant || "",
-          FamilyBook_File: fetchedData?.data?.stage2?.legacyApplicant || "",
+          Passport_File: fetchedData?.data?.passport || "",
+          EmiratesId_File: fetchedData?.data?.emiratesID || "",
+          FamilyBook_File: fetchedData?.data?.familyBook || "",
           EtibharaNo: fetchedData?.data?.stage1?.etibharaNo || "",
           FamilyBookNumber: fetchedData?.data?.stage1?.familyBookNumber || "",
           FamilyNo: fetchedData?.data?.stage1?.familyNo || "",
@@ -262,19 +262,101 @@ const RegisterFormStep1 = forwardRef(
         const formData = new FormData();
         formData.append("ApplicantId", applicantId);
         formData.append("ApplicationId", applicationId);
-        for (const key in values) {
-          console.log(key)
-          if (values[key] !== undefined || values[key] !== "") {
-            if (key === "DOB") {
+
+        const FieldsAppend = [
+          "isSaved",
+          "NextActiveStep",
+          "TitleId",
+          "FirstName",
+          "MiddleName",
+          "LastName",
+          "Email",
+          "Nationality",
+          "DOB",
+          "Gender",
+          "Mobile",
+          "ApplicantTelephone",
+          "ApplingAs",
+          "SelectedTerm",
+          "ApplicationStart",
+          "ProgramOfInterest",
+          "CurrentPlaceOfStudy",
+          "GuardianRelation1",
+          "GuardianName1",
+          "GuardianMobile1",
+          "GuardianEmail1",
+          "GuardianRelation2",
+          "GuardianName2",
+          "GuardianMobile2",
+          "GuardianEmail2",
+          "AuthorizeToReleaseRecord",
+          "Authorize_GuardianName",
+          "Authorize_GuardianRelation",
+          "Authorize_Address",
+          "Authorize_Telephone",
+          "Address1",
+          "Country",
+          "CityState",
+          "Pobox",
+          "ZipCode",
+          "LegacyApplicant",
+          "LegacyFatherName",
+          "LegacyFatherProgram",
+          "LegacyFatherGraduationYear",
+          "LegacyFatherMobile",
+          "LegacyMotherName",
+          "LegacyMotherProgram",
+          "LegacyMotherGraduationYear",
+          "LegacyMotherMobile",
+          "PassportNumber",
+          "EmiratesId",
+          "EtibharaNo",
+          "FamilyBookNumber",
+          "FamilyNo",
+          "CityNo",
+          "Visiting_LevelOfStudy",
+          "StudentVisa",
+          "UAE_GCC_Resident",
+          "OnHouseCampus",
+          "MiddleEasternStudies",
+          "SemestersAtAUD",
+        ];
+
+        FieldsAppend.forEach((field) => {
+          if (values[field] !== undefined || values[field] !== "") {
+            if (field === "DOB") {
               formData.append(
-                key,
-                new Date(values[key]).toISOString().split("T")[0]
+                field,
+                new Date(values[field]).toISOString().split("T")[0]
               );
             } else {
-              formData.append(key, values[key]);
+              formData.append(field, values[field]);
             }
           }
-        }
+        });
+        
+        const fileToAppend = [
+          "FamilyBook_File",
+          "EmiratesId_File",
+          "Passport_File",
+        ];
+
+        fileToAppend.forEach((key) => {
+          if (values[key] && "documentContent" in values[key]) {
+            const fileContent = values[key].documentContent;
+            const blob = new Blob([atob(fileContent)], {
+              type: values[key].contentType,
+            });
+            const file = new File([blob], values[key].fileName, {
+              type: values[key].contentType,
+            });
+
+            formData.append(key, file);
+          } else {
+            formData.append(key, values[key]);
+          }
+        });
+
         handleAddStageTwo(formData);
       },
     });

@@ -108,9 +108,7 @@ const RegisterFormStep2 = forwardRef(
         ReadAndUnderstand:
           applicantStageThree?.data?.applicantReferance?.readAndUnderstand ||
           "",
-        CV:
-          applicantStageThree?.data?.applicantReferance?.personalStatement ||
-          "",
+        CV: applicantStageThree?.data?.cv || "",
       };
       setInit(initialvalues);
     }, [applicantStageThree]);
@@ -144,7 +142,7 @@ const RegisterFormStep2 = forwardRef(
     useEffect(() => {
       console.log(init);
     }, [init]);
-console.log('applicant33333333',applicantStageThree)
+    console.log("applicant33333333", applicantStageThree);
     const formik = useFormik({
       initialValues: init,
       validationSchema: getValidationSchemaStep2(applicationStart, applingAs),
@@ -184,10 +182,19 @@ console.log('applicant33333333',applicantStageThree)
           formData.append(field, values[field]);
         });
 
-        if (values.CV !== undefined) {
+        // Handle CV
+        if (values.CV && "documentContent" in values.CV) {
+          const CVContent = values.CV.documentContent;
+          const blob = new Blob([atob(CVContent)], {
+            type: values.CV.contentType,
+          });
+          const file = new File([blob], values.CV.fileName, {
+            type: values.CV.contentType,
+          });
+          formData.append("CV", file);
+        } else {
           formData.append("CV", values.CV);
         }
-
         // Handle DiplomaFile
         if (values.DiplomaFile && "documentContent" in values.DiplomaFile) {
           const diplomaFileContent = values.DiplomaFile.documentContent;

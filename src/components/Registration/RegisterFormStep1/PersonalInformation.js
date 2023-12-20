@@ -11,7 +11,7 @@ import DocumentUpload from "../../Inputs/DocumentUpload";
 const PersonalInformation = () => {
   const [showEmirate, setShowEmirate] = useState(false);
   const formik = useFormikContext();
-
+console.log('hvjhghvhg formik',formik)
   return (
     <div className='form-subcontainers'>
       <SectionTitle title='PERSONAL INFORMATION OF THE APPLICANT' />

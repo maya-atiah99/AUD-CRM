@@ -19,7 +19,6 @@ const ProgramInformation = ({ fetchedData }) => {
   ];
   useEffect(() => {
     const fetchApplyingAsData = async () => {
-
       await refetchApplyinAs();
       const formattedApplyingAsOptions = applyingAsData?.data
         ? applyingAsData?.data?.map((option) => ({
@@ -30,7 +29,7 @@ const ProgramInformation = ({ fetchedData }) => {
       setApplyingAsOptions(formattedApplyingAsOptions);
     };
     setApplicationStartValue(
-        fetchedData?.data?.application?.startYourApplication
+      fetchedData?.data?.application?.startYourApplication
     );
     fetchApplyingAsData();
   }, [fetchedData]);
@@ -39,7 +38,6 @@ const ProgramInformation = ({ fetchedData }) => {
     setApplicationStartValue(formik.values.ApplicationStart);
   }, [formik.values.ApplicationStart]);
 
- 
   useEffect(() => {
     const formattedApplyingAsOptions = applyingAsData?.data
       ? applyingAsData?.data?.map((option) => ({
@@ -141,7 +139,7 @@ const ProgramInformation = ({ fetchedData }) => {
 
       {formik.values.ApplicationStart === "2" ? (
         <>
-          <div className='grid-personal1-cont'>
+          <div className='grid-programInfo-cont'>
             <DropDown
               width='100%'
               label='Level of Study'
@@ -194,33 +192,46 @@ const ProgramInformation = ({ fetchedData }) => {
               errors={formik.errors?.SemestersAtAUD}
               touched={formik.touched?.SemestersAtAUD}
             />
-
-            <DropDown
-              required={true}
-              bolean={true}
-              width='100%'
-              label='Will you be applying for AUD On-Campus Housing?'
-              name='OnHouseCampus'
-              value={formik.values.OnHouseCampus}
-              onChange={(name, value) => {
-                formik.setFieldValue(name, value);
-              }}
-              errors={formik.errors?.OnHouseCampus}
-              touched={formik.touched?.OnHouseCampus}
-            />
-            <DropDown
-              bolean={true}
-              width='100%'
-              label='Do you plan to seek the Certificate in Middle Eastern Studies at AUD?'
-              required={true}
-              name='MiddleEasternStudies'
-              value={formik.values.MiddleEasternStudies}
-              onChange={(name, value) => {
-                formik.setFieldValue(name, value);
-              }}
-              errors={formik.errors?.MiddleEasternStudies}
-              touched={formik.touched?.MiddleEasternStudies}
-            />
+            <div className='moreInfo-grid'>
+              <DropDown
+                required={true}
+                bolean={true}
+                width='100%'
+                label='Will you be applying for AUD On-Campus Housing?'
+                name='OnHouseCampus'
+                value={formik.values.OnHouseCampus}
+                onChange={(name, value) => {
+                  formik.setFieldValue(name, value);
+                }}
+                errors={formik.errors?.OnHouseCampus}
+                touched={formik.touched?.OnHouseCampus}
+              />
+              <p>
+                Find out more about the{" "}
+                <a href='https://www.aud.edu/on-aud-campus/accommodation/' target="_blank">Certificate in Middle Eastern Studies</a>
+              </p>
+            </div>
+            <div className='moreInfo-grid'>
+              <DropDown
+                bolean={true}
+                width='100%'
+                label='Do you plan to seek the Certificate in Middle Eastern Studies at AUD?'
+                required={true}
+                name='MiddleEasternStudies'
+                value={formik.values.MiddleEasternStudies}
+                onChange={(name, value) => {
+                  formik.setFieldValue(name, value);
+                }}
+                errors={formik.errors?.MiddleEasternStudies}
+                touched={formik.touched?.MiddleEasternStudies}
+              />
+              <p>
+                Find out more about the{" "}
+                <a href='https://www.aud.edu/aud-school/school-of-arts-sciences/departments/department-of-international-and-middle-eastern-studies/department-programs/certificate-in-middle-eastern-studies/' target="_blank">
+                  Student Accomodation
+                </a>
+              </p>
+            </div>
           </div>
         </>
       ) : null}

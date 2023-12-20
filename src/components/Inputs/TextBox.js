@@ -11,6 +11,7 @@ const TextBox = ({
   touched,
   type,
   disabled,
+  moreInfo,
 }) => {
   const [initialValue, setInitialValue] = useState(value);
 
@@ -31,7 +32,7 @@ const TextBox = ({
   const inputStyle = {
     width: width,
     borderColor: errors && touched && "#F3223C",
-    cursor: disabled ? "no-drop" : "text"
+    cursor: disabled ? "no-drop" : "text",
   };
 
   useEffect(() => {
@@ -41,7 +42,7 @@ const TextBox = ({
   }, [value]);
 
   return (
-    <div className='textBox-container' >
+    <div className='textBox-container'>
       <label htmlFor={label} style={{ cursor: disabled ? "no-drop" : "text" }}>
         {label}
         {required && <span className='required'>*</span>}
@@ -56,6 +57,15 @@ const TextBox = ({
         value={initialValue}
         disabled={disabled ? true : false}
       />
+      {moreInfo ? (
+        <img
+          src='/images/moreInfoIcon.svg'
+          alt='more'
+          className='moreInfo-img'
+        />
+      ) : (
+        ""
+      )}
     </div>
   );
 };

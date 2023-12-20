@@ -89,13 +89,13 @@ const DropDown = ({
   ];
   const handleOnChange = (name, selectedOption) => {
     onChange(name, selectedOption.value);
-    if (setShowEmirate) {
+   
       if (selectedOption.label === "Emirate") {
         setShowEmirate(true);
       } else {
         setShowEmirate(false);
       }
-    }
+    
   };
   useEffect(() => {
     if (type) {

@@ -170,6 +170,7 @@ textarea:focus-visible {
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
+  position: relative;
 }
 .textBox-container-error {
   display: flex;
@@ -180,7 +181,14 @@ textarea:focus-visible {
   font-weight: 600;
   font-size: 17px;
 }
-
+.moreInfo-img{
+  width: 24px;
+height: 24px;
+position: absolute;
+right:0;
+margin-right: 2px;
+margin-bottom: 6px;
+}
 /************************************************** DropDown*******/
 
 .css-tj5bde-Svg {
@@ -301,6 +309,7 @@ textarea:focus-visible {
   font-style: normal;
   font-weight: 500;
   line-height: normal;
+  min-width: 100px;
 }
 
 /* .file-input-container img {
@@ -1001,7 +1010,7 @@ ul {
 /****************************PROGRAM INFORMATION*******************/
 .grid-programInfo-cont {
   display: grid;
-  grid-template-columns: 2fr 2fr 2fr 1fr;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
   grid-column-gap: 10px;
 }
 
@@ -1009,7 +1018,27 @@ ul {
   color: #1b224c;
   font-size: 18px;
 }
+.moreInfo-grid{
+  display: flex;
+  flex-direction: column;
+  color: #000;
+font-family: Raleway;
+font-size: 13px;
+font-style: normal;
+font-weight: 500;
+line-height: normal;
+}
 
+.moreInfo-grid a{
+  cursor: pointer;
+  color: #3886BD !important;
+font-family: Raleway;
+font-size: 13px;
+font-style: normal;
+font-weight: 600;
+line-height: normal;
+text-decoration-line: underline !important;
+}
 /************************************Consent****************/
 .grid-consent1-cont {
   display: grid;

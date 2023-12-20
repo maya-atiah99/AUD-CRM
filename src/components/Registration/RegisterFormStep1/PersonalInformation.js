@@ -11,7 +11,7 @@ import DocumentUpload from "../../Inputs/DocumentUpload";
 const PersonalInformation = () => {
   const [showEmirate, setShowEmirate] = useState(false);
   const formik = useFormikContext();
-console.log('hvjhghvhg formik',formik)
+  console.log("hvjhghvhg formik", formik);
   return (
     <div className='form-subcontainers'>
       <SectionTitle title='PERSONAL INFORMATION OF THE APPLICANT' />
@@ -166,7 +166,7 @@ console.log('hvjhghvhg formik',formik)
             text='Choose File'
             height='25px'
             imageHeight='30px'
-            size="5"
+            size='5'
             name='Passport_File'
             value={formik.values.Passport_File}
             onChange={(name, value) => {
@@ -192,7 +192,7 @@ console.log('hvjhghvhg formik',formik)
             text='Choose File'
             height='25px'
             imageHeight='30px'
-            size="5"
+            size='5'
             name='EmiratesId_File'
             value={formik.values.EmiratesId_File}
             onChange={(name, value) => {
@@ -207,17 +207,6 @@ console.log('hvjhghvhg formik',formik)
           <div className='grid-personal1-cont' style={{ paddingTop: "0.5rem" }}>
             <TextBox
               width='100%'
-              label='Ethbara No.'
-              name='EtibharaNo'
-              value={formik.values.EtibharaNo}
-              onChange={(name, value) => {
-                formik.setFieldValue(name, value);
-              }}
-              errors={formik.errors?.EtibharaNo}
-              touched={formik.touched?.EtibharaNo}
-            />
-            <TextBox
-              width='100%'
               label='Family Book No.'
               name='FamilyBookNumber'
               value={formik.values.FamilyBookNumber}
@@ -226,6 +215,32 @@ console.log('hvjhghvhg formik',formik)
               }}
               errors={formik.errors?.FamilyBookNumber}
               touched={formik.touched?.FamilyBookNumber}
+            />
+            <DocumentUpload
+              label='Upload Family Book'
+              text='Choose File'
+              height='25px'
+              imageHeight='30px'
+              size='5'
+              name='FamilyBook_File'
+              value={formik.values.FamilyBook_File}
+              onChange={(name, value) => {
+                formik.setFieldValue(name, value);
+              }}
+              fileName={formik.values.FamilyBook_File}
+              errors={formik.errors?.FamilyBook_File}
+              touched={formik.touched?.FamilyBook_File}
+            />{" "}
+            <TextBox
+              width='100%'
+              label='Ethbara No.'
+              name='EtibharaNo'
+              value={formik.values.EtibharaNo}
+              onChange={(name, value) => {
+                formik.setFieldValue(name, value);
+              }}
+              errors={formik.errors?.EtibharaNo}
+              touched={formik.touched?.EtibharaNo}
             />
             <TextBox
               width='100%'
@@ -238,6 +253,12 @@ console.log('hvjhghvhg formik',formik)
               errors={formik.errors?.FamilyNo}
               touched={formik.touched?.FamilyNo}
             />
+          </div>
+        ) : (
+          ""
+        )}
+        {showEmirate ? (
+          <div className='grid-personal1-cont'>
             <TextBox
               width='100%'
               label='City No.'
@@ -249,27 +270,6 @@ console.log('hvjhghvhg formik',formik)
               errors={formik.errors?.CityNo}
               touched={formik.touched?.CityNo}
             />
-          </div>
-        ) : (
-          ""
-        )}
-        {showEmirate ? (
-          <div className='grid-personal1-cont'>
-            <DocumentUpload
-              label='Upload Family Book'
-              text='Choose File'
-              height='25px'
-              imageHeight='30px'
-              size="5"
-              name='FamilyBook_File'
-              value={formik.values.FamilyBook_File}
-              onChange={(name, value) => {
-                formik.setFieldValue(name, value);
-              }}
-              fileName={formik.values.FamilyBook_File}
-              errors={formik.errors?.FamilyBook_File}
-              touched={formik.touched?.FamilyBook_File}
-            />{" "}
           </div>
         ) : (
           ""

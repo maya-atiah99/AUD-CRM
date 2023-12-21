@@ -2,7 +2,7 @@ import React from "react";
 
 const BulletedText = ({ items, size, font }) => {
   return (
-    <ul>
+    <ul className="bulleted-text">
       {items.map((item, index) => (
         <li style={{ fontSize: size, fontWeight: font }} key={index}>
           {item.text}

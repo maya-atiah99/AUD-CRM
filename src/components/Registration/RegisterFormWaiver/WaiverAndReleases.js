@@ -66,7 +66,7 @@ const WaiverAndReleases = forwardRef(({}, ref) => {
         </div>
         <div className='form-subcontainers'>
           <SectionTitle title='ACKNOWLEDGEMENT' size='18px' font='600' />
-          <TextComponent text='Insurance Coverage while at AUD' font='700' />
+          <TextComponent text='Insurance Coverage while at AUD' font='700' classfont='expand-font-title' />
           <SquareCheckBox
             text='Private health insurance covering care in the UAE is mandatory for AUD students. Visiting students are required to provide the Admissions Office with evidence of valid private health insurance applicable in the UAE, during the Admissions process. Visiting students are responsible for all charges related to any medical care, while enrolled at AUD. As part of the AUD residence visa application, students are also required to enroll in the AUD-sponsored health insurance plan.'
             name='HealthInsurance'

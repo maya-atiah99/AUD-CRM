@@ -27,7 +27,7 @@ const Consent = () => {
         classfont='consent-text'
         font='600'
       />
-      <div className='d-flex justify-content-between'>
+      <div className=' bulleted-consent-grid'>
         <BulletedText
           items={[{ text: "Student name" }, { text: "Address(es)" }]}
         />
@@ -110,8 +110,7 @@ const Consent = () => {
           errors={formik.errors["Authorize_Address"]}
           touched={formik.touched["Authorize_Address"]}
         />
-      </div>
-      <div className='grid-consent2-cont'>
+     
         <PhoneNumber
           width='100%'
           label='Telephone'

@@ -2,9 +2,22 @@ import * as Yup from "yup";
 
 const getValidationSchemaStep1 = (applicationStart, applingAs) => {
   const baseSchema = {
+    isSaved: Yup.boolean(),
     TitleId: Yup.string().notRequired("TitleId is required"),
-    FirstName: Yup.string().max(50, "First Name must be at most 50 characters").required("First Name is required"),
-    MiddleName: Yup.string().max(50, "Middle Name must be at most 50 characters").required("Middle Name is required"),
+    FirstName: Yup.string()
+      .max(50, "First Name must be at most 50 characters")
+      .when("isSaved", {
+        is: true,
+        then: () => {
+          Yup.string().required("First Name is required");
+        },
+        otherwise: () => {
+          Yup.string();
+        },
+      }),
+    MiddleName: Yup.string()
+      .max(50, "Middle Name must be at most 50 characters")
+      .required("Middle Name is required"),
     LastName: Yup.string().max(50, "Last Name must be at most 50 characters"),
     Email: Yup.string().email("Invalid Email").required("Email is required"),
     Nationality: Yup.string().required("Nationality is required"),
@@ -14,8 +27,7 @@ const getValidationSchemaStep1 = (applicationStart, applingAs) => {
     ApplicantTelephone: Yup.string().required(
       "Applicant Telephone is required"
     ),
-    isSaved:Yup.boolean(),
-    NextActiveStep:Yup.number(),
+    NextActiveStep: Yup.number(),
     SelectedTerm: Yup.string().required("Selected Term is required"),
     ApplicationStart: Yup.number().required("Application Start is required"),
     ApplingAs: Yup.number().required("Applying as  is required"),
@@ -99,17 +111,16 @@ const getValidationSchemaStep1 = (applicationStart, applingAs) => {
       baseSchema.MiddleEasternStudies.notRequired();
     baseSchema.SemestersAtAUD = baseSchema.SemestersAtAUD.notRequired();
   }
-  if (applingAs === 1 || applingAs ===5) {
+  if (applingAs === 1 || applingAs === 5) {
     baseSchema.CurrentPlaceOfStudy = baseSchema.CurrentPlaceOfStudy.required(
       "Current Place Of study is required"
     );
-  }else{
+  } else {
     baseSchema.CurrentPlaceOfStudy = baseSchema.CurrentPlaceOfStudy.notRequired(
       "Current Place Of study is required"
     );
   }
 
-  
   return Yup.object().shape(baseSchema);
 };
 export default getValidationSchemaStep1;

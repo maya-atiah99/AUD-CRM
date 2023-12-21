@@ -72,7 +72,7 @@ const DocumentUpload = ({
           <p
             className='p-style'
             style={{
-              maxWidth: "150px",
+              maxWidth: "80%",
               overflow: "hidden",
               textOverflow: "ellipsis",
               whiteSpace: "nowrap",

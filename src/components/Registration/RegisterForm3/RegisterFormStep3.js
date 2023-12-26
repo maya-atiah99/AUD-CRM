@@ -29,7 +29,7 @@ const RegisterFormStep3 = forwardRef(
 
     useEffect(() => {
       const initialvalues = {
-        isSaved: true,
+        isSaved: null,
         NextActiveStep: "",
         ProgramInformationCheck:
           applicantStageFour?.data?.stage2?.programInformationCheck || false,
@@ -60,9 +60,9 @@ const RegisterFormStep3 = forwardRef(
       });
     };
 
-    useEffect(() => {
-      console.log("init", init);
-    }, [init]);
+    // useEffect(() => {
+    //   console.log("init", init);
+    // }, [init]);
 
     const formik = useFormik({
       initialValues: init,
@@ -94,7 +94,7 @@ const RegisterFormStep3 = forwardRef(
         handleAddStageFour(formData);
       },
     });
-
+    console.log("formik step 3 isSaved", formik?.values?.isSaved);
     useEffect(() => {
       if (showModal) document.body.style.overflowY = "hidden";
       else document.body.style.overflowY = "scroll";
@@ -113,7 +113,7 @@ const RegisterFormStep3 = forwardRef(
     // useEffect(() => {
     //   refetchStageFour();
     // }, []);
-    console.log(applicantStageFour);
+    console.log("formik", formik);
     return (
       <>
         <div className='form-subcontainer'>

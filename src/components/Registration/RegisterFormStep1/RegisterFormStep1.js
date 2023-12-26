@@ -118,7 +118,7 @@ const RegisterFormStep1 = forwardRef(
           Gender: fetchedData?.data?.stage1?.gender || "",
           Mobile: fetchedData?.data?.stage1?.phoneNumber || "",
           ApplicantTelephone: fetchedData?.data?.stage1?.mobile || "",
-          ApplingAs: fetchedData?.data?.application?.applyingAs || "",
+          ApplingAs: fetchedData?.data?.application?.applyingAs  || "",
           SelectedTerm: fetchedData?.data?.application?.term || "",
           ApplicationStart:
             fetchedData?.data?.application?.startYourApplication?.toString() ||
@@ -222,31 +222,7 @@ const RegisterFormStep1 = forwardRef(
     //   console.log(init);
     // }, [init]);
 
-    // useEffect(() => {
-    //   console.log("save,save", save);
-    //   console.log(
-    //     'localStorage.getItem("save") step 1',
-    //     localStorage.getItem("save")
-    //   );
-    //   const savedValue = localStorage.getItem("save");
-    //   if (savedValue !== save) {
-    //     setSave(savedValue);
-    //   }
-    //   console.log('savedValue',savedValue)
-    // }, [save, localStorage.getItem("save")]);
-
-    // useEffect(() => {
-    //   console.log("save,save", save);
-    //   console.log(
-    //     'localStorage.getItem("save") step 1',
-    //     localStorage.getItem("save")
-    //   );
-    //   const savedValue = localStorage.getItem("save");
-    //   if (savedValue !== save) {
-    //     setSave(savedValue);
-    //   }
-    //   console.log('savedValue',savedValue)
-    // }, []);
+   
     const formik = useFormik({
       initialValues: init,
       validationSchema: getValidationSchemaStep1(applicationStart, applingAs),

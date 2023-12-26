@@ -62,7 +62,6 @@ export const useAddFiles = () => {
   return useMutation(addFiles);
 };
 
-
 /***********************Payment */
 const payment = (applicant) => {
   return axios.post(API_URL + `/api/Applicant/PostPayment`, applicant, {
@@ -77,18 +76,24 @@ export const usePayment = () => {
 };
 
 /**************Fetch  Applicant stage 1 */
-const fetchApplicantStageOne = async (applicantId) => {
-  return await axios.get(
-    API_URL + `/api/Applicant/GetApplicantStage/Stage1/${applicantId}`
-  );
+const fetchApplicantStageOne = async (applicantId, applicationId) => {
+  console.log("applicationIDdddd", applicationId);
+  if (applicantId && applicationId) {
+    return await axios.get(
+      API_URL +
+        `/api/Applicant/GetApplicantStage/Stage1/${applicantId}?ApplicationId=${applicationId}`
+    );
+  }
 };
-export const useFetchApplicantStageOne = (applicantId) => {
+
+export const useFetchApplicantStageOne = (applicantId, applicationId) => {
   return useQuery({
-    queryKey: ["stage1", applicantId],
-    queryFn: () => fetchApplicantStageOne(applicantId),
+    queryKey: ["stage1", applicantId, applicationId],
+    queryFn: () => fetchApplicantStageOne(applicantId, applicationId),
     enabled: true,
   });
 };
+
 /**************Fetch  Applicant stage 2 */
 const fetchApplicantStageTwo = async (applicantId, applicationId) => {
   return await axios.get(

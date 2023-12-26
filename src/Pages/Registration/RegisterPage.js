@@ -41,10 +41,10 @@ const RegisterPage = ({
   const [showThree, setShowThree] = useState(false);
   const [fetchedData, setfetchedData] = useState({});
   const { data: applicantStageOne, refetch: refetchStageOne } =
-    useFetchApplicantStageOne(applicantId);
+    useFetchApplicantStageOne(applicantId, applicationId);
   const { data: applicantStageTwo, refetch: refetchStageTwo } =
     useFetchApplicantStageTwo(applicantId, applicationId);
-
+  console.log("stage2", applicantStageTwo);
   const generateSteps = (applicationStart, applingAs) => {
     if (applicationStart === "2") {
       return [
@@ -267,6 +267,7 @@ const RegisterPage = ({
     }
   };
 
+  console.log("applicationID", applicationId);
   useEffect(() => {
     refreshPage();
   }, [showInterest, activeStep, applicantStageOne, applicantStageTwo]);
@@ -283,7 +284,7 @@ const RegisterPage = ({
     refreshPage();
     setApplicationStart(localStorage.getItem("applicationStart"));
     setApplyingAs(parseInt(localStorage.getItem("applingAs")));
-    setApplicationId(localStorage.getItem("applicantionId"));
+    setApplicationId(localStorage.getItem("applicationId"));
     setApplicantId(localStorage.getItem("applicantId"));
   }, []);
 
@@ -292,22 +293,14 @@ const RegisterPage = ({
     setSteps(newSteps);
   }, [applicationStart, fetchedData, applingAs]);
 
-  const handeleSubmit = (step) => {
-    try {
-      steps[step].ref.current?.submitForm();
-    } catch (error) {
-      console.error("Error submitting form:", error);
-    }
-  };
-
   const handleChange = async (next) => {
-    localStorage.setItem("save", true);
-    steps[activeStep].ref.current?.setFieldValue("isSaved", true);
+    console.log("continue to next step");
+
+    await steps[activeStep].ref.current?.setFieldValue("isSaved", true);
     steps[activeStep].ref.current?.setFieldValue(
       "NextActiveStep",
       activeStep + 1
     );
-    // if (next) handeleSubmit(activeStep);
 
     if (next) {
       try {
@@ -327,12 +320,11 @@ const RegisterPage = ({
     }
   };
 
-  const handleSave = (next) => {
-    localStorage.setItem("save", false);
-    steps[activeStep].ref.current?.setFieldValue("isSaved", false);
+  const handleSave =async (next) => {
+    console.log("handleSave");
+    await steps[activeStep].ref.current?.setFieldValue("isSaved", false);
     steps[activeStep].ref.current?.setFieldValue("NextActiveStep", activeStep);
-  
-    if (next) handeleSubmit(activeStep);
+    if (next) steps[activeStep].ref.current?.submitForm();
     // setTimeout(() => {
     //   navigate("/");
     //   localStorage.clear();

@@ -13,26 +13,40 @@ const getValidationSchemaStep2 = (applicationStart, applingAs) => {
     SchoolCountry2: Yup.string().notRequired(),
     applicantFiles: Yup.array().of(
       Yup.object().shape({
-        testType: Yup.string().required("Chosen test is required"),
-        academicDocument: Yup.mixed().required("Academic document is required"),
-        dateTaken: Yup.date().required("Date taken is required"),
-        registrationNumber: Yup.number().required(
-          "Registration number is required"
-        ),
-        totalScore: Yup.number().required("Total score is required"),
+        testType: Yup.string().notRequired(),
+        academicDocument: Yup.mixed().when("testType", {
+          is: (testType) => !!testType,
+          then: (schema) => schema.required("Academic document is required"),
+          otherwise: (schema) => schema.notRequired(),
+        }),
+        dateTaken: Yup.date().when("testType", {
+          is: (testType) => !!testType,
+          then: (schema) => schema.required("Date taken is required"),
+          otherwise: (schema) => schema.notRequired(),
+        }),
+        registrationNumber: Yup.number().when("testType", {
+          is: (testType) => !!testType,
+          then: (schema) => schema.required("Registration number is required"),
+          otherwise: (schema) => schema.notRequired(),
+        }),
+        totalScore: Yup.number().when("testType", {
+          is: (testType) => !!testType,
+          then: (schema) => schema.required("totalScore is required"),
+          otherwise: (schema) => schema.notRequired(),
+        }),
       })
     ),
     isSaved: Yup.boolean(),
     NextActiveStep: Yup.number(),
     PersonalStatement: Yup.string()
-    .test('min-words', 'Minimum 500 words are required', (value) => {
-      if (!value) {
-        return false;
-      }
-      const words = value.trim().split(/\s+/).length;
-      return words >= 500;
-    })
-    .required('Personal statement is required'),
+      .test("min-words", "Minimum 500 words are required", (value) => {
+        if (!value) {
+          return false;
+        }
+        const words = value.trim().split(/\s+/).length;
+        return words >= 500;
+      })
+      .required("Personal statement is required"),
     EmploymentStatus: Yup.string(),
     EmploymentSector: Yup.string(),
     CompanyName: Yup.string(),

@@ -20,9 +20,8 @@ function App() {
     parseInt(localStorage.getItem("applingAs")) || null
   );
   const [applicationId, setApplicationId] = useState(
-    localStorage.getItem("applicationId") || null
+    localStorage.getItem("applicationId") 
   );
-  console.log('applicationStartxsddsc',applicationStart)
   return (
     <QueryClientProvider client={queryCLient}>
       <div>

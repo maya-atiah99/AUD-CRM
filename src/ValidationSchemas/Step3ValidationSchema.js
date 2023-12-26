@@ -21,8 +21,15 @@ const Step3ValidationSchema = Yup.object().shape({
     .required()
     .oneOf([true], "This field is required"),
   RecordsCheck: Yup.boolean()
-    .required()
-    .oneOf([true], "This field is required"),
+    .when("isSaved", {
+      is: (isSaved) => {
+        console.log('isSaaaaaaved',isSaved)
+         return isSaved
+      },
+      then: (schema) => schema.required("RecordsCheck is required")
+      .oneOf([true], "This field is required"),
+      otherwise: (schema) => schema.notRequired(),
+    }),
 });
 
 export default Step3ValidationSchema;

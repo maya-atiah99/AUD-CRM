@@ -45,11 +45,11 @@ const ShowInterestForm = ({
   const { mutate: addShowInterest } = useAddApplicantToShowInterest();
   const { mutate: addApplicant } = useAddApplicant();
 
-  const handleContinueToApply = (values, { setFieldError,resetForm }) => {
+  const handleContinueToApply = (values, { setFieldError, resetForm }) => {
     addApplicant(values, {
       onSuccess: (data) => {
         localStorage.setItem("applicantId", data?.data?.applicantId);
-        localStorage.setItem("applicantionId", data?.data?.applicationId);
+        localStorage.setItem("applicationId", data?.data?.applicationId);
         setApplicationId(data?.data?.applicationId);
         localStorage.setItem("applicationStart", values.applicationStart);
         setApplicationStart(values.applicationStart);
@@ -57,7 +57,7 @@ const ShowInterestForm = ({
         openVerifiedModal("Continue");
         localStorage.removeItem("message");
         setSubmissionSuccess(true);
-        resetForm()
+        resetForm();
       },
       onError: (error, data) => {
         console.error("An error occurred:", error?.response?.data);
@@ -68,12 +68,13 @@ const ShowInterestForm = ({
     });
   };
 
-  const handleSubmitForm = (values) => {
+  const handleSubmitForm = (values, { resetForm }) => {
     addShowInterest(values, {
       onSuccess: (data) => {
         openVerifiedModal("Submit");
         setApplicantId(data?.data?.applicantId);
         setSubmissionSuccess(true);
+        resetForm();
       },
       onError: (error) => {
         console.error("An error occurred:", error);
@@ -94,9 +95,9 @@ const ShowInterestForm = ({
         const valuesToSend =
           values.titleId === "" ? { ...values, titleId: undefined } : values;
         if (clickedButton === "continueToApply") {
-          handleContinueToApply(valuesToSend, { setFieldError });
+          handleContinueToApply(valuesToSend, { setFieldError, resetForm });
         } else if (clickedButton === "submitForm") {
-          handleSubmitForm(valuesToSend);
+          handleSubmitForm(valuesToSend, { resetForm });
         }
 
         if (submissionSuccess) {

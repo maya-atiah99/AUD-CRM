@@ -268,65 +268,63 @@ textarea:focus-visible {
 /******************************************file input********/
 .file-input {
   display: none;
+ 
 }
 
+.file-input-container-upl,
 .file-input-container {
+  flex: 1;
   position: relative;
-  border-radius: 5px;
-  /* height: 100px; */
-  border: 1px solid #1b224c31;
-  /* padding: 30px; */
-  padding: 10px;
-  gap: 10px;
   display: flex;
   flex-direction: row;
-  align-items: center;
-  padding: 20px;
   justify-content: space-between;
-}
-.file-input-container-upl {
-  position: relative;
-  border-radius: 5px;
-  /* height: 100px; */
+  align-items: center;
+  padding: 0 10px;
   border: 1px solid #1b224c31;
-  /* padding: 30px; */
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  padding: 20px;
-  gap: 10px;
-  justify-content: space-between;
-  background-color: #020b581f;
-}
-.file-input-container:hover {
+  border-radius: 5px;
   cursor: pointer;
 }
-.size-upload-dc {
+.file-input-container-upl {
+  background-color: #020b581f;
+}
+.img-text-container {
+  width: 70%;
+  display: flex;
+  flex-direction: row;
+  gap: 5px;
+  align-items: center;
+}
+.img-text-container img {
+  width: auto;
+}
+.img-text-container p {
+  max-width: 60%;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
   color: #1b224c;
-  text-align: right;
   font-family: Raleway;
-  font-size: 10px;
+  font-size: 14px;
   font-style: normal;
   font-weight: 500;
   line-height: normal;
-  min-width: 100px;
+  margin: 0;
 }
-
-/* .file-input-container img {
-  width: 80px;
-  height: 50px;
-} */
-.file-input-container p {
-  font-size: 15px;
+.size-upload-dc p {
+  color: #1b224c;
+  text-align: right;
+  font-family: Raleway;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+  margin: 0;
 }
-
 .close-document-icon {
   position: absolute;
-  top: 2px;
-  right: 3px;
-  color: #020a58;
-  opacity: 0.7;
-  font-size: 18px;
+  top: 0;
+  right: 0;
+  width: 16px;
 }
 /**************************************Modal****/
 .modal-container {
@@ -1004,6 +1002,11 @@ ul {
 .grid-mailing-cont {
   display: grid;
   grid-template-columns: 2fr 1fr 1fr 1fr;
+  grid-column-gap: 10px;
+}
+.grid-personal-emirates-cont{
+  display: grid;
+  grid-template-columns: 2fr 3fr 3fr 3fr;
   grid-column-gap: 10px;
 }
 
@@ -2113,7 +2116,7 @@ responsiveness ************/
     font-weight: bold;
   }
   .expandable-card {
-    padding: 15px 0px;
+    padding: 15px 5px;
     margin: 10px 0;
     gap: 10px;
   }
@@ -2145,7 +2148,7 @@ responsiveness ************/
   .aud-button > .button-icon {
     vertical-align: middle !important;
     width: 18px !important;
-}
+  }
 
   /******************/
   /********/
@@ -2163,7 +2166,13 @@ responsiveness ************/
   .form-subcontainers {
     gap: 0.8rem;
   }
-
+.textBox-container{
+  font-size: 10px !important;
+}
+.close-document-icon {
+  
+  width: 12px;
+}
   /******form step 1***********/
   .grid-personal1-cont,
   .grid-personal2-cont,
@@ -2172,6 +2181,13 @@ responsiveness ************/
     grid-template-columns: 1fr 1fr;
     grid-column-gap: 10px;
     grid-row-gap: 10px;
+  }
+  .grid-personal-emirates-cont{
+   
+    grid-template-columns: 1fr;
+    grid-row-gap: 10px;
+    padding-top: 10px;
+    
   }
   .form-subcontainer {
     gap: 2rem;
@@ -2243,9 +2259,24 @@ responsiveness ************/
   .grid-acd-cont {
     grid-template-columns: 1fr 1fr;
   }
-
+  .grid-academic4-cont {
+    grid-template-columns: 1fr;
+  }
+  .img-text-container p {
+    font-size: 11px;
+  }
+  .size-upload-dc p {
+    font-size: 9px;
+  }
+  .img-text-container img {
+    width: 50px !important;
+  }
+  .file-input-container,
+  .file-input-container-upl {
+    height: 40px !important;
+  }
   /******payment*******/
   .payment-subcontainer {
     width: 100%;
-}
+  }
 }

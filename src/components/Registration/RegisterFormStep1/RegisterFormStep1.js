@@ -334,7 +334,7 @@ const RegisterFormStep1 = forwardRef(
             }
           }
         });
-        
+
         const fileToAppend = [
           "FamilyBook_File",
           "EmiratesId_File",
@@ -375,6 +375,8 @@ const RegisterFormStep1 = forwardRef(
       localStorage.setItem("applingAs", formik.values?.ApplingAs);
     }, [formik.values]);
     console.log(fetchedData);
+    console.log("formik.values.isSaved", formik.values.isSaved);
+
     return (
       <div className='form-subcontainer'>
         <FormikProvider

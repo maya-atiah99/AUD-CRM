@@ -21,7 +21,6 @@ const DropDown = ({
   isMonth,
   parent,
   data,
-  setShowEmirate,
   bolean,
 }) => {
   const { data: options, refetch: refetchTypes } = useFetchDropDownTypes(
@@ -90,13 +89,6 @@ const DropDown = ({
   const handleOnChange = (name, selectedOption) => {
     onChange(name, selectedOption.value);
 
-    if (selectedOption.label === "Emirate") {
-      if (setShowEmirate) {
-        setShowEmirate(true);
-      } else {
-        setShowEmirate(false);
-      }
-    }
   };
   useEffect(() => {
     if (type) {

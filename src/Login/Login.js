@@ -14,7 +14,7 @@ const Login = ({
   setShowApplicatiosModal,
   setApplicationStart,
   setApplyingAs,
-  setIsForgotPassword
+  setIsForgotPassword,
 }) => {
   const [manageShowInterest, setManageshowInterest] = useState(false);
   const { mutate: login } = useApplicantLogin();
@@ -39,6 +39,7 @@ const Login = ({
           login(values, {
             onSuccess: (data) => {
               setApplicantId(data?.data?.applicantId);
+              localStorage.setItem("token", data?.data?.token);
               localStorage.setItem("applicantId", data?.data?.applicantId);
               localStorage.setItem("fullName", data?.data?.fullName);
               localStorage.setItem(
@@ -115,7 +116,9 @@ const Login = ({
                 <div className='test222'>
                   <LinkButton
                     title='Forgot Password'
-                    handleOnClick={()=>(setIsForgotPassword(true),setShowLoginModal(false))}
+                    handleOnClick={() => (
+                      setIsForgotPassword(true), setShowLoginModal(false)
+                    )}
                     underlined={true}
                     type='button'
                   />

@@ -57,27 +57,19 @@ const DocumentUpload = ({
       </label>
 
       <label
-        className={`file-input-container ${
+        className={` ${
           selectedFile ? "file-input-container-upl" : "file-input-container"
         }`}
         style={containerStyle}
       >
         <input type='file' className='file-input' onChange={handleFileChange} />
-        <div className="d-flex align-items-center gap-1">
+        <div className='img-text-container'>
           <img
             src='/images/Layer 25.svg'
             alt='layer'
-            style={{ height: imageHeight, width: imageHeight }}
+            style={{ height: imageHeight }}
           />
-          <p
-            className='p-style'
-            style={{
-              maxWidth: "80%",
-              overflow: "hidden",
-              textOverflow: "ellipsis",
-              whiteSpace: "nowrap",
-            }}
-          >
+          <p>
             {errors && touched ? (
               <span className='error-message'>{errors}</span>
             ) : selectedFile ? (
@@ -87,7 +79,7 @@ const DocumentUpload = ({
             )}
           </p>
         </div>
-        <div className="size-upload-dc">Max Size: {size} mb</div>
+        <div className='size-upload-dc'><p>Max Size: {size} mb</p></div>
 
         {selectedFile ? (
           <AiFillCloseCircle

@@ -302,21 +302,25 @@ const RegisterPage = ({
 
   const handleChange = async (next) => {
     localStorage.setItem("save", true);
-    steps[activeStep].ref.current?.setFieldValue("NextActiveStep", activeStep + 1);
+    steps[activeStep].ref.current?.setFieldValue("isSaved", true);
+    steps[activeStep].ref.current?.setFieldValue(
+      "NextActiveStep",
+      activeStep + 1
+    );
     // if (next) handeleSubmit(activeStep);
-  
+
     if (next) {
       try {
         await steps[activeStep].ref.current?.submitForm();
-        if (steps[activeStep].ref.current?.isValid) {
-          if (activeStep === 0) {
-            setShowInterest(false);
-          }
-          setActiveStep((prevActiveStep) => prevActiveStep + 1);
-          window.scrollTo(0, 0);
-        } else {
-          window.scrollTo(0, 0);
-        }
+        // if (steps[activeStep].ref.current?.isValid) {
+        //   if (activeStep === 0) {
+        //     setShowInterest(false);
+        //   }
+        //   setActiveStep((prevActiveStep) => prevActiveStep + 1);
+        //   window.scrollTo(0, 0);
+        // } else {
+        //   window.scrollTo(0, 0);
+        // }
       } catch (error) {
         console.error("Error submitting form:", error);
       }
@@ -328,8 +332,7 @@ const RegisterPage = ({
     localStorage.setItem("save", false);
     steps[activeStep].ref.current?.setFieldValue("isSaved", false);
     steps[activeStep].ref.current?.setFieldValue("NextActiveStep", activeStep);
-    // steps[activeStep].ref.current?.isValidating
-   console.log("steps[activeStep].ref.current?.values",   steps[activeStep].ref.current) 
+  
     if (next) handeleSubmit(activeStep);
     // setTimeout(() => {
     //   navigate("/");

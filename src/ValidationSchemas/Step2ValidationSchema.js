@@ -24,7 +24,15 @@ const getValidationSchemaStep2 = (applicationStart, applingAs) => {
     ),
     isSaved: Yup.boolean(),
     NextActiveStep: Yup.number(),
-    PersonalStatement: Yup.string().min(500).required(),
+    PersonalStatement: Yup.string()
+    .test('min-words', 'Minimum 500 words are required', (value) => {
+      if (!value) {
+        return false;
+      }
+      const words = value.trim().split(/\s+/).length;
+      return words >= 500;
+    })
+    .required('Personal statement is required'),
     EmploymentStatus: Yup.string(),
     EmploymentSector: Yup.string(),
     CompanyName: Yup.string(),

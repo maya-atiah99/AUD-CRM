@@ -312,21 +312,20 @@ const RegisterPage = ({
     if (next) {
       try {
         await steps[activeStep].ref.current?.submitForm();
-        // if (steps[activeStep].ref.current?.isValid) {
-        //   if (activeStep === 0) {
-        //     setShowInterest(false);
-        //   }
-        //   setActiveStep((prevActiveStep) => prevActiveStep + 1);
-        //   window.scrollTo(0, 0);
-        // } else {
-        //   window.scrollTo(0, 0);
-        // }
+        if (steps[activeStep].ref.current?.isValid) {
+          if (activeStep === 0) {
+            setShowInterest(false);
+          }
+          setActiveStep((prevActiveStep) => prevActiveStep + 1);
+          window.scrollTo(0, 0);
+        } else {
+          window.scrollTo(0, 0);
+        }
       } catch (error) {
         console.error("Error submitting form:", error);
       }
     }
   };
-  console.log("console.log(activeStepmmmmmmmm", activeStep);
 
   const handleSave = (next) => {
     localStorage.setItem("save", false);

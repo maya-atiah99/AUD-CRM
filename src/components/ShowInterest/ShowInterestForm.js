@@ -209,13 +209,11 @@ const ShowInterestForm = ({
                     <div>
                       <div className='error-container d-flex gap-1 align-items-start'>
                         <img src='/images/errorSign.svg' alt='error' />
-                        <div className='d-flex flex-column '>
-                          <p style={{ color: "#C60303" }}>
-                            There is already a registration under this email
-                          </p>
-                          <div className='d-flex gap-1'>
-                            <p>To Continue your application please</p>
-                            <p
+                        <div>
+                          <p>
+                            There is already a registration under this email. To
+                            Continue your application please{" "}
+                            <span
                               onClick={() => setShowLoginModal(true)}
                               style={{
                                 textDecoration: "underline",
@@ -223,8 +221,8 @@ const ShowInterestForm = ({
                               }}
                             >
                               Login
-                            </p>
-                          </div>
+                            </span>
+                          </p>
                         </div>
                       </div>
                     </div>

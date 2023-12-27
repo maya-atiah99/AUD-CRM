@@ -932,6 +932,10 @@ ul {
 }
 .error-container p {
   font-size: 12px;
+  color: #C60303
+}
+.error-container span{
+  color:#1B224C
 }
 /***********************************Upper Header*************/
 .upperHeader-container {
@@ -1546,7 +1550,7 @@ td:first-child {
 @media screen and (max-width: 1280px) {
   .showInterest-subContainer {
     padding: 30px 30px;
-    height: 85%;
+    height: 89%;
     width: 95%;
     flex-direction: column;
     justify-content: center;
@@ -2073,7 +2077,7 @@ responsiveness ************/
   }
   .showInterest-subContainer {
     padding: 10px 10px;
-    height: fit-content;
+    height:90%;
     width: 95%;
     flex-direction: column;
     justify-content: center;
@@ -2092,6 +2096,10 @@ responsiveness ************/
     justify-content: center;
     gap: 1%;
   }
+  .showInterestForm-inner-cont p {
+    font-size: 10px !important;
+    padding-top: 2px
+}
   .classfont-show {
     font-size: 14px;
   }

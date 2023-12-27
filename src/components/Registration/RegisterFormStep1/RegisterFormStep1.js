@@ -31,7 +31,6 @@ const RegisterFormStep1 = forwardRef(
   ) => {
     const [init, setInit] = useState({});
     const { mutate: addApplicantStagetwo } = useAddApplicantStageTwo();
-    const [save, setSave] = useState(localStorage.getItem("save") || true);
     useEffect(() => {
       if (showInterest) {
         const initialOne = {
@@ -118,7 +117,7 @@ const RegisterFormStep1 = forwardRef(
           Gender: fetchedData?.data?.stage1?.gender || "",
           Mobile: fetchedData?.data?.stage1?.phoneNumber || "",
           ApplicantTelephone: fetchedData?.data?.stage1?.mobile || "",
-          ApplingAs: fetchedData?.data?.application?.applyingAs  || "",
+          ApplingAs: fetchedData?.data?.application?.applyingAs || "",
           SelectedTerm: fetchedData?.data?.application?.term || "",
           ApplicationStart:
             fetchedData?.data?.application?.startYourApplication?.toString() ||
@@ -222,7 +221,6 @@ const RegisterFormStep1 = forwardRef(
     //   console.log(init);
     // }, [init]);
 
-   
     const formik = useFormik({
       initialValues: init,
       validationSchema: getValidationSchemaStep1(applicationStart, applingAs),
@@ -347,9 +345,12 @@ const RegisterFormStep1 = forwardRef(
     }, [ref, formik]);
 
     useEffect(() => {
+      console.log("dfjkvbjhbfdvfvfv");
       localStorage.setItem("applicationStart", formik.values?.ApplicationStart);
       localStorage.setItem("applingAs", formik.values?.ApplingAs);
-    }, [formik.values]);
+      setApplicationStart(formik.values?.ApplicationStart);
+      setApplyingAs(formik.values?.ApplingAs);
+    }, [formik.values?.ApplicationStart, formik.values?.ApplingAs]);
     console.log(fetchedData);
     console.log("formik.values.isSaved", formik.values.isSaved);
 

@@ -12,6 +12,7 @@ const WaiverAndReleases = forwardRef(({}, ref) => {
       AgreementTermsCheck: "",
       HealthInsurance: "",
       AcknowledgeAndPolicies: "",
+      isSaved:""
     },
     validationSchema: WaiverAndReleasesValidationSchema,
     enableReinitialize: true,

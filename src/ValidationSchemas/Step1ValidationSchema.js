@@ -1,58 +1,157 @@
 import * as Yup from "yup";
 
 const getValidationSchemaStep1 = (applicationStart, applingAs) => {
+  console.log('applicatisaaatart',applicationStart)
   const baseSchema = {
     isSaved: Yup.boolean(),
     TitleId: Yup.string().notRequired("TitleId is required"),
     FirstName: Yup.string()
       .max(50, "First Name must be at most 50 characters")
       .when("isSaved", {
-        is: true,
-        then: () => {
-          Yup.string().required("First Name is required");
-        },
-        otherwise: () => {
-          Yup.string();
-        },
+        is: (isSaved) => isSaved,
+        then: (schema) => schema.required("First Name is required"),
+        otherwise: (schema) => schema.notRequired(),
       }),
     MiddleName: Yup.string()
       .max(50, "Middle Name must be at most 50 characters")
-      .required("Middle Name is required"),
-    LastName: Yup.string().max(50, "Last Name must be at most 50 characters"),
-    Email: Yup.string().email("Invalid Email").required("Email is required"),
-    Nationality: Yup.string().required("Nationality is required"),
-    DOB: Yup.date().required("Date of Birth is required"),
-    Gender: Yup.string().required("Gender is required"),
-    Mobile: Yup.string().required("Mobile is required"),
-    ApplicantTelephone: Yup.string().required(
-      "Applicant Telephone is required"
-    ),
+      .when("isSaved", {
+        is: (isSaved) => isSaved,
+        then: (schema) => schema.required("MiddleName is required"),
+        otherwise: (schema) => schema.notRequired(),
+      }),
+    LastName: Yup.string()
+      .max(50, "Last Name must be at most 50 characters")
+      .when("isSaved", {
+        is: (isSaved) => isSaved,
+        then: (schema) => schema.required("LastName is required"),
+        otherwise: (schema) => schema.notRequired(),
+      }),
+    Email: Yup.string()
+      .email("Invalid Email")
+      .when("isSaved", {
+        is: (isSaved) => isSaved,
+        then: (schema) => schema.required("Email is required"),
+        otherwise: (schema) => schema.notRequired(),
+      }),
+    Nationality: Yup.string().when("isSaved", {
+      is: (isSaved) => isSaved,
+      then: (schema) => schema.required("Nationality is required"),
+      otherwise: (schema) => schema.notRequired(),
+    }),
+    DOB: Yup.date().when("isSaved", {
+      is: (isSaved) => isSaved,
+      then: (schema) => schema.required("DOB is required"),
+      otherwise: (schema) => schema.notRequired(),
+    }),
+    Gender: Yup.string().when("isSaved", {
+      is: (isSaved) => isSaved,
+      then: (schema) => schema.required("Gender is required"),
+      otherwise: (schema) => schema.notRequired(),
+    }),
+    Mobile: Yup.string().when("isSaved", {
+      is: (isSaved) => isSaved,
+      then: (schema) => schema.required("Mobile is required"),
+      otherwise: (schema) => schema.notRequired(),
+    }),
+    ApplicantTelephone: Yup.string().when("isSaved", {
+      is: (isSaved) => isSaved,
+      then: (schema) => schema.required("ApplicantTelephone is required"),
+      otherwise: (schema) => schema.notRequired(),
+    }),
     NextActiveStep: Yup.number(),
-    SelectedTerm: Yup.string().required("Selected Term is required"),
-    ApplicationStart: Yup.number().required("Application Start is required"),
-    ApplingAs: Yup.number().required("Applying as  is required"),
-    ProgramOfInterest: Yup.string().required("Program Of Interest is required"),
+    SelectedTerm: Yup.string().when("isSaved", {
+      is: (isSaved) => isSaved,
+      then: (schema) => schema.required("SelectedTerm is required"),
+      otherwise: (schema) => schema.notRequired(),
+    }),
+    ApplicationStart: Yup.number().when("isSaved", {
+      is: (isSaved) => isSaved,
+      then: (schema) => schema.required("ApplicationStart is required"),
+      otherwise: (schema) => schema.notRequired(),
+    }),
+    ApplingAs: Yup.number().when("isSaved", {
+      is: (isSaved) => isSaved,
+      then: (schema) => schema.required("ApplingAs is required"),
+      otherwise: (schema) => schema.notRequired(),
+    }),
+    ProgramOfInterest: Yup.string().when("isSaved", {
+      is: (isSaved) => isSaved,
+      then: (schema) => schema.required("ProgramOfInterest is required"),
+      otherwise: (schema) => schema.notRequired(),
+    }),
     CurrentPlaceOfStudy: Yup.string(),
-    GuardianRelation1: Yup.string().required("GuardianRelation1 is required"),
-    GuardianName1: Yup.string().required("GuardianName1 is required"),
-    GuardianMobile1: Yup.string().required("GuardianMobile1 is required"),
+    GuardianRelation1: Yup.string().when("isSaved", {
+      is: (isSaved) => isSaved,
+      then: (schema) => schema.required("GuardianRelation1 is required"),
+      otherwise: (schema) => schema.notRequired(),
+    }),
+    GuardianName1: Yup.string().when("isSaved", {
+      is: (isSaved) => isSaved,
+      then: (schema) => schema.required("GuardianName1 is required"),
+      otherwise: (schema) => schema.notRequired(),
+    }),
+    GuardianMobile1: Yup.string().when("isSaved", {
+      is: (isSaved) => isSaved,
+      then: (schema) => schema.required("GuardianMobile1 is required"),
+      otherwise: (schema) => schema.notRequired(),
+    }),
     GuardianEmail1: Yup.string()
       .email("Invalid Email")
-      .required("GuardianEmail1 is required"),
+      .when("isSaved", {
+        is: (isSaved) => isSaved,
+        then: (schema) => schema.required("GuardianEmail1 is required"),
+        otherwise: (schema) => schema.notRequired(),
+      }),
     GuardianRelation2: Yup.string(),
     GuardianName2: Yup.string(),
     GuardianMobile2: Yup.string(),
     GuardianEmail2: Yup.string().email("Invalid Email"),
-    AuthorizeToReleaseRecord: Yup.boolean()
-      .required()
-      .oneOf([true], "This field is required"),
-    Authorize_GuardianName: Yup.string().required(),
-    Authorize_GuardianRelation: Yup.string().required(),
-    Authorize_Address: Yup.string().required(),
-    Authorize_Telephone: Yup.string().required(),
-    Address1: Yup.string().max(500).required(),
-    Country: Yup.string().required("Country is required"),
-    CityState: Yup.string().required("City/State is required"),
+    AuthorizeToReleaseRecord: Yup.boolean().when("isSaved", {
+      is: (isSaved) => isSaved,
+      then: (schema) =>
+        schema
+          .required("AuthorizeToReleaseRecord is required")
+          .oneOf([true], "This field is required"),
+      otherwise: (schema) => schema.notRequired(),
+    }),
+    Authorize_GuardianName: Yup.string().when("isSaved", {
+      is: (isSaved) => isSaved,
+      then: (schema) => schema.required("Authorize_GuardianName is required"),
+      otherwise: (schema) => schema.notRequired(),
+    }),
+    Authorize_GuardianRelation: Yup.string().when("isSaved", {
+      is: (isSaved) => isSaved,
+      then: (schema) =>
+        schema.required("Authorize_GuardianRelation is required"),
+      otherwise: (schema) => schema.notRequired(),
+    }),
+    Authorize_Address: Yup.string().when("isSaved", {
+      is: (isSaved) => isSaved,
+      then: (schema) => schema.required("Authorize_Address is required"),
+      otherwise: (schema) => schema.notRequired(),
+    }),
+    Authorize_Telephone: Yup.string().when("isSaved", {
+      is: (isSaved) => isSaved,
+      then: (schema) => schema.required("Authorize_Telephone is required"),
+      otherwise: (schema) => schema.notRequired(),
+    }),
+    Address1: Yup.string()
+      .max(500)
+      .when("isSaved", {
+        is: (isSaved) => isSaved,
+        then: (schema) => schema.required("Address1 is required"),
+        otherwise: (schema) => schema.notRequired(),
+      }),
+    Country: Yup.string().when("isSaved", {
+      is: (isSaved) => isSaved,
+      then: (schema) => schema.required("Country is required"),
+      otherwise: (schema) => schema.notRequired(),
+    }),
+    CityState: Yup.string().when("isSaved", {
+      is: (isSaved) => isSaved,
+      then: (schema) => schema.required("CityState is required"),
+      otherwise: (schema) => schema.notRequired(),
+    }),
     Pobox: Yup.string().max(50),
     ZipCode: Yup.string().max(50),
     LegacyApplicant: Yup.boolean(),
@@ -82,25 +181,42 @@ const getValidationSchemaStep1 = (applicationStart, applingAs) => {
   };
 
   if (applicationStart === "2") {
-    baseSchema.Visiting_LevelOfStudy =
-      baseSchema.Visiting_LevelOfStudy.required(
-        ".Visiting_LevelOfStudy  is required"
-      );
-    baseSchema.StudentVisa = baseSchema.StudentVisa.required(
-      "StudentVisa  is required"
+    baseSchema.Visiting_LevelOfStudy = baseSchema.Visiting_LevelOfStudy.when(
+      "isSaved",
+      {
+        is: (isSaved) => isSaved,
+        then: (schema) => schema.required("Visiting_LevelOfStudy is required"),
+        otherwise: (schema) => schema.notRequired(),
+      }
     );
-    baseSchema.UAE_GCC_Resident = baseSchema.UAE_GCC_Resident.required(
-      "UAE_GCC_Resident  is required"
+    baseSchema.StudentVisa = baseSchema.StudentVisa.when("isSaved", {
+      is: (isSaved) => isSaved,
+      then: (schema) => schema.required("StudentVisa is required"),
+      otherwise: (schema) => schema.notRequired(),
+    });
+    baseSchema.UAE_GCC_Resident = baseSchema.UAE_GCC_Resident.when("isSaved", {
+      is: (isSaved) => isSaved,
+      then: (schema) => schema.required("UAE_GCC_Resident is required"),
+      otherwise: (schema) => schema.notRequired(),
+    });
+    baseSchema.OnHouseCampus = baseSchema.OnHouseCampus.when("isSaved", {
+      is: (isSaved) => isSaved,
+      then: (schema) => schema.required("OnHouseCampus is required"),
+      otherwise: (schema) => schema.notRequired(),
+    });
+    baseSchema.MiddleEasternStudies = baseSchema.MiddleEasternStudies.when(
+      "isSaved",
+      {
+        is: (isSaved) => isSaved,
+        then: (schema) => schema.required("MiddleEasternStudies is required"),
+        otherwise: (schema) => schema.notRequired(),
+      }
     );
-    baseSchema.OnHouseCampus = baseSchema.OnHouseCampus.required(
-      "OnHouseCampus  is required"
-    );
-    baseSchema.MiddleEasternStudies = baseSchema.MiddleEasternStudies.required(
-      "MiddleEasternStudies"
-    );
-    baseSchema.SemestersAtAUD = baseSchema.SemestersAtAUD.required(
-      "SemestersAtAUD  is required"
-    );
+    baseSchema.SemestersAtAUD = baseSchema.SemestersAtAUD.when("isSaved", {
+      is: (isSaved) => isSaved,
+      then: (schema) => schema.required("SemestersAtAUD is required"),
+      otherwise: (schema) => schema.notRequired(),
+    });
   } else {
     baseSchema.Visiting_LevelOfStudy =
       baseSchema.Visiting_LevelOfStudy.notRequired();
@@ -112,8 +228,13 @@ const getValidationSchemaStep1 = (applicationStart, applingAs) => {
     baseSchema.SemestersAtAUD = baseSchema.SemestersAtAUD.notRequired();
   }
   if (applingAs === 1 || applingAs === 5) {
-    baseSchema.CurrentPlaceOfStudy = baseSchema.CurrentPlaceOfStudy.required(
-      "Current Place Of study is required"
+    baseSchema.CurrentPlaceOfStudy = baseSchema.CurrentPlaceOfStudy.when(
+      "isSaved",
+      {
+        is: (isSaved) => isSaved,
+        then: (schema) => schema.required("CurrentPlaceOfStudy is required"),
+        otherwise: (schema) => schema.notRequired(),
+      }
     );
   } else {
     baseSchema.CurrentPlaceOfStudy = baseSchema.CurrentPlaceOfStudy.notRequired(

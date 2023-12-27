@@ -86,11 +86,6 @@ const RegisterFormStep3 = forwardRef(
           "UndergroundCatalogCheck",
           values.UndergroundCatalogCheck
         );
-        for (const key in values) {
-          if (values[key] !== undefined || values[key] !== "") {
-            formData.append(key, values[key]);
-          }
-        }
         handleAddStageFour(formData);
       },
     });

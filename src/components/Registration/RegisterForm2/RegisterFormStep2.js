@@ -182,6 +182,9 @@ const RegisterFormStep2 = forwardRef(
           formData.append(field, values[field]);
         });
 
+        const hasStageThreeData = Object.values(fieldsToAppend).some(
+          (field) => !!values[field]
+        );
         // Handle CV
         if (values.CV && "documentContent" in values.CV) {
           const CVContent = values.CV.documentContent;
@@ -209,65 +212,74 @@ const RegisterFormStep2 = forwardRef(
         } else {
           formData.append("DiplomaFile", values.DiplomaFile);
         }
+
         /*********************Appliacnt files post */
-        const formDataFiles = new FormData();
-        values.applicantFiles.forEach((file, index) => {
-          formDataFiles.append(
-            `applicantFiles[${index}].applicantId`,
-            applicantId
-          );
-          formDataFiles.append(
-            `applicantFiles[${index}].applicationId`,
-            applicationId
-          );
-          formDataFiles.append(
-            `applicantFiles[${index}].testType`,
-            file.testType
-          );
+        if (
+          values.applicantFiles?.length > 0 &&
+          values.applicantFiles.some((file) => !!file.testType)
+        ) {
+          const formDataFiles = new FormData();
+          values.applicantFiles.forEach((file, index) => {
+            formDataFiles.append(
+              `applicantFiles[${index}].applicantId`,
+              applicantId
+            );
+            formDataFiles.append(
+              `applicantFiles[${index}].applicationId`,
+              applicationId
+            );
+            formDataFiles.append(
+              `applicantFiles[${index}].testType`,
+              file.testType
+            );
 
-          if (
-            file.academicDocument &&
-            "documentContent" in file.academicDocument
-          ) {
-            const academicFileContent = file.academicDocument.documentContent;
-            const blob = new Blob([atob(academicFileContent)], {
-              type: file.academicDocument.contentType,
-            });
-            const academicFile = new File(
-              [blob],
-              file.academicDocument.fileName,
-              {
+            if (
+              file.academicDocument &&
+              "documentContent" in file.academicDocument
+            ) {
+              const academicFileContent = file.academicDocument.documentContent;
+              const blob = new Blob([atob(academicFileContent)], {
                 type: file.academicDocument.contentType,
-              }
-            );
+              });
+              const academicFile = new File(
+                [blob],
+                file.academicDocument.fileName,
+                {
+                  type: file.academicDocument.contentType,
+                }
+              );
+
+              formDataFiles.append(
+                `applicantFiles[${index}].academicDocument`,
+                academicFile
+              );
+            } else {
+              formDataFiles.append(
+                `applicantFiles[${index}].academicDocument`,
+                file.academicDocument
+              );
+            }
 
             formDataFiles.append(
-              `applicantFiles[${index}].academicDocument`,
-              academicFile
+              `applicantFiles[${index}].dateTaken`,
+              file.dateTaken
             );
-          } else {
             formDataFiles.append(
-              `applicantFiles[${index}].academicDocument`,
-              file.academicDocument
+              `applicantFiles[${index}].registrationNumber`,
+              file.registrationNumber
             );
-          }
+            formDataFiles.append(
+              `applicantFiles[${index}].totalScore`,
+              file.totalScore
+            );
+          });
 
-          formDataFiles.append(
-            `applicantFiles[${index}].dateTaken`,
-            file.dateTaken
-          );
-          formDataFiles.append(
-            `applicantFiles[${index}].registrationNumber`,
-            file.registrationNumber
-          );
-          formDataFiles.append(
-            `applicantFiles[${index}].totalScore`,
-            file.totalScore
-          );
-        });
+          handleAddFiles(formDataFiles);
+        }
 
-        handleAddFiles(formDataFiles);
-        handleAddStageThree(formData);
+        if (hasStageThreeData) {
+          handleAddStageThree(formData);
+        }
       },
     });
 
@@ -284,7 +296,10 @@ const RegisterFormStep2 = forwardRef(
       setApplyingAs(parseInt(localStorage.getItem("applingAs")));
       setApplicationStart(localStorage.getItem("applicationStart"));
     }, []);
-
+    console.log(
+      "values.applicantFiles.lengthvalues.applicantFiles.length",
+      formik.values?.applicantFiles?.length
+    );
     console.log("formik", formik);
     return (
       <div className='form-subcontainer '>

@@ -77,7 +77,6 @@ export const usePayment = () => {
 
 /**************Fetch  Applicant stage 1 */
 const fetchApplicantStageOne = async (applicantId, applicationId) => {
-  console.log("applicationIDdddd", applicationId);
   if (applicantId && applicationId) {
     return await axios.get(
       API_URL +

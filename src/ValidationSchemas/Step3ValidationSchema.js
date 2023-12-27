@@ -4,32 +4,55 @@ const Step3ValidationSchema = Yup.object().shape({
   isSaved: Yup.boolean(),
   NextActiveStep: Yup.number(),
   HealthChalenges: Yup.boolean().notRequired(),
-  ProgramInformationCheck: Yup.boolean()
-    .required()
-    .oneOf([true], "This field is required"),
-  ImportantNotesCheck: Yup.boolean()
-    .required()
-    .oneOf([true], "This field is required"),
+  ProgramInformationCheck: Yup.boolean().when("isSaved", {
+    is: (isSaved) => isSaved,
+    then: (schema) =>
+      schema
+        .required("ProgramInformationCheck is required")
+        .oneOf([true], "This field is required"),
+    otherwise: (schema) => schema.notRequired(),
+  }),
+  ImportantNotesCheck: Yup.boolean().when("isSaved", {
+    is: (isSaved) => isSaved,
+    then: (schema) =>
+      schema
+        .required("ImportantNotesCheck is required")
+        .oneOf([true], "This field is required"),
+    otherwise: (schema) => schema.notRequired(),
+  }),
   HealthComments: Yup.mixed().notRequired(),
-  TermAndConditionCheck: Yup.boolean()
-    .required()
-    .oneOf([true], "This field is required"),
-  UndergroundCatalogCheck: Yup.boolean()
-    .required()
-    .oneOf([true], "This field is required"),
-  AcceptResponsibilitiesCheck: Yup.boolean()
-    .required()
-    .oneOf([true], "This field is required"),
-  RecordsCheck: Yup.boolean()
-    .when("isSaved", {
-      is: (isSaved) => {
-        console.log('isSaaaaaaved',isSaved)
-         return isSaved
-      },
-      then: (schema) => schema.required("RecordsCheck is required")
-      .oneOf([true], "This field is required"),
-      otherwise: (schema) => schema.notRequired(),
-    }),
+  TermAndConditionCheck: Yup.boolean().when("isSaved", {
+    is: (isSaved) => isSaved,
+    then: (schema) =>
+      schema
+        .required("TermAndConditionCheck is required")
+        .oneOf([true], "This field is required"),
+    otherwise: (schema) => schema.notRequired(),
+  }),
+  UndergroundCatalogCheck: Yup.boolean().when("isSaved", {
+    is: (isSaved) => isSaved,
+    then: (schema) =>
+      schema
+        .required("UndergroundCatalogCheck is required")
+        .oneOf([true], "This field is required"),
+    otherwise: (schema) => schema.notRequired(),
+  }),
+  AcceptResponsibilitiesCheck: Yup.boolean().when("isSaved", {
+    is: (isSaved) => isSaved,
+    then: (schema) =>
+      schema
+        .required("AcceptResponsibilitiesCheck is required")
+        .oneOf([true], "This field is required"),
+    otherwise: (schema) => schema.notRequired(),
+  }),
+  RecordsCheck: Yup.boolean().when("isSaved", {
+    is: (isSaved) => isSaved,
+    then: (schema) =>
+      schema
+        .required("RecordsCheck is required")
+        .oneOf([true], "This field is required"),
+    otherwise: (schema) => schema.notRequired(),
+  }),
 });
 
 export default Step3ValidationSchema;

@@ -20,6 +20,8 @@ const DropDown = ({
   isYear,
   isMonth,
   parent,
+  data,
+  bolean,
 }) => {
   const { data: options, refetch: refetchTypes } = useFetchDropDownTypes(
     type || null
@@ -80,6 +82,14 @@ const DropDown = ({
       }))
     : [];
 
+  const boleanOptions = [
+    { value: true, label: "Yes" },
+    { value: false, label: "No" },
+  ];
+  const handleOnChange = (name, selectedOption) => {
+    onChange(name, selectedOption.value);
+
+  };
   useEffect(() => {
     if (type) {
       refetchTypes();
@@ -116,16 +126,20 @@ const DropDown = ({
     }),
   };
 
-  const optionsSelected = isAcademic
-  ? formattedAcademicOptions
-  : isYear
-  ? formattedYear
-  : isMonth
-  ? formattedMonth
-  : parent
-  ? formattedParentOptions
-  : formattedOptions;
-  
+  const optionsSelected = bolean
+    ? boleanOptions
+    : isAcademic
+    ? formattedAcademicOptions
+    : isYear
+    ? formattedYear
+    : isMonth
+    ? formattedMonth
+    : parent
+    ? formattedParentOptions
+    : data
+    ? data
+    : formattedOptions;
+
   return (
     <div className='textBox-container' style={{ width: width }}>
       <label htmlFor={label}>
@@ -134,7 +148,9 @@ const DropDown = ({
       </label>
       <Select
         options={
-          isAcademic
+          bolean
+            ? boleanOptions
+            : isAcademic
             ? formattedAcademicOptions
             : isYear
             ? formattedYear
@@ -142,6 +158,8 @@ const DropDown = ({
             ? formattedMonth
             : parent
             ? formattedParentOptions
+            : data
+            ? data
             : formattedOptions
         }
         required={required}
@@ -149,12 +167,8 @@ const DropDown = ({
         components={{
           DropdownIndicator: CustomDropdownArrow,
         }}
-        value={
-          optionsSelected.find((option) => option.value === value) || null
-        }
-        onChange={(selectedOption) => {
-          onChange(name, selectedOption.value);
-        }}
+        value={optionsSelected.find((option) => option.value === value) || null}
+        onChange={(selectedOption) => handleOnChange(name, selectedOption)}
       />
     </div>
   );

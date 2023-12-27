@@ -16,36 +16,13 @@ const Reservation = ({ handleClick }) => {
             name='TermAndConditionCheck'
             value={formik.values.TermAndConditionCheck}
             onChange={(checked) => {
-              formik.setFieldValue(
-                "TermAndConditionCheck",
-                checked
-              );
+              formik.setFieldValue("TermAndConditionCheck", checked);
             }}
+            policy='here'
+            href='https://www.aud.edu/media/q2acttic/graduate-re-agreement-terms.pdf'
             errors={formik.errors?.TermAndConditionCheck}
             touched={formik.errors?.TermAndConditionCheck}
           />
-          <div className='blue-link' onClick={handleClick}>
-            Here
-          </div>
-        </div>
-        <div className='d-flex'>
-          <SquareCheckBox
-            text='I have read the'
-            name='UndergroundCatalogCheck'
-            value={formik.values.UndergroundCatalogCheck}
-            onChange={(checked) => {
-              formik.setFieldValue(
-                "UndergroundCatalogCheck",
-                checked
-              );
-            }}
-            errors={formik.errors?.UndergroundCatalogCheck}
-            touched={formik.errors?.UndergroundCatalogCheck}
-          />
-          <div className='blue-link'>
-            <a href="https://aud.edu/media/catalogs/undergraduate/index.html" target="_blank"> Undergraduate Catalog </a>
-            <span>online</span>
-          </div>
         </div>
       </div>
     </>

@@ -7,8 +7,8 @@ import AUDButton from "../Buttons/AUDButton";
 import { Formik, Form } from "formik";
 import showInterestValidationSchema from "../../ValidationSchemas/ShowInterestValidationSchema";
 import { useAddApplicantToShowInterest } from "../../Hooks/ShowInterest";
-import RadioButtonGroup from "../Inputs/RadioButtonGroup";
 import { useAddApplicant } from "../../Hooks/Appplicant";
+import DropDown from "../Inputs/DropDown";
 
 const startYourApplicationOptions = [
   { label: "Undergraduate", value: "0" },
@@ -20,7 +20,13 @@ const ShowInterestForm = ({
   openVerifiedModal,
   setApplicantId,
   setPhoneNumber,
+  setEmail,
+  setApplicationStart,
+  setApplicationId,
 }) => {
+  const [submissionSuccess, setSubmissionSuccess] = useState(false);
+
+  const [errorMessage, setErrorMessage] = useState("");
   const [clickedButton, setClickedButton] = useState(null);
   const [init, setInit] = useState({
     firstName: "",
@@ -38,65 +44,78 @@ const ShowInterestForm = ({
 
   const { mutate: addShowInterest } = useAddApplicantToShowInterest();
   const { mutate: addApplicant } = useAddApplicant();
- 
-  
-  const handleContinueToApply = (values) => {
+
+  const handleContinueToApply = (values, { setFieldError, resetForm }) => {
     addApplicant(values, {
       onSuccess: (data) => {
-        console.log("submitted");
-        console.log(data?.data?.applicantId);
         localStorage.setItem("applicantId", data?.data?.applicantId);
+        localStorage.setItem("applicationId", data?.data?.applicationId);
+        setApplicationId(data?.data?.applicationId);
+        localStorage.setItem("applicationStart", values.applicationStart);
+        setApplicationStart(values.applicationStart);
         setApplicantId(data?.data?.applicantId);
         openVerifiedModal("Continue");
         localStorage.removeItem("message");
+        setSubmissionSuccess(true);
+        resetForm();
+      },
+      onError: (error, data) => {
+        console.error("An error occurred:", error?.response?.data);
+        setErrorMessage(error?.response?.data);
+        setFieldError(error?.response?.data);
+        setSubmissionSuccess(false);
+      },
+    });
+  };
+
+  const handleSubmitForm = (values, { resetForm }) => {
+    addShowInterest(values, {
+      onSuccess: (data) => {
+        openVerifiedModal("Submit");
+        setApplicantId(data?.data?.applicantId);
+        setSubmissionSuccess(true);
+        resetForm();
       },
       onError: (error) => {
         console.error("An error occurred:", error);
+        setSubmissionSuccess(false);
       },
     });
   };
-
-  const handleSubmitForm = (values) => {
-    addShowInterest(values, {
-      onSuccess: (data) => {
-        console.log("show interest submitted");
-        openVerifiedModal("Submit");
-        console.log("data11", data);
-        setApplicantId(data?.data?.applicantId);
-      },
-      onError: (error) => {
-        console.error("An error occured:", error);
-      },
-    });
+  const handleEmailChange = () => {
+    setErrorMessage("");
   };
-
   return (
     <Formik
       initialValues={init}
       validationSchema={showInterestValidationSchema}
       onSubmit={(values, { resetForm, setFieldError }) => {
         setPhoneNumber(values.mobile);
+        setEmail(values.email);
         const valuesToSend =
           values.titleId === "" ? { ...values, titleId: undefined } : values;
         if (clickedButton === "continueToApply") {
-          handleContinueToApply(valuesToSend);
+          handleContinueToApply(valuesToSend, { setFieldError, resetForm });
         } else if (clickedButton === "submitForm") {
-          handleSubmitForm(valuesToSend);
+          handleSubmitForm(valuesToSend, { resetForm });
         }
-        resetForm();
-        setInit({
-          firstName: "",
-          middleName: "",
-          lastName: "",
-          email: "",
-          nationality: "",
-          mobile: "",
-          titleId: "",
-          howDidYouHear: "",
-          selectedTerm: "",
-          fieldOfInterest: "",
-          applicationStart: "",
-        });
+
+        if (submissionSuccess) {
+          resetForm();
+          setInit({
+            firstName: "",
+            middleName: "",
+            lastName: "",
+            email: "",
+            nationality: "",
+            mobile: "",
+            titleId: "",
+            howDidYouHear: "",
+            selectedTerm: "",
+            fieldOfInterest: "",
+            applicationStart: "",
+          });
+        }
       }}
     >
       {({
@@ -112,7 +131,7 @@ const ShowInterestForm = ({
         return (
           <Form>
             <div className='showInterestForm-inner-cont '>
-              <div className='grid-container'>
+              <div className='grid-container2'>
                 <Dropdown
                   width='100%'
                   label='Title'
@@ -168,20 +187,51 @@ const ShowInterestForm = ({
                   touched={touched.lastName}
                 />
               </div>
-              <div className='grid-container2 '>
-                <TextBox
-                  styleType='formField'
-                  width='100%'
-                  label='Email'
-                  required={true}
-                  name='email'
-                  value={values.email}
-                  onChange={(name, value) => {
-                    setFieldValue(name, value);
-                  }}
-                  errors={errors.email}
-                  touched={touched.email}
-                />
+              <div
+                className={errorMessage ? "grid-container3" : "grid-container2"}
+              >
+                <div className='d-flex flex-column'>
+                  <TextBox
+                    styleType='formField'
+                    width='100%'
+                    label='Email'
+                    required={true}
+                    name='email'
+                    value={values.email}
+                    onChange={(name, value) => {
+                      setFieldValue(name, value);
+                      handleEmailChange();
+                    }}
+                    errors={errors.email || errorMessage}
+                    touched={touched.email}
+                  />
+                  {errorMessage ? (
+                    <div>
+                      <div className='error-container d-flex gap-1 align-items-start'>
+                        <img src='/images/errorSign.svg' alt='error' />
+                        <div className='d-flex flex-column '>
+                          <p style={{ color: "#C60303" }}>
+                            There is already a registration under this email
+                          </p>
+                          <div className='d-flex gap-1'>
+                            <p>To Continue your application please</p>
+                            <p
+                              onClick={() => setShowLoginModal(true)}
+                              style={{
+                                textDecoration: "underline",
+                                cursor: "pointer",
+                              }}
+                            >
+                              Login
+                            </p>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  ) : (
+                    ""
+                  )}
+                </div>
 
                 <Dropdown
                   styleType='formField'
@@ -209,7 +259,6 @@ const ShowInterestForm = ({
                   onChange={(name, value) => {
                     setFieldValue(name, value);
                   }}
-                  
                   errors={errors.mobile}
                   touched={touched.mobile}
                 />
@@ -246,74 +295,49 @@ const ShowInterestForm = ({
                   touched={touched.selectedTerm}
                 />
               </div>
-              <Dropdown
-                styleType='formField'
-                width='50%'
-                label='Field Of Interest'
-                required={true}
-                type='8'
-                name='fieldOfInterest'
-                value={values.fieldOfInterest}
-                onChange={(name, value) => {
-                  setFieldValue(name, value);
-                }}
-                errors={errors.fieldOfInterest}
-                touched={touched.fieldOfInterest}
-              />
-              <div>
-                <RadioButtonGroup
-                  options={startYourApplicationOptions}
-                  name='applicationStart'
-                  selectedValue={values.applicationStart}
+              <div className='grid-container2 '>
+                <DropDown
+                  styleType='formField'
+                  width='100%'
                   label='Start Your Application'
                   required={true}
-                  onRadioChange={(name, value) => {
+                  name='applicationStart'
+                  data={startYourApplicationOptions}
+                  value={values.applicationStart}
+                  onChange={(name, value) => {
                     setFieldValue(name, value);
                   }}
+                  errors={errors.applicationStart}
+                  touched={touched.applicationStart}
                 />
-                {errors?.applicationStart && touched?.applicationStart ? (
-                  <span className='span-required'>
-                    Start Your Application is required
-                  </span>
-                ) : (
-                  ""
-                )}
+                <Dropdown
+                  styleType='formField'
+                  width='100%'
+                  label='Field Of Interest'
+                  required={true}
+                  type='8'
+                  name='fieldOfInterest'
+                  value={values.fieldOfInterest}
+                  onChange={(name, value) => {
+                    setFieldValue(name, value);
+                  }}
+                  errors={errors.fieldOfInterest}
+                  touched={touched.fieldOfInterest}
+                />
               </div>
 
-              <div className='d-flex justify-content-between mt-1 '>
-                <div className='d-flex flex-column gap-2'>
-                  {/* <LinkButton
-                    title='CONTINUE TO APPLY'
-                    underlined={true}
-                    required={true}
-                    handleOnClick={() => {
-                      setClickedButton("continueToApply");
-                      handleSubmit();
-                    }}
-                  /> */}
-                  <AUDButton
-                    text='CONTINUE TO APPLY'
-                    type='submit'
-                    required={true}
-                    handleOnClick={() => {
-                      setClickedButton("continueToApply");
-                      handleSubmit();
-                    }}
-                  />
-                  <LinkButton
-                    title='LOGIN HERE'
-                    handleOnClick={() => {
-                      setShowLoginModal(true);
-                    }}
-                    // linkTo='/register'
-                    // underlined={true}
-                    required={true}
-                    color='#1B224C'
-                  />
-                </div>
-
+              <div className='showinterest-btn-container'>
                 <AUDButton
-                  text='Submit Form'
+                  text='Submit an Application'
+                  type='submit'
+                  required={true}
+                  handleOnClick={() => {
+                    setClickedButton("continueToApply");
+                    handleSubmit();
+                  }}
+                />
+                <AUDButton
+                  text='Submit your Inquiry'
                   type='submit'
                   required={true}
                   handleOnClick={() => {
@@ -322,6 +346,18 @@ const ShowInterestForm = ({
                   }}
                 />
               </div>
+
+              <p className='applicant-loginp'>
+                RETURNING APPLICANT:{" "}
+                <span
+                  onClick={() => {
+                    setShowLoginModal(true);
+                  }}
+                >
+                  Login
+                </span>{" "}
+                to continue an application
+              </p>
             </div>
           </Form>
         );

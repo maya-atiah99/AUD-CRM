@@ -6,18 +6,19 @@ import LinkButton from "../components/Buttons/LinkButton";
 import { useApplicantLogin } from "../Hooks/Login";
 import LoginValidationSchema from "../ValidationSchemas/loginValidationSchema";
 import { Formik, Form } from "formik";
-import { useNavigate } from "react-router-dom";
+import toast from "react-hot-toast";
 
 const Login = ({
   setShowLoginModal,
-  applicantId,
   setApplicantId,
-  setMessage,
+  setShowApplicatiosModal,
+  setApplicationStart,
+  setApplyingAs,
+  setIsForgotPassword,
 }) => {
   const [manageShowInterest, setManageshowInterest] = useState(false);
-  const navigate = useNavigate();
   const { mutate: login } = useApplicantLogin();
-
+  const [errorMessage, setErrorMessage] = useState("");
   const initialValues = {
     username: "",
     password: "",
@@ -25,7 +26,6 @@ const Login = ({
 
   return (
     <ModalComponent
-      height='28rem'
       width='37rem'
       title='Login'
       onClose={() => setShowLoginModal(false)}
@@ -33,45 +33,34 @@ const Login = ({
       <Formik
         initialValues={initialValues}
         validationSchema={LoginValidationSchema}
-        onSubmit={(values) => {
+        onSubmit={(values, { setFieldError }) => {
           console.log("test", values);
-          
+
           login(values, {
             onSuccess: (data) => {
-              console.log("login dataa", data);
               setApplicantId(data?.data?.applicantId);
+              localStorage.setItem("token", data?.data?.token);
               localStorage.setItem("applicantId", data?.data?.applicantId);
+              localStorage.setItem("fullName", data?.data?.fullName);
               localStorage.setItem(
-                "message",
-                (() => {
-                  if (data?.data?.message === "Stage1") {
-                    setManageshowInterest(true);
-                    return 0;
-                  } else if (data?.data?.message === "Stage2") {
-                    return 1;
-                  } else if (data?.data?.message === "Stage3") {
-                    return 2;
-                  }
-                  return 3;
-                })()
+                "applicationStart",
+                data?.data?.applicationStart
               );
-              
-              localStorage.setItem("applicationStart", data?.data?.applicationStart);
               localStorage.setItem("applingAs", data?.data?.appliyingAs);
-
+              setApplicationStart(data?.data?.applicationStart);
+              setApplyingAs(data?.data?.appliyingAs);
               console.log(
                 "manageShowInterest,manageShowInterest",
                 manageShowInterest
               );
-              navigate("/register", {
-                state: {
-                  activeStep: localStorage.getItem("message"),
-                  showInterest: data?.data?.message === "Stage1" ? true : false,
-                },
-              });
+              setShowApplicatiosModal(true);
+              setShowLoginModal(false);
             },
             onError: (error) => {
               console.error("An error occurred:", error);
+              toast.error("Wrong Email or Password");
+              setFieldError("error");
+              setErrorMessage("error");
             },
           });
         }}
@@ -85,7 +74,6 @@ const Login = ({
           handleSubmit,
           isSubmitting,
         }) => {
-          console.log(values);
           return (
             <Form>
               <div className='login-container'>
@@ -97,7 +85,7 @@ const Login = ({
                   onChange={(name, value) => {
                     setFieldValue(name, value);
                   }}
-                  errors={errors.username}
+                  errors={errors.username || errorMessage}
                   touched={touched.username}
                 />
                 <TextBox
@@ -107,9 +95,16 @@ const Login = ({
                   name='password'
                   value={values.password}
                   onChange={(name, value) => {
-                    setFieldValue(name, value);
+                    var CryptoJS = require("crypto-js");
+                    const secretKey = "AUD-CTS-109812jfgiubfg435345"; // Replace this with your secret key
+                    const encryptedData = CryptoJS.AES.encrypt(
+                      JSON.stringify(value),
+                      secretKey
+                    ).toString();
+
+                    setFieldValue(name, encryptedData);
                   }}
-                  errors={errors.password}
+                  errors={errors.password || errorMessage}
                   touched={touched.password}
                 />
                 <AUDButton
@@ -120,8 +115,10 @@ const Login = ({
                 />
                 <div className='test222'>
                   <LinkButton
-                    handleOnClick={() => setShowLoginModal(false)}
-                    title='DON’T HAVE AN ACCOUNT? REGISTER NOW'
+                    title='Forgot Password'
+                    handleOnClick={() => (
+                      setIsForgotPassword(true), setShowLoginModal(false)
+                    )}
                     underlined={true}
                     type='button'
                   />

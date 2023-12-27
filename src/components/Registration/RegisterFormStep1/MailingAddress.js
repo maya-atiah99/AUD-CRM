@@ -13,13 +13,13 @@ const MailingAddress = () => {
         width='100%'
         label='Address'
         required={true}
-        name='address'
-        value={formik.values.address}
+        name='Address1'
+        value={formik.values.Address1}
         onChange={(name, value) => {
           formik.setFieldValue(name, value);
         }}
-        errors={formik.errors?.address}
-        touched={formik.touched?.address}
+        errors={formik.errors?.Address1}
+        touched={formik.touched?.Address1}
       />
       <div className='grid-mailing-cont'>
         <Dropdown
@@ -27,27 +27,27 @@ const MailingAddress = () => {
           label='Country'
           required={true}
           type='9'
-          name='country'
-          value={formik.values.country}
+          name='Country'
+          value={formik.values.Country}
           onChange={(name, value) => {
             formik.setFieldValue(name, value);
           }}
-          errors={formik.errors?.country}
-          touched={formik.touched?.country}
+          errors={formik.errors?.Country}
+          touched={formik.touched?.Country}
         />
         <Dropdown
           width='100%'
           label='City/State'
           type='10'
-          parent={formik.values.country}
+          parent={formik.values.Country}
           required={true}
-          name='cityState'
-          value={formik.values.cityState}
+          name='CityState'
+          value={formik.values.CityState}
           onChange={(name, value) => {
             formik.setFieldValue(name, value);
           }}
-          errors={formik.errors?.cityState}
-          touched={formik.touched?.cityState}
+          errors={formik.errors?.CityState}
+          touched={formik.touched?.CityState}
         />
         {/* <TextBox
           width='100%'
@@ -64,26 +64,24 @@ const MailingAddress = () => {
         <TextBox
           width='100%'
           label='P.O. Box'
-          required={true}
-          name='pobox'
-          value={formik.values.pobox}
+          name='Pobox'
+          value={formik.values.Pobox}
           onChange={(name, value) => {
             formik.setFieldValue(name, value);
           }}
-          errors={formik.errors?.pobox}
-          touched={formik.touched?.pobox}
+          errors={formik.errors?.Pobox}
+          touched={formik.touched?.Pobox}
         />
         <TextBox
           width='100%'
           label='Zip Code'
-          required={true}
-          name='zipCode'
-          value={formik.values.zipCode}
+          name='ZipCode'
+          value={formik.values.ZipCode}
           onChange={(name, value) => {
             formik.setFieldValue(name, value);
           }}
-          errors={formik.errors?.zipCode}
-          touched={formik.touched?.zipCode}
+          errors={formik.errors?.ZipCode}
+          touched={formik.touched?.ZipCode}
         />
         
       </div>

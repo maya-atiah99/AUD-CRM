@@ -4,11 +4,11 @@ const step4ValidationSchema = Yup.object().shape({
   paymentDetails: Yup.object().shape({
     paymentMethod: Yup.string().required("Payment Method is required"),
     cardDetails: Yup.object().shape({
-      cardType: Yup.string().required("Card Type is required"),
-      cardNumber: Yup.string().required("Card Number is required"),
-      expirationYear: Yup.string().required("Expiration Year is required"),
-      expirationMonth: Yup.string().required("Expiration Month is required"),
-      cvv: Yup.string().required("CVV is required"),
+      CardType: Yup.string().required("Card Type is required"),
+      EncryptedCardNumber: Yup.number().required("Card Number is required"),
+      ExpirationYear: Yup.number().required("Expiration Year is required"),
+      ExpirationMonth: Yup.number().required("Expiration Month is required"),
+      CVV: Yup.number().required("CVV is required"),
     }),
   }),
 });

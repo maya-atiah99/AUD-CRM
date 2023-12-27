@@ -1,16 +1,16 @@
 import React from "react";
 import ModalComponent from "../ModalComponent";
 
-const VerifiedCheckModal = ({ setShowVerifiedCheckModal }) => {
+const VerifiedCheckModal = ({ close, text, title }) => {
   return (
     <ModalComponent
-      onClose={() => setShowVerifiedCheckModal(false)}
-      handleOnClick={() => setShowVerifiedCheckModal(false)}
-      isButton={true}
+      onClose={close}
+      handleOnClick={close}
+      isButton={false}
       height='30rem'
       width='50rem'
-      title='Sent Successfully'
-      description='You will receive an email from us very soon'
+      title={title}
+      description={text}
     >
       <div className='d-flex  justify-content-center align-items-center'>
         <div className='d-flex  justify-content-center align-items-center'>

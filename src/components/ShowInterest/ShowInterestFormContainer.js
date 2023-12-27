@@ -8,18 +8,21 @@ const ShowInterestFormContainer = ({
   setShowLoginModal,
   openVerifiedModal,
   setApplicantId,
-  setPhoneNumber
+  setPhoneNumber,
+  setEmail,
+  setApplicationStart,
+  setApplicationId,
 }) => {
   return (
     <div className='show-interest-form'>
       <div>
         <TextComponent
-          text='Welcome to the online admissions portal '
+          text='Welcome to the Online Admissions Portal  '
           font='800'
           classfont='classfont-show'
         />
         <TextComponent
-          text='At the american university in Dubai'
+          text='at the American University in Dubai'
           font='800'
           classfont='classfont-show'
         />
@@ -32,6 +35,9 @@ const ShowInterestFormContainer = ({
         openVerifiedModal={openVerifiedModal}
         setApplicantId={setApplicantId}
         setPhoneNumber={setPhoneNumber}
+        setEmail={setEmail}
+        setApplicationStart={setApplicationStart}
+        setApplicationId={setApplicationId}
       />
     </div>
   );

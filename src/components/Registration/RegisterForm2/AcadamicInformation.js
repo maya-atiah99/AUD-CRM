@@ -5,24 +5,22 @@ import DateTime from "../../Inputs/DateTime";
 import DocumentUpload from "../../Inputs/DocumentUpload";
 import TextArea from "../../Inputs/TextArea";
 import { useFormikContext } from "formik";
-import TextBox from "../../Inputs/TextBox";
 
 const AcadamicInformation = () => {
   const formik = useFormikContext();
   const applicationStart = localStorage.getItem("applicationStart");
-  const applingAS = localStorage.getItem("applingAs");
-  console.log('formikkkkkkkkk',formik.values)
+  const applingAS = parseInt(localStorage.getItem("applingAs"));
   return (
     <div className='form-subcontainers academic-container'>
       <SectionTitle title='ACADEMIC INFORMATION' />
-      {!(applicationStart === "0" && applingAS === "2") && (
+      {!(applicationStart === "0" && applingAS === 2) && (
         <div className='grid-academic-cont'>
           <DropDown
             width='100%'
             label={
-              applicationStart === "0" && applingAS !== "1"
-                ? "Country you Graduated from"
-                : "Country Your Current University"
+              applicationStart === "0" && applingAS !== 1
+                ? "Country You Graduated from"
+                : "Country of Your Current University"
             }
             required={true}
             type='9'
@@ -38,11 +36,11 @@ const AcadamicInformation = () => {
           <DropDown
             width='100%'
             label={
-              applicationStart === "0" && applingAS === "0"
-                ? "School Name"
+              applicationStart === "0" && (applingAS ===0 || applingAS ===1)
+                ? "High School Name"
                 : "University Name "
             }
-            type={applicationStart === "0" && applingAS === "0" ? "12" : "11"}
+            type={applicationStart === "0" &&  (applingAS ===0 || applingAS ===1 ) ? "12" : "11"}
             parent={formik.values.CurrentUniversityCountry}
             required={true}
             name='SchoolCountry'
@@ -57,11 +55,11 @@ const AcadamicInformation = () => {
             width='100%'
             label={
               applicationStart === "1" ||
-              (applicationStart === "0" && applingAS === "3")
-                ? "Degree Earned"
-                : applicationStart === "2"
+              (applicationStart === "0" && applingAS === 3)
+                ? "Degree Earned Major"
+                : applicationStart === "2" && applingAS==6
                 ? "Level of study"
-                : "HS Diploma"
+                : "High School Diploma"
             }
             required={true}
             type={applicationStart === "2" ? "13" : "7"}
@@ -74,7 +72,7 @@ const AcadamicInformation = () => {
             touched={formik.touched?.DiplomaType}
           />
 
-          {applicationStart !== "2" && (
+          {(applicationStart !== "2" && applingAS !== 5) && (
             <DateTime
               width='100%'
               label='Graduation Year'
@@ -91,12 +89,11 @@ const AcadamicInformation = () => {
         </div>
       )}
 
-      {(applicationStart === "0" && applingAS === "1") ||
-      (applicationStart === "1" && applingAS === "1") ? (
+      {(applicationStart === "0" && applingAS === 1) ? (
         <div className='grid-academic2-cont'>
           <DropDown
             width='100%'
-            label={"Country you Graduated From"}
+            label={"Country of Your Current University"}
             required={true}
             type='9'
             name='CurrentUniversityCountry2'
@@ -110,10 +107,10 @@ const AcadamicInformation = () => {
 
           <DropDown
             width='100%'
-            label='School Name'
+            label='University Name'
             required={true}
             name='SchoolCountry2'
-            type='12'
+            type='11'
             parent={formik.values.CurrentUniversityCountry2}
             value={formik.values.SchoolCountry2}
             onChange={(name, value) => {
@@ -127,10 +124,10 @@ const AcadamicInformation = () => {
         ""
       )}
 
-      <div className='grid-academic2-cont'>
+      <div className='grid-academic4-cont'>
         {applicationStart === "0" && (
           <TextArea
-            label='Please List Any Advanced Courses Such As: ‘A’ Levels, Ap.'
+            label='Please List Any Advanced Courses Such As: ‘A’ Levels, Ap, Clep, Ib Diploma. '
             rows='4'
             cols='3'
             name='ListAdvancedCources'
@@ -143,15 +140,31 @@ const AcadamicInformation = () => {
           />
         )}
         <DocumentUpload
+          text='Upload Diploma'
+          required={true}
+          height='100px'
+          imageHeight="50px"
+          size="50"
+          label='Upload Document'
+          name='DiplomaFile'
+          // fileName={formik.values.DiplomaFile} 
+          value={formik.values.DiplomaFile}
+          onChange={(name, value) => {
+            formik.setFieldValue(name, value);
+          }}
+          errors={formik.errors?.DiplomaFile}
+          touched={formik.touched?.DiplomaFile}
+        />
+        {/* <DocumentUpload
           text='Upload The Academic Document'
           required={true}
           height='100px'
           label='Upload Document'
-          name='DiplomaFile'
-          fileName={formik.values.DiplomaFile}
-          errors={formik.errors?.DiplomaFile}
-          touched={formik.touched?.DiplomaFile}
-        />{" "}
+          name='AcademicDocument'
+          fileName={formik.values.AcademicDocument}
+          errors={formik.errors?.AcademicDocument}
+          touched={formik.touched?.AcademicDocument}
+        />{" "} */}
       </div>
       {applicationStart === "0" && (
         <TextArea

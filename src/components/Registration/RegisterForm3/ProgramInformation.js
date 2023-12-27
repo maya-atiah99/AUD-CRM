@@ -3,31 +3,55 @@ import SectionTitle from "../../Texts/SectionTitle";
 import SquareCheckBox from "../../Inputs/SquareCheckBox";
 import BulletedText from "../../Texts/BulletedText";
 import { useFormikContext } from "formik";
+import TextComponent from "../../Texts/TextComponent";
+import TextArea from "../../Inputs/TextArea";
 
-const details = [
-  {
-    text: "I agree to abide by the regulations and policies set forth in the University’s Undergraduate Catalog, Student Handbook, Schedule of Tuition Fees, and Enrollment Agreement and as stated in this application and online.",
-  },
-  {
-    text: "I certify that the information that I have provided in this application is true and complete to the best of my knowledge. I realize that omissions or falsifications of information will be sufficient reason for rejection or dismissal.",
-  },
-];
 const ProgramInformation = () => {
   const formik = useFormikContext();
 
   return (
     <div className='form-subcontainers'>
-      <SectionTitle title='PROGRAM INFORMATION' size='18px' font='600' />
-      <BulletedText items={details} />
+      <TextComponent
+        classfont='classfont-p'
+        font='700'
+        text='AUD aims to guarantee an integrated and inclusive learning experience for all students. We encourage you to indicate below if you have any health or learning challenge that requires further support.'
+      />
+      <div className='d-flex gap-1 flex-wrap'>
+        <p className='classfont-p' style={{ fontWeight: "800" }}>
+          Admitted students are required to provide the full health history
+          information and proof of immunization. Click
+          <span className='blue-link'>
+            <a
+              href='https://www.aud.edu/university-overview/administrative-offices/health-center/health-history-form/'
+              target='_blank'
+            >
+              here
+            </a>
+          </span>
+          <span> </span>
+          for details
+        </p>
+      </div>
       <SquareCheckBox
-        text='If I am accepted by The American University in Dubai (AUD),'
-        name='ProgramInformationCheck'
-        value={formik.values.ProgramInformationCheck}
+        text='Yes'
+        name='HealthChalenges'
+        value={formik.values.HealthChalenges}
         onChange={(checked) => {
-          formik.setFieldValue("ProgramInformationCheck", checked);
+          formik.setFieldValue("HealthChalenges", checked);
         }}
-        errors={formik.errors?.ProgramInformationCheck}
-        touched={formik.errors?.ProgramInformationCheck}
+        errors={formik.errors?.HealthChalenges}
+        touched={formik.errors?.HealthChalenges}
+      />
+      <TextArea
+        label='Please Provide Details:'
+        rows='5'
+        name='HealthComments'
+        value={formik.values.HealthComments}
+        onChange={(name, value) => {
+          formik.setFieldValue(name, value);
+        }}
+        errors={formik.errors?.HealthComments}
+        touched={formik.touched?.HealthComments}
       />
     </div>
   );

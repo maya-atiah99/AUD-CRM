@@ -11,27 +11,31 @@ const DocumentUpload = ({
   height,
   errors,
   touched,
-  fileName,
+  onChange,
+  value,
+  imageHeight,
+  size,
 }) => {
-  const formik = useFormikContext();
   const [selectedFile, setSelectedFile] = useState(null);
 
   const handleFileChange = (event) => {
     const file = event.target.files[0];
     if (file) {
+      console.log("filexasdcdasdaddd", file);
       setSelectedFile(file);
-      formik.setFieldValue(name, file);
-    } else if (fileName) {
-      setSelectedFile(fileName);
-      formik.setFieldValue(name, fileName.toString());
+      onChange(name, file);
+    } else if (value) {
+      setSelectedFile(value);
+      onChange(name, value);
     }
   };
 
-  const handleRemoveFile = () => {
+  const handleRemoveFile = (event) => {
+    event.preventDefault();
     setSelectedFile(null);
-    formik.setFieldValue(name, null);
+    onChange(name, undefined);
+    // onChange(name, null);
   };
-
   const containerStyle = {
     width: width,
     height: height,
@@ -39,11 +43,11 @@ const DocumentUpload = ({
   };
 
   useEffect(() => {
-    if (fileName) {
-      setSelectedFile(fileName);
-      formik.setFieldValue(name, fileName);
+    if (value) {
+      setSelectedFile(value);
+      onChange(name, value);
     }
-  }, [fileName]);
+  }, [value]);
 
   return (
     <div>
@@ -53,25 +57,29 @@ const DocumentUpload = ({
       </label>
 
       <label
-        className={`file-input-container ${
+        className={` ${
           selectedFile ? "file-input-container-upl" : "file-input-container"
         }`}
         style={containerStyle}
       >
-        <img src='/images/Layer 25.svg' alt='layer' />
         <input type='file' className='file-input' onChange={handleFileChange} />
-        <p className='p-style'>
-          {/* {formik.values[name] !== ""
-            ? formik.values[name]
-            : selectedFile
-            ? selectedFile.name
-            : text} */}
-          {selectedFile ? selectedFile?.name || selectedFile?.fileName : text}
-
-          {/* {fileName ? fileName : text} */}
-
-          {errors && touched && <span className='error-message'>{errors}</span>}
-        </p>
+        <div className='img-text-container'>
+          <img
+            src='/images/Layer 25.svg'
+            alt='layer'
+            style={{ height: imageHeight }}
+          />
+          <p>
+            {errors && touched ? (
+              <span className='error-message'>{errors}</span>
+            ) : selectedFile ? (
+              selectedFile.name || selectedFile.fileName || text
+            ) : (
+              text
+            )}
+          </p>
+        </div>
+        <div className='size-upload-dc'><p>Max Size: {size} mb</p></div>
 
         {selectedFile ? (
           <AiFillCloseCircle

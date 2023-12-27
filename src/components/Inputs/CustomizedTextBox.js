@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 
-const TextBox = ({
+const CustomizedTextBox = ({
   label,
   required,
   width,
@@ -10,8 +10,6 @@ const TextBox = ({
   errors,
   touched,
   type,
-  disabled,
-  moreInfo,
 }) => {
   const [initialValue, setInitialValue] = useState(value);
 
@@ -32,18 +30,15 @@ const TextBox = ({
   const inputStyle = {
     width: width,
     borderColor: errors && touched && "#F3223C",
-    cursor: disabled ? "no-drop" : "text",
   };
 
   useEffect(() => {
-    {
-      !type && setInitialValue(value);
-    }
+    setInitialValue(value);
   }, [value]);
 
   return (
     <div className='textBox-container'>
-      <label htmlFor={label} style={{ cursor: disabled ? "no-drop" : "text" }}>
+      <label htmlFor={label}>
         {label}
         {required && <span className='required'>*</span>}
       </label>
@@ -55,19 +50,10 @@ const TextBox = ({
         className='text-input'
         onChange={handleChange}
         value={initialValue}
-        disabled={disabled ? true : false}
       />
-      {moreInfo ? (
-        <img
-          src='/images/moreInfoIcon.svg'
-          alt='more'
-          className='moreInfo-img'
-        />
-      ) : (
-        ""
-      )}
+      <img src='/images/questionIcon' alt="question"/>
     </div>
   );
 };
 
-export default TextBox;
+export default CustomizedTextBox;

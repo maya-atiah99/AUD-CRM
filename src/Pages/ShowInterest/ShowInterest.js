@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import LogoContainer from "../../components/LogoContainer.js";
 import ShowInterestFormContainer from "../../components/ShowInterest/ShowInterestFormContainer.js";
 import ShowInterestVideo from "../../assets/video/background-video.mp4";
 import VerticalLine from "../../components/Texts/VerticalLine.js";
@@ -10,42 +9,81 @@ import { useMutation } from "react-query";
 import { API_URL } from "../../Constants.js";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import ApplicationsModal from "../../Login/ApplicationsModal.js";
+import toast, { Toaster } from "react-hot-toast";
+import ForgotPasswordModal from "../../Login/ForgotPasswordModal.js";
+import OtpForgotPasswordModal from "../../Login/OtpForgotPasswordModal.js";
 
-const ShowInterest = ({ setApplicantId, applicantId, setMessage }) => {
+const ShowInterest = ({
+  setApplicantId,
+  applicantId,
+  setMessage,
+  applicationId,
+  setApplicationId,
+  applicationStart,
+  setApplicationStart,
+  applingAs,
+  setApplyingAs,
+}) => {
   const [showVerifiedModal, setshowVerifiedModal] = useState(false);
   const [showLoginModal, setShowLoginModal] = useState(false);
+  const [showApplicationsModal, setShowApplicatiosModal] = useState(false);
   const [showVerifiedCheckModal, setShowVerifiedCheckModal] = useState(false);
   const [actionOrigin, setActionOrigin] = useState(null);
   const [otpCode, setOtpCode] = useState("");
-  const [phoneNumber,setPhoneNumber]=useState("")
+  const [emailotp, setEmailOtp] = useState("");
+  const [phoneNumber, setPhoneNumber] = useState("");
+  const [email, setEmail] = useState("");
+  const [isForgotPassword, setIsForgotPassword] = useState(false);
+  const [otpForgotPassword, setOtpForgotPassword] = useState(false);
+  const [otpError, setOtpError] = useState(false);
   const navigate = useNavigate();
-
   const openVerifiedModal = (origin) => {
     setActionOrigin(origin);
     setshowVerifiedModal(true);
   };
 
+  /**************Validate show interest */
   const validateShowInterest = useMutation({
     mutationFn: () => {
       return axios.post(
         API_URL +
-          `/api/Applicant/ValidateShowingInterest/${applicantId}/${otpCode}`
+          `/api/Applicant/ValidateShowingInterest/${applicantId}/${otpCode}/${emailotp}`
       );
     },
     onSuccess: async (data) => {
-      console.log("data?.data?.verified", data?.data?.verified);
       if (data?.data?.verified === "true") {
         setshowVerifiedModal(false);
         setShowVerifiedCheckModal(true);
         setOtpCode("");
+        setEmailOtp("");
       }
+      setTimeout(() => {
+        setShowVerifiedCheckModal(false);
+      }, [1000]);
+    },
+    onError: (error) => {
+      console.log("error: ", error);
+      toast.error("Something went wrong");
+      setOtpError(true);
+    },
+  });
+  /**************resend otp show interest */
+  const resendShowInterestEmailOtp = useMutation({
+    mutationFn: () => {
+      return axios.post(
+        API_URL + `/api/Applicant/ResendShowingIntersetEmailOTP/${applicantId}`
+      );
+    },
+    onSuccess: async (data) => {
+      setEmailOtp("");
     },
     onError: (error) => {
       console.log("error: ", error);
     },
   });
 
-  const resenfShowingInterest = useMutation({
+  const resendShowInterestPhoneOtp = useMutation({
     mutationFn: () => {
       return axios.post(
         API_URL + `/api/Applicant/ResendShowingIntersetOTP/${applicantId}`
@@ -58,15 +96,15 @@ const ShowInterest = ({ setApplicantId, applicantId, setMessage }) => {
       console.log("error: ", error);
     },
   });
-
+  /*****************Validate for registeration */
   const validateApplicant = useMutation({
     mutationFn: () => {
       return axios.post(
-        API_URL + `/api/Applicant/ValidateApplicant/${applicantId}/${otpCode}`
+        API_URL +
+          `/api/Applicant/ValidateApplicant/${applicantId}/${otpCode}/${emailotp}`
       );
     },
     onSuccess: async (data) => {
-      console.log("data?.data?.verified", data?.data?.verified);
       openVerifiedModal("Continue");
       setActionOrigin("Continue");
       if (data?.data?.verified === "true") {
@@ -77,13 +115,16 @@ const ShowInterest = ({ setApplicantId, applicantId, setMessage }) => {
     },
     onError: (error) => {
       console.log("error: ", error);
+      toast.error("Something went wrong");
+      setOtpError(true);
     },
   });
 
-  const resendApplicantOtp = useMutation({
+  /*************resend otp for registeration */
+  const resendApplicantPhoneOtp = useMutation({
     mutationFn: () => {
       return axios.post(
-        API_URL + `/api/Applicant/ResendApplicantOTP/${applicantId}`
+        API_URL + `/api/Applicant/ResendApplicantMobileOTP/${applicantId}`
       );
     },
     onSuccess: async (data) => {
@@ -95,28 +136,45 @@ const ShowInterest = ({ setApplicantId, applicantId, setMessage }) => {
       console.log("error: ", error);
     },
   });
+  const resendApplicantEmailOtp = useMutation({
+    mutationFn: () => {
+      return axios.post(
+        API_URL + `/api/Applicant/ResendApplicantEmailOTP/${applicantId}`
+      );
+    },
+    onSuccess: async (data) => {
+      openVerifiedModal("Continue");
+      setActionOrigin("Continue");
+      setEmailOtp("");
+    },
+    onError: (error) => {
+      console.log("error: ", error);
+    },
+  });
 
+  /***************handle done in verification model for otp */
   const handleDone = () => {
     if (actionOrigin === "Submit") {
       validateShowInterest.mutate();
     } else if (actionOrigin === "Continue") {
-      console.log("hellloooooooo");
       validateApplicant.mutate();
     }
   };
-
-  console.log("testtttttttttt", actionOrigin);
-
+  /***************handle resend otp  ***/
   const handleResendEmail = () => {
     if (actionOrigin === "Submit") {
-      resenfShowingInterest.mutate();
+      resendShowInterestEmailOtp.mutate();
     } else if (actionOrigin === "Continue") {
-      resendApplicantOtp.mutate();
+      resendApplicantEmailOtp.mutate();
     }
   };
-
-  console.log("otpCode", otpCode);
-
+  const handleResendPhone = () => {
+    if (actionOrigin === "Submit") {
+      resendShowInterestPhoneOtp.mutate();
+    } else if (actionOrigin === "Continue") {
+      resendApplicantPhoneOtp.mutate();
+    }
+  };
   return (
     <div className='showInterest-container'>
       <video autoPlay loop muted id='background-video'>
@@ -137,6 +195,9 @@ const ShowInterest = ({ setApplicantId, applicantId, setMessage }) => {
           openVerifiedModal={openVerifiedModal}
           setApplicantId={setApplicantId}
           setPhoneNumber={setPhoneNumber}
+          setEmail={setEmail}
+          setApplicationStart={setApplicationStart}
+          setApplicationId={setApplicationId}
         />
       </div>
       {showVerifiedModal && (
@@ -146,23 +207,51 @@ const ShowInterest = ({ setApplicantId, applicantId, setMessage }) => {
           applicantId={applicantId}
           otpCode={otpCode}
           setOtpCode={setOtpCode}
-          handleOnClickLink={handleResendEmail}
+          emailotp={emailotp}
+          setEmailOtp={setEmailOtp}
+          handleOnClickLinkEmail={handleResendEmail}
+          handleOnClickLinkPhone={handleResendPhone}
           phoneNumber={phoneNumber}
+          email={email}
+          otpError={otpError}
         />
       )}
       {showVerifiedCheckModal && (
         <VerifiedCheckModal
           setShowVerifiedCheckModal={setShowVerifiedCheckModal}
+          text='You will receive an email from us very soon'
+          title='Sent Successfully'
+          close={() => setShowVerifiedCheckModal(false)}
         />
       )}
       {showLoginModal && (
         <Login
           setShowLoginModal={setShowLoginModal}
-          applicantId={applicantId}
           setApplicantId={setApplicantId}
-          setMessage={setMessage}
+          setShowApplicatiosModal={setShowApplicatiosModal}
+          setApplicationStart={setApplicationStart}
+          setApplyingAs={setApplyingAs}
+          setIsForgotPassword={setIsForgotPassword}
         />
       )}
+      {showApplicationsModal && (
+        <ApplicationsModal
+          setShowApplicatiosModal={setShowApplicatiosModal}
+          applicantId={applicantId}
+          applicationStart={applicationStart}
+          setApplicationStart={setApplicationStart}
+          applingAs={applingAs}
+          setApplyingAs={setApplyingAs}
+        />
+      )}
+      {isForgotPassword && (
+        <ForgotPasswordModal
+          setIsForgotPassword={setIsForgotPassword}
+          setOtpForgotPassword={setOtpForgotPassword}
+        />
+      )}
+      {otpForgotPassword && <OtpForgotPasswordModal />}
+      <Toaster />
     </div>
   );
 };

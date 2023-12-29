@@ -316,17 +316,7 @@ const RegisterFormStep1 = forwardRef(
         ];
 
         fileToAppend.forEach((key) => {
-          if (values[key] && "documentContent" in values[key]) {
-            const fileContent = values[key].documentContent;
-            const blob = new Blob([atob(fileContent)], {
-              type: values[key].contentType,
-            });
-            const file = new File([blob], values[key].fileName, {
-              type: values[key].contentType,
-            });
-
-            formData.append(key, file);
-          } else {
+          if (!values[key].fileName) {
             formData.append(key, values[key]);
           }
         });

@@ -58,7 +58,7 @@ const getValidationSchemaStep2 = (applicationStart, applingAs) => {
             if (!value) {
               return false;
             }
-            const words = value.trim().split(" ").length;
+            const words = value.trim().split("").length;
             console.log('worddddsssssssssssssss',words)
             return words >= 500;
           })

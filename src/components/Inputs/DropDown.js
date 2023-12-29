@@ -4,6 +4,7 @@ import {
   useFetchAcademicTerms,
   useFetchDropDownFromParent,
   useFetchDropDownTypes,
+  useFetchFieldOfInterestByApplicationStart,
 } from "../../Hooks/DropDownTypes";
 
 const DropDown = ({
@@ -22,6 +23,7 @@ const DropDown = ({
   parent,
   data,
   bolean,
+  applicatioStart,
 }) => {
   const { data: options, refetch: refetchTypes } = useFetchDropDownTypes(
     type || null
@@ -30,6 +32,9 @@ const DropDown = ({
     useFetchAcademicTerms();
   const { data: parentOptions, refetch: refetchParentOptions } =
     useFetchDropDownFromParent(type, parent);
+
+  const { data: fieldOfInterest, refetch: refetchFieldOfInterest } =
+    useFetchFieldOfInterestByApplicationStart(applicatioStart);
 
   const currentYear = new Date().getFullYear();
   const yearOptions = Array.from(
@@ -86,9 +91,15 @@ const DropDown = ({
     { value: true, label: "Yes" },
     { value: false, label: "No" },
   ];
+  const formattedFieldOfInterestOptions = fieldOfInterest?.data
+    ? fieldOfInterest?.data.map((option) => ({
+        value: option.value,
+        label: option.text,
+      }))
+    : [];
+    
   const handleOnChange = (name, selectedOption) => {
     onChange(name, selectedOption.value);
-
   };
   useEffect(() => {
     if (type) {
@@ -126,7 +137,9 @@ const DropDown = ({
     }),
   };
 
-  const optionsSelected = bolean
+  const optionsSelected = fieldOfInterest
+    ? formattedFieldOfInterestOptions
+    : bolean
     ? boleanOptions
     : isAcademic
     ? formattedAcademicOptions
@@ -148,7 +161,9 @@ const DropDown = ({
       </label>
       <Select
         options={
-          bolean
+          fieldOfInterest
+            ? formattedFieldOfInterestOptions
+            : bolean
             ? boleanOptions
             : isAcademic
             ? formattedAcademicOptions

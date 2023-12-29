@@ -313,7 +313,7 @@ const ShowInterestForm = ({
                   width='100%'
                   label='Field Of Interest'
                   required={true}
-                  type='8'
+                  applicatioStart={values.applicationStart}
                   name='fieldOfInterest'
                   value={values.fieldOfInterest}
                   onChange={(name, value) => {

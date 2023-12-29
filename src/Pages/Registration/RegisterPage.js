@@ -320,15 +320,15 @@ const RegisterPage = ({
     }
   };
 
-  const handleSave =async (next) => {
+  const handleSave = async (next) => {
     console.log("handleSave");
     await steps[activeStep].ref.current?.setFieldValue("isSaved", false);
     steps[activeStep].ref.current?.setFieldValue("NextActiveStep", activeStep);
     if (next) steps[activeStep].ref.current?.submitForm();
-    // setTimeout(() => {
-    //   navigate("/");
-    //   localStorage.clear();
-    // }, 400);
+    setTimeout(() => {
+      navigate("/");
+      localStorage.clear();
+    }, 500);
   };
 
   useEffect(() => {
@@ -352,16 +352,18 @@ const RegisterPage = ({
     <div>
       <UpperHeader />
       <div className='registerPage-container'>
-        <AUDButton
-          text={steps[activeStep]?.previousStep}
-          icon={
-            activeStep !== 0
-              ? "/images/backarrowForbutton.svg"
-              : "/images/homeicon.svg"
-          }
-          to={activeStep === 0 ? "/" : null}
-          handleOnClick={() => handleClickPreviousButton()}
-        />
+        <div className='back-button'>
+          <AUDButton
+            text={steps[activeStep]?.previousStep}
+            icon={
+              activeStep !== 0
+                ? "/images/backarrowForbutton.svg"
+                : "/images/homeicon.svg"
+            }
+            to={activeStep === 0 ? "/" : null}
+            handleOnClick={() => handleClickPreviousButton()}
+          />
+        </div>
 
         <TextComponent
           text='Please fill all the required fields (*) and click the Save & Continue button to continue to the next step.'

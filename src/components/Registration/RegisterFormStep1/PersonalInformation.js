@@ -11,7 +11,6 @@ import DocumentUpload from "../../Inputs/DocumentUpload";
 const PersonalInformation = () => {
   const [showEmirate, setShowEmirate] = useState(false);
   const formik = useFormikContext();
-  console.log("hvjhghvhg formik", formik);
 
   useEffect(() => {
     if (formik.values.Nationality === "dcb9b21c-31bf-42fa-9b60-fab3608a49e6") {
@@ -19,7 +18,6 @@ const PersonalInformation = () => {
     }
   }, [formik.values.Nationality]);
 
-  console.log('emrirates file',formik.values.EmiratesId_File)
   return (
     <div className='form-subcontainers'>
       <SectionTitle title='PERSONAL INFORMATION OF THE APPLICANT' />
@@ -156,7 +154,7 @@ const PersonalInformation = () => {
       </div>
 
       <div style={{ paddingTop: "0.5rem" }}>
-        <div className='grid-personal-emirates-cont'>
+        <div className='grid-personal1-cont'>
           <TextBox
             width='100%'
             label='Passport No.'
@@ -172,7 +170,7 @@ const PersonalInformation = () => {
             label='Upload Passport'
             text='Choose File'
             height='38px'
-            imageHeight='30px'
+            smallImage={true}
             size='5'
             name='Passport_File'
             value={formik.values.Passport_File}
@@ -198,7 +196,7 @@ const PersonalInformation = () => {
             label='Upload Emirates ID (Front & Back)'
             text='Choose File'
             height='38px'
-            imageHeight='30px'
+            smallImage={true}
             size='5'
             name='EmiratesId_File'
             value={formik.values.EmiratesId_File}
@@ -227,7 +225,7 @@ const PersonalInformation = () => {
               label='Upload Family Book'
               text='Choose File'
               height='38px'
-              imageHeight='30px'
+              smallImage={true}
               size='5'
               name='FamilyBook_File'
               value={formik.values.FamilyBook_File}

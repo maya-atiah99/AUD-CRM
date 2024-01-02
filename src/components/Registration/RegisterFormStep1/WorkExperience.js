@@ -83,8 +83,8 @@ const WorkExperience = () => {
         label="Upload CV"
           text='Choose File'
           height='35px'
-          imageHeight="30px"
           size="50"
+          smallImage={true}
           required={true}
           name='CV'
           value={formik.values.CV}

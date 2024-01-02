@@ -204,7 +204,7 @@ const RegisterFormStep2 = forwardRef(
         // } else {
         //   formData.append("DiplomaFile", values.DiplomaFile);
         // }
-        if (!values.DiplomaFile.fileName) {
+        if (!values?.DiplomaFile?.fileName) {
           formData.append("DiplomaFile", values.DiplomaFile);
         }
         /*********************Appliacnt files post */
@@ -227,7 +227,7 @@ const RegisterFormStep2 = forwardRef(
               file.testType
             );
 
-            if (!file.fileName) {
+            if (!file.academicDocument.fileName) {
               formDataFiles.append(
                 `applicantFiles[${index}].academicDocument`,
                 file.academicDocument
@@ -270,8 +270,8 @@ const RegisterFormStep2 = forwardRef(
       setApplicationStart(localStorage.getItem("applicationStart"));
     }, []);
     console.log(
-      "values.applicantFiles.lengthvalues.applicantFiles.length",
-      formik.values?.applicantFiles?.length
+      "values?.DiplomaFile?.fileName",
+      formik.values?.DiplomaFile?.fileName
     );
     console.log("formik stage three", formik);
     return (

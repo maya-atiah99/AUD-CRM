@@ -13,6 +13,7 @@ import RegisterFormStep2 from "../../components/Registration/RegisterForm2/Regis
 import RegisterFormStep3 from "../../components/Registration/RegisterForm3/RegisterFormStep3";
 import RegisterFormStep4 from "../../components/Registration/RegisterForm4/RegisterFormStep4";
 import WaiverAndReleases from "../../components/Registration/RegisterFormWaiver/WaiverAndReleases";
+import toast, { Toaster } from "react-hot-toast";
 
 const RegisterPage = ({
   applicantId,
@@ -312,6 +313,7 @@ const RegisterPage = ({
           setActiveStep((prevActiveStep) => prevActiveStep + 1);
           window.scrollTo(0, 0);
         } else {
+          toast.error("Please Fill All Required Fields")
           window.scrollTo(0, 0);
         }
       } catch (error) {
@@ -402,6 +404,7 @@ const RegisterPage = ({
           )}
         </div>
       </div>
+      <Toaster />
     </div>
   );
 };

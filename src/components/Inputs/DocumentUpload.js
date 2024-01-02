@@ -15,6 +15,7 @@ const DocumentUpload = ({
   value,
   imageHeight,
   size,
+  smallImage 
 }) => {
   const [selectedFile, setSelectedFile] = useState(null);
 
@@ -67,7 +68,7 @@ const DocumentUpload = ({
           <img
             src='/images/Layer 25.svg'
             alt='layer'
-            style={{ height: imageHeight }}
+            className={smallImage ? "smallImage" : "bigImage"}
           />
           <p>
             {errors && touched ? (

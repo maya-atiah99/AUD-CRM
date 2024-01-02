@@ -72,7 +72,6 @@ const ApplicationsModal = ({
               <th>Program</th>
               <th>Plan to Join</th>
               <th>Status</th>
-              <th>Steps</th>
               <th>Createtd On</th>
               <th></th>
             </tr>
@@ -87,9 +86,8 @@ const ApplicationsModal = ({
                   <td style={{ maxWidth: "200px" }}>
                     {item.fieldOfInterest_Display}
                   </td>
-                  <td></td>
+                  <td>{item.termName}</td>
                   <td>{applicationStatus(item.applicationStatus)}</td>
-                  <td></td>
                   <td>{item.createdOn.substring(0, 10)}</td>
 
                   <td>

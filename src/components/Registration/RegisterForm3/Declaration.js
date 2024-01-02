@@ -28,55 +28,35 @@ const Declaration = ({ applingAs, applicationStart }) => {
         errors={formik.errors?.RecordsCheck}
         touched={formik.errors?.RecordsCheck}
       />
-      <div className='d-flex gap-1 flex-wrap'>
-        <SquareCheckBox
-          text='I have read and agree to abide by the regulations and policies set forth in the University’s'
-          name='UndergroundCatalogCheck'
-          value={formik.values.UndergroundCatalogCheck}
-          onChange={(checked) => {
-            formik.setFieldValue("UndergroundCatalogCheck", checked);
-          }}
-          errors={formik.errors?.UndergroundCatalogCheck}
-          touched={formik.errors?.UndergroundCatalogCheck}
-        />
-        <div className='blue-link'>
-          <a
-            href={applicationStart === "0"
-              ? 'https://aud.edu/media/catalogs/undergraduate/index.html'
-              : applicationStart === "1"
-              ? "https://aud.edu/media/catalogs/graduate/index.html"
-              : "https://www.aud.edu/media/catalogs/undergraduate/index.html"}
-            target='_blank'
-          >
-            {applicationStart === "0"
-              ? "Undergaduate Catalog, "
-              : applicationStart === "1"
-              ? "Graduate Catalog, "
-              : "Level Of Study, "}
-          </a>
-        </div>
-        <div className='blue-link'>
-          <a
-            href='https://aud.edu/media/catalogs/student-handbook/index.html'
-            target='_blank'
-          >
-            {" "}
-            Student Handbook,{" "}
-          </a>
-        </div>
-        <div className='blue-link'>
-          <a
-            href='https://www.aud.edu/university-overview/administrative-offices/office-of-finance/'
-            target='_blank'
-          >
-            {" "}
-            Schedule of Tuition Fees{" "}
-          </a>
-        </div>
-        <p className='classfont-p' style={{ fontWeight: "600" }}>
-          and Enrollment Agreement and as stated in this application and online.
-        </p>
-      </div>
+      <SquareCheckBox
+        text='I have read and agree to abide by the regulations and policies set forth in the University’s'
+        name='UndergroundCatalogCheck'
+        value={formik.values.UndergroundCatalogCheck}
+        onChange={(checked) => {
+          formik.setFieldValue("UndergroundCatalogCheck", checked);
+        }}
+        policy={
+          applicationStart === "0"
+            ? "Undergaduate Catalog, "
+            : applicationStart === "1"
+            ? "Graduate Catalog, "
+            : "Level Of Study, "
+        }
+        href={
+          applicationStart === "0"
+            ? "https://aud.edu/media/catalogs/undergraduate/index.html"
+            : applicationStart === "1"
+            ? "https://aud.edu/media/catalogs/graduate/index.html"
+            : "https://www.aud.edu/media/catalogs/undergraduate/index.html"
+        }
+        policy2='Student Handbook,'
+        href2='https://aud.edu/media/catalogs/student-handbook/index.html'
+        policy3='Schedule of Tuition Fees'
+        href3='https://www.aud.edu/university-overview/administrative-offices/office-of-finance/'
+        text2=' and Enrollment Agreement and as stated in this application and online.'
+        errors={formik.errors?.UndergroundCatalogCheck}
+        touched={formik.errors?.UndergroundCatalogCheck}
+      />
 
       <SquareCheckBox
         text={

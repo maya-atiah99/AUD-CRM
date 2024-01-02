@@ -39,7 +39,7 @@ a {
 
 .blue-link a {
   color: #3886bd;
-  text-decoration: none;
+  text-decoration: underline !important;
 }
 /************/
 .span-required {
@@ -294,14 +294,12 @@ textarea:focus-visible {
   gap: 5px;
   align-items: center;
 }
-.img-text-container img {
-  width: auto;
-}
+
 .img-text-container p {
-  max-width: 60%;
+  /* max-width: 60%;  */
   text-overflow: ellipsis;
   overflow: hidden;
-  white-space: nowrap;
+  /* white-space: nowrap; */
   color: #1b224c;
   font-family: Raleway;
   font-size: 14px;
@@ -309,6 +307,10 @@ textarea:focus-visible {
   font-weight: 500;
   line-height: normal;
   margin: 0;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 1;
+  overflow: hidden;
 }
 .size-upload-dc p {
   color: #1b224c;
@@ -325,6 +327,12 @@ textarea:focus-visible {
   top: 0;
   right: 0;
   width: 16px;
+}
+.smallImage {
+  height: 30px;
+}
+.bigImage {
+  height: 50px;
 }
 /**************************************Modal****/
 .modal-container {
@@ -1092,6 +1100,7 @@ ul {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr;
   grid-column-gap: 10px;
+  grid-row-gap: 10px;
 }
 
 .classfont-p {
@@ -1795,6 +1804,9 @@ td:first-child {
   .stepper-font-number-title {
     font-size: 10px;
   }
+  .react-tel-input .form-control {
+    font-size: 11px;
+  }
 }
 @media screen and (max-width: 1259px) {
   .registerPage-container {
@@ -2031,13 +2043,13 @@ td:first-child {
     font-size: 12px !important;
   }
   .blue-link {
-    font-size: 12px;
+    font-size: 10px;
   }
   .blue-link span {
-    font-size: 12px;
+    font-size: 10px;
   }
   .classfont-p {
-    font-size: 12px;
+    font-size: 10px;
     margin: 0;
   }
   th,
@@ -2079,6 +2091,9 @@ responsiveness ************/
   /**text box **/
   .text-input {
     height: 28px;
+    font-size: 11px;
+  }
+  .react-tel-input .form-control {
     font-size: 11px;
   }
 
@@ -2343,14 +2358,12 @@ responsiveness ************/
     grid-template-columns: 1fr;
   }
   .img-text-container p {
-    font-size: 11px;
+    font-size: 10px;
   }
   .size-upload-dc p {
     font-size: 9px;
   }
-  .img-text-container img {
-    width: 50px !important;
-  }
+
   .file-input-container,
   .file-input-container-upl {
     height: 40px !important;
@@ -2378,20 +2391,40 @@ responsiveness ************/
   .applicant-loginp span {
     font-size: 10px !important;
   }
-
+  .bigImage {
+    height: 30px;
+  }
   /********Stepper responsive*********/
   .aud-app-header {
     display: flex;
-    gap:10px;
+    gap: 10px;
     padding: 1rem;
     flex-direction: column;
     justify-content: normal;
     align-items: normal;
-}
-.inActiveLine {
- display: none;
-}
-.inactive{
-  display: none;
-}
+  }
+  .inActiveLine {
+    display: none;
+  }
+  /* .aud-header-logo{
+  padding-left: 15px;
+} */
+  .checkedLogo {
+    height: 20px;
+  }
+  .hide-titile {
+    display: none;
+    padding: 0rem 10px 0 5px;
+  }
+  .stepper {
+    display: flex;
+    justify-content: normal;
+    width: 100%;
+  }
+  .stepper .step {
+    padding: 0px 0px 0px 6px;
+    margin: 0px 2px 0px 2px;
+    height: 20px;
+    width: 20px;
+  }
 }

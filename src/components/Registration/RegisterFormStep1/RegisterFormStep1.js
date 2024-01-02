@@ -52,7 +52,7 @@ const RegisterFormStep1 = forwardRef(
           ApplingAs: fetchedData?.data?.applicant?.applyingAs || "",
           SelectedTerm: "",
           ApplicationStart:
-            fetchedData?.data?.application?.startYourApplication || "",
+            fetchedData?.data?.application?.startYourApplication.toString() || "",
           ProgramOfInterest: "",
           CurrentPlaceOfStudy: "",
           GuardianRelation1: "",
@@ -111,7 +111,7 @@ const RegisterFormStep1 = forwardRef(
           Nationality: fetchedData?.data?.stage1?.nationalityId || "",
           DOB: fetchedData?.data?.stage1?.dob
             ? new Date(fetchedData?.data?.stage1?.dob)
-                .toISOString()
+                ?.toISOString()
                 .split("T")[0]
             : "",
           Gender: fetchedData?.data?.stage1?.gender || "",

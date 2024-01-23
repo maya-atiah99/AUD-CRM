@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 
 const SquareCheckBox = ({
   text,
@@ -13,14 +13,19 @@ const SquareCheckBox = ({
   href2,
   policy2,
   policy3,
-  text2
+  text2,
+  disabled,
 }) => {
   return (
-    <label className='checkbox-container'>
+    <label
+      className='checkbox-container'
+      style={{ cursor: disabled ? "not-allowed" : "pointer" }}
+    >
       <input
         type='checkbox'
         checked={value}
         onChange={(e) => onChange(e.target.checked)}
+        disabled={disabled}
       />
       <span
         className={`${errors && touched ? "red-checkmark " : "checkmark"}`}
@@ -45,7 +50,6 @@ const SquareCheckBox = ({
                 {policy3}
               </a>
             </span>
-         
           </span>
         )}
         {text2}

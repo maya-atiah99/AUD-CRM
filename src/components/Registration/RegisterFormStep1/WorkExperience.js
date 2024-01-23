@@ -4,9 +4,8 @@ import DropDown from "../../Inputs/DropDown";
 import TextBox from "../../Inputs/TextBox";
 import { useFormikContext } from "formik";
 import DocumentUpload from "../../Inputs/DocumentUpload";
-import DateTime from "../../Inputs/DateTime";
 
-const WorkExperience = () => {
+const WorkExperience = ({isView}) => {
   const formik = useFormikContext();
 
   return (
@@ -25,6 +24,7 @@ const WorkExperience = () => {
           }}
           errors={formik.errors?.EmploymentStatus}
           touched={formik.touched?.EmploymentStatus}
+          disabled={isView}
         />
 
         <DropDown
@@ -39,6 +39,7 @@ const WorkExperience = () => {
           }}
           errors={formik.errors?.EmploymentSector}
           touched={formik.touched?.EmploymentSector}
+          disabled={isView}
         />
 
         <TextBox
@@ -52,6 +53,7 @@ const WorkExperience = () => {
           }}
           errors={formik.errors?.CompanyName}
           touched={formik.touched?.CompanyName}
+          disabled={isView}
         />
         <TextBox
           required={true}
@@ -64,6 +66,7 @@ const WorkExperience = () => {
           }}
           errors={formik.errors?.JobTitle}
           touched={formik.touched?.JobTitle}
+          disabled={isView}
         />
       </div>
       <div className='grid-programInfo-cont'>
@@ -78,6 +81,7 @@ const WorkExperience = () => {
           }}
           errors={formik.errors?.YearsOfExperience}
           touched={formik.touched?.YearsOfExperience}
+          disabled={isView}
         />
         <DocumentUpload
         label="Upload CV"
@@ -93,6 +97,7 @@ const WorkExperience = () => {
           }}
           errors={formik.errors?.CV}
           touched={formik.touched?.CV}
+          disabled={isView}
         />{" "}
       </div>
     </div>

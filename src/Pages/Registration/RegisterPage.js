@@ -28,6 +28,9 @@ const RegisterPage = ({
   const [activeStep, setActiveStep] = useState(
     parseInt(localStorage.getItem("message"), 10) || 0
   );
+  const [isView, setIsView] = useState(
+    localStorage.getItem("applicationStatus") || false
+  );
   const [steps, setSteps] = useState([]);
   const formikRefStep1 = useRef();
   const formikRefStep2 = useRef();
@@ -66,6 +69,7 @@ const RegisterPage = ({
               applingAs={applingAs}
               setApplyingAs={setApplyingAs}
               applicationStart={applicationStart}
+              isView={isView}
             />
           ),
           ref: formikRefStep1,
@@ -87,6 +91,7 @@ const RegisterPage = ({
               applingAs={applingAs}
               setApplyingAs={setApplyingAs}
               applicationStart={applicationStart}
+              isView={isView}
             />
           ),
           ref: formikRefStep2,
@@ -96,7 +101,7 @@ const RegisterPage = ({
           title: "Waiver and Releases",
           previousStep: "Back to Academic",
           NextStep: "Go to Declaration",
-          form: <WaiverAndReleases ref={formikRefStep5} />,
+          form: <WaiverAndReleases ref={formikRefStep5} isView={isView} />,
           ref: formikRefStep5,
         },
         {
@@ -113,6 +118,7 @@ const RegisterPage = ({
               applingAs={applingAs}
               activeStep={activeStep}
               applicationStart={applicationStart}
+              isView={isView}
             />
           ),
           ref: formikRefStep3,
@@ -127,6 +133,7 @@ const RegisterPage = ({
               activeStep={activeStep}
               applicantId={applicantId}
               applicationId={applicationId}
+              isView={isView}
             />
           ),
           ref: formikRefStep4,
@@ -151,6 +158,7 @@ const RegisterPage = ({
               applingAs={applingAs}
               setApplyingAs={setApplyingAs}
               applicationStart={applicationStart}
+              isView={isView}
             />
           ),
           ref: formikRefStep1,
@@ -169,6 +177,7 @@ const RegisterPage = ({
               applingAs={applingAs}
               activeStep={activeStep}
               applicationStart={applicationStart}
+              isView={isView}
             />
           ),
           ref: formikRefStep3,
@@ -183,6 +192,7 @@ const RegisterPage = ({
               activeStep={activeStep}
               applicantId={applicantId}
               applicationId={applicationId}
+              isView={isView}
             />
           ),
           ref: formikRefStep4,
@@ -207,6 +217,7 @@ const RegisterPage = ({
               applingAs={applingAs}
               setApplyingAs={setApplyingAs}
               applicationStart={applicationStart}
+              isView={isView}
             />
           ),
           ref: formikRefStep1,
@@ -228,6 +239,7 @@ const RegisterPage = ({
               setApplyingAs={setApplyingAs}
               applicationStart={applicationStart}
               activeStep={activeStep}
+              isView={isView}
             />
           ),
           ref: formikRefStep2,
@@ -246,6 +258,7 @@ const RegisterPage = ({
               applingAs={applingAs}
               applicationStart={applicationStart}
               activeStep={activeStep}
+              isView={isView}
             />
           ),
           ref: formikRefStep3,
@@ -260,6 +273,7 @@ const RegisterPage = ({
               activeStep={activeStep}
               applicantId={applicantId}
               applicationId={applicationId}
+              isView={isView}
             />
           ),
           ref: formikRefStep4,
@@ -313,7 +327,7 @@ const RegisterPage = ({
           setActiveStep((prevActiveStep) => prevActiveStep + 1);
           window.scrollTo(0, 0);
         } else {
-          toast.error("Please Fill All Required Fields")
+          toast.error("Please Fill All Required Fields");
           window.scrollTo(0, 0);
         }
       } catch (error) {
@@ -333,6 +347,11 @@ const RegisterPage = ({
     }, 500);
   };
 
+  const handleNext = (next) => {
+    if (next) {
+      setActiveStep((prevActiveStep) => prevActiveStep + 1);
+    }
+  };
   useEffect(() => {
     if (showInterest === true && activeStep === 0) {
       refetchStageOne();
@@ -384,14 +403,20 @@ const RegisterPage = ({
         <div className='button-cont-register '>
           {activeStep !== steps.length - 1 ? (
             <>
-              <AUDButton
-                text='Save & Continue Later'
-                handleOnClick={() => handleSave(true)}
-              />
-              <AUDButton
-                text='Continue To The Next Step'
-                handleOnClick={() => handleChange(true)}
-              />
+              {!isView && (
+                <AUDButton
+                  text='Save & Continue Later'
+                  handleOnClick={() => handleSave(true)}
+                />
+              )}
+              {isView ? (
+                <AUDButton text='Next' handleOnClick={() => handleNext(true)} />
+              ) : (
+                <AUDButton
+                  text='Continue To The Next Step'
+                  handleOnClick={() => handleChange(true)}
+                />
+              )}
             </>
           ) : (
             <AUDButton

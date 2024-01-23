@@ -18,7 +18,14 @@ import {
 import Declaration from "./Declaration";
 const RegisterFormStep3 = forwardRef(
   (
-    { applicantId, applicationId, applingAs, applicationStart, activeStep },
+    {
+      applicantId,
+      applicationId,
+      applingAs,
+      applicationStart,
+      activeStep,
+      isView,
+    },
     ref
   ) => {
     const { data: applicantStageFour, refetch: refetchStageFour } =
@@ -117,13 +124,17 @@ const RegisterFormStep3 = forwardRef(
             innerRef={ref}
             validationSchema={Step3ValidationSchema}
           >
-            <ProgramInformation />
+            <ProgramInformation isView={isView} />
             <Declaration
               applingAs={applingAs}
               applicationStart={applicationStart}
+              isView={isView}
             />
-            <ImportantNotices />
-            <Reservation handleClick={() => setShowModal(true)} />
+            <ImportantNotices isView={isView} />
+            <Reservation
+              handleClick={() => setShowModal(true)}
+              isView={isView}
+            />
           </FormikProvider>
         </div>
         {showModal && (

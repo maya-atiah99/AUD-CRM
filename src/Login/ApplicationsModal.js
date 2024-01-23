@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import ModalComponent from "../components/ModalComponent";
-import { Button } from "bootstrap";
 import RoundedButton from "../components/Buttons/RoundedButtons";
 import { useFetchApplicationsById } from "../Hooks/Login";
 import { useNavigate } from "react-router-dom";
@@ -9,9 +8,7 @@ import AUDButton from "../components/Buttons/AUDButton";
 const ApplicationsModal = ({
   setShowApplicatiosModal,
   applicantId,
-  applicationStart,
   setApplicationStart,
-  applingAs,
   setApplyingAs,
 }) => {
   const [name, setName] = useState(localStorage.getItem("fullName"));
@@ -47,6 +44,11 @@ const ApplicationsModal = ({
     localStorage.setItem("applicantId", item.applicantId);
     localStorage.setItem("applingAs", item.applyingAs);
     localStorage.setItem("applicationStart", item.startYourApplication);
+    ///check if application status is viewed only
+    //maya change applicationStatus to what lama will send to you don't keep it 0 
+    if(item.applicationStatus === 0){
+      localStorage.setItem("applicationStatus",true)
+    }
     setApplicationStart(item.startYourApplication);
     setApplyingAs(item.applyingAs);
     localStorage.setItem("message", item.nextActiveStep);

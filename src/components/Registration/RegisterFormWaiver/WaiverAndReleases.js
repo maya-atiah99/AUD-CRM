@@ -5,14 +5,14 @@ import SectionTitle from "../../Texts/SectionTitle";
 import { useFormik } from "formik";
 import WaiverAndReleasesValidationSchema from "../../../ValidationSchemas/WaiverAndReleasesValidationSchema";
 
-const WaiverAndReleases = forwardRef(({}, ref) => {
+const WaiverAndReleases = forwardRef(({ isView }, ref) => {
   const formik = useFormik({
     initialValues: {
       RemainInFullForceCheck: "",
       AgreementTermsCheck: "",
       HealthInsurance: "",
       AcknowledgeAndPolicies: "",
-      isSaved:""
+      isSaved: "",
     },
     validationSchema: WaiverAndReleasesValidationSchema,
     enableReinitialize: true,
@@ -53,6 +53,7 @@ const WaiverAndReleases = forwardRef(({}, ref) => {
             }}
             errors={formik.errors?.RemainInFullForceCheck}
             touched={formik.errors?.RemainInFullForceCheck}
+            disabled={isView}
           />
           <SquareCheckBox
             text='I have executed this Waiver and Release and have agreed to the terms of this instrument having carefully read it in full '
@@ -63,11 +64,16 @@ const WaiverAndReleases = forwardRef(({}, ref) => {
             }}
             errors={formik.errors?.AgreementTermsCheck}
             touched={formik.errors?.AgreementTermsCheck}
+            disabled={isView}
           />
         </div>
         <div className='form-subcontainers'>
           <SectionTitle title='ACKNOWLEDGEMENT' size='18px' font='600' />
-          <TextComponent text='Insurance Coverage while at AUD' font='700' classfont='expand-font-title' />
+          <TextComponent
+            text='Insurance Coverage while at AUD'
+            font='700'
+            classfont='expand-font-title'
+          />
           <SquareCheckBox
             text='Private health insurance covering care in the UAE is mandatory for AUD students. Visiting students are required to provide the Admissions Office with evidence of valid private health insurance applicable in the UAE, during the Admissions process. Visiting students are responsible for all charges related to any medical care, while enrolled at AUD. As part of the AUD residence visa application, students are also required to enroll in the AUD-sponsored health insurance plan.'
             name='HealthInsurance'
@@ -77,6 +83,7 @@ const WaiverAndReleases = forwardRef(({}, ref) => {
             }}
             errors={formik.errors?.HealthInsurance}
             touched={formik.errors?.HealthInsurance}
+            disabled={isView}
           />
 
           <SquareCheckBox
@@ -90,6 +97,7 @@ const WaiverAndReleases = forwardRef(({}, ref) => {
             touched={formik.errors?.AcknowledgeAndPolicies}
             policy='AUD Academic Calendar online'
             href='https://www.aud.edu/admissions/academic-calendar-and-application-deadlines/'
+            disabled={isView}
           />
         </div>
       </div>

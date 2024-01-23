@@ -3,7 +3,7 @@ import SquareCheckBox from "../../Inputs/SquareCheckBox";
 import SectionTitle from "../../Texts/SectionTitle";
 import { useFormikContext } from "formik";
 
-const Reservation = ({ handleClick }) => {
+const Reservation = ({ handleClick,isView }) => {
   const formik = useFormikContext();
   return (
     <>
@@ -22,6 +22,7 @@ const Reservation = ({ handleClick }) => {
             href='https://www.aud.edu/media/q2acttic/graduate-re-agreement-terms.pdf'
             errors={formik.errors?.TermAndConditionCheck}
             touched={formik.errors?.TermAndConditionCheck}
+            disabled={isView}
           />
         </div>
       </div>

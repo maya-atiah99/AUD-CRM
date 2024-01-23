@@ -5,9 +5,8 @@ import DropDown from "../../Inputs/DropDown";
 import PhoneNumber from "../../Inputs/PhoneNumber";
 import { useFormikContext } from "formik";
 import SquareCheckBox from "../../Inputs/SquareCheckBox";
-import DateTime from "../../Inputs/DateTime";
 
-const ParentInformation = () => {
+const ParentInformation = ({ isView }) => {
   const formik = useFormikContext();
 
   return (
@@ -26,6 +25,7 @@ const ParentInformation = () => {
           }}
           errors={formik.errors?.GuardianRelation1}
           touched={formik.touched?.GuardianRelation1}
+          disabled={isView}
         />
         <TextBox
           width='100%'
@@ -38,6 +38,7 @@ const ParentInformation = () => {
           }}
           errors={formik.errors?.GuardianName1}
           touched={formik.touched?.GuardianName1}
+          disabled={isView}
         />
         <PhoneNumber
           width='50%'
@@ -50,6 +51,7 @@ const ParentInformation = () => {
           }}
           errors={formik.errors?.GuardianMobile1}
           touched={formik.touched?.GuardianMobile1}
+          disabled={isView}
         />
         <TextBox
           width='100%'
@@ -62,6 +64,7 @@ const ParentInformation = () => {
           }}
           errors={formik.errors?.GuardianEmail1}
           touched={formik.touched?.GuardianEmail1}
+          disabled={isView}
         />
       </div>
       <div className='grid-personal1-cont'>
@@ -76,6 +79,7 @@ const ParentInformation = () => {
           }}
           errors={formik.errors?.GuardianRelation2}
           touched={formik.touched?.GuardianRelation2}
+          disabled={isView}
         />
         <TextBox
           width='100%'
@@ -87,6 +91,7 @@ const ParentInformation = () => {
           }}
           errors={formik.errors?.GuardianName2}
           touched={formik.touched?.GuardianName2}
+          disabled={isView}
         />
         <PhoneNumber
           width='50%'
@@ -98,6 +103,7 @@ const ParentInformation = () => {
           }}
           errors={formik.errors?.GuardianMobile2}
           touched={formik.touched?.GuardianMobile2}
+          disabled={isView}
         />
         <TextBox
           width='100%'
@@ -109,6 +115,7 @@ const ParentInformation = () => {
           }}
           errors={formik.errors?.GuardianEmail2}
           touched={formik.touched?.GuardianEmail2}
+          disabled={isView}
         />
       </div>
       <SquareCheckBox
@@ -121,6 +128,7 @@ const ParentInformation = () => {
         }}
         errors={formik.errors?.LegacyApplicant}
         touched={formik.errors?.LegacyApplicant}
+        disabled={isView}
       />
 
       {formik.values.LegacyApplicant === true ? (
@@ -136,6 +144,7 @@ const ParentInformation = () => {
               }}
               errors={formik.errors?.LegacyFatherName}
               touched={formik.touched?.LegacyFatherName}
+              disabled={isView}
             />
             {/* <TextBox
               width='100%'
@@ -159,6 +168,7 @@ const ParentInformation = () => {
               }}
               errors={formik.errors?.LegacyFatherProgram}
               touched={formik.touched?.LegacyFatherProgram}
+              disabled={isView}
             />
 
             {/* <DateTime
@@ -183,6 +193,7 @@ const ParentInformation = () => {
               }}
               errors={formik.errors?.LegacyFatherGraduationYear}
               touched={formik.touched?.LegacyFatherGraduationYear}
+              disabled={isView}
             />
             {/* <PhoneNumber
               width='50%'
@@ -207,6 +218,7 @@ const ParentInformation = () => {
               }}
               errors={formik.errors?.LegacyMotherName}
               touched={formik.touched?.LegacyMotherName}
+              disabled={isView}
             />
             {/* <TextBox
               width='100%'
@@ -230,6 +242,7 @@ const ParentInformation = () => {
               }}
               errors={formik.errors?.LegacyMotherProgram}
               touched={formik.touched?.LegacyMotherProgram}
+              disabled={isView}
             />
 
             {/* 
@@ -255,6 +268,7 @@ const ParentInformation = () => {
               }}
               errors={formik.errors?.LegacyMotherGraduationYear}
               touched={formik.touched?.LegacyMotherGraduationYear}
+              disabled={isView}
             />
             {/* <PhoneNumber
               width='50%'

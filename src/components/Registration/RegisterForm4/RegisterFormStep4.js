@@ -6,7 +6,7 @@ import step4ValidationSchema from "../../../ValidationSchemas/Step4ValidationSch
 import { usePayment } from "../../../Hooks/Appplicant";
 import VerifiedCheckModal from "../../ShowInterest/VerifiedCheckModal";
 
-const RegisterFormStep4 = ({ applicantId, applicationId }) => {
+const RegisterFormStep4 = ({ applicantId, applicationId,isView }) => {
   const [isSubmitted, setIsSubmitted] = useState(false);
  
 
@@ -63,13 +63,13 @@ const RegisterFormStep4 = ({ applicantId, applicationId }) => {
     <>
       <div className='payment-container'>
         <FormikProvider value={formik} validationSchema={step4ValidationSchema}>
-          <PaymentDetails />
+          <PaymentDetails isView={isView} />
           <div className='payment-verticalline'>
             <div className='verticalPayment-container'>
               <div className='verticalLine'></div>
             </div>
           </div>
-          <Invoice />
+          <Invoice isView={isView} />
         </FormikProvider>
       </div>
       {isSubmitted && (

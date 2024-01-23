@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import { AiFillCloseCircle } from "react-icons/ai";
-import { useFormikContext } from "formik";
 
 const DocumentUpload = ({
   text,
@@ -15,7 +14,8 @@ const DocumentUpload = ({
   value,
   imageHeight,
   size,
-  smallImage 
+  smallImage,
+  disabled,
 }) => {
   const [selectedFile, setSelectedFile] = useState(null);
 
@@ -41,6 +41,7 @@ const DocumentUpload = ({
     width: width,
     height: height,
     border: errors && touched ? "1px solid red" : "1px solid #1b224c31",
+    cursor: disabled ? "not-allowed" : "pointer",
   };
 
   useEffect(() => {
@@ -63,7 +64,12 @@ const DocumentUpload = ({
         }`}
         style={containerStyle}
       >
-        <input type='file' className='file-input' onChange={handleFileChange} />
+        <input
+          type='file'
+          className='file-input'
+          onChange={handleFileChange}
+          disabled={disabled}
+        />
         <div className='img-text-container'>
           <img
             src='/images/Layer 25.svg'
@@ -80,7 +86,9 @@ const DocumentUpload = ({
             )}
           </p>
         </div>
-        <div className='size-upload-dc'><p>Max Size: {size} mb</p></div>
+        <div className='size-upload-dc'>
+          <p>Max Size: {size} mb</p>
+        </div>
 
         {selectedFile ? (
           <AiFillCloseCircle

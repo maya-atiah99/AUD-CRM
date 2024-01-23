@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import Select from "react-select";
 import {
   useFetchAcademicTerms,
@@ -24,6 +24,7 @@ const DropDown = ({
   data,
   bolean,
   applicatioStart,
+  disabled,
 }) => {
   const { data: options, refetch: refetchTypes } = useFetchDropDownTypes(
     type || null
@@ -97,7 +98,7 @@ const DropDown = ({
         label: option.text,
       }))
     : [];
-    
+
   const handleOnChange = (name, selectedOption) => {
     onChange(name, selectedOption.value);
   };
@@ -123,6 +124,7 @@ const DropDown = ({
     control: (base) => ({
       ...base,
       border: errors && touched ? "1px solid #F3223C" : "",
+
       "&:focus": {
         borderColor: "blue",
       },
@@ -154,7 +156,10 @@ const DropDown = ({
     : formattedOptions;
 
   return (
-    <div className='textBox-container' style={{ width: width }}>
+    <div
+      className='textBox-container'
+      style={{ width: width, cursor: disabled ? "not-allowed" : "pointer" }}
+    >
       <label htmlFor={label}>
         {label}
         {required && <span className='required'>*</span>}
@@ -177,6 +182,7 @@ const DropDown = ({
             ? data
             : formattedOptions
         }
+        isDisabled={disabled}
         required={required}
         styles={customStyles}
         components={{

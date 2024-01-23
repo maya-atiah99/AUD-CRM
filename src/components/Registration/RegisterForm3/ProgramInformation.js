@@ -1,12 +1,10 @@
 import React from "react";
-import SectionTitle from "../../Texts/SectionTitle";
 import SquareCheckBox from "../../Inputs/SquareCheckBox";
-import BulletedText from "../../Texts/BulletedText";
 import { useFormikContext } from "formik";
 import TextComponent from "../../Texts/TextComponent";
 import TextArea from "../../Inputs/TextArea";
 
-const ProgramInformation = () => {
+const ProgramInformation = ({isView}) => {
   const formik = useFormikContext();
 
   return (
@@ -41,6 +39,7 @@ const ProgramInformation = () => {
         }}
         errors={formik.errors?.HealthChalenges}
         touched={formik.errors?.HealthChalenges}
+        disabled={isView}
       />
       <TextArea
         label='Please Provide Details:'
@@ -52,6 +51,7 @@ const ProgramInformation = () => {
         }}
         errors={formik.errors?.HealthComments}
         touched={formik.touched?.HealthComments}
+        disabled={isView}
       />
     </div>
   );

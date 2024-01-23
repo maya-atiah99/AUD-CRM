@@ -10,6 +10,7 @@ const CustomizedTextBox = ({
   errors,
   touched,
   type,
+  disabled
 }) => {
   const [initialValue, setInitialValue] = useState(value);
 
@@ -50,6 +51,7 @@ const CustomizedTextBox = ({
         className='text-input'
         onChange={handleChange}
         value={initialValue}
+        disabled={disabled}
       />
       <img src='/images/questionIcon' alt="question"/>
     </div>

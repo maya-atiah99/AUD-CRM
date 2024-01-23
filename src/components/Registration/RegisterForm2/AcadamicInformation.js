@@ -6,7 +6,7 @@ import DocumentUpload from "../../Inputs/DocumentUpload";
 import TextArea from "../../Inputs/TextArea";
 import { useFormikContext } from "formik";
 
-const AcadamicInformation = () => {
+const AcadamicInformation = ({isView}) => {
   const formik = useFormikContext();
   const applicationStart = localStorage.getItem("applicationStart");
   const applingAS = parseInt(localStorage.getItem("applingAs"));
@@ -31,6 +31,7 @@ const AcadamicInformation = () => {
             }}
             errors={formik.errors?.CurrentUniversityCountry}
             touched={formik.touched?.CurrentUniversityCountry}
+            disabled={isView}
           />
 
           <DropDown
@@ -50,6 +51,7 @@ const AcadamicInformation = () => {
             }}
             errors={formik.errors?.SchoolCountry}
             touched={formik.touched?.SchoolCountry}
+            disabled={isView}
           />
           <DropDown
             width='100%'
@@ -70,6 +72,7 @@ const AcadamicInformation = () => {
             }}
             errors={formik.errors?.DiplomaType}
             touched={formik.touched?.DiplomaType}
+            disabled={isView}
           />
 
           {(applicationStart !== "2" && applingAS !== 5) && (
@@ -84,6 +87,7 @@ const AcadamicInformation = () => {
               }}
               errors={formik.errors?.GraduationYear}
               touched={formik.touched?.GraduationYear}
+              disabled={isView}
             />
           )}
         </div>
@@ -103,6 +107,7 @@ const AcadamicInformation = () => {
             }}
             errors={formik.errors?.CurrentUniversityCountry2}
             touched={formik.touched?.CurrentUniversityCountry2}
+            disabled={isView}
           />
 
           <DropDown
@@ -118,6 +123,7 @@ const AcadamicInformation = () => {
             }}
             errors={formik.errors?.SchoolCountry2}
             touched={formik.touched?.SchoolCountry2}
+            disabled={isView}
           />
         </div>
       ) : (
@@ -137,6 +143,7 @@ const AcadamicInformation = () => {
             }}
             errors={formik.errors?.ListAdvancedCources}
             touched={formik.touched?.ListAdvancedCources}
+            disabled={isView}
           />
         )}
         <DocumentUpload
@@ -153,6 +160,7 @@ const AcadamicInformation = () => {
           }}
           errors={formik.errors?.DiplomaFile}
           touched={formik.touched?.DiplomaFile}
+          disabled={isView}
         />
         {/* <DocumentUpload
           text='Upload The Academic Document'
@@ -177,6 +185,7 @@ const AcadamicInformation = () => {
           }}
           errors={formik.errors?.ActivitiesNotEnrolled}
           touched={formik.touched?.ActivitiesNotEnrolled}
+          disabled={isView}
         />
       )}
     </div>

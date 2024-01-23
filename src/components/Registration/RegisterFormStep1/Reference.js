@@ -5,7 +5,7 @@ import { useFormikContext } from "formik";
 import DropDown from "../../Inputs/DropDown";
 import SquareCheckBox from "../../Inputs/SquareCheckBox";
 
-const Reference = () => {
+const Reference = ({ isView }) => {
   const formik = useFormikContext();
 
   return (
@@ -23,6 +23,7 @@ const Reference = () => {
           }}
           errors={formik.errors?.ReferanceTitle}
           touched={formik.touched?.ReferanceTitle}
+          disabled={isView}
         />
         <TextBox
           width='100%'
@@ -34,6 +35,7 @@ const Reference = () => {
           }}
           errors={formik.errors?.ReferanceName}
           touched={formik.touched?.ReferanceName}
+          disabled={isView}
         />
         <TextBox
           width='100%'
@@ -45,6 +47,7 @@ const Reference = () => {
           }}
           errors={formik.errors?.ReferanceEmail}
           touched={formik.touched?.ReferanceEmail}
+          disabled={isView}
         />
         <TextBox
           width='100%'
@@ -56,6 +59,7 @@ const Reference = () => {
           }}
           errors={formik.errors?.KnowTheReferance}
           touched={formik.touched?.KnowTheReferance}
+          disabled={isView}
         />
       </div>
       <SquareCheckBox
@@ -67,6 +71,7 @@ const Reference = () => {
         }}
         errors={formik.errors?.SendTheLetterRecomendation}
         touched={formik.errors?.SendTheLetterRecomendation}
+        disabled={isView}
       />
       <SquareCheckBox
         text='I have read and understand the above information'
@@ -77,6 +82,7 @@ const Reference = () => {
         }}
         errors={formik.errors?.ReadAndUnderstand}
         touched={formik.errors?.ReadAndUnderstand}
+        disabled={isView}
       />
     </div>
   );

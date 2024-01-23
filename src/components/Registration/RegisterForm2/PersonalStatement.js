@@ -3,7 +3,7 @@ import SectionTitle from "../../Texts/SectionTitle";
 import TextArea from "../../Inputs/TextArea";
 import { useFormikContext } from "formik";
 
-const PersonalStatement = () => {
+const PersonalStatement = ({isView}) => {
   const formik = useFormikContext();
 
   return (
@@ -21,6 +21,7 @@ const PersonalStatement = () => {
         }}
         errors={formik.errors?.PersonalStatement}
         touched={formik.touched?.PersonalStatement}
+        disabled={isView}
       />
     </div>
   );

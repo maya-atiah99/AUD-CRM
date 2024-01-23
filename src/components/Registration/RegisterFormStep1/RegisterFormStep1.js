@@ -26,6 +26,7 @@ const RegisterFormStep1 = forwardRef(
       applicationStart,
       setApplyingAs,
       activeStep,
+      isView
     },
     ref
   ) => {
@@ -351,11 +352,11 @@ const RegisterFormStep1 = forwardRef(
           innerRef={ref}
           validationSchema={step1ValidationSchema}
         >
-          <PersonalInformation />
-          <MailingAddress />
-          <ProgramInformation fetchedData={fetchedData} />
-          <ParentInformation />
-          <Consent />
+          <PersonalInformation  isView={isView}/>
+          <MailingAddress  isView={isView} />
+          <ProgramInformation fetchedData={fetchedData}   isView={isView}/>
+          <ParentInformation   isView={isView}/>
+          <Consent   isView={isView}/>
         </FormikProvider>
       </div>
     );

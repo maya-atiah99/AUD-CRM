@@ -28,6 +28,7 @@ const RegisterFormStep2 = forwardRef(
       applicationStart,
       setApplyingAs,
       activeStep,
+      isView,
     },
     ref
   ) => {
@@ -278,13 +279,13 @@ const RegisterFormStep2 = forwardRef(
       <div className='form-subcontainer '>
         <FormikProvider value={formik} innerRef={ref}>
           <SubmitText />
-          <AcadamicInformation />
-          <AcadamicFiles />
-          <PersonalStatement />
+          <AcadamicInformation isView={isView} />
+          <AcadamicFiles isView={isView} />
+          <PersonalStatement isView={isView} />
           {applicationStart === "1" ? (
             <>
-              <WorkExperience />
-              <Reference />
+              <WorkExperience isView={isView} />
+              <Reference isView={isView} />
             </>
           ) : (
             ""

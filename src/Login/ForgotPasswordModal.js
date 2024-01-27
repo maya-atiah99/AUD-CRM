@@ -8,11 +8,13 @@ const ForgotPasswordModal = ({
   setIsForgotPassword,
   setShowOtpForgotPasswordModal,
   setMode,
+  setActionOrigin,
 }) => {
   const handleSelectViaMobile = () => {
     setMode("mobile");
     setShowOtpForgotPasswordModal(true);
     setIsForgotPassword(false);
+    setActionOrigin("Continue");
   };
 
   const handleSelectViaEmail = () => {
@@ -45,8 +47,6 @@ const ForgotPasswordModal = ({
         </div>
         {/* <TextBox label='Enter Mobile Number' /> */}
       </div>
-  
-
     </ModalComponent>
   );
 };

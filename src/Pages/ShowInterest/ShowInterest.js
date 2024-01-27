@@ -44,6 +44,7 @@ const ShowInterest = ({
   const [checkEmailSent, setCheckEmailSent] = useState(false);
   const [showOtpCodeModal, setShowOtpCodeMOdal] = useState(false);
   const navigate = useNavigate();
+
   const openVerifiedModal = (origin) => {
     setActionOrigin(origin);
     setshowVerifiedModal(true);
@@ -212,19 +213,21 @@ const ShowInterest = ({
     onSuccess: async (data) => {
       setShowOtpForgotPasswordModal(false);
       setShowOtpCodeMOdal(true);
-      setApplicantId(data?.data?.response?.applicantId)
+      setApplicantId(data?.data?.applicantId);
     },
     onError: (error) => {
       console.log("error: ", error);
       toast.error("Something went wrong");
     },
   });
+
   ///****Verify password  otp */
   const verifyForgotPasswordOtp = useMutation({
-    mutationFn: () => {
-      return axios.post(
+    mutationFn: async() => {
+      const url=`${applicantId}/${otpCode}`
+      return await axios.post(
         API_URL +
-          `/api/Applicant/VerifyForgotPasswordOTP/${applicantId}/${otpCode}`
+          `/api/Applicant/VerifyForgotPasswordOTP/${url}`
       );
     },
     onSuccess: async (data) => {
@@ -236,7 +239,7 @@ const ShowInterest = ({
       toast.error("Something went wrong");
     },
   });
-
+console.log('otpcodeeee',otpCode)
   //***handle send otp mobile or email  */
   const handleNextStepForgotPasswordOTP = () => {
     if (mode === "mobile") {
@@ -248,7 +251,7 @@ const ShowInterest = ({
 
   /*****handle verify otp for mobile in forgot password */
   const handleVerifyMobileOtpForPassword = () => {
-    verifyForgotPasswordOtp.mutate()
+    verifyForgotPasswordOtp.mutate();
   };
   console.log(email);
   console.log(phoneNumber);
@@ -326,6 +329,7 @@ const ShowInterest = ({
           setIsForgotPassword={setIsForgotPassword}
           setShowOtpForgotPasswordModal={setShowOtpForgotPasswordModal}
           setMode={setMode}
+          setActionOrigin={setActionOrigin}
         />
       )}
       {showOtpForgotPasswordModal && (
@@ -339,10 +343,11 @@ const ShowInterest = ({
       )}
       {showOtpCodeModal && (
         <OtpCodeModal
-        setOtpCode={setOtpCode}
+          setOtpCode={setOtpCode}
           setShowOtpCodeMOdal={setShowOtpCodeMOdal}
           setCheckEmailSent={setCheckEmailSent}
           handleVerifyMobileOtpForPassword={handleVerifyMobileOtpForPassword}
+          handleOnClickLinkPhone={handleResendPhone}
         />
       )}
       {checkEmailSent && (

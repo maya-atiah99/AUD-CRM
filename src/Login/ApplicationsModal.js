@@ -38,16 +38,51 @@ const ApplicationsModal = ({
         return "Unknown";
     }
   };
-  console.log(applications);
+
+  const stepsFunction = (startYourApplication, applyingAs, nextActiveStep) => {
+    if (startYourApplication === 2) {
+      switch (nextActiveStep) {
+        case 0:
+          return "Academic";
+        case 1:
+          return "Waiver & Releases";
+        case 2:
+          return "Declaration";
+        case 3:
+          return "Pay & Submit";
+      }
+    } else if (startYourApplication === 0 && applyingAs === 2) {
+      switch (nextActiveStep) {
+        case 0:
+          return "Academic";
+        case 1:
+          return "Declaration";
+        case 2:
+          return "Pay & Submit";
+      }
+    } else {
+      switch (nextActiveStep) {
+        case 0:
+          return "Academic";
+        case 1:
+          return "Waiver & Releases";
+        case 2:
+          return "Declaration";
+        case 3:
+          return "Pay & Submit";
+      }
+    }
+  };
+  console.log("applications", applications);
   const handleContinueApplication = (item) => {
     localStorage.setItem("applicationId", item.applicationId);
     localStorage.setItem("applicantId", item.applicantId);
     localStorage.setItem("applingAs", item.applyingAs);
     localStorage.setItem("applicationStart", item.startYourApplication);
     ///check if application status is viewed only
-    //maya change applicationStatus to what lama will send to you don't keep it 0 
-    if(item.applicationStatus === 0){
-      localStorage.setItem("applicationStatus",true)
+    //maya change applicationStatus to what lama will send to you don't keep it 0
+    if (item.applicationStatus === 4) {
+      localStorage.setItem("applicationStatus", true);
     }
     setApplicationStart(item.startYourApplication);
     setApplyingAs(item.applyingAs);
@@ -69,11 +104,11 @@ const ApplicationsModal = ({
         <table className='applications-table'>
           <thead>
             <tr>
-              <th>Name</th>
               <th>Application</th>
               <th>Program</th>
               <th>Plan to Join</th>
               <th>Status</th>
+              <th>Steps</th>
               <th>Createtd On</th>
               <th></th>
             </tr>
@@ -82,18 +117,24 @@ const ApplicationsModal = ({
             {applications?.data?.map((item) => {
               return (
                 <tr key={item.applicantId}>
-                  <td>{name}</td>
                   <td>{applicationStartFunction(item.startYourApplication)}</td>
 
                   <td style={{ maxWidth: "200px" }}>
                     {item.fieldOfInterest_Display}
                   </td>
                   <td>{item.termName}</td>
-                  <td>{applicationStatus(item.applicationStatus)}</td>
+                  <td></td>
+                  <td>
+                    {stepsFunction(
+                      item.startYourApplication,
+                      item.applyingAs,
+                      item.nextActiveStep
+                    )}
+                  </td>
                   <td>{item.createdOn.substring(0, 10)}</td>
 
                   <td>
-                    <RoundedButton
+                    <AUDButton
                       text='Continue'
                       handleOnClick={() => handleContinueApplication(item)}
                     />
@@ -103,7 +144,9 @@ const ApplicationsModal = ({
             })}
           </tbody>
         </table>
-        <div>
+        <div className="d-flex gap-1">
+        <AUDButton text='Re-Apply' />
+
           <AUDButton text='Start New Application' />
         </div>
       </div>

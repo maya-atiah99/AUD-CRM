@@ -47,7 +47,7 @@ const RegisterFormStep1 = forwardRef(
             ? new Date(fetchedData?.data?.dob).toISOString().split("T")[0]
             : "",
           Gender: "",
-          Mobile: fetchedData?.data?.applicant?.phoneNumber || "",
+          Mobile: fetchedData?.data?.applicant?.mobile || "",
           ApplicantTelephone: "",
 
           ApplingAs: fetchedData?.data?.applicant?.applyingAs || "",
@@ -116,8 +116,8 @@ const RegisterFormStep1 = forwardRef(
                 .split("T")[0]
             : "",
           Gender: fetchedData?.data?.stage1?.gender || "",
-          Mobile: fetchedData?.data?.stage1?.phoneNumber || "",
-          ApplicantTelephone: fetchedData?.data?.stage1?.mobile || "",
+          Mobile: fetchedData?.data?.stage1?.mobile || "",
+          ApplicantTelephone: fetchedData?.data?.stage1?.phoneNumber || "",
           ApplingAs: fetchedData?.data?.application?.applyingAs || "",
           SelectedTerm: fetchedData?.data?.application?.term || "",
           ApplicationStart:

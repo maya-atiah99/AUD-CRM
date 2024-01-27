@@ -8,6 +8,7 @@ const OtpCodeModal = ({
   setShowOtpCodeMOdal,
   setOtpCode,
   handleVerifyMobileOtpForPassword,
+  handleOnClickLinkPhone,
 }) => {
   const [otp, setOtp] = useState(new Array(4).fill(""));
 
@@ -64,8 +65,9 @@ const OtpCodeModal = ({
         </div>
         <LinkButton
           title='Resend'
-          text='Didn’t receive the code? '
+          text='Didn’t receive the code?'
           underlined={true}
+          handleOnClick={handleOnClickLinkPhone}
         />
         <AUDButton text='Enter' handleOnClick={handleEnter} />
       </div>

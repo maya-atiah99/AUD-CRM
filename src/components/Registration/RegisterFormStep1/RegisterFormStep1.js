@@ -26,7 +26,7 @@ const RegisterFormStep1 = forwardRef(
       applicationStart,
       setApplyingAs,
       activeStep,
-      isView
+      isView,
     },
     ref
   ) => {
@@ -44,7 +44,7 @@ const RegisterFormStep1 = forwardRef(
           Email: fetchedData?.data?.applicant?.email || "",
           Nationality: fetchedData?.data?.applicant?.nationalityId || "",
           DOB: fetchedData?.data?.dob
-            ? new Date(fetchedData?.data?.dob).toISOString().split("T")[0]
+            ? fetchedData?.data?.dob?.substring(0, 10)
             : "",
           Gender: "",
           Mobile: fetchedData?.data?.applicant?.mobile || "",
@@ -53,7 +53,8 @@ const RegisterFormStep1 = forwardRef(
           ApplingAs: fetchedData?.data?.applicant?.applyingAs || "",
           SelectedTerm: "",
           ApplicationStart:
-            fetchedData?.data?.application?.startYourApplication.toString() || "",
+            fetchedData?.data?.application?.startYourApplication.toString() ||
+            "",
           ProgramOfInterest: "",
           CurrentPlaceOfStudy: "",
           GuardianRelation1: "",
@@ -111,9 +112,7 @@ const RegisterFormStep1 = forwardRef(
           Email: fetchedData?.data?.stage1?.email || "",
           Nationality: fetchedData?.data?.stage1?.nationalityId || "",
           DOB: fetchedData?.data?.stage1?.dob
-            ? new Date(fetchedData?.data?.stage1?.dob)
-                ?.toISOString()
-                .split("T")[0]
+            ? fetchedData?.data?.stage1?.dob?.substring(0, 10)
             : "",
           Gender: fetchedData?.data?.stage1?.gender || "",
           Mobile: fetchedData?.data?.stage1?.mobile || "",
@@ -300,10 +299,7 @@ const RegisterFormStep1 = forwardRef(
         FieldsAppend.forEach((field) => {
           if (values[field] !== undefined || values[field] !== "") {
             if (field === "DOB") {
-              formData.append(
-                field,
-                new Date(values[field]).toISOString().split("T")[0]
-              );
+              formData.append(field, values[field].substring(0, 10));
             } else {
               formData.append(field, values[field]);
             }
@@ -352,11 +348,11 @@ const RegisterFormStep1 = forwardRef(
           innerRef={ref}
           validationSchema={step1ValidationSchema}
         >
-          <PersonalInformation  isView={isView}/>
-          <MailingAddress  isView={isView} />
-          <ProgramInformation fetchedData={fetchedData}   isView={isView}/>
-          <ParentInformation   isView={isView}/>
-          <Consent   isView={isView}/>
+          <PersonalInformation isView={isView} />
+          <MailingAddress isView={isView} />
+          <ProgramInformation fetchedData={fetchedData} isView={isView} />
+          <ParentInformation isView={isView} />
+          <Consent isView={isView} />
         </FormikProvider>
       </div>
     );

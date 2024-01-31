@@ -49,6 +49,8 @@ const RegisterPage = ({
   const { data: applicantStageTwo, refetch: refetchStageTwo } =
     useFetchApplicantStageTwo(applicantId, applicationId);
   console.log("stage2", applicantStageTwo);
+  console.log('application start',applicationStart)
+  
   const generateSteps = (applicationStart, applingAs) => {
     if (applicationStart === "2") {
       return [
@@ -363,6 +365,7 @@ const RegisterPage = ({
   const handleClickPreviousButton = () => {
     if (activeStep === 0) {
       setShowInterest(true);
+      navigate("/");
     } else {
       setActiveStep(activeStep - 1);
       refetchStageTwo();
@@ -373,7 +376,7 @@ const RegisterPage = ({
     <div>
       <UpperHeader />
       <div className='registerPage-container'>
-        <div className='back-button'>
+        <div >
           <AUDButton
             text={steps[activeStep]?.previousStep}
             icon={
@@ -381,7 +384,7 @@ const RegisterPage = ({
                 ? "/images/backarrowForbutton.svg"
                 : "/images/homeicon.svg"
             }
-            to={activeStep === 0 ? "/" : null}
+            // to={activeStep === 0 ? "/" : null}
             handleOnClick={() => handleClickPreviousButton()}
           />
         </div>

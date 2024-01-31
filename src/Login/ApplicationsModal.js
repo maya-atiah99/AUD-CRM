@@ -11,9 +11,7 @@ const ApplicationsModal = ({
   setApplicationStart,
   setApplyingAs,
 }) => {
-  const [name, setName] = useState(localStorage.getItem("fullName"));
   const { data: applications } = useFetchApplicationsById(applicantId);
-  const [manageShowInterest, setManageshowInterest] = useState(false);
   const navigate = useNavigate();
 
   const applicationStartFunction = (applicationType) => {
@@ -43,18 +41,20 @@ const ApplicationsModal = ({
     if (startYourApplication === 2) {
       switch (nextActiveStep) {
         case 0:
-          return "Academic";
+          return "Personal Info";
         case 1:
-          return "Waiver & Releases";
+          return "Academic";
         case 2:
-          return "Declaration";
+          return "Waiver & Releases";
         case 3:
+          return "Declaration";
+        case 4:
           return "Pay & Submit";
       }
     } else if (startYourApplication === 0 && applyingAs === 2) {
       switch (nextActiveStep) {
         case 0:
-          return "Academic";
+          return "Personal Info";
         case 1:
           return "Declaration";
         case 2:
@@ -63,9 +63,9 @@ const ApplicationsModal = ({
     } else {
       switch (nextActiveStep) {
         case 0:
-          return "Academic";
+          return "Personal Info";
         case 1:
-          return "Waiver & Releases";
+          return "Academic";
         case 2:
           return "Declaration";
         case 3:
@@ -79,14 +79,16 @@ const ApplicationsModal = ({
     localStorage.setItem("applicantId", item.applicantId);
     localStorage.setItem("applingAs", item.applyingAs);
     localStorage.setItem("applicationStart", item.startYourApplication);
-    ///check if application status is viewed only
-    //maya change applicationStatus to what lama will send to you don't keep it 0
+
     if (item.applicationStatus === 4) {
       localStorage.setItem("applicationStatus", true);
     }
+
     setApplicationStart(item.startYourApplication);
     setApplyingAs(item.applyingAs);
+
     localStorage.setItem("message", item.nextActiveStep);
+
     navigate("/register", {
       state: {
         activeStep: localStorage.getItem("message"),
@@ -94,6 +96,7 @@ const ApplicationsModal = ({
       },
     });
   };
+
   return (
     <ModalComponent
       // width='40rem'
@@ -135,7 +138,7 @@ const ApplicationsModal = ({
 
                   <td>
                     <AUDButton
-                      text='Continue'
+                      text={item.applicationStatus === 4 ? "View" : "Continue"}
                       handleOnClick={() => handleContinueApplication(item)}
                     />
                   </td>
@@ -144,8 +147,8 @@ const ApplicationsModal = ({
             })}
           </tbody>
         </table>
-        <div className="d-flex gap-1">
-        <AUDButton text='Re-Apply' />
+        <div className='d-flex gap-1'>
+          <AUDButton text='Re-Apply' />
 
           <AUDButton text='Start New Application' />
         </div>

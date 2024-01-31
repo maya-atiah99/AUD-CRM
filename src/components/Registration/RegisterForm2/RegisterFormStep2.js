@@ -47,9 +47,7 @@ const RegisterFormStep2 = forwardRef(
         SchoolCountry: applicantStageThree?.data?.stage2?.schoolCountry || "",
         DiplomaType: applicantStageThree?.data?.stage2?.diplomaType || "",
         GraduationYear: applicantStageThree?.data?.stage2?.graduationYear
-          ? new Date(applicantStageThree?.data?.stage2?.graduationYear)
-              .toISOString()
-              .split("T")[0]
+          ? applicantStageThree?.data?.stage2?.graduationYear?.substring(0,10)
           : "",
         ListAdvancedCources:
           applicantStageThree?.data?.stage2?.listAdvancedCources || "",

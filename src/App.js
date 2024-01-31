@@ -38,7 +38,7 @@ function App() {
               applingAs={applingAs}
               setApplyingAs={setApplyingAs}
               applicationId={applicationId}
-              setApplicationId={setApplicationStart}
+              setApplicationId={setApplicationId}
             />
           }
         />
@@ -54,7 +54,7 @@ function App() {
               applingAs={applingAs}
               setApplyingAs={setApplyingAs}
               applicationId={applicationId}
-              setApplicationId={setApplicationStart}
+              setApplicationId={setApplicationId}
             />
           }
         />

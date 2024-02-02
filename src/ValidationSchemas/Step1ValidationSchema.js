@@ -1,7 +1,7 @@
 import * as Yup from "yup";
 
 const getValidationSchemaStep1 = (applicationStart, applingAs) => {
-  console.log('applicatisaaatart',applicationStart)
+  console.log("applicatisaaatart", applicationStart);
   const baseSchema = {
     isSaved: Yup.boolean(),
     TitleId: Yup.string().notRequired("TitleId is required"),
@@ -113,7 +113,7 @@ const getValidationSchemaStep1 = (applicationStart, applingAs) => {
           .required("AuthorizeToReleaseRecord is required")
           .oneOf([true], "This field is required"),
       otherwise: (schema) => schema.notRequired(),
-    }), 
+    }),
     Authorize_GuardianName: Yup.string().when("isSaved", {
       is: (isSaved) => isSaved,
       then: (schema) => schema.required("Authorize_GuardianName is required"),
@@ -153,7 +153,7 @@ const getValidationSchemaStep1 = (applicationStart, applingAs) => {
       otherwise: (schema) => schema.notRequired(),
     }),
     Pobox: Yup.string().max(50),
-    ZipCode: Yup.string().max(50),
+    ZipCode: Yup.string().max(5).min(5),
     LegacyApplicant: Yup.boolean(),
     LegacyFatherName: Yup.string().max(10),
     LegacyFatherProgram: Yup.string(),

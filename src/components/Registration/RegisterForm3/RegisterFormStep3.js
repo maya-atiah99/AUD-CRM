@@ -49,8 +49,10 @@ const RegisterFormStep3 = forwardRef(
         HealthComments: applicantStageFour?.data?.stage2?.healthComments || "",
         HealthChalenges:
           applicantStageFour?.data?.stage2?.healthChalenges || false,
-        AcceptResponsibilitiesCheck: false,
-        RecordsCheck: false,
+        AcceptResponsibilitiesCheck:
+          applicantStageFour?.data?.stage2?.acceptResponsibilitiesCheck ||
+          false,
+        RecordsCheck: applicantStageFour?.data?.stage2?.recordsCheck || false,
       };
       setInit(initialvalues);
     }, [applicantStageFour]);
@@ -83,6 +85,12 @@ const RegisterFormStep3 = forwardRef(
         formData.append("NextActiveStep", formik.values.NextActiveStep);
         formData.append("HealthChalenges", values.HealthChalenges);
         formData.append("HealthComments", values.HealthComments);
+        formData.append(
+          "AcceptResponsibilitiesCheck",
+          values.AcceptResponsibilitiesCheck
+        );
+        formData.append("RecordsCheck", values.RecordsCheck);
+
         formData.append(
           "ProgramInformationCheck",
           values.ProgramInformationCheck

@@ -3,13 +3,12 @@ import TextComponent from "../../Texts/TextComponent";
 import SectionTitle from "../../Texts/SectionTitle";
 import BulletedText from "../../Texts/BulletedText";
 import SquareCheckBox from "../../Inputs/SquareCheckBox";
-import LinkButton from "../../Buttons/LinkButton";
 import TextBox from "../../Inputs/TextBox";
 import { useFormikContext } from "formik";
 import PhoneNumber from "../../Inputs/PhoneNumber";
 import DropDown from "../../Inputs/DropDown";
 
-const Consent = () => {
+const Consent = ({ isView }) => {
   const formik = useFormikContext();
 
   return (
@@ -20,12 +19,14 @@ const Consent = () => {
         size='18px'
         font='600'
         classfont='consent-text'
+        disabled={isView}
       />
       <TextComponent
         text='Any other education record is classified as non-directory information and can not be disclosed to any party without the student’s '
         size='18px'
         classfont='consent-text'
         font='600'
+        disabled={isView}
       />
       <div className=' bulleted-consent-grid'>
         <BulletedText
@@ -61,7 +62,9 @@ const Consent = () => {
           }}
           errors={formik.errors?.AuthorizeToReleaseRecord}
           touched={formik.errors?.AuthorizeToReleaseRecord}
+          disabled={isView}
         />
+
         {/* <LinkButton title='I Authorize ' /> */}
         <TextComponent
           authorize='I Authorize'
@@ -71,6 +74,14 @@ const Consent = () => {
           text='to release my education records (e.g., grades, GPA, ID, schedule, statement of fees) to the following:'
         />
       </div>
+      {formik.errors?.AuthorizeToReleaseRecord &&
+      formik.touched?.AuthorizeToReleaseRecord ? (
+        <span className='span-required'>
+          Authorize To Release Record is required
+        </span>
+      ) : (
+        ""
+      )}
       <div className='grid-consent1-cont'>
         <TextBox
           width='100%'
@@ -83,6 +94,7 @@ const Consent = () => {
           }}
           errors={formik.errors["Authorize_GuardianName"]}
           touched={formik.touched["Authorize_GuardianName"]}
+          disabled={isView}
         />
 
         <DropDown
@@ -97,6 +109,7 @@ const Consent = () => {
           }}
           errors={formik.errors?.Authorize_GuardianRelation}
           touched={formik.touched?.Authorize_GuardianRelation}
+          disabled={isView}
         />
         <TextBox
           width='100%'
@@ -109,8 +122,9 @@ const Consent = () => {
           }}
           errors={formik.errors["Authorize_Address"]}
           touched={formik.touched["Authorize_Address"]}
+          disabled={isView}
         />
-     
+
         <PhoneNumber
           width='100%'
           label='Telephone'
@@ -122,6 +136,7 @@ const Consent = () => {
           }}
           errors={formik.errors["Authorize_Telephone"]}
           touched={formik.touched["Authorize_Telephone"]}
+          disabled={isView}
         />
       </div>
     </div>

@@ -28,6 +28,7 @@ const RegisterFormStep2 = forwardRef(
       applicationStart,
       setApplyingAs,
       activeStep,
+      isView,
     },
     ref
   ) => {
@@ -46,9 +47,7 @@ const RegisterFormStep2 = forwardRef(
         SchoolCountry: applicantStageThree?.data?.stage2?.schoolCountry || "",
         DiplomaType: applicantStageThree?.data?.stage2?.diplomaType || "",
         GraduationYear: applicantStageThree?.data?.stage2?.graduationYear
-          ? new Date(applicantStageThree?.data?.stage2?.graduationYear)
-              .toISOString()
-              .split("T")[0]
+          ? applicantStageThree?.data?.stage2?.graduationYear?.substring(0,10)
           : "",
         ListAdvancedCources:
           applicantStageThree?.data?.stage2?.listAdvancedCources || "",
@@ -186,33 +185,27 @@ const RegisterFormStep2 = forwardRef(
           (field) => !!values[field]
         );
         // Handle CV
-        if (values.CV && "documentContent" in values.CV) {
-          const CVContent = values.CV.documentContent;
-          const blob = new Blob([atob(CVContent)], {
-            type: values.CV.contentType,
-          });
-          const file = new File([blob], values.CV.fileName, {
-            type: values.CV.contentType,
-          });
-          formData.append("CV", file);
-        } else {
+
+        if (!values.CV.fileName) {
           formData.append("CV", values.CV);
         }
         // Handle DiplomaFile
-        if (values.DiplomaFile && "documentContent" in values.DiplomaFile) {
-          const diplomaFileContent = values.DiplomaFile.documentContent;
-          const blob = new Blob([atob(diplomaFileContent)], {
-            type: values.DiplomaFile.contentType,
-          });
-          const file = new File([blob], values.DiplomaFile.fileName, {
-            type: values.DiplomaFile.contentType,
-          });
+        // if (values.DiplomaFile && "documentContent" in values.DiplomaFile) {
+        //   const diplomaFileContent = values.DiplomaFile.documentContent;
+        //   const blob = new Blob([atob(diplomaFileContent)], {
+        //     type: values.DiplomaFile.contentType,
+        //   });
+        //   const file = new File([blob], values.DiplomaFile.fileName, {
+        //     type: values.DiplomaFile.contentType,
+        //   });
 
-          formData.append("DiplomaFile", file);
-        } else {
+        //   formData.append("DiplomaFile", file);
+        // } else {
+        //   formData.append("DiplomaFile", values.DiplomaFile);
+        // }
+        if (!values?.DiplomaFile?.fileName) {
           formData.append("DiplomaFile", values.DiplomaFile);
         }
-
         /*********************Appliacnt files post */
         if (
           values.applicantFiles?.length > 0 &&
@@ -233,33 +226,12 @@ const RegisterFormStep2 = forwardRef(
               file.testType
             );
 
-            if (
-              file.academicDocument &&
-              "documentContent" in file.academicDocument
-            ) {
-              const academicFileContent = file.academicDocument.documentContent;
-              const blob = new Blob([atob(academicFileContent)], {
-                type: file.academicDocument.contentType,
-              });
-              const academicFile = new File(
-                [blob],
-                file.academicDocument.fileName,
-                {
-                  type: file.academicDocument.contentType,
-                }
-              );
-
-              formDataFiles.append(
-                `applicantFiles[${index}].academicDocument`,
-                academicFile
-              );
-            } else {
+            if (!file.academicDocument.fileName) {
               formDataFiles.append(
                 `applicantFiles[${index}].academicDocument`,
                 file.academicDocument
               );
             }
-
             formDataFiles.append(
               `applicantFiles[${index}].dateTaken`,
               file.dateTaken
@@ -297,21 +269,21 @@ const RegisterFormStep2 = forwardRef(
       setApplicationStart(localStorage.getItem("applicationStart"));
     }, []);
     console.log(
-      "values.applicantFiles.lengthvalues.applicantFiles.length",
-      formik.values?.applicantFiles?.length
+      "values?.DiplomaFile?.fileName",
+      formik.values?.DiplomaFile?.fileName
     );
-    console.log("formik", formik);
+    console.log("formik stage three", formik);
     return (
       <div className='form-subcontainer '>
         <FormikProvider value={formik} innerRef={ref}>
           <SubmitText />
-          <AcadamicInformation />
-          <AcadamicFiles />
-          <PersonalStatement />
+          <AcadamicInformation isView={isView} />
+          <AcadamicFiles isView={isView} />
+          <PersonalStatement isView={isView} />
           {applicationStart === "1" ? (
             <>
-              <WorkExperience />
-              <Reference />
+              <WorkExperience isView={isView} />
+              <Reference isView={isView} />
             </>
           ) : (
             ""

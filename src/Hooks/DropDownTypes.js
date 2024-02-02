@@ -20,6 +20,15 @@ const fetchDropDownFromPArent = async (typeId, parentId) => {
   }
 };
 
+const fetchFieldOfInterestByApplicationStart = async (applicationStart) => {
+  if (applicationStart) {
+    return await axios.get(
+      API_URL + `/api/Setting/GetFieldOfInterestByApplicationStart/${applicationStart}`
+    );
+  }
+};
+
+/****fetch */
 export const useFetchDropDownTypes = (typeId) => {
   return useQuery({
     queryKey: ["Types", typeId],
@@ -40,6 +49,14 @@ export const useFetchDropDownFromParent = (typeId, parentId) => {
   return useQuery({
     queryKey: ["Types", typeId, parentId],
     queryFn: () => fetchDropDownFromPArent(typeId, parentId),
+    enabled: true,
+  });
+};
+
+export const useFetchFieldOfInterestByApplicationStart = (applicationStart) => {
+  return useQuery({
+    queryKey: ["field", applicationStart],
+    queryFn: () => fetchFieldOfInterestByApplicationStart(applicationStart),
     enabled: true,
   });
 };

@@ -113,7 +113,7 @@ const getValidationSchemaStep1 = (applicationStart, applingAs) => {
           .required("AuthorizeToReleaseRecord is required")
           .oneOf([true], "This field is required"),
       otherwise: (schema) => schema.notRequired(),
-    }),
+    }), 
     Authorize_GuardianName: Yup.string().when("isSaved", {
       is: (isSaved) => isSaved,
       then: (schema) => schema.required("Authorize_GuardianName is required"),

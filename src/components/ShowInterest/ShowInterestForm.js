@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import Dropdown from "../Inputs/DropDown";
 import TextBox from "../Inputs/TextBox";
 import PhoneNumber from "../Inputs/PhoneNumber";
-import LinkButton from "../Buttons/LinkButton";
 import AUDButton from "../Buttons/AUDButton";
 import { Formik, Form } from "formik";
 import showInterestValidationSchema from "../../ValidationSchemas/ShowInterestValidationSchema";
@@ -27,6 +26,7 @@ const ShowInterestForm = ({
   const [submissionSuccess, setSubmissionSuccess] = useState(false);
 
   const [errorMessage, setErrorMessage] = useState("");
+  const [errorPhoneMessage, setErrorPhoneMessage] = useState("");
   const [clickedButton, setClickedButton] = useState(null);
   const [init, setInit] = useState({
     firstName: "",
@@ -61,7 +61,12 @@ const ShowInterestForm = ({
       },
       onError: (error, data) => {
         console.error("An error occurred:", error?.response?.data);
-        setErrorMessage(error?.response?.data);
+        const errorMessage = error?.response?.data.split(" ");
+        if (errorMessage[0] === "Phone") {
+          setErrorPhoneMessage(error?.response?.data);
+        } else {
+          setErrorMessage(error?.response?.data);
+        }
         setFieldError(error?.response?.data);
         setSubmissionSuccess(false);
       },
@@ -84,6 +89,9 @@ const ShowInterestForm = ({
   };
   const handleEmailChange = () => {
     setErrorMessage("");
+  };
+  const handleMobileChange = () => {
+    setErrorPhoneMessage("");
   };
   return (
     <Formik
@@ -247,19 +255,46 @@ const ShowInterestForm = ({
                 />
               </div>
               <div className='grid-container2 '>
-                <PhoneNumber
-                  styleType='formField'
-                  width='100%'
-                  label='Mobile'
-                  required={true}
-                  name='mobile'
-                  value={values.mobile}
-                  onChange={(name, value) => {
-                    setFieldValue(name, value);
-                  }}
-                  errors={errors.mobile}
-                  touched={touched.mobile}
-                />
+                <div>
+                  <PhoneNumber
+                    styleType='formField'
+                    width='100%'
+                    label='Mobile'
+                    required={true}
+                    name='mobile'
+                    value={values.mobile}
+                    onChange={(name, value) => {
+                      setFieldValue(name, value);
+                      handleMobileChange();
+                    }}
+                    errors={errors.mobile}
+                    touched={touched.mobile}
+                  />
+                  {errorPhoneMessage ? (
+                    <div>
+                      <div className='error-container d-flex gap-1 align-items-start'>
+                        <img src='/images/errorSign.svg' alt='error' />
+                        <div>
+                          <p>
+                            There is already a registration under this Phone
+                            Number. To Continue your application please{" "}
+                            <span
+                              onClick={() => setShowLoginModal(true)}
+                              style={{
+                                textDecoration: "underline",
+                                cursor: "pointer",
+                              }}
+                            >
+                              Login
+                            </span>
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+                  ) : (
+                    ""
+                  )}
+                </div>
               </div>
 
               <div className='grid-container2 '>
@@ -313,7 +348,7 @@ const ShowInterestForm = ({
                   width='100%'
                   label='Field Of Interest'
                   required={true}
-                  type='8'
+                  applicatioStart={values.applicationStart}
                   name='fieldOfInterest'
                   value={values.fieldOfInterest}
                   onChange={(name, value) => {

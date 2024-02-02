@@ -6,7 +6,7 @@ import TextBox from "../../Inputs/TextBox";
 import { useFormikContext } from "formik";
 import { useFetchApplyingAs } from "../../../Hooks/Appplicant";
 
-const ProgramInformation = ({ fetchedData }) => {
+const ProgramInformation = ({ fetchedData, isView }) => {
   const formik = useFormikContext();
   const [applyingAsOptions, setApplyingAsOptions] = useState([]);
   const [applicationStartValue, setApplicationStartValue] = useState("");
@@ -51,6 +51,8 @@ const ProgramInformation = ({ fetchedData }) => {
   const onRadioChange = (name, value) => {
     formik.setFieldValue(name, value);
   };
+
+  console.log('formikk xdccd',formik?.values)
   return (
     <div className='form-subcontainers'>
       <SectionTitle title='PROGRAM INFORMATION' dotted={true} />
@@ -61,6 +63,7 @@ const ProgramInformation = ({ fetchedData }) => {
         label='Start Your Application'
         required={true}
         onRadioChange={onRadioChange}
+        disabled={isView}
       />
       {formik.errors?.ApplicationStart && formik.touched?.ApplicationStart ? (
         <span className='span-required'>
@@ -77,6 +80,7 @@ const ProgramInformation = ({ fetchedData }) => {
         label='Applying As'
         required={true}
         onRadioChange={onRadioChange}
+        disabled={isView}
       />
       {formik.errors?.ApplingAs && formik.touched?.ApplingAs ? (
         <span className='span-required'>Applying as is required</span>
@@ -96,6 +100,7 @@ const ProgramInformation = ({ fetchedData }) => {
           }}
           errors={formik.errors?.ProgramOfInterest}
           touched={formik.touched?.ProgramOfInterest}
+          disabled={isView}
         />
         <DropDown
           width='100%'
@@ -109,6 +114,7 @@ const ProgramInformation = ({ fetchedData }) => {
           }}
           errors={formik.errors?.SelectedTerm}
           touched={formik.touched?.SelectedTerm}
+          disabled={isView}
         />
 
         {(formik.values.ApplicationStart === "0" &&
@@ -133,6 +139,7 @@ const ProgramInformation = ({ fetchedData }) => {
             }}
             errors={formik.errors?.CurrentPlaceOfStudy}
             touched={formik.touched?.CurrentPlaceOfStudy}
+            disabled={isView}
           />
         ) : null}
       </div>
@@ -152,6 +159,7 @@ const ProgramInformation = ({ fetchedData }) => {
               }}
               errors={formik.errors?.Visiting_LevelOfStudy}
               touched={formik.touched?.Visiting_LevelOfStudy}
+              disabled={isView}
             />
             <DropDown
               width='100%'
@@ -165,6 +173,7 @@ const ProgramInformation = ({ fetchedData }) => {
               }}
               errors={formik.errors?.StudentVisa}
               touched={formik.touched?.StudentVisa}
+              disabled={isView}
             />
             <DropDown
               width='100%'
@@ -179,6 +188,7 @@ const ProgramInformation = ({ fetchedData }) => {
               }}
               errors={formik.errors?.UAE_GCC_Resident}
               touched={formik.touched?.UAE_GCC_Resident}
+              disabled={isView}
             />
             <TextBox
               width='100%'
@@ -191,6 +201,7 @@ const ProgramInformation = ({ fetchedData }) => {
               }}
               errors={formik.errors?.SemestersAtAUD}
               touched={formik.touched?.SemestersAtAUD}
+              disabled={isView}
             />
             <div className='moreInfo-grid'>
               <DropDown
@@ -205,10 +216,17 @@ const ProgramInformation = ({ fetchedData }) => {
                 }}
                 errors={formik.errors?.OnHouseCampus}
                 touched={formik.touched?.OnHouseCampus}
+                disabled={isView}
               />
               <p>
                 Find out more about the{" "}
-                <a href='https://www.aud.edu/on-aud-campus/accommodation/' target="_blank">Certificate in Middle Eastern Studies</a>
+                <a
+                  href='https://www.aud.edu/on-aud-campus/accommodation/'
+                  target='_blank'
+                  rel="noreferrer"
+                >
+                  Certificate in Middle Eastern Studies
+                </a>
               </p>
             </div>
             <div className='moreInfo-grid'>
@@ -224,10 +242,15 @@ const ProgramInformation = ({ fetchedData }) => {
                 }}
                 errors={formik.errors?.MiddleEasternStudies}
                 touched={formik.touched?.MiddleEasternStudies}
+                disabled={isView}
               />
               <p>
                 Find out more about the{" "}
-                <a href='https://www.aud.edu/aud-school/school-of-arts-sciences/departments/department-of-international-and-middle-eastern-studies/department-programs/certificate-in-middle-eastern-studies/' target="_blank">
+                <a
+                  href='https://www.aud.edu/aud-school/school-of-arts-sciences/departments/department-of-international-and-middle-eastern-studies/department-programs/certificate-in-middle-eastern-studies/'
+                  target='_blank'
+                  rel="noreferrer"
+                >
                   Student Accomodation
                 </a>
               </p>

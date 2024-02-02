@@ -1,9 +1,10 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import Select from "react-select";
 import {
   useFetchAcademicTerms,
   useFetchDropDownFromParent,
   useFetchDropDownTypes,
+  useFetchFieldOfInterestByApplicationStart,
 } from "../../Hooks/DropDownTypes";
 
 const DropDown = ({
@@ -22,6 +23,8 @@ const DropDown = ({
   parent,
   data,
   bolean,
+  applicatioStart,
+  disabled,
 }) => {
   const { data: options, refetch: refetchTypes } = useFetchDropDownTypes(
     type || null
@@ -30,6 +33,9 @@ const DropDown = ({
     useFetchAcademicTerms();
   const { data: parentOptions, refetch: refetchParentOptions } =
     useFetchDropDownFromParent(type, parent);
+
+  const { data: fieldOfInterest, refetch: refetchFieldOfInterest } =
+    useFetchFieldOfInterestByApplicationStart(applicatioStart);
 
   const currentYear = new Date().getFullYear();
   const yearOptions = Array.from(
@@ -86,9 +92,15 @@ const DropDown = ({
     { value: true, label: "Yes" },
     { value: false, label: "No" },
   ];
+  const formattedFieldOfInterestOptions = fieldOfInterest?.data
+    ? fieldOfInterest?.data.map((option) => ({
+        value: option.value,
+        label: option.text,
+      }))
+    : [];
+
   const handleOnChange = (name, selectedOption) => {
     onChange(name, selectedOption.value);
-
   };
   useEffect(() => {
     if (type) {
@@ -112,6 +124,7 @@ const DropDown = ({
     control: (base) => ({
       ...base,
       border: errors && touched ? "1px solid #F3223C" : "",
+
       "&:focus": {
         borderColor: "blue",
       },
@@ -126,7 +139,9 @@ const DropDown = ({
     }),
   };
 
-  const optionsSelected = bolean
+  const optionsSelected = fieldOfInterest
+    ? formattedFieldOfInterestOptions
+    : bolean
     ? boleanOptions
     : isAcademic
     ? formattedAcademicOptions
@@ -141,14 +156,19 @@ const DropDown = ({
     : formattedOptions;
 
   return (
-    <div className='textBox-container' style={{ width: width }}>
+    <div
+      className='textBox-container'
+      style={{ width: width, cursor: disabled ? "not-allowed" : "pointer" }}
+    >
       <label htmlFor={label}>
         {label}
         {required && <span className='required'>*</span>}
       </label>
       <Select
         options={
-          bolean
+          fieldOfInterest
+            ? formattedFieldOfInterestOptions
+            : bolean
             ? boleanOptions
             : isAcademic
             ? formattedAcademicOptions
@@ -162,6 +182,7 @@ const DropDown = ({
             ? data
             : formattedOptions
         }
+        isDisabled={disabled}
         required={required}
         styles={customStyles}
         components={{

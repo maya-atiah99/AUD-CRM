@@ -15,6 +15,11 @@ const Stepper = ({
     }
   };
 
+
+// .stepper .step.active ~ .activeLine {
+//     width: 100px;
+//     opacity: 1;
+// }
   return (
     <div className='stepper'>
       {steps.map((step, index) => {
@@ -49,14 +54,17 @@ const Stepper = ({
                 />
               </div>
             )}
-
-            <TextComponent
-              text={step.title}
-              font='600'
-              color='white'
-              classfont='stepper-font-number-title'
-              opacity={index === activeStep ? "1" : "0.4"}
-            />
+            <div
+              className={index === activeStep ? "show-title" : "hide-titile"}
+            >
+              <TextComponent
+                text={step.title}
+                font='600'
+                color='white'
+                classfont='stepper-font-number-title'
+                opacity={index === activeStep ? "1" : "0.4"}
+              />
+            </div>
             <div className={!lastStep ? "activeLine" : ""}></div>
             {index !== steps.length - 1 && index !== activeStep && (
               <div className='inActiveLine'></div>

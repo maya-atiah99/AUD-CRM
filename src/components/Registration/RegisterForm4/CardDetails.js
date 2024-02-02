@@ -1,11 +1,11 @@
-import React, { useState } from "react";
+import React from "react";
 import TextBox from "../../Inputs/TextBox";
 import CardTypeTab from "../../Buttons/CardTypeTab";
 import AUDButton from "../../Buttons/AUDButton";
 import DropDown from "../../Inputs/DropDown";
 import { useFormikContext } from "formik";
 
-const CardDetails = () => {
+const CardDetails = ({ isView }) => {
   const formik = useFormikContext();
   const cardType = formik.values.paymentDetails.cardDetails.CardType;
 
@@ -47,7 +47,10 @@ const CardDetails = () => {
           formik.setFieldValue(name, value);
         }}
         errors={formik.errors?.paymentDetails?.cardDetails?.EncryptedCardNumber}
-        touched={formik.touched?.paymentDetails?.cardDetails?.EncryptedCardNumber}
+        touched={
+          formik.touched?.paymentDetails?.cardDetails?.EncryptedCardNumber
+        }
+        disabled={isView}
       />
       <div className='d-flex gap-1'>
         <DropDown
@@ -61,6 +64,7 @@ const CardDetails = () => {
           }}
           errors={formik.errors?.paymentDetails?.cardDetails?.ExpirationYear}
           touched={formik.touched?.paymentDetails?.cardDetails?.ExpirationYear}
+          disabled={isView}
         />
         <DropDown
           label='Expiration Month'
@@ -73,6 +77,7 @@ const CardDetails = () => {
           }}
           errors={formik.errors?.paymentDetails?.cardDetails?.ExpirationMonth}
           touched={formik.touched?.paymentDetails?.cardDetails?.ExpirationMonth}
+          disabled={isView}
         />
         <TextBox
           label='CVV'
@@ -84,14 +89,24 @@ const CardDetails = () => {
           }}
           errors={formik.errors?.paymentDetails?.cardDetails?.CVV}
           touched={formik.touched?.paymentDetails?.cardDetails?.CVV}
+          disabled={isView}
         />
       </div>
-      <AUDButton
-        text='Pay Now'
-        width='100%'
-        type='submit'
-        handleOnClick={formik.submitForm}
-      />
+      {isView ? (
+        <AUDButton
+          text='Payment Successfully Processed'
+          width='100%'
+          type='submit'
+          disabled={isView}
+        />
+      ) : (
+        <AUDButton
+          text='Pay Now'
+          width='100%'
+          type='submit'
+          handleOnClick={formik.submitForm}
+        />
+      )}
     </div>
   );
 };

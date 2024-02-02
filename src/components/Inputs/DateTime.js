@@ -9,6 +9,7 @@ const DateTime = ({
   name,
   errors,
   touched,
+  disabled,
 }) => {
   const [initialValue, setInitialValue] = useState(value);
 
@@ -22,7 +23,7 @@ const DateTime = ({
   useEffect(() => {
     setInitialValue(value);
   }, [value]);
-  
+
   return (
     <div className='textBox-container'>
       <label htmlFor={label}>
@@ -42,6 +43,8 @@ const DateTime = ({
           required={required}
           onChange={handleChange}
           value={initialValue}
+          disabled={disabled}
+          style={{ cursor: disabled ? "not-allowed" : "pointer" }}
           // className='text-input'
         />
         <span className='custom-date-icon'></span>

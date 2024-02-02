@@ -3,7 +3,7 @@ import SectionTitle from "../../Texts/SectionTitle";
 import SquareCheckBox from "../../Inputs/SquareCheckBox";
 import { useFormikContext } from "formik";
 
-const ImportantNotices = () => {
+const ImportantNotices = ({isView}) => {
   const formik = useFormikContext();
   return (
     <div className='form-subcontainers important-notices-container'>
@@ -20,7 +20,7 @@ const ImportantNotices = () => {
         }}
         errors={formik.errors?.ImportantNotesCheck}
         touched={formik.errors?.ImportantNotesCheck}
-
+        disabled={isView}
       />
      
       </div>

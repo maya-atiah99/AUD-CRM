@@ -2,24 +2,50 @@ import React from "react";
 import ModalComponent from "../components/ModalComponent";
 import TextComponent from "../components/Texts/TextComponent";
 import TextBox from "../components/Inputs/TextBox";
+import AUDButton from "../components/Buttons/AUDButton";
 
-const ForgotPasswordModal = ({setIsForgotPassword,setOtpForgotPassword}) => {
+const ForgotPasswordModal = ({
+  setIsForgotPassword,
+  setShowOtpForgotPasswordModal,
+  setMode,
+  setActionOrigin,
+}) => {
+  const handleSelectViaMobile = () => {
+    setMode("mobile");
+    setShowOtpForgotPasswordModal(true);
+    setIsForgotPassword(false);
+    setActionOrigin("Continue");
+  };
+
+  const handleSelectViaEmail = () => {
+    setMode("email");
+    setShowOtpForgotPasswordModal(true);
+    setIsForgotPassword(false);
+  };
   return (
     <ModalComponent
       width='40rem'
       title='Forgot Password'
       text='Confirm'
-      isButton={true}
-      handleOnClick={()=>(setOtpForgotPassword(true),setOtpForgotPassword(false))}
-      onClose={()=>setIsForgotPassword(false)}
+      onClose={() => setIsForgotPassword(false)}
     >
-      <div className='expandable-card'>
+      <div className='forgort-password-cont'>
         <TextComponent
-          text='Enter your mobile number below to receive an OTP'
+          text='Select which contact details should we use to reset your password.'
           size='18px'
           font='500'
-        />{" "}
-        <TextBox label='Enter Mobile Number' />
+        />
+
+        <div className='select-via-email' onClick={handleSelectViaMobile}>
+          <img src='/images/Mobile.svg' alt='mobile' />
+          <h3>Mobile Number</h3>
+        </div>
+
+        <div className='select-via-email' onClick={handleSelectViaEmail}>
+          <img src='/images/Email.svg' alt='mobile' />
+          <h3>Email Address</h3>
+        </div>
+        {/* <TextBox label='Enter Mobile Number' /> */}
       </div>
     </ModalComponent>
   );

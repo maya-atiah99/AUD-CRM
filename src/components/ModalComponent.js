@@ -12,7 +12,7 @@ const ModalComponent = ({
   children,
   isButton,
   classFont,
-  text
+  text,
 }) => {
   return (
     <div className='modal-container'>
@@ -22,18 +22,12 @@ const ModalComponent = ({
       >
         <div>
           <h2 className={classFont}>{title}</h2>
-          <img
-            src='/images/closeicon.svg'
-            alt='close icon'
-            className='close-icon'
-            onClick={onClose}
-          />
+          <div onClick={onClose} className='close-icon'>
+            <img src='/images/closeicon.svg' alt='close icon' />
+          </div>
         </div>
         {description ? (
-          <div
-            className='py-4'
-            style={{ paddingLeft: "20px", paddingTop: "30px" }}
-          >
+          <div>
             <TextComponent text={description} size='18px' font='500' />{" "}
           </div>
         ) : (

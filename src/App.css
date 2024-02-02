@@ -6,6 +6,7 @@
 
 /**************************************Buttons*****/
 .aud-button {
+  /* width: 100%; */
   display: flex;
   border-radius: 5px;
   padding: 10px;
@@ -38,7 +39,7 @@ a {
 
 .blue-link a {
   color: #3886bd;
-  text-decoration: none;
+  text-decoration: underline !important;
 }
 /************/
 .span-required {
@@ -268,7 +269,6 @@ textarea:focus-visible {
 /******************************************file input********/
 .file-input {
   display: none;
- 
 }
 
 .file-input-container-upl,
@@ -294,14 +294,12 @@ textarea:focus-visible {
   gap: 5px;
   align-items: center;
 }
-.img-text-container img {
-  width: auto;
-}
+
 .img-text-container p {
-  max-width: 60%;
+  /* max-width: 60%;  */
   text-overflow: ellipsis;
   overflow: hidden;
-  white-space: nowrap;
+  /* white-space: nowrap; */
   color: #1b224c;
   font-family: Raleway;
   font-size: 14px;
@@ -309,6 +307,10 @@ textarea:focus-visible {
   font-weight: 500;
   line-height: normal;
   margin: 0;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 1;
+  overflow: hidden;
 }
 .size-upload-dc p {
   color: #1b224c;
@@ -325,6 +327,12 @@ textarea:focus-visible {
   top: 0;
   right: 0;
   width: 16px;
+}
+.smallImage {
+  height: 30px;
+}
+.bigImage {
+  height: 50px;
 }
 /**************************************Modal****/
 .modal-container {
@@ -357,7 +365,9 @@ textarea:focus-visible {
   font-size: 20px;
   opacity: 1;
 }
-
+.close-icon img {
+  width: 50px;
+}
 .inner-modal-container h2 {
   font-size: 22px;
   color: #020a58;
@@ -406,6 +416,7 @@ textarea:focus-visible {
   flex-direction: column;
   gap: 20px;
 }
+
 .close-icon-exp {
   z-index: 1;
   position: absolute;
@@ -699,7 +710,7 @@ ul {
 }
 
 .stepper .step.active ~ .activeLine {
-  width: 130px;
+  width: 100px;
   opacity: 1;
 }
 
@@ -721,7 +732,7 @@ ul {
   font-size: 20px;
 }
 .stepper-font-number-title {
-  font-size: 15px;
+  font-size: 14px;
 }
 /******select react*******/
 .css-tj5bde-Svg {
@@ -932,10 +943,76 @@ ul {
 }
 .error-container p {
   font-size: 12px;
-  color: #C60303
+  color: #c60303;
 }
-.error-container span{
-  color:#1B224C
+.error-container span {
+  color: #1b224c;
+}
+
+.select-via-email {
+  height: 80px;
+  border-radius: 9px;
+  background: #f0eeee;
+  padding: 25px;
+  display: flex;
+  flex-direction: row;
+  gap: 20px;
+  align-items: center;
+  cursor: pointer;
+}
+.select-via-email:hover {
+  box-shadow: 0px 3px 6px #00000029;
+}
+.select-via-email:hover h3 {
+  color: #f3223c !important;
+}
+.select-via-email:hover img {
+  filter: brightness(0) saturate(100%) invert(23%) sepia(95%) saturate(5309%)
+    hue-rotate(344deg) brightness(102%) contrast(91%);
+}
+.select-via-email h3 {
+  color: #1b224c;
+  font-family: Raleway;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+  margin: 0;
+}
+.select-via-email h4 {
+  color: #1b224c;
+  font-family: Raleway;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+  margin: 0;
+}
+.forgort-password-cont {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding-top: 25px;
+}
+.otp-field {
+  width: 50px;
+  height: 50px;
+  font-size: 18px;
+  text-align: center;
+  border: 0.2px solid #ccc;
+  border-radius: 5px;
+  outline: none;
+  background-color: #f0eeee;
+}
+.otpField-container {
+  display: flex;
+  gap: 0.5rem;
+  justify-content: center;
+}
+
+.gif {
+  height: 170px;
+  width: 170px;
 }
 /***********************************Upper Header*************/
 .upperHeader-container {
@@ -959,18 +1036,22 @@ ul {
 }
 
 .aud-header-logo {
-  width: 200px;
-  height: 40px;
+  width: 150px;
+  height: 30px;
 }
 /*******************************Register Page***************/
 .registerPage-container {
   display: flex;
   flex-direction: column;
-  margin: 7rem 4rem;
+  margin: 7rem 2rem;
   gap: 1.5rem;
 }
 .register-title {
   font-size: 20px;
+}
+.back-button {
+  align-items: flex-start;
+  width: 200px;
 }
 
 /**************************8****Register forms container*********/
@@ -1008,7 +1089,7 @@ ul {
   grid-template-columns: 2fr 1fr 1fr 1fr;
   grid-column-gap: 10px;
 }
-.grid-personal-emirates-cont{
+.grid-personal-emirates-cont {
   display: grid;
   grid-template-columns: 2fr 3fr 3fr 3fr;
   grid-column-gap: 10px;
@@ -1019,6 +1100,7 @@ ul {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr;
   grid-column-gap: 10px;
+  grid-row-gap: 10px;
 }
 
 .classfont-p {
@@ -1722,6 +1804,9 @@ td:first-child {
   .stepper-font-number-title {
     font-size: 10px;
   }
+  .react-tel-input .form-control {
+    font-size: 11px;
+  }
 }
 @media screen and (max-width: 1259px) {
   .registerPage-container {
@@ -1958,13 +2043,13 @@ td:first-child {
     font-size: 12px !important;
   }
   .blue-link {
-    font-size: 12px;
+    font-size: 10px;
   }
   .blue-link span {
-    font-size: 12px;
+    font-size: 10px;
   }
   .classfont-p {
-    font-size: 12px;
+    font-size: 10px;
     margin: 0;
   }
   th,
@@ -2006,6 +2091,9 @@ responsiveness ************/
   /**text box **/
   .text-input {
     height: 28px;
+    font-size: 11px;
+  }
+  .react-tel-input .form-control {
     font-size: 11px;
   }
 
@@ -2077,7 +2165,7 @@ responsiveness ************/
   }
   .showInterest-subContainer {
     padding: 10px 10px;
-    height:90%;
+    height: 90%;
     width: 95%;
     flex-direction: column;
     justify-content: center;
@@ -2098,13 +2186,15 @@ responsiveness ************/
   }
   .showInterestForm-inner-cont p {
     font-size: 10px !important;
-    padding-top: 2px
-}
-  .classfont-show {
-    font-size: 14px;
+    padding-top: 8px;
+  }
+  .classfont-show,
+  .p-style,
+  .underlined-link {
+    font-size: 13px;
   }
   .textBox-container label {
-    font-size: 10px;
+    font-size: 12px;
   }
   .required {
     padding-left: 1px;
@@ -2158,6 +2248,8 @@ responsiveness ************/
     width: 18px !important;
   }
 
+  /************************************/
+  /*************************/
   /******************/
   /********/
   /***/
@@ -2174,13 +2266,12 @@ responsiveness ************/
   .form-subcontainers {
     gap: 0.8rem;
   }
-.textBox-container{
-  font-size: 10px !important;
-}
-.close-document-icon {
-  
-  width: 12px;
-}
+  .textBox-container {
+    font-size: 10px !important;
+  }
+  .close-document-icon {
+    width: 12px;
+  }
   /******form step 1***********/
   .grid-personal1-cont,
   .grid-personal2-cont,
@@ -2190,12 +2281,10 @@ responsiveness ************/
     grid-column-gap: 10px;
     grid-row-gap: 10px;
   }
-  .grid-personal-emirates-cont{
-   
+  .grid-personal-emirates-cont {
     grid-template-columns: 1fr;
     grid-row-gap: 10px;
     padding-top: 10px;
-    
   }
   .form-subcontainer {
     gap: 2rem;
@@ -2271,14 +2360,12 @@ responsiveness ************/
     grid-template-columns: 1fr;
   }
   .img-text-container p {
-    font-size: 11px;
+    font-size: 10px;
   }
   .size-upload-dc p {
     font-size: 9px;
   }
-  .img-text-container img {
-    width: 50px !important;
-  }
+
   .file-input-container,
   .file-input-container-upl {
     height: 40px !important;
@@ -2286,5 +2373,60 @@ responsiveness ************/
   /******payment*******/
   .payment-subcontainer {
     width: 100%;
+  }
+  .select-via-email h3 {
+    font-size: 13px;
+  }
+  .expandable-card {
+    padding: 10px 5px;
+    margin: 10px 0;
+    gap: 15px;
+  }
+  .inner-modal-container h2 {
+    font-size: 15px;
+    color: #020a58;
+    font-weight: bold;
+  }
+  .close-icon img {
+    width: 30px;
+  }
+  .applicant-loginp span {
+    font-size: 10px !important;
+  }
+  .bigImage {
+    height: 30px;
+  }
+  /********Stepper responsive*********/
+  .aud-app-header {
+    display: flex;
+    gap: 10px;
+    padding: 1rem;
+    flex-direction: column;
+    justify-content: normal;
+    align-items: normal;
+  }
+  .inActiveLine {
+    display: none;
+  }
+  /* .aud-header-logo{
+  padding-left: 15px;
+} */
+  .checkedLogo {
+    height: 20px;
+  }
+  .hide-titile {
+    display: none;
+    padding: 0rem 10px 0 5px;
+  }
+  .stepper {
+    display: flex;
+    justify-content: normal;
+    width: 100%;
+  }
+  .stepper .step {
+    padding: 0px 0px 0px 6px;
+    margin: 0px 2px 0px 2px;
+    height: 20px;
+    width: 20px;
   }
 }

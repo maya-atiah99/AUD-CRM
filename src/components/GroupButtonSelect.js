@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 
 const GroupButtonSelect = ({ text1, text2, activeState, onToggle }) => {
   return (

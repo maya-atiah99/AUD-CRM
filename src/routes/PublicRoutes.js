@@ -10,7 +10,7 @@ const useAuth = () => {
 };
 const PublicRoutes = () => {
   const auth = useAuth();
-  return !auth ? <Navigate to='/'/> : <Outlet />;
+  return auth ? <Navigate to='/register' /> : <Outlet />;
 };
 
 export default PublicRoutes;

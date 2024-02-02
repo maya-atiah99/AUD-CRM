@@ -3,7 +3,7 @@ import TabButton from "../../Buttons/TabButton";
 import SectionTitle from "../../Texts/SectionTitle";
 import CardDetails from "./CardDetails";
 import { useFormikContext } from "formik";
-const PaymentDetails = () => {
+const PaymentDetails = ({isView}) => {
   const [selected, setSelected] = useState("card");
   const formik = useFormikContext();
   return (
@@ -29,7 +29,7 @@ const PaymentDetails = () => {
         />
       </div>
       <div>
-        {selected === "card" && <CardDetails formik={formik} />}
+        {selected === "card" && <CardDetails formik={formik} isView={isView} />}
         {selected === "other" && "other"}
       </div>
     </div>

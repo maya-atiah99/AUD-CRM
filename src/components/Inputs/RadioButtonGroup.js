@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 
 import RadioButton from "../../components/Inputs/RadioButton";
 
@@ -9,8 +9,9 @@ const RadioButtonGroup = ({
   selectedValue,
   name,
   onRadioChange,
+  disabled,
 }) => {
-
+  
   return (
     <div className='radio-buttons-container'>
       <label htmlFor={label} className='radioBtn-label'>
@@ -24,6 +25,7 @@ const RadioButtonGroup = ({
           value={option.value}
           checked={selectedValue === option.value}
           handleOnChange={() => onRadioChange(name, option.value)}
+          disabled={disabled}
         />
       ))}
     </div>

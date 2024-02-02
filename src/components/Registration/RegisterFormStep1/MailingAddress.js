@@ -3,7 +3,7 @@ import TextBox from "../../Inputs/TextBox";
 import SectionTitle from "../../Texts/SectionTitle";
 import { useFormikContext } from "formik";
 import Dropdown from "../../../components/Inputs/DropDown";
-const MailingAddress = () => {
+const MailingAddress = ({ isView }) => {
   const formik = useFormikContext();
 
   return (
@@ -20,6 +20,7 @@ const MailingAddress = () => {
         }}
         errors={formik.errors?.Address1}
         touched={formik.touched?.Address1}
+        disabled={isView}
       />
       <div className='grid-mailing-cont'>
         <Dropdown
@@ -34,6 +35,7 @@ const MailingAddress = () => {
           }}
           errors={formik.errors?.Country}
           touched={formik.touched?.Country}
+          disabled={isView}
         />
         <Dropdown
           width='100%'
@@ -48,6 +50,7 @@ const MailingAddress = () => {
           }}
           errors={formik.errors?.CityState}
           touched={formik.touched?.CityState}
+          disabled={isView}
         />
         {/* <TextBox
           width='100%'
@@ -71,6 +74,7 @@ const MailingAddress = () => {
           }}
           errors={formik.errors?.Pobox}
           touched={formik.touched?.Pobox}
+          disabled={isView}
         />
         <TextBox
           width='100%'
@@ -82,8 +86,8 @@ const MailingAddress = () => {
           }}
           errors={formik.errors?.ZipCode}
           touched={formik.touched?.ZipCode}
+          disabled={isView}
         />
-        
       </div>
     </div>
   );

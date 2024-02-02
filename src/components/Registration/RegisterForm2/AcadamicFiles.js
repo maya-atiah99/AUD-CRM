@@ -28,7 +28,7 @@ const test = [
   { label: "SAT", value: "4" },
 ];
 
-const AcadamicFiles = () => {
+const AcadamicFiles = ({isView}) => {
   const [sections, setSections] = useState(1);
   const formik = useFormikContext();
 
@@ -98,6 +98,7 @@ const AcadamicFiles = () => {
               touched={
                 formik.touched?.applicantFiles?.[index]?.academicDocument
               }
+              disabled={isView}
             />
 
             <div className='grid-acd-cont'>
@@ -112,6 +113,7 @@ const AcadamicFiles = () => {
                 }}
                 errors={formik.errors?.applicantFiles?.[index]?.dateTaken}
                 touched={formik.touched?.applicantFiles?.[index]?.dateTaken}
+                disabled={isView}
               />
               <TextBox
                 width='100%'
@@ -128,6 +130,7 @@ const AcadamicFiles = () => {
                 touched={
                   formik.touched?.applicantFiles?.[index]?.registrationNumber
                 }
+                disabled={isView}
               />
               <TextBox
                 width='100%'
@@ -140,6 +143,7 @@ const AcadamicFiles = () => {
                 }}
                 errors={formik.errors?.applicantFiles?.[index]?.totalScore}
                 touched={formik.touched?.applicantFiles?.[index]?.totalScore}
+                disabled={isView}
               />
             </div>
           </div>

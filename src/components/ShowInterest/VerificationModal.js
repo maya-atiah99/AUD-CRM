@@ -47,6 +47,8 @@ const VerificationModal = ({
         isSubmitting,
       }) => {
         console.log(values);
+        console.log(errors);
+
         return (
           <Form>
             <ModalComponent
@@ -59,13 +61,17 @@ const VerificationModal = ({
             >
               <div>
                 <div className='expandable-card'>
-                  <div className='d-flex gap-1'>
+                  <div className='d-flex gap-1 flex-wrap'>
                     <TextComponent
                       text='We have send the OTP on '
-                      size='18px'
+                      classfont='classfont-show'
                       font='500'
                     />{" "}
-                    <TextComponent text={phoneNumber} size='18px' font='700' />
+                    <TextComponent
+                      text={phoneNumber}
+                      classfont='classfont-show'
+                      font='700'
+                    />
                   </div>
 
                   <TextBox
@@ -86,13 +92,17 @@ const VerificationModal = ({
                     underlined={true}
                   />
                   <HorizantalLine width='100%' />
-                  <div className='d-flex gap-1'>
+                  <div className='d-flex gap-1 flex-wrap'>
                     <TextComponent
                       text='We have send the OTP on'
-                      size='18px'
                       font='500'
+                      classfont='classfont-show'
                     />
-                    <TextComponent text={email} size='18px' font='700' />
+                    <TextComponent
+                      text={email}
+                      classfont='classfont-show'
+                      font='700'
+                    />
                   </div>
 
                   <TextBox

@@ -11,6 +11,7 @@ const TextArea = ({
   name,
   errors,
   touched,
+  disabled,
 }) => {
   const [initialValue, setInitialValue] = useState(value);
 
@@ -30,6 +31,7 @@ const TextArea = ({
       className={`${
         errors && touched ? "textBox-container-error " : "textBox-container"
       }`}
+      style={{ cursor: disabled ? "not-allowed" : "pointer" }}
     >
       <label htmlFor={label}>
         {label}
@@ -43,6 +45,7 @@ const TextArea = ({
         rows={rows}
         cols={cols}
         placeholder={placeholder}
+        disabled={disabled}
       />
     </div>
   );

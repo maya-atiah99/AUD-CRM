@@ -13,6 +13,8 @@ import ApplicationsModal from "../../Login/ApplicationsModal.js";
 import toast, { Toaster } from "react-hot-toast";
 import ForgotPasswordModal from "../../Login/ForgotPasswordModal.js";
 import OtpForgotPasswordModal from "../../Login/OtpForgotPasswordModal.js";
+import OtpCodeModal from "../../Login/OtpCodeModal.js";
+import CheckEmailSent from "../../Login/CheckEmailSent.js";
 
 const ShowInterest = ({
   setApplicantId,
@@ -35,9 +37,14 @@ const ShowInterest = ({
   const [phoneNumber, setPhoneNumber] = useState("");
   const [email, setEmail] = useState("");
   const [isForgotPassword, setIsForgotPassword] = useState(false);
-  const [otpForgotPassword, setOtpForgotPassword] = useState(false);
+  const [showOtpForgotPasswordModal, setShowOtpForgotPasswordModal] =
+    useState(false);
   const [otpError, setOtpError] = useState(false);
+  const [mode, setMode] = useState();
+  const [checkEmailSent, setCheckEmailSent] = useState(false);
+  const [showOtpCodeModal, setShowOtpCodeMOdal] = useState(false);
   const navigate = useNavigate();
+
   const openVerifiedModal = (origin) => {
     setActionOrigin(origin);
     setshowVerifiedModal(true);
@@ -175,6 +182,79 @@ const ShowInterest = ({
       resendApplicantPhoneOtp.mutate();
     }
   };
+
+  /**************Forget password  (otp) ********************/
+  /*********/
+  /*****/
+  /***Send Forgot password email ***/
+  const sendForgotPasswordEmail = useMutation({
+    mutationFn: () => {
+      return axios.post(
+        API_URL + `/api/Applicant/SendForgotPasswordEmail/${email}`
+      );
+    },
+    onSuccess: async (data) => {
+      setShowOtpForgotPasswordModal(false);
+      setCheckEmailSent(true);
+    },
+    onError: (error) => {
+      console.log("error: ", error);
+      toast.error("Something went wrong");
+    },
+  });
+
+  //****Send forgot password mobile *****/
+  const sendForgotPasswordMobile = useMutation({
+    mutationFn: () => {
+      return axios.post(
+        API_URL + `/api/Applicant/SendForgotPasswordOTP/${phoneNumber}`
+      );
+    },
+    onSuccess: async (data) => {
+      setShowOtpForgotPasswordModal(false);
+      setShowOtpCodeMOdal(true);
+      setApplicantId(data?.data?.applicantId);
+    },
+    onError: (error) => {
+      console.log("error: ", error);
+      toast.error("Something went wrong");
+    },
+  });
+
+  ///****Verify password  otp */
+  const verifyForgotPasswordOtp = useMutation({
+    mutationFn: async() => {
+      const url=`${applicantId}/${otpCode}`
+      return await axios.post(
+        API_URL +
+          `/api/Applicant/VerifyForgotPasswordOTP/${url}`
+      );
+    },
+    onSuccess: async (data) => {
+      setCheckEmailSent(true);
+      setShowOtpCodeMOdal(false);
+    },
+    onError: (error) => {
+      console.log("error: ", error);
+      toast.error("Something went wrong");
+    },
+  });
+console.log('otpcodeeee',otpCode)
+  //***handle send otp mobile or email  */
+  const handleNextStepForgotPasswordOTP = () => {
+    if (mode === "mobile") {
+      sendForgotPasswordMobile.mutate();
+    } else {
+      sendForgotPasswordEmail.mutate();
+    }
+  };
+
+  /*****handle verify otp for mobile in forgot password */
+  const handleVerifyMobileOtpForPassword = () => {
+    verifyForgotPasswordOtp.mutate();
+  };
+  console.log(email);
+  console.log(phoneNumber);
   return (
     <div className='showInterest-container'>
       <video autoPlay loop muted id='background-video'>
@@ -247,10 +327,38 @@ const ShowInterest = ({
       {isForgotPassword && (
         <ForgotPasswordModal
           setIsForgotPassword={setIsForgotPassword}
-          setOtpForgotPassword={setOtpForgotPassword}
+          setShowOtpForgotPasswordModal={setShowOtpForgotPasswordModal}
+          setMode={setMode}
+          setActionOrigin={setActionOrigin}
         />
       )}
-      {otpForgotPassword && <OtpForgotPasswordModal />}
+      {showOtpForgotPasswordModal && (
+        <OtpForgotPasswordModal
+          mode={mode}
+          setShowOtpForgotPasswordModal={setShowOtpForgotPasswordModal}
+          setEmail={setEmail}
+          setPhoneNumber={setPhoneNumber}
+          handleNextStepForgotPasswordOTP={handleNextStepForgotPasswordOTP}
+        />
+      )}
+      {showOtpCodeModal && (
+        <OtpCodeModal
+          setOtpCode={setOtpCode}
+          setShowOtpCodeMOdal={setShowOtpCodeMOdal}
+          setCheckEmailSent={setCheckEmailSent}
+          handleVerifyMobileOtpForPassword={handleVerifyMobileOtpForPassword}
+          handleOnClickLinkPhone={handleResendPhone}
+        />
+      )}
+      {checkEmailSent && (
+        <CheckEmailSent
+          mode={mode}
+          setCheckEmailSent={setCheckEmailSent}
+          email={email}
+          phoneNumber={phoneNumber}
+        />
+      )}
+
       <Toaster />
     </div>
   );

@@ -7,19 +7,14 @@ const VerifiedCheckModal = ({ close, text, title }) => {
       onClose={close}
       handleOnClick={close}
       isButton={false}
-      height='30rem'
+      height='20rem'
       width='50rem'
       title={title}
       description={text}
     >
       <div className='d-flex  justify-content-center align-items-center'>
         <div className='d-flex  justify-content-center align-items-center'>
-          <img
-            src='/images/Animation.gif'
-            height='250px'
-            width='250px'
-            alt='gif'
-          />
+          <img src='/images/Animation.gif' className='gif' alt='gif' />
         </div>
       </div>
     </ModalComponent>

@@ -13,6 +13,7 @@ import { FormikProvider, useFormik } from "formik";
 import step1ValidationSchema from "../../../ValidationSchemas/Step1ValidationSchema";
 import { useAddApplicantStageTwo } from "../../../Hooks/Appplicant";
 import getValidationSchemaStep1 from "../../../ValidationSchemas/Step1ValidationSchema";
+import { type } from "@testing-library/user-event/dist/type";
 
 const RegisterFormStep1 = forwardRef(
   (
@@ -26,11 +27,13 @@ const RegisterFormStep1 = forwardRef(
       applicationStart,
       setApplyingAs,
       activeStep,
+      isView,
     },
     ref
   ) => {
     const [init, setInit] = useState({});
     const { mutate: addApplicantStagetwo } = useAddApplicantStageTwo();
+    console.log("mxkdsjcnkdsc", fetchedData);
     useEffect(() => {
       if (showInterest) {
         const initialOne = {
@@ -43,16 +46,17 @@ const RegisterFormStep1 = forwardRef(
           Email: fetchedData?.data?.applicant?.email || "",
           Nationality: fetchedData?.data?.applicant?.nationalityId || "",
           DOB: fetchedData?.data?.dob
-            ? new Date(fetchedData?.data?.dob).toISOString().split("T")[0]
+            ? fetchedData?.data?.dob?.substring(0, 10)
             : "",
           Gender: "",
-          Mobile: fetchedData?.data?.applicant?.phoneNumber || "",
+          Mobile: fetchedData?.data?.applicant?.mobile || "",
           ApplicantTelephone: "",
 
           ApplingAs: fetchedData?.data?.applicant?.applyingAs || "",
           SelectedTerm: "",
           ApplicationStart:
-            fetchedData?.data?.application?.startYourApplication || "",
+            fetchedData?.data?.application?.startYourApplication.toString() ||
+            "",
           ProgramOfInterest: "",
           CurrentPlaceOfStudy: "",
           GuardianRelation1: "",
@@ -110,20 +114,18 @@ const RegisterFormStep1 = forwardRef(
           Email: fetchedData?.data?.stage1?.email || "",
           Nationality: fetchedData?.data?.stage1?.nationalityId || "",
           DOB: fetchedData?.data?.stage1?.dob
-            ? new Date(fetchedData?.data?.stage1?.dob)
-                .toISOString()
-                .split("T")[0]
+            ? fetchedData?.data?.stage1?.dob?.substring(0, 10)
             : "",
           Gender: fetchedData?.data?.stage1?.gender || "",
-          Mobile: fetchedData?.data?.stage1?.phoneNumber || "",
-          ApplicantTelephone: fetchedData?.data?.stage1?.mobile || "",
+          Mobile: fetchedData?.data?.stage1?.mobile || "",
+          ApplicantTelephone: fetchedData?.data?.stage1?.phoneNumber || "",
           ApplingAs: fetchedData?.data?.application?.applyingAs || "",
           SelectedTerm: fetchedData?.data?.application?.term || "",
           ApplicationStart:
             fetchedData?.data?.application?.startYourApplication?.toString() ||
             "",
           ProgramOfInterest:
-            fetchedData?.data?.stage2?.programApplicationId || "",
+            fetchedData?.data?.application?.programOfInterest || "",
           CurrentPlaceOfStudy:
             fetchedData?.data?.stage2?.currentPlaceOfStudy || "",
           GuardianRelation1: fetchedData?.data?.stage2?.guardianRelation1 || "",
@@ -299,10 +301,7 @@ const RegisterFormStep1 = forwardRef(
         FieldsAppend.forEach((field) => {
           if (values[field] !== undefined || values[field] !== "") {
             if (field === "DOB") {
-              formData.append(
-                field,
-                new Date(values[field]).toISOString().split("T")[0]
-              );
+              formData.append(field, values[field].substring(0, 10));
             } else {
               formData.append(field, values[field]);
             }
@@ -316,17 +315,7 @@ const RegisterFormStep1 = forwardRef(
         ];
 
         fileToAppend.forEach((key) => {
-          if (values[key] && "documentContent" in values[key]) {
-            const fileContent = values[key].documentContent;
-            const blob = new Blob([atob(fileContent)], {
-              type: values[key].contentType,
-            });
-            const file = new File([blob], values[key].fileName, {
-              type: values[key].contentType,
-            });
-
-            formData.append(key, file);
-          } else {
+          if (!values[key]?.fileName) {
             formData.append(key, values[key]);
           }
         });
@@ -361,11 +350,11 @@ const RegisterFormStep1 = forwardRef(
           innerRef={ref}
           validationSchema={step1ValidationSchema}
         >
-          <PersonalInformation />
-          <MailingAddress />
-          <ProgramInformation fetchedData={fetchedData} />
-          <ParentInformation />
-          <Consent />
+          <PersonalInformation isView={isView} />
+          <MailingAddress isView={isView} />
+          <ProgramInformation fetchedData={fetchedData} isView={isView} />
+          <ParentInformation isView={isView} />
+          <Consent isView={isView} />
         </FormikProvider>
       </div>
     );

@@ -710,7 +710,7 @@ ul {
 }
 
 .stepper .step.active ~ .activeLine {
-  width: 130px;
+  width: 100px;
   opacity: 1;
 }
 
@@ -732,7 +732,7 @@ ul {
   font-size: 20px;
 }
 .stepper-font-number-title {
-  font-size: 15px;
+  font-size: 14px;
 }
 /******select react*******/
 .css-tj5bde-Svg {
@@ -1036,14 +1036,14 @@ ul {
 }
 
 .aud-header-logo {
-  width: 200px;
-  height: 40px;
+  width: 150px;
+  height: 30px;
 }
 /*******************************Register Page***************/
 .registerPage-container {
   display: flex;
   flex-direction: column;
-  margin: 7rem 4rem;
+  margin: 7rem 2rem;
   gap: 1.5rem;
 }
 .register-title {

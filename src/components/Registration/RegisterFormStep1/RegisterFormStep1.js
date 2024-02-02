@@ -13,6 +13,7 @@ import { FormikProvider, useFormik } from "formik";
 import step1ValidationSchema from "../../../ValidationSchemas/Step1ValidationSchema";
 import { useAddApplicantStageTwo } from "../../../Hooks/Appplicant";
 import getValidationSchemaStep1 from "../../../ValidationSchemas/Step1ValidationSchema";
+import { type } from "@testing-library/user-event/dist/type";
 
 const RegisterFormStep1 = forwardRef(
   (
@@ -32,6 +33,7 @@ const RegisterFormStep1 = forwardRef(
   ) => {
     const [init, setInit] = useState({});
     const { mutate: addApplicantStagetwo } = useAddApplicantStageTwo();
+    console.log("mxkdsjcnkdsc", fetchedData);
     useEffect(() => {
       if (showInterest) {
         const initialOne = {
@@ -123,7 +125,7 @@ const RegisterFormStep1 = forwardRef(
             fetchedData?.data?.application?.startYourApplication?.toString() ||
             "",
           ProgramOfInterest:
-            fetchedData?.data?.stage2?.programApplicationId || "",
+            fetchedData?.data?.application?.programOfInterest || "",
           CurrentPlaceOfStudy:
             fetchedData?.data?.stage2?.currentPlaceOfStudy || "",
           GuardianRelation1: fetchedData?.data?.stage2?.guardianRelation1 || "",
@@ -313,7 +315,7 @@ const RegisterFormStep1 = forwardRef(
         ];
 
         fileToAppend.forEach((key) => {
-          if (!values[key].fileName) {
+          if (!values[key]?.fileName) {
             formData.append(key, values[key]);
           }
         });

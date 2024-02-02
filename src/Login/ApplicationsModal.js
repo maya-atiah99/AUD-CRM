@@ -89,12 +89,21 @@ const ApplicationsModal = ({
 
     localStorage.setItem("message", item.nextActiveStep);
 
-    navigate("/register", {
-      state: {
-        activeStep: localStorage.getItem("message"),
-        showInterest: localStorage.getItem("message") === 0 ? true : false,
-      },
-    });
+    if (item.applicationStatus === 4) {
+      navigate("/register", {
+        state: {
+          activeStep: 0,
+          showInterest: localStorage.getItem("message") === 0 ? true : false,
+        },
+      });
+    } else {
+      navigate("/register", {
+        state: {
+          activeStep: localStorage.getItem("message"),
+          showInterest: localStorage.getItem("message") === 0 ? true : false,
+        },
+      });
+    }
   };
 
   return (

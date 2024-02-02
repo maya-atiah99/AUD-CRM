@@ -15,6 +15,11 @@ const Stepper = ({
     }
   };
 
+
+// .stepper .step.active ~ .activeLine {
+//     width: 100px;
+//     opacity: 1;
+// }
   return (
     <div className='stepper'>
       {steps.map((step, index) => {

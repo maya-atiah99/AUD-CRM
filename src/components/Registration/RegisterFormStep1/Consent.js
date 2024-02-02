@@ -64,6 +64,7 @@ const Consent = ({ isView }) => {
           touched={formik.errors?.AuthorizeToReleaseRecord}
           disabled={isView}
         />
+
         {/* <LinkButton title='I Authorize ' /> */}
         <TextComponent
           authorize='I Authorize'
@@ -73,6 +74,14 @@ const Consent = ({ isView }) => {
           text='to release my education records (e.g., grades, GPA, ID, schedule, statement of fees) to the following:'
         />
       </div>
+      {formik.errors?.AuthorizeToReleaseRecord &&
+      formik.touched?.AuthorizeToReleaseRecord ? (
+        <span className='span-required'>
+          Authorize To Release Record is required
+        </span>
+      ) : (
+        ""
+      )}
       <div className='grid-consent1-cont'>
         <TextBox
           width='100%'
@@ -86,7 +95,6 @@ const Consent = ({ isView }) => {
           errors={formik.errors["Authorize_GuardianName"]}
           touched={formik.touched["Authorize_GuardianName"]}
           disabled={isView}
-
         />
 
         <DropDown

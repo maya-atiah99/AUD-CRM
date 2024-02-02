@@ -29,8 +29,8 @@ const RegisterPage = ({
     parseInt(localStorage.getItem("message"), 10) || 0
   );
   const [isView, setIsView] = useState(
-    localStorage.getItem("applicationStatus") || false
-  );
+    localStorage.getItem("applicationStatus") === "true"
+  );;
   const [steps, setSteps] = useState([]);
   const formikRefStep1 = useRef();
   const formikRefStep2 = useRef();
@@ -49,8 +49,8 @@ const RegisterPage = ({
   const { data: applicantStageTwo, refetch: refetchStageTwo } =
     useFetchApplicantStageTwo(applicantId, applicationId);
   console.log("stage2", applicantStageTwo);
-  console.log('application start',applicationStart)
-  
+  console.log("application start", applicationStart);
+
   const generateSteps = (applicationStart, applingAs) => {
     if (applicationStart === "2") {
       return [
@@ -296,6 +296,7 @@ const RegisterPage = ({
       setfetchedData(applicantStageTwo);
     }
   };
+  console.log('isview',isView)
 
   useEffect(() => {
     refreshPage();
@@ -376,7 +377,7 @@ const RegisterPage = ({
     <div>
       <UpperHeader />
       <div className='registerPage-container'>
-        <div >
+        <div>
           <AUDButton
             text={steps[activeStep]?.previousStep}
             icon={

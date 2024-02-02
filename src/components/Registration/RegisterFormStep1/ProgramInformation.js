@@ -51,6 +51,8 @@ const ProgramInformation = ({ fetchedData, isView }) => {
   const onRadioChange = (name, value) => {
     formik.setFieldValue(name, value);
   };
+
+  console.log('formikk xdccd',formik?.values)
   return (
     <div className='form-subcontainers'>
       <SectionTitle title='PROGRAM INFORMATION' dotted={true} />

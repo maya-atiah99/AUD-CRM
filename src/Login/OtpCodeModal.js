@@ -35,6 +35,7 @@ const OtpCodeModal = ({
     handleVerifyMobileOtpForPassword();
   };
   console.log(otp.join(""));
+  console.log('otpp',otp)
   return (
     <ModalComponent
       width='40rem'

@@ -12,7 +12,7 @@ const showInterestValidationSchema = Yup.object().shape({
     .required("Last Name is required"),
   email: Yup.string().email("Invalid Email").required("Email is required"),
   nationality: Yup.string().required("Nationality is required"),
-  mobile: Yup.string().required("Mobile is required"),
+  mobile: Yup.string().required("Mobile is required").min(10),
   titleId: Yup.string().nullable(),
   howDidYouHear: Yup.string().required("How did you hear about us is required"),
   selectedTerm: Yup.string().required("Selected term is required"),

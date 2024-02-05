@@ -366,7 +366,6 @@ const ShowInterestForm = ({
                   required={true}
                   handleOnClick={() => {
                     setClickedButton("continueToApply");
-                    handleSubmit();
                   }}
                 />
                 <AUDButton
@@ -375,7 +374,6 @@ const ShowInterestForm = ({
                   required={true}
                   handleOnClick={() => {
                     setClickedButton("submitForm");
-                    handleSubmit();
                   }}
                 />
               </div>

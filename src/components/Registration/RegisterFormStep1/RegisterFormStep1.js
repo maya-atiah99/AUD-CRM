@@ -52,7 +52,7 @@ const RegisterFormStep1 = forwardRef(
           Mobile: fetchedData?.data?.applicant?.mobile || "",
           ApplicantTelephone: "",
 
-          ApplingAs: fetchedData?.data?.applicant?.applyingAs || "",
+          ApplingAs: fetchedData?.data?.application?.applyingAs || "",
           SelectedTerm: "",
           ApplicationStart:
             fetchedData?.data?.application?.startYourApplication.toString() ||
@@ -201,6 +201,7 @@ const RegisterFormStep1 = forwardRef(
       });
     };
 
+    console.log('cdskmcsdcds0',typeof fetchedData?.data?.application?.applyingAs)
     useEffect(() => {
       if (showInterest) {
         localStorage.setItem(

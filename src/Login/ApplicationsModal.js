@@ -82,6 +82,8 @@ const ApplicationsModal = ({
 
     if (item.applicationStatus === 4) {
       localStorage.setItem("applicationStatus", true);
+    } else {
+      localStorage.setItem("applicationStatus", false);
     }
 
     setApplicationStart(item.startYourApplication);

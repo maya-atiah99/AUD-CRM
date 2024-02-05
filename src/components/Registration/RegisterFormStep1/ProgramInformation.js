@@ -53,6 +53,7 @@ const ProgramInformation = ({ fetchedData, isView }) => {
   };
 
   console.log('formikk xdccd',formik?.values)
+  console.log('csdcsdcdscsc',applyingAsData)
   return (
     <div className='form-subcontainers'>
       <SectionTitle title='PROGRAM INFORMATION' dotted={true} />

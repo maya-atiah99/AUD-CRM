@@ -87,23 +87,18 @@ const ApplicationsModal = ({
     setApplicationStart(item.startYourApplication);
     setApplyingAs(item.applyingAs);
 
-    localStorage.setItem("message", item.nextActiveStep);
-
     if (item.applicationStatus === 4) {
-      navigate("/register", {
-        state: {
-          activeStep: 0,
-          showInterest: localStorage.getItem("message") === 0 ? true : false,
-        },
-      });
+      localStorage.setItem("message", 0);
     } else {
-      navigate("/register", {
-        state: {
-          activeStep: localStorage.getItem("message"),
-          showInterest: localStorage.getItem("message") === 0 ? true : false,
-        },
-      });
+      localStorage.setItem("message", item.nextActiveStep);
     }
+
+    navigate("/register", {
+      state: {
+        activeStep: localStorage.getItem("message"),
+        showInterest: localStorage.getItem("message") === 0 ? true : false,
+      },
+    });
   };
 
   return (

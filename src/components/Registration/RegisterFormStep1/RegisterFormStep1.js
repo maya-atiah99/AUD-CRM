@@ -52,7 +52,7 @@ const RegisterFormStep1 = forwardRef(
           Mobile: fetchedData?.data?.applicant?.mobile || "",
           ApplicantTelephone: "",
 
-          ApplingAs: fetchedData?.data?.application?.applyingAs || "",
+          ApplingAs: fetchedData?.data?.application?.applyingAs,
           SelectedTerm: "",
           ApplicationStart:
             fetchedData?.data?.application?.startYourApplication.toString() ||
@@ -119,7 +119,7 @@ const RegisterFormStep1 = forwardRef(
           Gender: fetchedData?.data?.stage1?.gender || "",
           Mobile: fetchedData?.data?.stage1?.mobile || "",
           ApplicantTelephone: fetchedData?.data?.stage1?.phoneNumber || "",
-          ApplingAs: fetchedData?.data?.application?.applyingAs || "",
+          ApplingAs: fetchedData?.data?.application?.applyingAs,
           SelectedTerm: fetchedData?.data?.application?.term || "",
           ApplicationStart:
             fetchedData?.data?.application?.startYourApplication?.toString() ||

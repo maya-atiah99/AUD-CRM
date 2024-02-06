@@ -256,7 +256,6 @@ const RegisterFormStep1 = forwardRef(
           "Gender",
           "Mobile",
           "ApplicantTelephone",
-          "ApplingAs",
           "SelectedTerm",
           "ApplicationStart",
           "ProgramOfInterest",
@@ -324,6 +323,11 @@ const RegisterFormStep1 = forwardRef(
           }
         });
 
+        if (values.ApplingAs == null) {
+          formData.append("ApplingAs", "");
+        } else {
+          formData.append("ApplingAs", values.ApplingAs);
+        }
         handleAddStageTwo(formData);
       },
     });

@@ -220,7 +220,8 @@ const PersonalInformation = ({ isView }) => {
             disabled={isView}
           />{" "}
         </div>
-        {showEmirate ? (
+        {formik.values.Nationality ===
+        "dcb9b21c-31bf-42fa-9b60-fab3608a49e6" ? (
           <div className='grid-personal1-cont' style={{ paddingTop: "0.5rem" }}>
             <TextBox
               width='100%'

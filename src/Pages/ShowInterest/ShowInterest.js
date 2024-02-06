@@ -64,6 +64,8 @@ const ShowInterest = ({
         setShowVerifiedCheckModal(true);
         setOtpCode("");
         setEmailOtp("");
+      } else {
+        toast.error("Something went wrong");
       }
       setTimeout(() => {
         setShowVerifiedCheckModal(false);
@@ -223,11 +225,10 @@ const ShowInterest = ({
 
   ///****Verify password  otp */
   const verifyForgotPasswordOtp = useMutation({
-    mutationFn: async() => {
-      const url=`${applicantId}/${otpCode}`
+    mutationFn: async () => {
+      const url = `${applicantId}/${otpCode}`;
       return await axios.post(
-        API_URL +
-          `/api/Applicant/VerifyForgotPasswordOTP/${url}`
+        API_URL + `/api/Applicant/VerifyForgotPasswordOTP/${url}`
       );
     },
     onSuccess: async (data) => {
@@ -239,7 +240,7 @@ const ShowInterest = ({
       toast.error("Something went wrong");
     },
   });
-console.log('otpcodeeee',otpCode)
+  console.log("otpcodeeee", otpCode);
   //***handle send otp mobile or email  */
   const handleNextStepForgotPasswordOTP = () => {
     if (mode === "mobile") {
@@ -253,8 +254,7 @@ console.log('otpcodeeee',otpCode)
   const handleVerifyMobileOtpForPassword = () => {
     verifyForgotPasswordOtp.mutate();
   };
-  console.log(email);
-  console.log(phoneNumber);
+
   return (
     <div className='showInterest-container'>
       <video autoPlay loop muted id='background-video'>

@@ -20,7 +20,13 @@ const Step3ValidationSchema = Yup.object().shape({
         .oneOf([true], "This field is required"),
     otherwise: (schema) => schema.notRequired(),
   }),
-  HealthComments: Yup.mixed().notRequired(),
+  HealthComments: Yup.mixed().when("HealthChalenges", {
+    is: (HealthChalenges) => HealthChalenges,
+    then: (schema) =>
+      schema
+        .required("HealthChalenges is required"),
+    otherwise: (schema) => schema.notRequired(),
+  }),
   TermAndConditionCheck: Yup.boolean().when("isSaved", {
     is: (isSaved) => isSaved,
     then: (schema) =>

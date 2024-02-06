@@ -140,17 +140,17 @@ export const useFetchApplicantStageFour = (applicantId, applicationId) => {
 /**************************Fetch applying according to application start */
 
 const fetchApplyingAs = async (applicationStart) => {
-  if (applicationStart) {
+  const app = applicationStart || 0
     return await axios.get(
-      API_URL + `/api/ApplicantView/GetApplyingAsByStart/${applicationStart}`
+      API_URL + `/api/ApplicantView/GetApplyingAsByStart/${app}`
     );
-  }
+
 };
 
 export const useFetchApplyingAs = (applicationStart) => {
   return useQuery({
     queryKey: ["applyingAs", applicationStart],
     queryFn: () => fetchApplyingAs(applicationStart),
-    enable: true,
+    enable: false,
   });
 };

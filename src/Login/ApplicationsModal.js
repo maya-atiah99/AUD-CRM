@@ -4,6 +4,7 @@ import RoundedButton from "../components/Buttons/RoundedButtons";
 import { useFetchApplicationsById } from "../Hooks/Login";
 import { useNavigate } from "react-router-dom";
 import AUDButton from "../components/Buttons/AUDButton";
+import Loader from "../components/Loader/Loader";
 
 const ApplicationsModal = ({
   setShowApplicatiosModal,
@@ -11,7 +12,8 @@ const ApplicationsModal = ({
   setApplicationStart,
   setApplyingAs,
 }) => {
-  const { data: applications } = useFetchApplicationsById(applicantId);
+  const { data: applications, isLoading: isApplicationsByIdLoading } =
+    useFetchApplicationsById(applicantId);
   const navigate = useNavigate();
 
   const applicationStartFunction = (applicationType) => {
@@ -110,49 +112,60 @@ const ApplicationsModal = ({
       onClose={() => setShowApplicatiosModal(false)}
     >
       <div className='applications-table-cont'>
-        <table className='applications-table'>
-          <thead>
-            <tr>
-              <th>Application</th>
-              <th>Program</th>
-              <th>Plan to Join</th>
-              <th>Status</th>
-              <th>Steps</th>
-              <th>Createtd On</th>
-              <th></th>
-            </tr>
-          </thead>
-          <tbody>
-            {applications?.data?.map((item) => {
-              return (
-                <tr key={item.applicantId}>
-                  <td>{applicationStartFunction(item.startYourApplication)}</td>
-
-                  <td style={{ maxWidth: "200px" }}>
-                    {item.fieldOfInterest_Display}
-                  </td>
-                  <td>{item.termName}</td>
-                  <td></td>
-                  <td>
-                    {stepsFunction(
-                      item.startYourApplication,
-                      item.applyingAs,
-                      item.nextActiveStep
-                    )}
-                  </td>
-                  <td>{item.createdOn.substring(0, 10)}</td>
-
-                  <td>
-                    <AUDButton
-                      text={item.applicationStatus === 4 ? "View" : "Continue"}
-                      handleOnClick={() => handleContinueApplication(item)}
-                    />
-                  </td>
+        {isApplicationsByIdLoading ? (
+          <Loader />
+        ) : (
+          <>
+            <table className='applications-table'>
+              <thead>
+                <tr>
+                  <th>Application</th>
+                  <th>Program</th>
+                  <th>Plan to Join</th>
+                  <th>Status</th>
+                  <th>Steps</th>
+                  <th>Created On</th>
+                  <th></th>
                 </tr>
-              );
-            })}
-          </tbody>
-        </table>
+              </thead>
+              <tbody>
+                {applications?.data?.map((item) => {
+                  return (
+                    <tr key={item.applicantId}>
+                      <td>
+                        {applicationStartFunction(item.startYourApplication)}
+                      </td>
+
+                      <td style={{ maxWidth: "200px" }}>
+                        {item.fieldOfInterest_Display}
+                      </td>
+                      <td>{item.termName}</td>
+                      <td></td>
+                      <td>
+                        {stepsFunction(
+                          item.startYourApplication,
+                          item.applyingAs,
+                          item.nextActiveStep
+                        )}
+                      </td>
+                      <td>{item.createdOn.substring(0, 10)}</td>
+
+                      <td>
+                        <AUDButton
+                          text={
+                            item.applicationStatus === 4 ? "View" : "Continue"
+                          }
+                          handleOnClick={() => handleContinueApplication(item)}
+                        />
+                      </td>
+                    </tr>
+                  );
+                })}
+              </tbody>
+            </table>
+          </>
+        )}
+
         <div className='d-flex gap-1'>
           <AUDButton text='Re-Apply' />
 

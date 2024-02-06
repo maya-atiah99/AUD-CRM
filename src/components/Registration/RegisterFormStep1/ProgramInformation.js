@@ -9,7 +9,7 @@ import { useFetchApplyingAs } from "../../../Hooks/Appplicant";
 const ProgramInformation = ({ fetchedData, isView }) => {
   const formik = useFormikContext();
   const [applyingAsOptions, setApplyingAsOptions] = useState([]);
-  const [applicationStartValue, setApplicationStartValue] = useState("");
+  const [applicationStartValue, setApplicationStartValue] = useState("0");
   const { data: applyingAsData, refetch: refetchApplyinAs } =
     useFetchApplyingAs(applicationStartValue);
   const startYourApplicationOptions = [
@@ -17,7 +17,9 @@ const ProgramInformation = ({ fetchedData, isView }) => {
     { label: "Graduate", value: "1" },
     { label: "Visiting", value: "2" },
   ];
+
   useEffect(() => {
+    console.log("1111111111111111111111111111111");
     const fetchApplyingAsData = async () => {
       await refetchApplyinAs();
       const formattedApplyingAsOptions = applyingAsData?.data
@@ -39,6 +41,8 @@ const ProgramInformation = ({ fetchedData, isView }) => {
   }, [formik.values.ApplicationStart]);
 
   useEffect(() => {
+    console.log("222222222222222222222");
+    console.log("xsxjsx");
     const formattedApplyingAsOptions = applyingAsData?.data
       ? applyingAsData?.data?.map((option) => ({
           value: option.applyingAsId,
@@ -52,8 +56,12 @@ const ProgramInformation = ({ fetchedData, isView }) => {
     formik.setFieldValue(name, value);
   };
 
-  console.log('formikk xdccd',formik?.values)
-  console.log('csdcsdcdscsc',applyingAsData)
+  console.log("formikk xdccd", formik?.values);
+  console.log("csdcsdcdscsc", applyingAsData);
+  console.log("applyingAsData", applyingAsData);
+  console.log("applicationStartValue", applicationStartValue);
+  console.log("formik.values.ApplicationStart", formik.values.ApplicationStart);
+  console.log("applying as options", applyingAsOptions);
   return (
     <div className='form-subcontainers'>
       <SectionTitle title='PROGRAM INFORMATION' dotted={true} />
@@ -224,7 +232,7 @@ const ProgramInformation = ({ fetchedData, isView }) => {
                 <a
                   href='https://www.aud.edu/on-aud-campus/accommodation/'
                   target='_blank'
-                  rel="noreferrer"
+                  rel='noreferrer'
                 >
                   Certificate in Middle Eastern Studies
                 </a>
@@ -250,7 +258,7 @@ const ProgramInformation = ({ fetchedData, isView }) => {
                 <a
                   href='https://www.aud.edu/aud-school/school-of-arts-sciences/departments/department-of-international-and-middle-eastern-studies/department-programs/certificate-in-middle-eastern-studies/'
                   target='_blank'
-                  rel="noreferrer"
+                  rel='noreferrer'
                 >
                   Student Accomodation
                 </a>

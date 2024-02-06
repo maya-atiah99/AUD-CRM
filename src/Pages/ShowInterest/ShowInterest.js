@@ -69,7 +69,7 @@ const ShowInterest = ({
       }
       setTimeout(() => {
         setShowVerifiedCheckModal(false);
-      }, [1000]);
+      }, [2000]);
     },
     onError: (error) => {
       console.log("error: ", error);

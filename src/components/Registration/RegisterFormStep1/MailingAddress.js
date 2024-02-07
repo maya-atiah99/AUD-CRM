@@ -32,6 +32,7 @@ const MailingAddress = ({ isView }) => {
           value={formik.values.Country}
           onChange={(name, value) => {
             formik.setFieldValue(name, value);
+            formik.setFieldValue("CityState", "");
           }}
           errors={formik.errors?.Country}
           touched={formik.touched?.Country}

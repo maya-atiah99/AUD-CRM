@@ -50,7 +50,7 @@ const TextBox = ({
       <input
         type={type ? type : "text"}
         id={label}
-        required={required}
+        // required={required}
         style={inputStyle}
         className='text-input'
         onChange={handleChange}

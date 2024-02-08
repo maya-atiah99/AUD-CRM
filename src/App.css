@@ -35,6 +35,7 @@ a {
 .aud-button:hover {
   background-color: #f3223c;
   cursor: pointer;
+  transition: 0.3s ease-in-out;
 }
 
 .blue-link a {
@@ -367,6 +368,10 @@ textarea:focus-visible {
 }
 .close-icon img {
   width: 50px;
+}
+.close-icon img:hover {
+  filter: brightness(0) saturate(100%) invert(23%) sepia(95%) saturate(5309%)
+    hue-rotate(344deg) brightness(102%) contrast(91%);
 }
 .inner-modal-container h2 {
   font-size: 22px;
@@ -962,9 +967,11 @@ ul {
 }
 .select-via-email:hover {
   box-shadow: 0px 3px 6px #00000029;
+  transition: 0.2s ease-in-out;
 }
 .select-via-email:hover h3 {
   color: #f3223c !important;
+  transition: 0.2s ease-in-out;
 }
 .select-via-email:hover img {
   filter: brightness(0) saturate(100%) invert(23%) sepia(95%) saturate(5309%)
@@ -2224,6 +2231,7 @@ responsiveness ************/
   .close-icon {
     width: 10%;
   }
+
   label {
     font-size: 10px;
   }

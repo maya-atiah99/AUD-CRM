@@ -201,7 +201,10 @@ const RegisterFormStep1 = forwardRef(
       });
     };
 
-    console.log('cdskmcsdcds0',typeof fetchedData?.data?.application?.applyingAs)
+    console.log(
+      "cdskmcsdcds0",
+      typeof fetchedData?.data?.application?.applyingAs
+    );
     useEffect(() => {
       if (showInterest) {
         localStorage.setItem(
@@ -253,7 +256,6 @@ const RegisterFormStep1 = forwardRef(
           "Gender",
           "Mobile",
           "ApplicantTelephone",
-          "ApplingAs",
           "SelectedTerm",
           "ApplicationStart",
           "ProgramOfInterest",
@@ -321,6 +323,11 @@ const RegisterFormStep1 = forwardRef(
           }
         });
 
+        if (values.ApplingAs == null) {
+          formData.append("ApplingAs", "");
+        } else {
+          formData.append("ApplingAs", values.ApplingAs);
+        }
         handleAddStageTwo(formData);
       },
     });
@@ -335,14 +342,11 @@ const RegisterFormStep1 = forwardRef(
     }, [ref, formik]);
 
     useEffect(() => {
-      console.log("dfjkvbjhbfdvfvfv");
       localStorage.setItem("applicationStart", formik.values?.ApplicationStart);
       localStorage.setItem("applingAs", formik.values?.ApplingAs);
       setApplicationStart(formik.values?.ApplicationStart);
       setApplyingAs(formik.values?.ApplingAs);
     }, [formik.values?.ApplicationStart, formik.values?.ApplingAs]);
-    console.log(fetchedData);
-    console.log("formik.values.isSaved", formik.values.isSaved);
 
     return (
       <div className='form-subcontainer'>

@@ -1,10 +1,12 @@
 import React from "react";
-
+import styles from "./Loader.module.css";
 const Loader = () => {
   return (
-    <svg viewBox='25 25 50 50'>
-      <circle r='20' cy='50' cx='50'></circle>
-    </svg>
+    <div className={styles["load-main-cont"]}>
+      <div className={styles["loader-container"]}>
+        <div className={styles["loader"]}></div>
+      </div>
+    </div>
   );
 };
 

@@ -4,7 +4,7 @@ import { useFormikContext } from "formik";
 import TextComponent from "../../Texts/TextComponent";
 import TextArea from "../../Inputs/TextArea";
 
-const ProgramInformation = ({isView}) => {
+const ProgramInformation = ({ isView }) => {
   const formik = useFormikContext();
 
   return (
@@ -41,18 +41,20 @@ const ProgramInformation = ({isView}) => {
         touched={formik.errors?.HealthChalenges}
         disabled={isView}
       />
-      <TextArea
-        label='Please Provide Details:'
-        rows='5'
-        name='HealthComments'
-        value={formik.values.HealthComments}
-        onChange={(name, value) => {
-          formik.setFieldValue(name, value);
-        }}
-        errors={formik.errors?.HealthComments}
-        touched={formik.touched?.HealthComments}
-        disabled={isView}
-      />
+      {formik.values.HealthChalenges == true && (
+        <TextArea
+          label='Please Provide Details:'
+          rows='5'
+          name='HealthComments'
+          value={formik.values.HealthComments}
+          onChange={(name, value) => {
+            formik.setFieldValue(name, value);
+          }}
+          errors={formik.errors?.HealthComments}
+          touched={formik.touched?.HealthComments}
+          disabled={isView}
+        />
+      )}
     </div>
   );
 };

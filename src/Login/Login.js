@@ -79,7 +79,7 @@ const Login = ({
               <div className='login-container'>
                 <TextBox
                   label='Email Address'
-                  required={true}
+                  // required={true}
                   name='username'
                   value={values.username}
                   onChange={(name, value) => {
@@ -91,7 +91,7 @@ const Login = ({
                 <TextBox
                   label='Password'
                   type='password'
-                  required={true}
+                  // required={true}
                   name='password'
                   value={values.password}
                   onChange={(name, value) => {

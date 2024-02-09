@@ -2118,6 +2118,10 @@ responsiveness ************/
     min-height: 25px !important;
     height: 28px !important;
   }
+  .css-18jj4pb-controll {
+    height: 28px !important;
+    min-height: 25px !important;
+  }
   /**phone input */
   .react-tel-input .form-control {
     height: 28px !important ;

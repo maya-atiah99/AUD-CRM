@@ -99,7 +99,7 @@ const ProgramInformation = ({ fetchedData, isView }) => {
       <div className='grid-programInfo-cont'>
         <DropDown
           width='100%'
-          label='Program Of Interest'
+          label='Program'
           required={true}
           name='ProgramOfInterest'
           type='5'

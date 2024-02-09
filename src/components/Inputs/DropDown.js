@@ -183,7 +183,7 @@ const DropDown = ({
             : formattedOptions
         }
         isDisabled={disabled}
-        required={required}
+        // required={required}
         styles={customStyles}
         components={{
           DropdownIndicator: CustomDropdownArrow,

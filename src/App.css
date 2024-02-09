@@ -1902,6 +1902,10 @@ td:first-child {
   .invoice-card-container {
     padding-bottom: 30px;
   }
+  .applications-table-cont th,
+  .applications-table-cont td {
+    font-size: 14px;
+  }
 }
 @media screen and (max-width: 1437px) {
   .invoice-card-container {

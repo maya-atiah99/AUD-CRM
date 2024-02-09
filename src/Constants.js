@@ -1,1 +1,1 @@
-export const API_URL="https://chatbottesting.cts.ae/api"
+export const API_URL="https://EndPointTesting.aud.edu"

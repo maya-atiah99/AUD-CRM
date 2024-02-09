@@ -7,6 +7,7 @@ import { useApplicantLogin } from "../Hooks/Login";
 import LoginValidationSchema from "../ValidationSchemas/loginValidationSchema";
 import { Formik, Form } from "formik";
 import toast from "react-hot-toast";
+import LoaderButton from "../components/Loader/LoaderButton";
 
 const Login = ({
   setShowLoginModal,
@@ -17,7 +18,7 @@ const Login = ({
   setIsForgotPassword,
 }) => {
   const [manageShowInterest, setManageshowInterest] = useState(false);
-  const { mutate: login } = useApplicantLogin();
+  const { mutate: login, isLoading: isLoginLoading } = useApplicantLogin();
   const [errorMessage, setErrorMessage] = useState("");
   const initialValues = {
     username: "",
@@ -107,12 +108,17 @@ const Login = ({
                   errors={errors.password || errorMessage}
                   touched={touched.password}
                 />
-                <AUDButton
-                  width='100%'
-                  text='Login'
-                  type='submit'
-                  handleOnClick={() => handleSubmit()}
-                />
+                {isLoginLoading ? (
+                  <LoaderButton />
+                ) : (
+                  <AUDButton
+                    width='100%'
+                    text='Login'
+                    type='submit'
+                    handleOnClick={() => handleSubmit()}
+                  />
+                )}
+
                 <div className='test222'>
                   <LinkButton
                     title='Forgot Password'

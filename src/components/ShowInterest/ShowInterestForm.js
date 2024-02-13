@@ -93,6 +93,8 @@ const ShowInterestForm = ({
   const handleMobileChange = () => {
     setErrorPhoneMessage("");
   };
+
+
   return (
     <Formik
       initialValues={init}
@@ -102,6 +104,7 @@ const ShowInterestForm = ({
         setEmail(values.email);
         const valuesToSend =
           values.titleId === "" ? { ...values, titleId: undefined } : values;
+          console.log('clickedbutton',clickedButton)
         if (clickedButton === "continueToApply") {
           handleContinueToApply(valuesToSend, { setFieldError, resetForm });
         } else if (clickedButton === "submitForm") {

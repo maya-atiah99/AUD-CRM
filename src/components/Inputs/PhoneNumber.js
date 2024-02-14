@@ -13,9 +13,10 @@ const PhoneNumber = ({
   touched,
   validate,
   disabled,
+  initialCountry,
 }) => {
   const [initialValue, setInitialValue] = useState(value);
-
+  const [initialCode, setInitialCode] = useState(initialCountry || "ae");
   const inputStyle = {
     width: "100%",
     border: errors && touched ? "1px solid red" : "",
@@ -36,6 +37,9 @@ const PhoneNumber = ({
     setInitialValue(value);
   }, [value]);
 
+  useEffect(() => {
+    setInitialCode(initialCode);
+  }, [initialCode]);
   return (
     <div style={{ color: disabled ? "#1b224c3f" : "#1B224C" }}>
       {label ? (
@@ -48,7 +52,8 @@ const PhoneNumber = ({
       )}
 
       <PhoneInput
-        country={"ae"}
+        country={initialCode}
+        placeholder=''
         value={initialValue}
         onChange={handlePhoneChange}
         autoComplete='off'

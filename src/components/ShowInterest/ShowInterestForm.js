@@ -28,6 +28,7 @@ const ShowInterestForm = ({
   const [errorMessage, setErrorMessage] = useState("");
   const [errorPhoneMessage, setErrorPhoneMessage] = useState("");
   const [clickedButton, setClickedButton] = useState(null);
+  const [initialCountry, setInitialCountry] = useState("ae");
   const [init, setInit] = useState({
     firstName: "",
     middleName: "",
@@ -45,6 +46,9 @@ const ShowInterestForm = ({
   const { mutate: addShowInterest } = useAddApplicantToShowInterest();
   const { mutate: addApplicant } = useAddApplicant();
 
+  const resetPhoneInput = () => {
+    setInitialCountry("ae");
+  };
   const handleContinueToApply = (values, { setFieldError, resetForm }) => {
     addApplicant(values, {
       onSuccess: (data) => {
@@ -79,6 +83,7 @@ const ShowInterestForm = ({
         openVerifiedModal("Submit");
         setApplicantId(data?.data?.applicantId);
         setSubmissionSuccess(true);
+        resetPhoneInput();
         resetForm();
       },
       onError: (error) => {
@@ -94,7 +99,6 @@ const ShowInterestForm = ({
     setErrorPhoneMessage("");
   };
 
-
   return (
     <Formik
       initialValues={init}
@@ -104,13 +108,12 @@ const ShowInterestForm = ({
         setEmail(values.email);
         const valuesToSend =
           values.titleId === "" ? { ...values, titleId: undefined } : values;
-          console.log('clickedbutton',clickedButton)
+        console.log("clickedbutton", clickedButton);
         if (clickedButton === "continueToApply") {
           handleContinueToApply(valuesToSend, { setFieldError, resetForm });
         } else if (clickedButton === "submitForm") {
           handleSubmitForm(valuesToSend, { resetForm });
         }
-
         if (submissionSuccess) {
           resetForm();
           setInit({
@@ -264,6 +267,7 @@ const ShowInterestForm = ({
                     width='100%'
                     label='Mobile'
                     required={true}
+                    initialCountry={initialCountry}
                     name='mobile'
                     value={values.mobile}
                     onChange={(name, value) => {
@@ -342,6 +346,7 @@ const ShowInterestForm = ({
                   value={values.applicationStart}
                   onChange={(name, value) => {
                     setFieldValue(name, value);
+                    setFieldValue("fieldOfInterest", "");
                   }}
                   errors={errors.applicationStart}
                   touched={touched.applicationStart}

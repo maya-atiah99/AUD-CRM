@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Dropdown from "../Inputs/DropDown";
 import TextBox from "../Inputs/TextBox";
 import PhoneNumber from "../Inputs/PhoneNumber";
@@ -24,7 +24,7 @@ const ShowInterestForm = ({
   setApplicationId,
 }) => {
   const [submissionSuccess, setSubmissionSuccess] = useState(false);
-
+  const [isResetForm, setIsResetform] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
   const [errorPhoneMessage, setErrorPhoneMessage] = useState("");
   const [clickedButton, setClickedButton] = useState(null);
@@ -83,7 +83,9 @@ const ShowInterestForm = ({
         openVerifiedModal("Submit");
         setApplicantId(data?.data?.applicantId);
         setSubmissionSuccess(true);
-        resetPhoneInput();
+        setInitialCountry("ae");
+        setIsResetform(true);
+
         resetForm();
       },
       onError: (error) => {
@@ -98,7 +100,11 @@ const ShowInterestForm = ({
   const handleMobileChange = () => {
     setErrorPhoneMessage("");
   };
+  console.log("submission", submissionSuccess);
 
+  useEffect(() => {
+    setIsResetform(false);
+  }, [init]);
   return (
     <Formik
       initialValues={init}
@@ -263,6 +269,7 @@ const ShowInterestForm = ({
               <div className='grid-container2 '>
                 <div>
                   <PhoneNumber
+                    key={isResetForm}
                     styleType='formField'
                     width='100%'
                     label='Mobile'

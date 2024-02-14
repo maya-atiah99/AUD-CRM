@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import ModalComponent from "../components/ModalComponent";
 import LinkButton from "../components/Buttons/LinkButton";
 import TextComponent from "../components/Texts/TextComponent";
@@ -34,8 +34,11 @@ const OtpCodeModal = ({
     setOtpCode(otp.join(""));
     handleVerifyMobileOtpForPassword();
   };
-  console.log(otp.join(""));
-  console.log('otpp',otp)
+
+  useEffect(() => {
+    setOtpCode(otp.join(""));
+  }, [otp]);
+
   return (
     <ModalComponent
       width='40rem'

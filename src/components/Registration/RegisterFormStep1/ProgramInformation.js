@@ -19,7 +19,6 @@ const ProgramInformation = ({ fetchedData, isView }) => {
   ];
 
   useEffect(() => {
-    console.log("1111111111111111111111111111111");
     const fetchApplyingAsData = async () => {
       await refetchApplyinAs();
       const formattedApplyingAsOptions = applyingAsData?.data
@@ -41,8 +40,6 @@ const ProgramInformation = ({ fetchedData, isView }) => {
   }, [formik.values.ApplicationStart]);
 
   useEffect(() => {
-    console.log("222222222222222222222");
-    console.log("xsxjsx");
     const formattedApplyingAsOptions = applyingAsData?.data
       ? applyingAsData?.data?.map((option) => ({
           value: option.applyingAsId,
@@ -56,12 +53,6 @@ const ProgramInformation = ({ fetchedData, isView }) => {
     formik.setFieldValue(name, value);
   };
 
-  console.log("formikk xdccd", formik?.values);
-  console.log("csdcsdcdscsc", applyingAsData);
-  console.log("applyingAsData", applyingAsData);
-  console.log("applicationStartValue", applicationStartValue);
-  console.log("formik.values.ApplicationStart", formik.values.ApplicationStart);
-  console.log("applying as options", applyingAsOptions);
   return (
     <div className='form-subcontainers'>
       <SectionTitle title='PROGRAM INFORMATION' dotted={true} />
@@ -71,7 +62,10 @@ const ProgramInformation = ({ fetchedData, isView }) => {
         selectedValue={formik.values.ApplicationStart}
         label='Start Your Application'
         required={true}
-        onRadioChange={onRadioChange}
+        onRadioChange={(name, value) => {
+          formik.setFieldValue(name, value);
+          formik.setFieldValue("ApplingAs", "");
+        }}
         disabled={isView}
       />
       {formik.errors?.ApplicationStart && formik.touched?.ApplicationStart ? (

@@ -433,7 +433,7 @@ const RegisterPage = ({
         <div className='button-cont-register '>
           {steps[activeStep]?.ShowContinue === true ? (
             <AUDButton
-              text='Continue To Verify'
+              text='Submit'
               handleOnClick={() => handleContinueDeclaration(true)}
             />
           ) : activeStep !== steps.length - 1 ? (

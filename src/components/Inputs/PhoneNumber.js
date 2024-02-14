@@ -38,8 +38,9 @@ const PhoneNumber = ({
   }, [value]);
 
   useEffect(() => {
-    setInitialCode(initialCode);
-  }, [initialCode]);
+    setInitialCode(initialCountry);
+  }, [initialCountry]);
+
   return (
     <div style={{ color: disabled ? "#1b224c3f" : "#1B224C" }}>
       {label ? (
@@ -52,8 +53,10 @@ const PhoneNumber = ({
       )}
 
       <PhoneInput
+        key={initialCode}
         country={initialCode}
         placeholder=''
+        countryCodeEditable={true}
         value={initialValue}
         onChange={handlePhoneChange}
         autoComplete='off'

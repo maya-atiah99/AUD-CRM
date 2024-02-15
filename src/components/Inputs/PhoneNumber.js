@@ -53,8 +53,7 @@ const PhoneNumber = ({
       )}
 
       <PhoneInput
-        key={initialCode}
-        country={initialCode}
+        country={'ae'}
         placeholder=''
         countryCodeEditable={true}
         value={initialValue}

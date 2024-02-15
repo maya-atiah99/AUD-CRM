@@ -56,6 +56,7 @@ const ShowInterestForm = ({
         localStorage.setItem("applicationId", data?.data?.applicationId);
         setApplicationId(data?.data?.applicationId);
         localStorage.setItem("applicationStart", values.applicationStart);
+        localStorage.setItem("applicationStatus", false);
         setApplicationStart(values.applicationStart);
         setApplicantId(data?.data?.applicantId);
         openVerifiedModal("Continue");

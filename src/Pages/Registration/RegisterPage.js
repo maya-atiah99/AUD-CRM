@@ -379,6 +379,8 @@ const RegisterPage = ({
   const handleNext = (next) => {
     if (next) {
       setActiveStep((prevActiveStep) => prevActiveStep + 1);
+      window.scrollTo(0, 0);
+
     }
   };
   useEffect(() => {

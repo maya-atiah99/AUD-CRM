@@ -163,7 +163,7 @@ const getValidationSchemaStep1 = (applicationStart, applingAs) => {
     LegacyMotherProgram: Yup.string(),
     LegacyMotherGraduationYear: Yup.number(),
     LegacyMotherMobile: Yup.string(),
-    PassportNumber: Yup.string().max(10).min(10),
+    PassportNumber: Yup.string().max(10),
     EmiratesId: Yup.string().max(10).min(10),
     Passport_File: Yup.mixed(),
     EmiratesId_File: Yup.mixed(),

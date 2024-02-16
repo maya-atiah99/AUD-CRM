@@ -124,11 +124,11 @@ const DropDown = ({
     control: (base) => ({
       ...base,
       border: errors && touched ? "1px solid #F3223C" : "",
-
       "&:focus": {
         borderColor: "blue",
       },
     }),
+
     placeholder: (base) => ({
       ...base,
       color: "transparent",
@@ -185,6 +185,7 @@ const DropDown = ({
         isDisabled={disabled}
         // required={required}
         styles={customStyles}
+        maxMenuHeight={100}
         components={{
           DropdownIndicator: CustomDropdownArrow,
         }}

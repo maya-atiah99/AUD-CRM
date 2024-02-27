@@ -234,7 +234,7 @@ const ShowInterest = ({
     onSuccess: async (data) => {
       setCheckEmailSent(true);
       setShowOtpCodeMOdal(false);
-      setOtpCode("")
+      setOtpCode("");
     },
     onError: (error) => {
       console.log("error: ", error);

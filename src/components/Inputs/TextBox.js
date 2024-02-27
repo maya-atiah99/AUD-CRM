@@ -12,6 +12,7 @@ const TextBox = ({
   type,
   disabled,
   moreInfo,
+  placeholder
 }) => {
   const [initialValue, setInitialValue] = useState(value);
 
@@ -56,6 +57,7 @@ const TextBox = ({
         onChange={handleChange}
         value={initialValue}
         disabled={disabled ? true : false}
+        placeholder={placeholder}
       />
       {moreInfo ? (
         <img

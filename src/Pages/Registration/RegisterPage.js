@@ -15,6 +15,7 @@ import RegisterFormStep4 from "../../components/Registration/RegisterForm4/Regis
 import WaiverAndReleases from "../../components/Registration/RegisterFormWaiver/WaiverAndReleases";
 import toast, { Toaster } from "react-hot-toast";
 import VerifiedCheckModal from "../../components/ShowInterest/VerifiedCheckModal";
+import ExitModal from "../../components/Registration/ExitModal";
 
 const RegisterPage = ({
   applicantId,
@@ -32,6 +33,7 @@ const RegisterPage = ({
   const [isView, setIsView] = useState(
     localStorage.getItem("applicationStatus") === "true"
   );
+  const [isExit, setIsExit] = useState(false);
   const [steps, setSteps] = useState([]);
   const [isVerified, setIsVerified] = useState(false);
   const formikRefStep1 = useRef();
@@ -380,7 +382,6 @@ const RegisterPage = ({
     if (next) {
       setActiveStep((prevActiveStep) => prevActiveStep + 1);
       window.scrollTo(0, 0);
-
     }
   };
   useEffect(() => {
@@ -414,12 +415,12 @@ const RegisterPage = ({
                 : "/images/homeicon.svg"
             }
             // to={activeStep === 0 ? "/" : null}
-            handleOnClick={() => handleClickPreviousButton()}
+            handleOnClick={() => setIsExit(true)}
           />
         </div>
 
         <TextComponent
-          text='Please fill all the required fields (*) and click the Save & Continue button to continue to the next step.'
+          text='Please fill all the required fields (*) before moving to the next page.'
           icon='/images/warning-sign.svg'
           opacity='0.56'
           color='#1B224C'
@@ -472,6 +473,15 @@ const RegisterPage = ({
           close={() => setIsVerified(false)}
           title='Application Submitted Successfully'
           text='You will receive an email from us very soon'
+        />
+      ) : (
+        ""
+      )}
+      {isExit ? (
+        <ExitModal
+          setIsExit={setIsExit}
+          handleSave={() => handleSave(true)}
+          handleExit={handleClickPreviousButton}
         />
       ) : (
         ""

@@ -21,13 +21,13 @@ const Consent = ({ isView }) => {
         classfont='consent-text'
         disabled={isView}
       />
-      <TextComponent
+      {/* <TextComponent
         text='Any other education record is classified as non-directory information and can not be disclosed to any party without the student’s '
         size='18px'
         classfont='consent-text'
         font='600'
         disabled={isView}
-      />
+      /> */}
       <div className=' bulleted-consent-grid'>
         <BulletedText
           items={[{ text: "Student name" }, { text: "Address(es)" }]}
@@ -45,7 +45,7 @@ const Consent = ({ isView }) => {
           ]}
         />
         <BulletedText
-          items={[{ text: "ates of Attendance and Credentials AAwarded." }]}
+          items={[{ text: "Dates of Attendance and Credentials AAwarded." }]}
         />
       </div>
       <TextComponent

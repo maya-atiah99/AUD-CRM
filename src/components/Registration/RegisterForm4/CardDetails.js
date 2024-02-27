@@ -9,6 +9,14 @@ const CardDetails = ({ isView }) => {
   const formik = useFormikContext();
   const cardType = formik.values.paymentDetails.cardDetails.CardType;
 
+  const handleCardNumberChange = (name, value) => {
+    const formattedValue = value.replace(/[\s-]/g, "");
+    const formattedCardNumber = formattedValue
+      .replace(/(.{4})/g, "$1 -")
+      .trim();
+    formik.setFieldValue(name, formattedCardNumber);
+  };
+
   return (
     <div className='payment-subcontainer'>
       <div>
@@ -42,9 +50,10 @@ const CardDetails = ({ isView }) => {
         label='Card Number'
         required={true}
         name='paymentDetails.cardDetails.EncryptedCardNumber'
+        placeholder='0000 - 0000 - 0000 - 0000'
         value={formik.values.paymentDetails.cardDetails.EncryptedCardNumber}
         onChange={(name, value) => {
-          formik.setFieldValue(name, value);
+          handleCardNumberChange(name, value);
         }}
         errors={formik.errors?.paymentDetails?.cardDetails?.EncryptedCardNumber}
         touched={

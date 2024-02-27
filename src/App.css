@@ -367,7 +367,7 @@ textarea:focus-visible {
   opacity: 1;
 }
 .close-icon img {
-  width: 50px;
+  width: 40px;
 }
 .close-icon img:hover {
   filter: brightness(0) saturate(100%) invert(23%) sepia(95%) saturate(5309%)
@@ -2117,6 +2117,10 @@ responsiveness ************/
   .css-1b9fmbm-control {
     min-height: 25px !important;
     height: 28px !important;
+  }
+  .css-18jj4pb-controll {
+    height: 28px !important;
+    min-height: 25px !important;
   }
   /**phone input */
   .react-tel-input .form-control {

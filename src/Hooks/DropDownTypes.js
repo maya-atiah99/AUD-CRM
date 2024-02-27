@@ -9,7 +9,7 @@ const fetchDropdownTypes = async (typeId) => {
 };
 
 const fetchAcademicTerms = async () => {
-  return await axios.get(API_URL + "/api/Setting/GetAcadmicTerms");
+  return await axios.get(API_URL + "/api/Term/GetActiveAcademicTerms");
 };
 
 const fetchDropDownFromPArent = async (typeId, parentId) => {
@@ -23,7 +23,8 @@ const fetchDropDownFromPArent = async (typeId, parentId) => {
 const fetchFieldOfInterestByApplicationStart = async (applicationStart) => {
   if (applicationStart) {
     return await axios.get(
-      API_URL + `/api/Setting/GetFieldOfInterestByApplicationStart/${applicationStart}`
+      API_URL +
+        `/api/Setting/GetFieldOfInterestByApplicationStart/${applicationStart}`
     );
   }
 };

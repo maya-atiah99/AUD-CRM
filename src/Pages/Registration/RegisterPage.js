@@ -14,6 +14,7 @@ import RegisterFormStep3 from "../../components/Registration/RegisterForm3/Regis
 import RegisterFormStep4 from "../../components/Registration/RegisterForm4/RegisterFormStep4";
 import WaiverAndReleases from "../../components/Registration/RegisterFormWaiver/WaiverAndReleases";
 import toast, { Toaster } from "react-hot-toast";
+import VerifiedCheckModal from "../../components/ShowInterest/VerifiedCheckModal";
 
 const RegisterPage = ({
   applicantId,
@@ -30,8 +31,9 @@ const RegisterPage = ({
   );
   const [isView, setIsView] = useState(
     localStorage.getItem("applicationStatus") === "true"
-  );;
+  );
   const [steps, setSteps] = useState([]);
+  const [isVerified, setIsVerified] = useState(false);
   const formikRefStep1 = useRef();
   const formikRefStep2 = useRef();
   const formikRefStep3 = useRef();
@@ -53,6 +55,7 @@ const RegisterPage = ({
 
   const generateSteps = (applicationStart, applingAs) => {
     if (applicationStart === "2") {
+      //visiting
       return [
         {
           step: 1,
@@ -124,24 +127,26 @@ const RegisterPage = ({
             />
           ),
           ref: formikRefStep3,
+          ShowContinue: true,
         },
-        {
-          step: 5,
-          title: "Pay & Submit",
-          previousStep: "Back to Declaration",
-          NextStep: "Submit",
-          form: (
-            <RegisterFormStep4
-              activeStep={activeStep}
-              applicantId={applicantId}
-              applicationId={applicationId}
-              isView={isView}
-            />
-          ),
-          ref: formikRefStep4,
-        },
+        // {
+        //   step: 5,
+        //   title: "Pay & Submit",
+        //   previousStep: "Back to Declaration",
+        //   NextStep: "Submit",
+        //   form: (
+        //     <RegisterFormStep4
+        //       activeStep={activeStep}
+        //       applicantId={applicantId}
+        //       applicationId={applicationId}
+        //       isView={isView}
+        //     />
+        //   ),
+        //   ref: formikRefStep4,
+        // },
       ];
     } else if (applicationStart === "0" && applingAs === 2) {
+      //audit
       return [
         {
           step: 1,
@@ -296,7 +301,7 @@ const RegisterPage = ({
       setfetchedData(applicantStageTwo);
     }
   };
-  console.log('isview',isView)
+  console.log("isview", isView);
 
   useEffect(() => {
     refreshPage();
@@ -350,6 +355,27 @@ const RegisterPage = ({
     }, 500);
   };
 
+  const handleContinueDeclaration = async (next) => {
+    await steps[activeStep].ref.current?.setFieldValue("isSaved", true);
+    steps[activeStep].ref.current?.setFieldValue(
+      "NextActiveStep",
+      activeStep + 1
+    );
+    if (next) {
+      try {
+        await steps[activeStep].ref.current?.submitForm();
+        if (steps[activeStep].ref.current?.isValid) {
+          setIsVerified(true);
+          window.scrollTo(0, 0);
+        } else {
+          toast.error("Please Fill All Required Fields");
+          window.scrollTo(0, 0);
+        }
+      } catch (error) {
+        console.error("Error submitting form:", error);
+      }
+    }
+  };
   const handleNext = (next) => {
     if (next) {
       setActiveStep((prevActiveStep) => prevActiveStep + 1);
@@ -405,7 +431,12 @@ const RegisterPage = ({
           setActiveStep={setActiveStep}
         />
         <div className='button-cont-register '>
-          {activeStep !== steps.length - 1 ? (
+          {steps[activeStep]?.ShowContinue === true ? (
+            <AUDButton
+              text='Submit'
+              handleOnClick={() => handleContinueDeclaration(true)}
+            />
+          ) : activeStep !== steps.length - 1 ? (
             <>
               {!isView && (
                 <AUDButton
@@ -434,6 +465,15 @@ const RegisterPage = ({
         </div>
       </div>
       <Toaster />
+      {isVerified ? (
+        <VerifiedCheckModal
+          close={() => setIsVerified(false)}
+          title='Application Submitted Successfully'
+          text='You will receive an email from us very soon'
+        />
+      ) : (
+        ""
+      )}
     </div>
   );
 };

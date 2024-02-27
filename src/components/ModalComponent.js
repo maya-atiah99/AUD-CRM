@@ -23,7 +23,7 @@ const ModalComponent = ({
         <div>
           <h2 className={classFont}>{title}</h2>
           <div onClick={onClose} className='close-icon'>
-            <img src='/images/closeicon.svg' alt='close icon' />
+            <img src='/images/closeicon.svg' alt='close icon' onClick={onClose}  />
           </div>
         </div>
         {description ? (

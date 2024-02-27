@@ -69,7 +69,7 @@ const ShowInterest = ({
       }
       setTimeout(() => {
         setShowVerifiedCheckModal(false);
-      }, [2000]);
+      }, [3000]);
     },
     onError: (error) => {
       console.log("error: ", error);
@@ -137,8 +137,8 @@ const ShowInterest = ({
       );
     },
     onSuccess: async (data) => {
-      openVerifiedModal("Continue");
-      setActionOrigin("Continue");
+      // openVerifiedModal("Continue");
+      // setActionOrigin("Continue");
       setOtpCode("");
     },
     onError: (error) => {
@@ -152,8 +152,8 @@ const ShowInterest = ({
       );
     },
     onSuccess: async (data) => {
-      openVerifiedModal("Continue");
-      setActionOrigin("Continue");
+      // openVerifiedModal("Continue");
+      // setActionOrigin("Continue");
       setEmailOtp("");
     },
     onError: (error) => {
@@ -234,6 +234,7 @@ const ShowInterest = ({
     onSuccess: async (data) => {
       setCheckEmailSent(true);
       setShowOtpCodeMOdal(false);
+      setOtpCode("")
     },
     onError: (error) => {
       console.log("error: ", error);

@@ -60,7 +60,7 @@ const DropDown = ({
 
   const formattedOptions = options?.data
     ? options?.data?.map((option) => ({
-        value: option.value,
+        value: option.ddid,
         label: option.text,
       }))
     : [];

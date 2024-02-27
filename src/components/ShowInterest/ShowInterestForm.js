@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Dropdown from "../Inputs/DropDown";
 import TextBox from "../Inputs/TextBox";
 import PhoneNumber from "../Inputs/PhoneNumber";
@@ -24,10 +24,11 @@ const ShowInterestForm = ({
   setApplicationId,
 }) => {
   const [submissionSuccess, setSubmissionSuccess] = useState(false);
-
+  const [isResetForm, setIsResetform] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
   const [errorPhoneMessage, setErrorPhoneMessage] = useState("");
   const [clickedButton, setClickedButton] = useState(null);
+  const [initialCountry, setInitialCountry] = useState("ae");
   const [init, setInit] = useState({
     firstName: "",
     middleName: "",
@@ -45,6 +46,9 @@ const ShowInterestForm = ({
   const { mutate: addShowInterest } = useAddApplicantToShowInterest();
   const { mutate: addApplicant } = useAddApplicant();
 
+  const resetPhoneInput = () => {
+    setInitialCountry("ae");
+  };
   const handleContinueToApply = (values, { setFieldError, resetForm }) => {
     addApplicant(values, {
       onSuccess: (data) => {
@@ -52,6 +56,7 @@ const ShowInterestForm = ({
         localStorage.setItem("applicationId", data?.data?.applicationId);
         setApplicationId(data?.data?.applicationId);
         localStorage.setItem("applicationStart", values.applicationStart);
+        localStorage.setItem("applicationStatus", false);
         setApplicationStart(values.applicationStart);
         setApplicantId(data?.data?.applicantId);
         openVerifiedModal("Continue");
@@ -79,6 +84,9 @@ const ShowInterestForm = ({
         openVerifiedModal("Submit");
         setApplicantId(data?.data?.applicantId);
         setSubmissionSuccess(true);
+        setInitialCountry("ae");
+        setIsResetform(true);
+
         resetForm();
       },
       onError: (error) => {
@@ -93,6 +101,11 @@ const ShowInterestForm = ({
   const handleMobileChange = () => {
     setErrorPhoneMessage("");
   };
+  console.log("submission", submissionSuccess);
+
+  useEffect(() => {
+    setIsResetform(false);
+  }, [init]);
   return (
     <Formik
       initialValues={init}
@@ -102,12 +115,12 @@ const ShowInterestForm = ({
         setEmail(values.email);
         const valuesToSend =
           values.titleId === "" ? { ...values, titleId: undefined } : values;
+        console.log("clickedbutton", clickedButton);
         if (clickedButton === "continueToApply") {
           handleContinueToApply(valuesToSend, { setFieldError, resetForm });
         } else if (clickedButton === "submitForm") {
           handleSubmitForm(valuesToSend, { resetForm });
         }
-
         if (submissionSuccess) {
           resetForm();
           setInit({
@@ -257,10 +270,12 @@ const ShowInterestForm = ({
               <div className='grid-container2 '>
                 <div>
                   <PhoneNumber
+                    key={isResetForm}
                     styleType='formField'
                     width='100%'
                     label='Mobile'
                     required={true}
+                    initialCountry={initialCountry}
                     name='mobile'
                     value={values.mobile}
                     onChange={(name, value) => {
@@ -339,6 +354,7 @@ const ShowInterestForm = ({
                   value={values.applicationStart}
                   onChange={(name, value) => {
                     setFieldValue(name, value);
+                    setFieldValue("fieldOfInterest", "");
                   }}
                   errors={errors.applicationStart}
                   touched={touched.applicationStart}

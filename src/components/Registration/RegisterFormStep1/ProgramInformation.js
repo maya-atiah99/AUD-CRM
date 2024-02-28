@@ -10,6 +10,7 @@ const ProgramInformation = ({ fetchedData, isView }) => {
   const formik = useFormikContext();
   const [applyingAsOptions, setApplyingAsOptions] = useState([]);
   const [applicationStartValue, setApplicationStartValue] = useState("0");
+  const [applicationType, setApplicationType] = useState(null);
   const { data: applyingAsData, refetch: refetchApplyinAs } =
     useFetchApplyingAs(applicationStartValue);
   const startYourApplicationOptions = [
@@ -49,6 +50,15 @@ const ProgramInformation = ({ fetchedData, isView }) => {
     setApplyingAsOptions(formattedApplyingAsOptions);
   }, [applyingAsData]);
 
+  useEffect(() => {
+    if (formik.values.ApplicationStart == "0") {
+      setApplicationType("00000000-0000-0000-0000-000000000000");
+    } else if (formik.values.ApplicationStart == "1") {
+      setApplicationType("00000000-0000-0000-0000-000000000001");
+    } else {
+      setApplicationType("00000000-0000-0000-0000-000000000002");
+    }
+  }, [formik.values.ApplicationStart]);
   const onRadioChange = (name, value) => {
     formik.setFieldValue(name, value);
   };
@@ -65,6 +75,7 @@ const ProgramInformation = ({ fetchedData, isView }) => {
         onRadioChange={(name, value) => {
           formik.setFieldValue(name, value);
           formik.setFieldValue("ApplingAs", "");
+          formik.setFieldValue("ProgramOfInterest", "");
         }}
         disabled={isView}
       />
@@ -95,6 +106,7 @@ const ProgramInformation = ({ fetchedData, isView }) => {
           width='100%'
           label='Program'
           required={true}
+          parent={applicationType}
           name='ProgramOfInterest'
           type='5'
           value={formik.values.ProgramOfInterest}

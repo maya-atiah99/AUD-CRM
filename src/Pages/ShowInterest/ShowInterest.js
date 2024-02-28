@@ -126,10 +126,13 @@ const ShowInterest = ({
         setshowVerifiedModal(false);
         navigate("/register", { state: { showInterest: true } });
         setOtpCode("");
+      } else {
+        toast.error("Something went wrong");
       }
     },
     onError: (error) => {
       console.log("error: ", error);
+
       toast.error("Something went wrong");
       setOtpError(true);
     },

@@ -69,7 +69,7 @@ const ShowInterest = ({
       }
       setTimeout(() => {
         setShowVerifiedCheckModal(false);
-      }, [3000]);
+      }, [5000]);
     },
     onError: (error) => {
       console.log("error: ", error);
@@ -86,6 +86,9 @@ const ShowInterest = ({
     },
     onSuccess: async (data) => {
       setEmailOtp("");
+      toast.success(
+        "Resend is done, please wait until you receive an otp then verify your email"
+      );
     },
     onError: (error) => {
       console.log("error: ", error);
@@ -100,6 +103,9 @@ const ShowInterest = ({
     },
     onSuccess: async (data) => {
       setOtpCode("");
+      toast.success(
+        "Resend is done, please wait until you receive an otp then verify your mobile"
+      );
     },
     onError: (error) => {
       console.log("error: ", error);
@@ -140,6 +146,9 @@ const ShowInterest = ({
       // openVerifiedModal("Continue");
       // setActionOrigin("Continue");
       setOtpCode("");
+      toast.success(
+        "Resend is done, please wait until you receive an otp then verify your mobile"
+      );
     },
     onError: (error) => {
       console.log("error: ", error);
@@ -155,6 +164,9 @@ const ShowInterest = ({
       // openVerifiedModal("Continue");
       // setActionOrigin("Continue");
       setEmailOtp("");
+      toast.success(
+        "Resend is done, please wait until you receive an otp then verify your email"
+      );
     },
     onError: (error) => {
       console.log("error: ", error);
@@ -360,7 +372,11 @@ const ShowInterest = ({
         />
       )}
 
-      <Toaster />
+      <Toaster
+        toastOptions={{
+          duration: 5000,
+        }}
+      />
     </div>
   );
 };

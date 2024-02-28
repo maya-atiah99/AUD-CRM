@@ -392,6 +392,14 @@ const RegisterPage = ({
     }
   }, [activeStep, showInterest, applicantId]);
 
+  const handlePrevious = () => {
+    if (activeStep === 0) {
+      setIsExit(true);
+    } else {
+      setActiveStep(activeStep - 1);
+      refetchStageTwo();
+    }
+  };
   const handleClickPreviousButton = () => {
     if (activeStep === 0) {
       setShowInterest(true);
@@ -415,7 +423,7 @@ const RegisterPage = ({
                 : "/images/homeicon.svg"
             }
             // to={activeStep === 0 ? "/" : null}
-            handleOnClick={() => setIsExit(true)}
+            handleOnClick={handlePrevious}
           />
         </div>
 

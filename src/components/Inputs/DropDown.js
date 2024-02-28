@@ -83,7 +83,7 @@ const DropDown = ({
 
   const formattedParentOptions = parentOptions?.data
     ? parentOptions?.data?.map((option) => ({
-        value: option.value,
+        value: option.ddid,
         label: option.text,
       }))
     : [];
@@ -185,7 +185,7 @@ const DropDown = ({
         isDisabled={disabled}
         // required={required}
         styles={customStyles}
-        maxMenuHeight={100}
+        maxMenuHeight={200}
         components={{
           DropdownIndicator: CustomDropdownArrow,
         }}

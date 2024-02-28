@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 
 const LinkButton = ({
   text,
@@ -8,16 +8,29 @@ const LinkButton = ({
   color,
   handleOnClick,
 }) => {
+  const [active, setActive] = useState(true); 
+
   const linkClass = underlined ? "underlined-link" : "linktext";
+
+ 
+  const handleClick = () => {
+    if (active) {
+      setActive(false);
+      handleOnClick(); 
+      setTimeout(() => {
+        setActive(true);
+      }, 55000); 
+    }
+  };
 
   return (
     <div className='d-flex align-items-center'>
       {text && <p className='p-style'>{text}</p>}
       <a
-        onClick={handleOnClick}
+        onClick={handleClick} 
         href={linkTo}
         className={linkClass}
-        style={{ color: color }}
+        style={{ color: active ? color : "gray" }}
       >
         {title}
       </a>

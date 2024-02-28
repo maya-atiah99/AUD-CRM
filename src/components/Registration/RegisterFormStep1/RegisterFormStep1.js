@@ -347,7 +347,7 @@ const RegisterFormStep1 = forwardRef(
       setApplicationStart(formik.values?.ApplicationStart);
       setApplyingAs(formik.values?.ApplingAs);
     }, [formik.values?.ApplicationStart, formik.values?.ApplingAs]);
-
+console.log('formikxsdcsd',formik.values)
     return (
       <div className='form-subcontainer'>
         <FormikProvider

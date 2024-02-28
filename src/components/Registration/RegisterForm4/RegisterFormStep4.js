@@ -33,7 +33,7 @@ const RegisterFormStep4 = ({ applicantId, applicationId,isView }) => {
       formData.append("ApplicationId", applicationId);
       formData.append(
         "EncryptedCardNumber",
-        values.paymentDetails.cardDetails.EncryptedCardNumber
+        values.paymentDetails.cardDetails.EncryptedCardNumber.replace(/[\s-]/g, "")
       );
       formData.append("CardType", values.paymentDetails.cardDetails.CardType);
       formData.append(

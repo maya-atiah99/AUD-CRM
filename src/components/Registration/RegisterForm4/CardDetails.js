@@ -12,7 +12,7 @@ const CardDetails = ({ isView }) => {
   const handleCardNumberChange = (name, value) => {
     const formattedValue = value.replace(/[\s-]/g, "");
     const formattedCardNumber = formattedValue
-      .replace(/(.{4})/g, "$1 -")
+      .replace(/(.{4})/g, "$1-")
       .trim();
     formik.setFieldValue(name, formattedCardNumber);
   };
@@ -49,6 +49,7 @@ const CardDetails = ({ isView }) => {
       <TextBox
         label='Card Number'
         required={true}
+        // type='number'
         name='paymentDetails.cardDetails.EncryptedCardNumber'
         placeholder='0000 - 0000 - 0000 - 0000'
         value={formik.values.paymentDetails.cardDetails.EncryptedCardNumber}

@@ -5,9 +5,18 @@ import TextBox from "../../Inputs/TextBox";
 import { useFormikContext } from "formik";
 import DocumentUpload from "../../Inputs/DocumentUpload";
 
-const WorkExperience = ({isView}) => {
+const WorkExperience = ({ isView }) => {
   const formik = useFormikContext();
 
+  const handleRequiredFields = () => {
+    if (
+      formik.values.EmploymentStatus === "deb66f30-2473-40d7-8052-fbfff10041f0"
+    ) {
+      return false;
+    } else {
+      return true;
+    }
+  };
   return (
     <div className='form-subcontainers'>
       <SectionTitle title='WORK EXPERIENCE' />
@@ -29,7 +38,7 @@ const WorkExperience = ({isView}) => {
 
         <DropDown
           type='15'
-          required={true}
+          required={handleRequiredFields()}
           width='100%'
           label='Employment Sector'
           name='EmploymentSector'
@@ -43,7 +52,7 @@ const WorkExperience = ({isView}) => {
         />
 
         <TextBox
-          required={true}
+          required={handleRequiredFields()}
           width='100%'
           label='Company Name'
           name='CompanyName'
@@ -56,7 +65,7 @@ const WorkExperience = ({isView}) => {
           disabled={isView}
         />
         <TextBox
-          required={true}
+          required={handleRequiredFields()}
           width='100%'
           label='Job Title'
           name='JobTitle'
@@ -71,7 +80,7 @@ const WorkExperience = ({isView}) => {
       </div>
       <div className='grid-programInfo-cont'>
         <TextBox
-          required={true}
+          required={handleRequiredFields()}
           width='100%'
           label='Year of Experience'
           name='YearsOfExperience'
@@ -84,10 +93,10 @@ const WorkExperience = ({isView}) => {
           disabled={isView}
         />
         <DocumentUpload
-        label="Upload CV"
+          label='Upload CV'
           text='Choose File'
           height='35px'
-          size="50"
+          size='50'
           smallImage={true}
           required={true}
           name='CV'

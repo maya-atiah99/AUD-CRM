@@ -59,7 +59,7 @@ const getValidationSchemaStep2 = (applicationStart, applingAs) => {
               return false;
             }
             const words = value.trim().split("").length;
-            console.log('worddddsssssssssssssss',words)
+            console.log("worddddsssssssssssssss", words);
             return words >= 500;
           })
           .required("PersonalStatement is required"),
@@ -149,25 +149,46 @@ const getValidationSchemaStep2 = (applicationStart, applingAs) => {
       then: (schema) => schema.required("EmploymentStatus is required"),
       otherwise: (schema) => schema.notRequired(),
     });
-    baseSchema.EmploymentSector = baseSchema.EmploymentSector.when("isSaved", {
-      is: (isSaved) => isSaved,
-      then: (schema) => schema.required("EmploymentSector is required"),
-      otherwise: (schema) => schema.notRequired(),
-    });
-    baseSchema.CompanyName = baseSchema.CompanyName.when("isSaved", {
-      is: (isSaved) => isSaved,
-      then: (schema) => schema.required("CompanyName is required"),
-      otherwise: (schema) => schema.notRequired(),
-    });
-    baseSchema.JobTitle = baseSchema.JobTitle.when("isSaved", {
-      is: (isSaved) => isSaved,
-      then: (schema) => schema.required("JobTitle is required"),
-      otherwise: (schema) => schema.notRequired(),
-    });
-    baseSchema.YearsOfExperience = baseSchema.YearsOfExperience.when(
-      "isSaved",
+
+    baseSchema.EmploymentSector = baseSchema.EmploymentSector.when(
+      ["isSaved", "EmploymentStatus"],
       {
-        is: (isSaved) => isSaved,
+        is: (isSaved, employmentStatus) =>
+          isSaved &&
+          employmentStatus !== "deb66f30-2473-40d7-8052-fbfff10041f0",
+        then: (schema) => schema.required("EmploymentSector is required"),
+        otherwise: (schema) => schema.notRequired(),
+      }
+    );
+
+    baseSchema.CompanyName = baseSchema.CompanyName.when(
+      ["isSaved", "EmploymentStatus"],
+      {
+        is: (isSaved, employmentStatus) =>
+          isSaved &&
+          employmentStatus !== "deb66f30-2473-40d7-8052-fbfff10041f0",
+        then: (schema) => schema.required("CompanyName is required"),
+        otherwise: (schema) => schema.notRequired(),
+      }
+    );
+
+    baseSchema.JobTitle = baseSchema.JobTitle.when(
+      ["isSaved", "EmploymentStatus"],
+      {
+        is: (isSaved, employmentStatus) =>
+          isSaved &&
+          employmentStatus !== "deb66f30-2473-40d7-8052-fbfff10041f0",
+        then: (schema) => schema.required("JobTitle is required"),
+        otherwise: (schema) => schema.notRequired(),
+      }
+    );
+
+    baseSchema.YearsOfExperience = baseSchema.YearsOfExperience.when(
+      ["isSaved", "EmploymentStatus"],
+      {
+        is: (isSaved, employmentStatus) =>
+          isSaved &&
+          employmentStatus !== "deb66f30-2473-40d7-8052-fbfff10041f0",
         then: (schema) => schema.required("YearsOfExperience is required"),
         otherwise: (schema) => schema.notRequired(),
       }
@@ -183,9 +204,9 @@ const getValidationSchemaStep2 = (applicationStart, applingAs) => {
     baseSchema.CompanyName = baseSchema.CompanyName.notRequired();
     baseSchema.JobTitle = baseSchema.JobTitle.notRequired();
     baseSchema.YearsOfExperience = baseSchema.YearsOfExperience.notRequired();
-
     baseSchema.CV = baseSchema.CV.notRequired();
   }
+
   return Yup.object().shape(baseSchema);
 };
 

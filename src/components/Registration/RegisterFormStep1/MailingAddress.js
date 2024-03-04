@@ -8,7 +8,13 @@ const MailingAddress = ({ isView }) => {
 
   return (
     <div className='form-subcontainers'>
-      <SectionTitle title='MAILING ADDRESS (TO BE USED FOR ALL ADMISSIONS CORRESPONDENCE)' />
+      <SectionTitle
+        title={
+          formik.values?.ApplicationStart === 2
+            ? "PERSONAL ADDRESS (TO BE USED FOR ALL ADMISSIONS CORRESPONDENCE)"
+            : "MAILING ADDRESS (TO BE USED FOR ALL ADMISSIONS CORRESPONDENCE)"
+        }
+      />
       <TextBox
         width='100%'
         label='Address'

@@ -89,7 +89,7 @@ const ProgramInformation = ({ fetchedData, isView }) => {
   };
 
   const onRadioChange = (name, value) => {
-    if (value== 8) {
+    if (value == 8) {
       setIsShowClintonModal(true);
     }
     formik.setFieldValue(name, value);
@@ -99,6 +99,22 @@ const ProgramInformation = ({ fetchedData, isView }) => {
     <>
       <div className='form-subcontainers'>
         <SectionTitle title='PROGRAM INFORMATION' dotted={true} />
+        <div className='grid-programInfo-cont'>
+          <DropDown
+            width='100%'
+            label='Selected Term'
+            required={true}
+            name='SelectedTerm'
+            isAcademic={true}
+            value={formik.values.SelectedTerm}
+            onChange={(name, value) => {
+              formik.setFieldValue(name, value);
+            }}
+            errors={formik.errors?.SelectedTerm}
+            touched={formik.touched?.SelectedTerm}
+            disabled={isView}
+          />
+        </div>
         <RadioButtonGroup
           options={startYourApplicationOptions}
           name='ApplicationStart'
@@ -148,20 +164,6 @@ const ProgramInformation = ({ fetchedData, isView }) => {
             }}
             errors={formik.errors?.ProgramOfInterest}
             touched={formik.touched?.ProgramOfInterest}
-            disabled={isView}
-          />
-          <DropDown
-            width='100%'
-            label='Selected Term'
-            required={true}
-            name='SelectedTerm'
-            isAcademic={true}
-            value={formik.values.SelectedTerm}
-            onChange={(name, value) => {
-              formik.setFieldValue(name, value);
-            }}
-            errors={formik.errors?.SelectedTerm}
-            touched={formik.touched?.SelectedTerm}
             disabled={isView}
           />
 

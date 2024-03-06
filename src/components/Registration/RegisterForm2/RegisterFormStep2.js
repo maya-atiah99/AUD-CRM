@@ -110,14 +110,12 @@ const RegisterFormStep2 = forwardRef(
           applicantStageThree?.data?.applicantReferance?.readAndUnderstand ||
           "",
         CV: applicantStageThree?.data?.cv || "",
-        StudyAbroadAdvisor: "",
+        StudyBoardAdvisor: "",
         RegistrarEmail: "",
-        TranscriptMobile: "",
-        TranscriptTelephone: "",
-        OfficialTranscript: "",
+        RegistrarPhone: "",
+        DiplomaFile: "",
         CityAcademic: "",
         StateAcademic: "",
-        CVAcademic: "",
       };
       setInit(initialvalues);
     }, [applicantStageThree]);

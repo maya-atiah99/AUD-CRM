@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import Dropdown from "../Inputs/DropDown";
 import TextBox from "../Inputs/TextBox";
 import PhoneNumber from "../Inputs/PhoneNumber";
@@ -8,6 +8,7 @@ import showInterestValidationSchema from "../../ValidationSchemas/ShowInterestVa
 import { useAddApplicantToShowInterest } from "../../Hooks/ShowInterest";
 import { useAddApplicant } from "../../Hooks/Appplicant";
 import DropDown from "../Inputs/DropDown";
+import toast from "react-hot-toast";
 
 const startYourApplicationOptions = [
   { label: "Undergraduate", value: "0" },
@@ -29,6 +30,7 @@ const ShowInterestForm = ({
   const [errorPhoneMessage, setErrorPhoneMessage] = useState("");
   const [clickedButton, setClickedButton] = useState(null);
   const [initialCountry, setInitialCountry] = useState("ae");
+  const FormRef = useRef();
   const [init, setInit] = useState({
     firstName: "",
     middleName: "",
@@ -46,9 +48,6 @@ const ShowInterestForm = ({
   const { mutate: addShowInterest } = useAddApplicantToShowInterest();
   const { mutate: addApplicant } = useAddApplicant();
 
-  const resetPhoneInput = () => {
-    setInitialCountry("ae");
-  };
   const handleContinueToApply = (values, { setFieldError, resetForm }) => {
     addApplicant(values, {
       onSuccess: (data) => {
@@ -101,14 +100,20 @@ const ShowInterestForm = ({
   const handleMobileChange = () => {
     setErrorPhoneMessage("");
   };
-  console.log("submission", submissionSuccess);
 
+  // if (!FormRef?.current?.isValid) {
+  //   toast.error("Please Fill All Required Fields");
+  // }
+  
+  console.log("Fordxd", FormRef);
   useEffect(() => {
     setIsResetform(false);
   }, [init]);
+
   return (
     <Formik
       initialValues={init}
+      innerRef={FormRef}
       validationSchema={showInterestValidationSchema}
       onSubmit={(values, { resetForm, setFieldError }) => {
         setPhoneNumber(values.mobile);
@@ -148,7 +153,6 @@ const ShowInterestForm = ({
         handleSubmit,
         isSubmitting,
       }) => {
-        console.log(values);
         return (
           <Form>
             <div className='showInterestForm-inner-cont '>

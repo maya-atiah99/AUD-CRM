@@ -55,7 +55,7 @@ const RegisterFormStep1 = forwardRef(
           Gender: "",
           Mobile: fetchedData?.data?.applicant?.mobile || "",
           ApplicantTelephone: "",
-
+          WhatsAppNumber: "",
           ApplingAs: fetchedData?.data?.application?.applyingAs,
           SelectedTerm: "",
           ApplicationStart:
@@ -122,6 +122,7 @@ const RegisterFormStep1 = forwardRef(
             : "",
           Gender: fetchedData?.data?.stage1?.gender || "",
           Mobile: fetchedData?.data?.stage1?.mobile || "",
+          WhatsAppNumber: fetchedData?.data?.stage1?.whatsAppNumber || "",
           ApplicantTelephone: fetchedData?.data?.stage1?.phoneNumber || "",
           ApplingAs: fetchedData?.data?.application?.applyingAs,
           SelectedTerm: fetchedData?.data?.application?.term || "",
@@ -259,6 +260,7 @@ const RegisterFormStep1 = forwardRef(
           "DOB",
           "Gender",
           "Mobile",
+          "WhatsAppNumber",
           "ApplicantTelephone",
           "SelectedTerm",
           "ApplicationStart",
@@ -351,7 +353,7 @@ const RegisterFormStep1 = forwardRef(
       setApplicationStart(formik.values?.ApplicationStart);
       setApplyingAs(formik.values?.ApplingAs);
     }, [formik.values?.ApplicationStart, formik.values?.ApplingAs]);
-console.log('formikxsdcsd',formik.values)
+    console.log("formikxsdcsd", formik.values);
     return (
       <div className='form-subcontainer'>
         <FormikProvider

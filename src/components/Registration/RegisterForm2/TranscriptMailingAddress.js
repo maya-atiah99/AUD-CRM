@@ -16,13 +16,13 @@ const TranscriptMailingAddress = ({ isView }) => {
           width='100%'
           label='Study Abroad Advisor / Office Name'
           required={true}
-          name='StudyAbroadAdvisor'
-          value={formik.values.StudyAbroadAdvisor}
+          name='StudyBoardAdvisor'
+          value={formik.values.StudyBoardAdvisor}
           onChange={(name, value) => {
             formik.setFieldValue(name, value);
           }}
-          errors={formik.errors?.StudyAbroadAdvisor}
-          touched={formik.touched?.StudyAbroadAdvisor}
+          errors={formik.errors?.StudyBoardAdvisor}
+          touched={formik.touched?.StudyBoardAdvisor}
           disabled={isView}
         />
         <TextBox
@@ -41,17 +41,17 @@ const TranscriptMailingAddress = ({ isView }) => {
         <PhoneNumber
           width='100%'
           label='Mobile'
-          name='TranscriptMobile'
+          name='RegistrarPhone'
           required={true}
-          value={formik.values.TranscriptMobile}
+          value={formik.values.RegistrarPhone}
           onChange={(name, value) => {
             formik.setFieldValue(name, value);
           }}
-          errors={formik.errors?.TranscriptMobile}
-          touched={formik.touched.TranscriptMobile}
+          errors={formik.errors?.RegistrarPhone}
+          touched={formik.touched.RegistrarPhone}
           disabled={isView}
         />
-        <PhoneNumber
+        {/* <PhoneNumber
           width='100%'
           label='Telephone'
           required={true}
@@ -63,7 +63,7 @@ const TranscriptMailingAddress = ({ isView }) => {
           errors={formik.errors?.TranscriptTelephone}
           touched={formik.touched.TranscriptTelephone}
           disabled={isView}
-        />
+        /> */}
       </div>
       <DocumentUpload
         height='100px'
@@ -71,14 +71,14 @@ const TranscriptMailingAddress = ({ isView }) => {
         label='Upload Document'
         text='Upload Official Transcript'
         required={true}
-        name='OfficialTranscript'
-        // fileName={formik.values.OfficialTranscript}
-        value={formik.values.OfficialTranscript}
+        name='DiplomaFile'
+        // fileName={formik.values.DiplomaFile}
+        value={formik.values.DiplomaFile}
         onChange={(name, value) => {
           formik.setFieldValue(name, value);
         }}
-        errors={formik.errors?.OfficialTranscript}
-        touched={formik.touched?.OfficialTranscript}
+        errors={formik.errors?.DiplomaFile}
+        touched={formik.touched?.DiplomaFile}
         disabled={isView}
       />
     </div>

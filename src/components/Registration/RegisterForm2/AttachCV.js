@@ -3,8 +3,8 @@ import SectionTitle from "../../Texts/SectionTitle";
 import DocumentUpload from "../../Inputs/DocumentUpload";
 import { useFormikContext } from "formik";
 
-const AttachCV = ({isView}) => {
-    const formik = useFormikContext();
+const AttachCV = ({ isView }) => {
+  const formik = useFormikContext();
   return (
     <div className='form-subcontainers'>
       <SectionTitle title='ATTACH CV' />
@@ -14,14 +14,14 @@ const AttachCV = ({isView}) => {
         label='Please upload your most up-to-date Resume or CV'
         text='Please upload your most up-to-date Resume or CV'
         required={true}
-        name='CVAcademic'
-        // fileName={formik.values.CVAcademic}
-        value={formik.values.CVAcademic}
+        name='CV'
+        // fileName={formik.values.CV}
+        value={formik.values.CV}
         onChange={(name, value) => {
           formik.setFieldValue(name, value);
         }}
-        errors={formik.errors?.CVAcademic}
-        touched={formik.touched?.CVAcademic}
+        errors={formik.errors?.CV}
+        touched={formik.touched?.CV}
         disabled={isView}
       />
     </div>

@@ -53,6 +53,11 @@ const getValidationSchemaStep1 = (applicationStart, applingAs) => {
       then: (schema) => schema.required("Mobile is required"),
       otherwise: (schema) => schema.notRequired(),
     }),
+    WhatsAppNumber: Yup.string().when("isSaved", {
+      is: (isSaved) => isSaved,
+      then: (schema) => schema.required("WhatsAppNumber is required"),
+      otherwise: (schema) => schema.notRequired(),
+    }),
     ApplicantTelephone: Yup.string().when("isSaved", {
       is: (isSaved) => isSaved,
       then: (schema) => schema.required("ApplicantTelephone is required"),

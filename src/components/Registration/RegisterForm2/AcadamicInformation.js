@@ -83,6 +83,20 @@ const AcadamicInformation = ({ isView }) => {
             />
           ) : (
             <>
+             <DropDown
+                width='100%'
+                label='State'
+                required={true}
+                type="18"
+                name='StateAcademic'
+                value={formik.values.StateAcademic}
+                onChange={(name, value) => {
+                  formik.setFieldValue(name, value);
+                }}
+                errors={formik.errors?.StateAcademic}
+                touched={formik.touched?.StateAcademic}
+                disabled={isView}
+              />
               <DropDown
                 width='100%'
                 label='City'
@@ -97,20 +111,7 @@ const AcadamicInformation = ({ isView }) => {
                 touched={formik.touched?.CityAcademic}
                 disabled={isView}
               />
-              <DropDown
-                width='100%'
-                label='State'
-                required={true}
-                // type={applicationStart === "2" ? "13" : "7"}
-                name='StateAcademic'
-                value={formik.values.StateAcademic}
-                onChange={(name, value) => {
-                  formik.setFieldValue(name, value);
-                }}
-                errors={formik.errors?.StateAcademic}
-                touched={formik.touched?.StateAcademic}
-                disabled={isView}
-              />
+             
             </>
           )}
 

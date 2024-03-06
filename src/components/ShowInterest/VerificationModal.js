@@ -53,7 +53,7 @@ const VerificationModal = ({
           <Form>
             <ModalComponent
               onClose={() => setshowVerifiedModal(false)}
-              handleOnClick={() => handleSubmit()}
+              handleOnClick={handleSubmit}
               isButton={true}
               width='60rem'
               title='OTP'

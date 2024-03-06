@@ -129,7 +129,7 @@ const PersonalInformation = ({ isView }) => {
           disabled={isView}
         />
       </div>
-      <div className='grid-personal2-cont'>
+      <div className='grid-programInfo-cont'>
         <PhoneNumber
           width='50%'
           label='Mobile'
@@ -142,6 +142,19 @@ const PersonalInformation = ({ isView }) => {
           errors={formik.errors?.Mobile}
           touched={formik.touched?.Mobile}
           disabled={true}
+        />
+         <PhoneNumber
+          width='50%'
+          label='WhatsApp Number'
+          required={true}
+          name='WhatsAppNumber'
+          value={formik.values.WhatsAppNumber}
+          onChange={(name, value) => {
+            formik.setFieldValue(name, value);
+          }}
+          errors={formik.errors?.WhatsAppNumber}
+          touched={formik.touched?.WhatsAppNumber}
+          disabled={isView}
         />
         <PhoneNumber
           width='100%'

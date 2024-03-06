@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import TextBox from "../../Inputs/TextBox";
 import SectionTitle from "../../Texts/SectionTitle";
 import { useFormikContext } from "formik";
@@ -6,15 +6,26 @@ import Dropdown from "../../../components/Inputs/DropDown";
 const MailingAddress = ({ isView }) => {
   const formik = useFormikContext();
 
+  const [mailingTitle, setMailingTitle] = useState(
+    formik.values?.ApplicationStart === 2
+      ? "PERSONAL ADDRESS (TO BE USED FOR ALL ADMISSIONS CORRESPONDENCE)"
+      : "MAILING ADDRESS (TO BE USED FOR ALL ADMISSIONS CORRESPONDENCE)"
+  );
+
+  useEffect(() => {
+    if (formik.values?.ApplicationStart === "2") {
+      setMailingTitle(
+        "PERSONAL ADDRESS (TO BE USED FOR ALL ADMISSIONS CORRESPONDENCE)"
+      );
+    } else {
+      setMailingTitle(
+        "MAILING ADDRESS (TO BE USED FOR ALL ADMISSIONS CORRESPONDENCE)"
+      );
+    }
+  }, [formik.values?.ApplicationStart]);
   return (
     <div className='form-subcontainers'>
-      <SectionTitle
-        title={
-          formik.values?.ApplicationStart === 2
-            ? "PERSONAL ADDRESS (TO BE USED FOR ALL ADMISSIONS CORRESPONDENCE)"
-            : "MAILING ADDRESS (TO BE USED FOR ALL ADMISSIONS CORRESPONDENCE)"
-        }
-      />
+      <SectionTitle title={mailingTitle} />
       <TextBox
         width='100%'
         label='Address'

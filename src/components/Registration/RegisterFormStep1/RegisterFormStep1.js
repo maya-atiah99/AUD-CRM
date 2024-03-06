@@ -14,6 +14,10 @@ import step1ValidationSchema from "../../../ValidationSchemas/Step1ValidationSch
 import { useAddApplicantStageTwo } from "../../../Hooks/Appplicant";
 import getValidationSchemaStep1 from "../../../ValidationSchemas/Step1ValidationSchema";
 import { type } from "@testing-library/user-event/dist/type";
+import TranscriptMailingAddress from "../RegisterForm2/TranscriptMailingAddress";
+import AttachCV from "../RegisterForm2/AttachCV";
+import { Reference } from "yup";
+import WaiverAndReleases from "../RegisterFormWaiver/WaiverAndReleases";
 
 const RegisterFormStep1 = forwardRef(
   (

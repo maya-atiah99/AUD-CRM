@@ -108,7 +108,14 @@ const RegisterPage = ({
           title: "Waiver and Releases",
           previousStep: "Back to Academic",
           NextStep: "Go to Declaration",
-          form: <WaiverAndReleases ref={formikRefStep5} isView={isView} />,
+          form: (
+            <WaiverAndReleases
+              ref={formikRefStep5}
+              isView={isView}
+              applingAs={applingAs}
+              applicationStart={applicationStart}
+            />
+          ),
           ref: formikRefStep5,
         },
         {

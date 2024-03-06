@@ -139,18 +139,20 @@ export const useFetchApplicantStageFour = (applicantId, applicationId) => {
 
 /**************************Fetch applying according to application start */
 
-const fetchApplyingAs = async (applicationStart) => {
-  const app = applicationStart || 0
+const fetchApplyingAs = async (data) => {
+  const app = data?.applicationStart || 0;
+  if (data?.academicTermId) {
     return await axios.get(
-      API_URL + `/api/ApplicantView/GetApplyingAsByStart/${app}`
+      API_URL +
+        `/api/ApplicantView/GetApplyingAsByStart/${app}/${data?.academicTermId}`
     );
-
+  }
 };
 
-export const useFetchApplyingAs = (applicationStart) => {
+export const useFetchApplyingAs = (data) => {
   return useQuery({
-    queryKey: ["applyingAs", applicationStart],
-    queryFn: () => fetchApplyingAs(applicationStart),
+    queryKey: ["applyingAs", data],
+    queryFn: () => fetchApplyingAs(data),
     enable: false,
   });
 };

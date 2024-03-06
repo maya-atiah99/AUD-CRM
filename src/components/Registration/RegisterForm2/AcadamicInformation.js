@@ -59,28 +59,62 @@ const AcadamicInformation = ({ isView }) => {
             touched={formik.touched?.SchoolCountry}
             disabled={isView}
           />
-          <DropDown
-            width='100%'
-            label={
-              applicationStart === "1" ||
-              (applicationStart === "0" && applingAS === 3)
-                ? "Degree Earned Major"
-                : applicationStart === "2" && applingAS == 6
-                ? "Level of study"
-                : "High School Diploma"
-            }
-            required={true}
-            type={applicationStart === "2" ? "13" : "7"}
-            name='DiplomaType'
-            value={formik.values.DiplomaType}
-            onChange={(name, value) => {
-              formik.setFieldValue(name, value);
-            }}
-            errors={formik.errors?.DiplomaType}
-            touched={formik.touched?.DiplomaType}
-            disabled={isView}
-          />
-          {applicationStart !== "2" && applingAS !== 5 && (
+          {applingAS !== 8 ? (
+            <DropDown
+              width='100%'
+              label={
+                applicationStart === "1" ||
+                (applicationStart === "0" && applingAS === 3)
+                  ? "Degree Earned Major"
+                  : applicationStart === "2" && applingAS == 6
+                  ? "Level of study"
+                  : "High School Diploma"
+              }
+              required={true}
+              type={applicationStart === "2" ? "13" : "7"}
+              name='DiplomaType'
+              value={formik.values.DiplomaType}
+              onChange={(name, value) => {
+                formik.setFieldValue(name, value);
+              }}
+              errors={formik.errors?.DiplomaType}
+              touched={formik.touched?.DiplomaType}
+              disabled={isView}
+            />
+          ) : (
+            <>
+              <DropDown
+                width='100%'
+                label='City'
+                required={true}
+                // type={applicationStart === "2" ? "13" : "7"}
+                name='CityAcademic'
+                value={formik.values.CityAcademic}
+                onChange={(name, value) => {
+                  formik.setFieldValue(name, value);
+                }}
+                errors={formik.errors?.CityAcademic}
+                touched={formik.touched?.CityAcademic}
+                disabled={isView}
+              />
+              <DropDown
+                width='100%'
+                label='State'
+                required={true}
+                // type={applicationStart === "2" ? "13" : "7"}
+                name='StateAcademic'
+                value={formik.values.StateAcademic}
+                onChange={(name, value) => {
+                  formik.setFieldValue(name, value);
+                }}
+                errors={formik.errors?.StateAcademic}
+                touched={formik.touched?.StateAcademic}
+                disabled={isView}
+              />
+            </>
+          )}
+
+          {applicationStart !== "2" && applingAS !== 5 && applingAS !== 8 && (
             <DateTime
               width='100%'
               label='Graduation Year'
@@ -152,22 +186,28 @@ const AcadamicInformation = ({ isView }) => {
             disabled={isView}
           />
         )}
-        <DocumentUpload
-          text='Upload Diploma'
-          required={true}
-          height='100px'
-          size='50'
-          label='Upload Document'
-          name='DiplomaFile'
-          // fileName={formik.values.DiplomaFile}
-          value={formik.values.DiplomaFile}
-          onChange={(name, value) => {
-            formik.setFieldValue(name, value);
-          }}
-          errors={formik.errors?.DiplomaFile}
-          touched={formik.touched?.DiplomaFile}
-          disabled={isView}
-        />
+
+        {applingAS !== 8 ? (
+          <DocumentUpload
+            text='Upload Diploma'
+            required={true}
+            height='100px'
+            size='50'
+            label='Upload Document'
+            name='DiplomaFile'
+            // fileName={formik.values.DiplomaFile}
+            value={formik.values.DiplomaFile}
+            onChange={(name, value) => {
+              formik.setFieldValue(name, value);
+            }}
+            errors={formik.errors?.DiplomaFile}
+            touched={formik.touched?.DiplomaFile}
+            disabled={isView}
+          />
+        ) : (
+          ""
+        )}
+
         {/* <DocumentUpload
           text='Upload The Academic Document'
           required={true}

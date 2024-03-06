@@ -8,11 +8,7 @@ const getValidationSchemaStep2 = (applicationStart, applingAs) => {
       then: (schema) => schema.required("SchoolCountry is required"),
       otherwise: (schema) => schema.notRequired(),
     }),
-    DiplomaType: Yup.string().when("isSaved", {
-      is: (isSaved) => isSaved,
-      then: (schema) => schema.required("DiplomaType is required"),
-      otherwise: (schema) => schema.notRequired(),
-    }),
+    DiplomaType: Yup.string(),
     GraduationYear: Yup.date(),
     ListAdvancedCources: Yup.string().notRequired(),
     DiplomaFile: Yup.mixed().when("isSaved", {
@@ -50,21 +46,7 @@ const getValidationSchemaStep2 = (applicationStart, applingAs) => {
     ),
     isSaved: Yup.boolean(),
     NextActiveStep: Yup.number(),
-    PersonalStatement: Yup.string().when("isSaved", {
-      is: (isSaved) => isSaved,
-      then: (schema) =>
-        schema
-          .test("min-words", "Minimum 500 words are required", (value) => {
-            if (!value) {
-              return false;
-            }
-            const words = value.trim().split("").length;
-            console.log("worddddsssssssssssssss", words);
-            return words >= 500;
-          })
-          .required("PersonalStatement is required"),
-      otherwise: (schema) => schema.notRequired(),
-    }),
+    PersonalStatement: Yup.string(),
     EmploymentStatus: Yup.string(),
     EmploymentSector: Yup.string(),
     CompanyName: Yup.string(),
@@ -77,9 +59,41 @@ const getValidationSchemaStep2 = (applicationStart, applingAs) => {
     SendTheLetterRecomendation: Yup.boolean(),
     ReadAndUnderstand: Yup.boolean(),
     CV: Yup.mixed(),
+    StudyAbroadAdvisor: Yup.string(),
+    RegistrarEmail: Yup.string(),
+    TranscriptMobile: Yup.number(),
+    TranscriptTelephone: Yup.number(),
+    OfficialTranscript: Yup.string(),
+    CityAcademic: Yup.string(),
+    StateAcademic: Yup.string(),
+    CVAcademic: Yup.string(),
   };
 
-  if (applicationStart !== "2" && applingAs !== 5) {
+  if (applingAs !== 0 && applingAs !== 7) {
+    console.log("llllokkkkkkkkkkkjnjnnhnbhb");
+    baseSchema.PersonalStatement = baseSchema.PersonalStatement.when(
+      "isSaved",
+      {
+        is: (isSaved) => isSaved,
+        then: (schema) =>
+          schema
+            .test("min-words", "Minimum 500 words are required", (value) => {
+              if (!value) {
+                return false;
+              }
+              const words = value.trim().split("").length;
+              console.log("words", words);
+              return words >= 500;
+            })
+            .required("PersonalStatement is required"),
+        otherwise: (schema) => schema.notRequired(),
+      }
+    );
+  } else {
+    baseSchema.PersonalStatement = baseSchema.PersonalStatement.notRequired();
+  }
+
+  if (applicationStart !== "2" && applingAs !== 5 && applingAs !== 8) {
     baseSchema.GraduationYear = baseSchema.GraduationYear.when("isSaved", {
       is: (isSaved) => isSaved,
       then: (schema) => schema.required("GraduationYear is required"),
@@ -89,6 +103,94 @@ const getValidationSchemaStep2 = (applicationStart, applingAs) => {
     baseSchema.GraduationYear = baseSchema.GraduationYear.notRequired();
   }
 
+  if (applicationStart === "2" && applingAs!==7) {
+    baseSchema.StudyAbroadAdvisor = baseSchema.StudyAbroadAdvisor.when(
+      "isSaved",
+      {
+        is: (isSaved) => isSaved,
+        then: (schema) => schema.required("StudyAbroadAdvisor is required"),
+        otherwise: (schema) => schema.notRequired(),
+      }
+    );
+    baseSchema.RegistrarEmail = baseSchema.RegistrarEmail.when("isSaved", {
+      is: (isSaved) => isSaved,
+      then: (schema) => schema.required("RegistrarEmailis required"),
+      otherwise: (schema) => schema.notRequired(),
+    });
+    baseSchema.TranscriptMobile = baseSchema.TranscriptMobile.when("isSaved", {
+      is: (isSaved) => isSaved,
+      then: (schema) => schema.required("TranscriptMobile is required"),
+      otherwise: (schema) => schema.notRequired(),
+    });
+    baseSchema.TranscriptTelephone = baseSchema.TranscriptTelephone.when(
+      "isSaved",
+      {
+        is: (isSaved) => isSaved,
+        then: (schema) => schema.required("TranscriptTelephone is required"),
+        otherwise: (schema) => schema.notRequired(),
+      }
+    );
+    baseSchema.OfficialTranscript = baseSchema.OfficialTranscript.when(
+      "isSaved",
+      {
+        is: (isSaved) => isSaved,
+        then: (schema) => schema.required("OfficialTranscript is required"),
+        otherwise: (schema) => schema.notRequired(),
+      }
+    );
+  } else {
+    baseSchema.StudyAbroadAdvisor = baseSchema.StudyAbroadAdvisor.notRequired();
+    baseSchema.RegistrarEmail = baseSchema.RegistrarEmail.notRequired();
+    baseSchema.TranscriptMobile = baseSchema.TranscriptMobile.notRequired();
+    baseSchema.TranscriptTelephone =
+      baseSchema.TranscriptTelephone.notRequired();
+    baseSchema.OfficialTranscript = baseSchema.OfficialTranscript.notRequired();
+  }
+
+  if (applingAs !== 8) {
+    baseSchema.DiplomaType = baseSchema.DiplomaType.when("isSaved", {
+      is: (isSaved) => isSaved,
+      then: (schema) => schema.required("DiplomaType is required"),
+      otherwise: (schema) => schema.notRequired(),
+    });
+  } else {
+    console.log('jhbjbvhv')
+    baseSchema.DiplomaType = baseSchema.DiplomaType.notRequired();
+    baseSchema.CityAcademic = baseSchema.CityAcademic.when("isSaved", {
+      is: (isSaved) => isSaved,
+      then: (schema) => schema.required("city academic is required"),
+      otherwise: (schema) => schema.notRequired(),
+    });
+    baseSchema.StateAcademic = baseSchema.StateAcademic.when("isSaved", {
+      is: (isSaved) => isSaved,
+      then: (schema) => schema.required("State Academic is required"),
+      otherwise: (schema) => schema.notRequired(),
+    });
+
+    baseSchema.CVAcademic = baseSchema.CVAcademic.when("isSaved", {
+      is: (isSaved) => isSaved,
+      then: (schema) => schema.required("CVAcademic is required"),
+      otherwise: (schema) => schema.notRequired(),
+    });
+
+    baseSchema.ReferanceTitle = baseSchema.ReferanceTitle.when("isSaved", {
+      is: (isSaved) => isSaved,
+      then: (schema) => schema.required("ReferanceTitle is required"),
+      otherwise: (schema) => schema.notRequired(),
+    });
+    baseSchema.ReferanceName = baseSchema.ReferanceName.when("isSaved", {
+      is: (isSaved) => isSaved,
+      then: (schema) => schema.required("ReferanceName is required"),
+      otherwise: (schema) => schema.notRequired(),
+    });
+    baseSchema.ReferanceEmail = baseSchema.ReferanceEmail.when("isSaved", {
+      is: (isSaved) => isSaved,
+      then: (schema) => schema.required("ReferanceEmail is required"),
+      otherwise: (schema) => schema.notRequired(),
+    });
+  }
+
+ 
   if (!(applicationStart === "0" && applingAs === 2)) {
     baseSchema.CurrentUniversityCountry =
       baseSchema.CurrentUniversityCountry.when("isSaved", {

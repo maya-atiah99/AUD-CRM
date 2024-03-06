@@ -42,10 +42,10 @@ const Declaration = ({ applingAs, applicationStart, isView }) => {
             ? "Undergaduate Catalog, "
             : applicationStart === "1"
             ? "Graduate Catalog, "
-            : "Level Of Study, "
+            : "Undergaduate Catalog, "
         }
         href={
-          applicationStart === "0"
+          applicationStart === "0" || applingAs == 8
             ? "https://aud.edu/media/catalogs/undergraduate/index.html"
             : applicationStart === "1"
             ? "https://aud.edu/media/catalogs/graduate/index.html"

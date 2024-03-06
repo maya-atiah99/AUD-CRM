@@ -17,6 +17,8 @@ import {
 import getValidationSchemaStep2 from "../../../ValidationSchemas/Step2ValidationSchema";
 import Reference from "../RegisterFormStep1/Reference";
 import WorkExperience from "../RegisterFormStep1/WorkExperience";
+import TranscriptMailingAddress from "./TranscriptMailingAddress";
+import AttachCV from "./AttachCV";
 
 const RegisterFormStep2 = forwardRef(
   (
@@ -47,7 +49,7 @@ const RegisterFormStep2 = forwardRef(
         SchoolCountry: applicantStageThree?.data?.stage2?.schoolCountry || "",
         DiplomaType: applicantStageThree?.data?.stage2?.diplomaType || "",
         GraduationYear: applicantStageThree?.data?.stage2?.graduationYear
-          ? applicantStageThree?.data?.stage2?.graduationYear?.substring(0,10)
+          ? applicantStageThree?.data?.stage2?.graduationYear?.substring(0, 10)
           : "",
         ListAdvancedCources:
           applicantStageThree?.data?.stage2?.listAdvancedCources || "",
@@ -108,6 +110,14 @@ const RegisterFormStep2 = forwardRef(
           applicantStageThree?.data?.applicantReferance?.readAndUnderstand ||
           "",
         CV: applicantStageThree?.data?.cv || "",
+        StudyAbroadAdvisor: "",
+        RegistrarEmail: "",
+        TranscriptMobile: "",
+        TranscriptTelephone: "",
+        OfficialTranscript: "",
+        CityAcademic: "",
+        StateAcademic: "",
+        CVAcademic: "",
       };
       setInit(initialvalues);
     }, [applicantStageThree]);
@@ -278,13 +288,39 @@ const RegisterFormStep2 = forwardRef(
         <FormikProvider value={formik} innerRef={ref}>
           <SubmitText />
           <AcadamicInformation isView={isView} />
-          <AcadamicFiles isView={isView} />
-          <PersonalStatement isView={isView} />
+          {applingAs == 6 || applingAs == 8 ? (
+            <TranscriptMailingAddress isView={isView} />
+          ) : (
+            ""
+          )}
+          {applingAs !== 8 ? (
+            <>
+              <AcadamicFiles isView={isView} />
+            </>
+          ) : (
+            ""
+          )}
+
           {applicationStart === "1" ? (
             <>
               <WorkExperience isView={isView} />
-              <Reference isView={isView} />
+              <Reference isView={isView} applingAs={applingAs} />
             </>
+          ) : (
+            ""
+          )}
+
+          {applingAs === 8 ? (
+            <>
+              <AttachCV isView={isView} />
+              <Reference isView={isView} applingAs={applingAs} />
+            </>
+          ) : (
+            ""
+          )}
+
+          {applingAs !== 0 && applingAs !== 7 ? (
+            <PersonalStatement isView={isView} />
           ) : (
             ""
           )}

@@ -5,7 +5,7 @@ import { useFormikContext } from "formik";
 import DropDown from "../../Inputs/DropDown";
 import SquareCheckBox from "../../Inputs/SquareCheckBox";
 
-const Reference = ({ isView }) => {
+const Reference = ({ isView, applingAs }) => {
   const formik = useFormikContext();
 
   return (
@@ -17,6 +17,7 @@ const Reference = ({ isView }) => {
           width='100%'
           label='Title'
           name='ReferanceTitle'
+          required={applingAs == 8 ? true : false}
           value={formik.values.ReferanceTitle}
           onChange={(name, value) => {
             formik.setFieldValue(name, value);
@@ -28,6 +29,7 @@ const Reference = ({ isView }) => {
         <TextBox
           width='100%'
           label='Name'
+          required={applingAs == 8 ? true : false}
           name='ReferanceName'
           value={formik.values.ReferanceName}
           onChange={(name, value) => {
@@ -40,6 +42,7 @@ const Reference = ({ isView }) => {
         <TextBox
           width='100%'
           label='Email'
+          required={applingAs == 8 ? true : false}
           name='ReferanceEmail'
           value={formik.values.ReferanceEmail}
           onChange={(name, value) => {

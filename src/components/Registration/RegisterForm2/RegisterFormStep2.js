@@ -110,12 +110,11 @@ const RegisterFormStep2 = forwardRef(
           applicantStageThree?.data?.applicantReferance?.readAndUnderstand ||
           "",
         CV: applicantStageThree?.data?.cv || "",
-        StudyBoardAdvisor: "",
-        RegistrarEmail: "",
-        RegistrarPhone: "",
-        DiplomaFile: "",
-        CityAcademic: "",
-        StateAcademic: "",
+        StudyBoardAdvisor:
+          applicantStageThree?.data?.stage2?.studyBoardAdvisor || "",
+        RegistrarEmail: applicantStageThree?.data?.stage2?.registrarEmail || "",
+        RegistrarPhone: applicantStageThree?.data?.stage2?.registrarPhone || "",
+        SchoolState: applicantStageThree?.data?.stage2?.schoolState || "",
       };
       setInit(initialvalues);
     }, [applicantStageThree]);
@@ -186,7 +185,7 @@ const RegisterFormStep2 = forwardRef(
           "StudyBoardAdvisor",
           "RegistrarEmail",
           "RegistrarPhone",
-          "StateAcademic",
+          "SchoolState",
         ];
 
         fieldsToAppend.forEach((field) => {

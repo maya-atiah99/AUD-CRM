@@ -89,13 +89,13 @@ const AcadamicInformation = ({ isView }) => {
                 required={true}
                 type='10'
                 parent='b15bc108-6b46-490a-a387-f2f0b7a42246'
-                name='StateAcademic'
-                value={formik.values.StateAcademic}
+                name='SchoolState'
+                value={formik.values.SchoolState}
                 onChange={(name, value) => {
                   formik.setFieldValue(name, value);
                 }}
-                errors={formik.errors?.StateAcademic}
-                touched={formik.touched?.StateAcademic}
+                errors={formik.errors?.SchoolState}
+                touched={formik.touched?.SchoolState}
                 disabled={isView}
               />
             </>

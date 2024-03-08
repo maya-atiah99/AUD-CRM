@@ -62,7 +62,7 @@ const getValidationSchemaStep2 = (applicationStart, applingAs) => {
     StudyBoardAdvisor: Yup.string(),
     RegistrarEmail: Yup.string(),
     RegistrarPhone: Yup.number(),
-    StateAcademic: Yup.string(),
+    SchoolState: Yup.string(),
   };
 
   if (applingAs !== 0 && applingAs !== 7) {
@@ -130,8 +130,7 @@ const getValidationSchemaStep2 = (applicationStart, applingAs) => {
   }
 
   if (applingAs === 8) {
- 
-    baseSchema.StateAcademic = baseSchema.StateAcademic.when("isSaved", {
+    baseSchema.SchoolState = baseSchema.SchoolState.when("isSaved", {
       is: (isSaved) => isSaved,
       then: (schema) => schema.required("State Academic is required"),
       otherwise: (schema) => schema.notRequired(),
@@ -159,7 +158,7 @@ const getValidationSchemaStep2 = (applicationStart, applingAs) => {
       otherwise: (schema) => schema.notRequired(),
     });
   } else {
-    baseSchema.StateAcademic = baseSchema.StateAcademic.notRequired();
+    baseSchema.SchoolState = baseSchema.SchoolState.notRequired();
     baseSchema.CV = baseSchema.CV.notRequired();
     baseSchema.ReferanceTitle = baseSchema.ReferanceTitle.notRequired();
     baseSchema.ReferanceName = baseSchema.ReferanceName.notRequired();
@@ -191,7 +190,7 @@ const getValidationSchemaStep2 = (applicationStart, applingAs) => {
 
   if (
     !(applicationStart === "0" && applingAs === 2) &&
-   ( applicationStart !== "2" || applingAs!==8)
+    (applicationStart !== "2" || applingAs !== 8)
   ) {
     baseSchema.DiplomaType = baseSchema.DiplomaType.when("isSaved", {
       is: (isSaved) => isSaved,

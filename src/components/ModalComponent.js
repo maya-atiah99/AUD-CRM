@@ -1,7 +1,7 @@
-import React from "react";
+import React, { useEffect } from "react";
 import TextComponent from "./Texts/TextComponent";
 import AUDButton from "./Buttons/AUDButton";
-
+import ReactDOM from "react-dom"
 const ModalComponent = ({
   title,
   description,
@@ -14,7 +14,20 @@ const ModalComponent = ({
   classFont,
   text,
 }) => {
-  return (
+
+  
+  useEffect(() => {
+    const handleEsc = (event) => {
+      if (event.keyCode === 27) onClose();
+    };
+ 
+    window.addEventListener('keydown', handleEsc);
+ 
+    return () => {
+      window.removeEventListener('keydown', handleEsc);
+    };
+  }, [onClose]);
+  return  (
     <div className='modal-container'>
       <div
         className='inner-modal-container'

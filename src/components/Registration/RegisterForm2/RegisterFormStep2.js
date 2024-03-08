@@ -183,6 +183,10 @@ const RegisterFormStep2 = forwardRef(
           "CompanyName",
           "YearsOfExperience",
           "GraduationYear",
+          "StudyBoardAdvisor",
+          "RegistrarEmail",
+          "RegistrarPhone",
+          "StateAcademic",
         ];
 
         fieldsToAppend.forEach((field) => {

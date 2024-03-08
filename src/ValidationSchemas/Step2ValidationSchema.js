@@ -62,7 +62,6 @@ const getValidationSchemaStep2 = (applicationStart, applingAs) => {
     StudyBoardAdvisor: Yup.string(),
     RegistrarEmail: Yup.string(),
     RegistrarPhone: Yup.number(),
-    CityAcademic: Yup.string(),
     StateAcademic: Yup.string(),
   };
 
@@ -131,11 +130,7 @@ const getValidationSchemaStep2 = (applicationStart, applingAs) => {
   }
 
   if (applingAs === 8) {
-    baseSchema.CityAcademic = baseSchema.CityAcademic.when("isSaved", {
-      is: (isSaved) => isSaved,
-      then: (schema) => schema.required("city academic is required"),
-      otherwise: (schema) => schema.notRequired(),
-    });
+ 
     baseSchema.StateAcademic = baseSchema.StateAcademic.when("isSaved", {
       is: (isSaved) => isSaved,
       then: (schema) => schema.required("State Academic is required"),
@@ -164,7 +159,6 @@ const getValidationSchemaStep2 = (applicationStart, applingAs) => {
       otherwise: (schema) => schema.notRequired(),
     });
   } else {
-    baseSchema.CityAcademic = baseSchema.CityAcademic.notRequired();
     baseSchema.StateAcademic = baseSchema.StateAcademic.notRequired();
     baseSchema.CV = baseSchema.CV.notRequired();
     baseSchema.ReferanceTitle = baseSchema.ReferanceTitle.notRequired();

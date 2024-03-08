@@ -185,7 +185,7 @@ const DropDown = ({
         isDisabled={disabled}
         // required={required}
         styles={customStyles}
-        maxMenuHeight={200}
+        maxMenuHeight={140}
         components={{
           DropdownIndicator: CustomDropdownArrow,
         }}

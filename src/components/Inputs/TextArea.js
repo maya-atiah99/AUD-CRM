@@ -12,6 +12,7 @@ const TextArea = ({
   errors,
   touched,
   disabled,
+  resize,
 }) => {
   const [initialValue, setInitialValue] = useState(value);
 
@@ -46,6 +47,7 @@ const TextArea = ({
         cols={cols}
         placeholder={placeholder}
         disabled={disabled}
+        style={{ resize: resize ? "auto" : "none" }}
       />
     </div>
   );

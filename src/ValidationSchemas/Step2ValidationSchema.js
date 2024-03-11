@@ -76,14 +76,15 @@ const getValidationSchemaStep2 = (applicationStart, applingAs) => {
               if (!value) {
                 return false;
               }
-              const words = value.trim().split("").length;
+              const words = value.trim().split(/<[^>]*>|[\s]+/).filter(word => word !== "").length;
               console.log("words", words);
-              return words >= 500;
+              return words >= 483;
             })
             .required("PersonalStatement is required"),
         otherwise: (schema) => schema.notRequired(),
       }
     );
+    
   } else {
     baseSchema.PersonalStatement = baseSchema.PersonalStatement.notRequired();
   }

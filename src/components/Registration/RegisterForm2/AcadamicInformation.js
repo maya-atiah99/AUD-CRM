@@ -174,7 +174,7 @@ const AcadamicInformation = ({ isView }) => {
           />
         )}
 
-        {applingAS !== 8 ? (
+        {applingAS !== 6 && applingAS !== 8  ? (
           <DocumentUpload
             text='Upload Diploma'
             required={true}

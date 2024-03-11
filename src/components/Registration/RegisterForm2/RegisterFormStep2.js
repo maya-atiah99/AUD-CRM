@@ -325,6 +325,8 @@ const RegisterFormStep2 = forwardRef(
           ) : (
             ""
           )}
+
+          
         </FormikProvider>
       </div>
     );

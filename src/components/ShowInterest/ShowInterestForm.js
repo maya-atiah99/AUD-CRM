@@ -30,7 +30,6 @@ const ShowInterestForm = ({
   const [errorPhoneMessage, setErrorPhoneMessage] = useState("");
   const [clickedButton, setClickedButton] = useState(null);
   const [initialCountry, setInitialCountry] = useState("ae");
-  const FormRef = useRef();
   const [init, setInit] = useState({
     firstName: "",
     middleName: "",
@@ -76,6 +75,7 @@ const ShowInterestForm = ({
       },
     });
   };
+  console.log("open verified modal", openVerifiedModal);
 
   const handleSubmitForm = (values, { resetForm }) => {
     addShowInterest(values, {
@@ -101,11 +101,6 @@ const ShowInterestForm = ({
     setErrorPhoneMessage("");
   };
 
-  // if (!FormRef?.current?.isValid) {
-  //   toast.error("Please Fill All Required Fields");
-  // }
-  
-  console.log("Fordxd", FormRef);
   useEffect(() => {
     setIsResetform(false);
   }, [init]);
@@ -113,7 +108,6 @@ const ShowInterestForm = ({
   return (
     <Formik
       initialValues={init}
-      innerRef={FormRef}
       validationSchema={showInterestValidationSchema}
       onSubmit={(values, { resetForm, setFieldError }) => {
         setPhoneNumber(values.mobile);

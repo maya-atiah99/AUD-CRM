@@ -10,7 +10,7 @@ const PersonalStatement = ({ isView }) => {
   return (
     <div className='form-subcontainers'>
       <SectionTitle title='PERSONAL STATEMENT' />
-      <TextArea
+      {/* <TextArea
         label='Personal statement (Minimum of 500 words)'
         rows='10'
         cols='3'
@@ -24,9 +24,9 @@ const PersonalStatement = ({ isView }) => {
         touched={formik.touched?.PersonalStatement}
         disabled={isView}
         resize={true}
-      />
+      /> */}
 
-      {/* <TextEditor
+      <TextEditor
         label='Personal statement (Minimum of 500 words)'
         required={true}
         name='PersonalStatement'
@@ -37,7 +37,7 @@ const PersonalStatement = ({ isView }) => {
         errors={formik.errors?.PersonalStatement}
         touched={formik.touched?.PersonalStatement}
         disabled={isView}
-      /> */}
+      />
     </div>
   );
 };

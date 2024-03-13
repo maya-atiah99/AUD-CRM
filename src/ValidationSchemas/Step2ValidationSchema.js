@@ -76,16 +76,16 @@ const getValidationSchemaStep2 = (applicationStart, applingAs) => {
               if (!value) {
                 return false;
               }
-              const words = value.trim().split(/<[^>]*>|[\s]+/).filter(word => word !== "").length;
-              console.log("words", words);
-              return words >= 483;
+              const strippedStr = value.replace(/<[^>]*>/g, ''); // Fixed regex and variable name
+              console.log("words", strippedStr.split(/\s+/).length); // Count words properly
+              return strippedStr.split(/\s+/).length >= 500; // Check word count
             })
-            .required("PersonalStatement is required"),
+            .required("PersonalStatement is required"), // Moved required validation inside 'then'
         otherwise: (schema) => schema.notRequired(),
       }
     );
-    
-  } else {
+  }
+   else {
     baseSchema.PersonalStatement = baseSchema.PersonalStatement.notRequired();
   }
 

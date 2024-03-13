@@ -1,22 +1,10 @@
-import React, { useEffect, useState } from "react";
-import { Navigate, Outlet, useNavigate } from "react-router-dom";
-const PrivateRoute = () => {
-  const [authenticated, setAuthenticated] = useState(false);
-  const navigate = useNavigate();
+import React from "react";
+import { Navigate, Outlet } from "react-router-dom";
 
-  useEffect(() => {
-    const token = localStorage.getItem("token");
-
-    const checkAuthentication = async () => {
-      if (token) {
-        setAuthenticated(true);
-      } else {
-        setAuthenticated(false);
-      }
-    };
-    checkAuthentication();
-  }, []);
-  return authenticated ? <Outlet/> : <Navigate to='/' replace />;
+const PrivateRoutes = () => {
+  const token = localStorage.getItem("token");
+  const auth = token;
+  return auth ? <Outlet /> : <Navigate to='/' />;
 };
 
-export default PrivateRoute;
+export default PrivateRoutes;

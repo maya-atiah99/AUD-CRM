@@ -22,19 +22,11 @@ const TextEditor = ({
   const modules = {
     toolbar: [
       [{ font: [] }],
-      [{ align: [] }],
       [{ size: [] }],
+      [{ align: [] }],
       ["bold", "italic", "underline", "strike"],
-      [{ color: [] }, { background: [] }],
-      ["blockquote", "code-block"],
-      [
-        { list: "ordered" },
-        { list: "bullet" },
-        { indent: "-1" },
-        { indent: "+1" },
-      ],
-      ["link", "image"],
-      ["clean"],
+      [{ list: "ordered" }, { list: "bullet" }],
+      ["link"],
     ],
   };
   const countWords = (content) => {
@@ -58,7 +50,9 @@ const TextEditor = ({
       <label htmlFor={label}>
         {label}
         {required && <span className='required'>*</span>}
-        <span className='required-field'>{errors && touched && " Personal Statement is required "}</span>
+        <span className='required-field'>
+          {errors && touched && " Personal Statement is required "}
+        </span>
         <span className='words-number'>
           Count : {countWords(editorContent)}
         </span>

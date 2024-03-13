@@ -94,7 +94,11 @@ const ApplicationsModal = ({
     if (item.applicationStatus === 4) {
       localStorage.setItem("message", 0);
     } else if (item.startYourApplication == 2) {
-      localStorage.setItem("message", 3);
+      if (item.stage4Completed != null) {
+        localStorage.setItem("message", 3);
+      } else {
+        localStorage.setItem("message", item.nextActiveStep);
+      }
     } else {
       localStorage.setItem("message", item.nextActiveStep);
     }

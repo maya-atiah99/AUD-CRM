@@ -68,7 +68,7 @@ const VerificationModal = ({
                       font='500'
                     />{" "}
                     <TextComponent
-                      text={phoneNumber}
+                      text={"+"+ phoneNumber}
                       classfont='classfont-show'
                       font='700'
                     />

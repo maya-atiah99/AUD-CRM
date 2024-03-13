@@ -325,6 +325,7 @@ const RegisterPage = ({
     setSteps(newSteps);
   }, [applicationStart, fetchedData, applingAs]);
 
+  //handle continue to next step button
   const handleChange = async (next) => {
     console.log("continue to next step");
 
@@ -353,6 +354,7 @@ const RegisterPage = ({
     }
   };
 
+  //handle save and continue button
   const handleSave = async (next) => {
     console.log("handleSave");
     await steps[activeStep].ref.current?.setFieldValue("isSaved", false);
@@ -385,6 +387,7 @@ const RegisterPage = ({
       }
     }
   };
+  //handle next in case view application
   const handleNext = (next) => {
     if (next) {
       setActiveStep((prevActiveStep) => prevActiveStep + 1);
@@ -399,6 +402,7 @@ const RegisterPage = ({
     }
   }, [activeStep, showInterest, applicantId]);
 
+  //Previous button in the form
   const handlePrevious = () => {
     if (activeStep === 0) {
       setIsExit(true);
@@ -407,10 +411,13 @@ const RegisterPage = ({
       refetchStageTwo();
     }
   };
+
+  //Exit popup to handle exit
   const handleClickPreviousButton = () => {
     if (activeStep === 0) {
       setShowInterest(true);
       navigate("/");
+      localStorage.clear();
     } else {
       setActiveStep(activeStep - 1);
       refetchStageTwo();

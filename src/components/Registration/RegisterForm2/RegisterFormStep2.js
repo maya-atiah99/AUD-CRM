@@ -288,7 +288,7 @@ const RegisterFormStep2 = forwardRef(
       <div className='form-subcontainer '>
         <FormikProvider value={formik} innerRef={ref}>
           <SubmitText />
-          <AcadamicInformation isView={isView} />
+          <AcadamicInformation isView={isView} data={applicantStageThree} />
           {applingAs == 6 || applingAs == 8 ? (
             <TranscriptMailingAddress isView={isView} />
           ) : (
@@ -325,8 +325,6 @@ const RegisterFormStep2 = forwardRef(
           ) : (
             ""
           )}
-
-          
         </FormikProvider>
       </div>
     );

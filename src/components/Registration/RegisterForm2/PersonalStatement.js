@@ -6,7 +6,6 @@ import TextEditor from "../../Inputs/TextEditor";
 
 const PersonalStatement = ({ isView }) => {
   const formik = useFormikContext();
-  console.log("sdkjdkne", formik?.values.PersonalStatement);
   return (
     <div className='form-subcontainers'>
       <SectionTitle title='PERSONAL STATEMENT' />

@@ -6,10 +6,20 @@ import DocumentUpload from "../../Inputs/DocumentUpload";
 import TextArea from "../../Inputs/TextArea";
 import { useFormikContext } from "formik";
 
-const AcadamicInformation = ({ isView }) => {
+const AcadamicInformation = ({ isView,data }) => {
   const formik = useFormikContext();
   const applicationStart = localStorage.getItem("applicationStart");
   const applingAS = parseInt(localStorage.getItem("applingAs"));
+
+  useEffect(() => {
+    if (applingAS === 8) {
+      formik.setFieldValue(
+        "CurrentUniversityCountry",
+        "b15bc108-6b46-490a-a387-f2f0b7a42246"
+      );
+      formik.setFieldValue("SchoolCountry", "");
+    }
+  }, [data]);
 
   return (
     <div className='form-subcontainers academic-container'>
@@ -26,9 +36,21 @@ const AcadamicInformation = ({ isView }) => {
             required={true}
             type='9'
             name='CurrentUniversityCountry'
-            value={formik.values.CurrentUniversityCountry}
+            value={
+              applingAS === 8
+                ? "b15bc108-6b46-490a-a387-f2f0b7a42246"
+                : formik.values.CurrentUniversityCountry
+            }
             onChange={(name, value) => {
-              formik.setFieldValue(name, value);
+              if (applingAS === 8) {
+                formik.setFieldValue(
+                  name,
+                  "b15bc108-6b46-490a-a387-f2f0b7a42246"
+                );
+              } else {
+                formik.setFieldValue(name, value);
+              }
+
               formik.setFieldValue("SchoolCountry", "");
             }}
             errors={formik.errors?.CurrentUniversityCountry}
@@ -68,6 +90,8 @@ const AcadamicInformation = ({ isView }) => {
                   ? "Degree Earned Major"
                   : applicationStart === "2" && applingAS == 6
                   ? "Level of study"
+                  : applingAS === 7
+                  ? "Visiting As"
                   : "High School Diploma"
               }
               required={true}
@@ -174,7 +198,7 @@ const AcadamicInformation = ({ isView }) => {
           />
         )}
 
-        {applingAS !== 6 && applingAS !== 8  ? (
+        {applingAS !== 6 && applingAS !== 8 ? (
           <DocumentUpload
             text='Upload Diploma'
             required={true}

@@ -3,7 +3,7 @@ import ModalComponent from "../ModalComponent";
 import AUDButton from "../Buttons/AUDButton";
 import TextComponent from "../Texts/TextComponent";
 
-const ExitModal = ({ setIsExit, handleExit, handleSave }) => {
+const ExitModal = ({ setIsExit, handleExit, handleSave, isView }) => {
   return (
     <ModalComponent
       // width='40rem'
@@ -17,9 +17,8 @@ const ExitModal = ({ setIsExit, handleExit, handleSave }) => {
           font='500'
         />
         <div className='d-flex gap-1'>
-          <AUDButton text='Exit' handleOnClick={handleExit}/>
-
-          <AUDButton text='Save' handleOnClick={handleSave} />
+          <AUDButton text='Exit' handleOnClick={handleExit} />
+          {isView ? "" : <AUDButton text='Save' handleOnClick={handleSave} />}
         </div>
       </div>
     </ModalComponent>

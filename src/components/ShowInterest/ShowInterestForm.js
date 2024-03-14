@@ -48,6 +48,10 @@ const ShowInterestForm = ({
   const { mutate: addApplicant } = useAddApplicant();
 
   const handleContinueToApply = (values, { setFieldError, resetForm }) => {
+    if (!values.titleId) {
+      const { titleId, ...valuesToSendWithoutTitleId } = values;
+      values = valuesToSendWithoutTitleId;
+    }
     addApplicant(values, {
       onSuccess: (data) => {
         localStorage.setItem("applicantId", data?.data?.applicantId);
@@ -60,6 +64,8 @@ const ShowInterestForm = ({
         openVerifiedModal("Continue");
         localStorage.removeItem("message");
         setSubmissionSuccess(true);
+        setErrorPhoneMessage("");
+        setErrorMessage("");
         resetForm();
       },
       onError: (error, data) => {
@@ -75,9 +81,13 @@ const ShowInterestForm = ({
       },
     });
   };
-  console.log("open verified modal", openVerifiedModal);
+  
 
   const handleSubmitForm = (values, { resetForm }) => {
+    if (!values.titleId) {
+      const { titleId, ...valuesToSendWithoutTitleId } = values;
+      values = valuesToSendWithoutTitleId;
+    }
     addShowInterest(values, {
       onSuccess: (data) => {
         openVerifiedModal("Submit");
@@ -85,7 +95,8 @@ const ShowInterestForm = ({
         setSubmissionSuccess(true);
         setInitialCountry("ae");
         setIsResetform(true);
-
+        setErrorPhoneMessage("");
+        setErrorMessage("");
         resetForm();
       },
       onError: (error) => {
@@ -104,7 +115,6 @@ const ShowInterestForm = ({
   useEffect(() => {
     setIsResetform(false);
   }, [init]);
-
   return (
     <Formik
       initialValues={init}

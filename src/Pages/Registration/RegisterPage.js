@@ -504,6 +504,7 @@ const RegisterPage = ({
           setIsExit={setIsExit}
           handleSave={() => handleSave(true)}
           handleExit={handleClickPreviousButton}
+          isView={isView}
         />
       ) : (
         ""

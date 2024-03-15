@@ -109,6 +109,7 @@ const ProgramInformation = ({ fetchedData, isView }) => {
             value={formik.values.SelectedTerm}
             onChange={(name, value) => {
               formik.setFieldValue(name, value);
+              formik.setFieldValue("ApplingAs", "");
             }}
             errors={formik.errors?.SelectedTerm}
             touched={formik.touched?.SelectedTerm}

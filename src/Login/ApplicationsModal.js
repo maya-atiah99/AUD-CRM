@@ -40,7 +40,22 @@ const ApplicationsModal = ({
   };
 
   const stepsFunction = (startYourApplication, applyingAs, nextActiveStep) => {
-    if (startYourApplication === 2) {
+    console.log("cdjcjdbhcdfc", nextActiveStep);
+    console.log("dsmxdkscdsncsd", startYourApplication);
+    if (applyingAs === 7 || applyingAs === 8) {
+      switch (nextActiveStep) {
+        case 0:
+          return "Personal Info";
+        case 1:
+          return "Academic";
+        case 2:
+          return "Waiver & Releases";
+        case 3:
+          return "Declaration";
+        case 4:
+          return "Declaration";
+      }
+    } else if (applyingAs === 6) {
       switch (nextActiveStep) {
         case 0:
           return "Personal Info";
@@ -113,7 +128,7 @@ const ApplicationsModal = ({
 
   return (
     <ModalComponent
-      // width='40rem'
+      // width='80%'
       title='Your Previous Applications'
       onClose={() => setShowApplicatiosModal(false)}
     >

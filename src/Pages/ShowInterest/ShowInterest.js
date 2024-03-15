@@ -120,11 +120,16 @@ const ShowInterest = ({
       );
     },
     onSuccess: async (data) => {
+      console.log("mutate successed");
       openVerifiedModal("Continue");
       setActionOrigin("Continue");
       if (data?.data?.verified === "true") {
+        console.log("here verified");
         setshowVerifiedModal(false);
-        navigate("/register", { state: { showInterest: true } });
+        localStorage.setItem("token", "f12a8b7c-9d3e-4f6a-bb18-2c72f515");
+        setTimeout(() => {
+          navigate("/register", { state: { showInterest: true } });
+        }, 200);
         setOtpCode("");
       } else {
         toast.error("Something went wrong");
@@ -181,6 +186,7 @@ const ShowInterest = ({
     if (actionOrigin === "Submit") {
       validateShowInterest.mutate();
     } else if (actionOrigin === "Continue") {
+      console.log("etsgsvdcvsdhgcsd");
       validateApplicant.mutate();
     }
   };

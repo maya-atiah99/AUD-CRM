@@ -56,8 +56,8 @@ const RegisterPage = ({
   console.log("application start", applicationStart);
 
   const generateSteps = (applicationStart, applingAs) => {
-    if (applicationStart === "2") {
-      //visiting
+    if (applingAs === 7 || applingAs === 8) {
+      //visiting application  : visiting or clinton
       return [
         {
           step: 1,
@@ -153,6 +153,102 @@ const RegisterPage = ({
         //   ),
         //   ref: formikRefStep4,
         // },
+      ];
+    } else if (applingAs === 6) {
+      return [
+        {
+          step: 1,
+          title: "Personal Info",
+          previousStep: "Back to main",
+          NextStep: "Go to Academic",
+          form: (
+            <RegisterFormStep1
+              ref={formikRefStep1}
+              fetchedData={fetchedData}
+              applicantId={applicantId}
+              applicationId={applicationId}
+              showInterest={showInterest}
+              activeStep={activeStep}
+              setApplicationStart={setApplicationStart}
+              applingAs={applingAs}
+              setApplyingAs={setApplyingAs}
+              applicationStart={applicationStart}
+              isView={isView}
+            />
+          ),
+          ref: formikRefStep1,
+        },
+        {
+          step: 2,
+          title: "Academic",
+          previousStep: "Back to Personal Info",
+          NextStep: "Go to Declaration",
+          form: (
+            <RegisterFormStep2
+              ref={formikRefStep2}
+              applicantId={applicantId}
+              fetchedData={fetchedData}
+              showThree={showThree}
+              activeStep={activeStep}
+              applicationId={applicationId}
+              setApplicationStart={setApplicationStart}
+              applingAs={applingAs}
+              setApplyingAs={setApplyingAs}
+              applicationStart={applicationStart}
+              isView={isView}
+            />
+          ),
+          ref: formikRefStep2,
+        },
+        {
+          step: 3,
+          title: "Waiver and Releases",
+          previousStep: "Back to Academic",
+          NextStep: "Go to Declaration",
+          form: (
+            <WaiverAndReleases
+              ref={formikRefStep5}
+              isView={isView}
+              applingAs={applingAs}
+              applicationStart={applicationStart}
+            />
+          ),
+          ref: formikRefStep5,
+        },
+        {
+          step: 4,
+          title: "Declaration",
+          previousStep: "Back to Waiver and Releases",
+          NextStep: "Go to Payment",
+          form: (
+            <RegisterFormStep3
+              ref={formikRefStep3}
+              applicantId={applicantId}
+              fetchedData={fetchedData}
+              applicationId={applicationId}
+              applingAs={applingAs}
+              activeStep={activeStep}
+              applicationStart={applicationStart}
+              isView={isView}
+            />
+          ),
+          ref: formikRefStep3,
+        },
+        {
+          step: 5,
+          title: "Pay & Submit",
+          previousStep: "Back to Declaration",
+          NextStep: "Submit",
+          form: (
+            <RegisterFormStep4
+              activeStep={activeStep}
+              applicantId={applicantId}
+              applicationId={applicationId}
+              isView={isView}
+            />
+          ),
+          ref: formikRefStep4,
+        },
       ];
     } else if (applicationStart === "0" && applingAs === 2) {
       //audit

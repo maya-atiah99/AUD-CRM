@@ -29,7 +29,7 @@ const AcadamicInformation = ({ isView,data }) => {
           <DropDown
             width='100%'
             label={
-              applicationStart === "0" && applingAS !== 1
+              applicationStart === "0"
                 ? "Country You Graduated from"
                 : "Country of Your Current University"
             }

@@ -15,7 +15,7 @@ const RegisterContainer = forwardRef(
     }, [activeStep, steps]);
 
     return (
-      <div>
+      <div >
         <div className='aud-app-header'>
           <img
             src='/images/Group 103.png'

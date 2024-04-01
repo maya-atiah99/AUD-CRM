@@ -1,6 +1,15 @@
 import React from "react";
 
-const TextComponent = ({ text, font, classfont, color, opacity, icon, hover,authorize }) => {
+const TextComponent = ({
+  text,
+  font,
+  classfont,
+  color,
+  opacity,
+  icon,
+  hover,
+  authorize,
+}) => {
   return (
     <div className='d-flex gap-2 '>
       {icon && <img src={icon} alt='icon' />}
@@ -12,7 +21,7 @@ const TextComponent = ({ text, font, classfont, color, opacity, icon, hover,auth
           fontWeight: font,
         }}
       >
-       <span className="authorize-class">{authorize}</span>  {text}
+        <span className='authorize-class'>{authorize}</span> {text}
       </p>
     </div>
   );

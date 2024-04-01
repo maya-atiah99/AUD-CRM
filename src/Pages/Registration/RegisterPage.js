@@ -1,21 +1,16 @@
 import React, { useEffect, useRef, useState } from "react";
 import UpperHeader from "../../components/Registration/UpperHeader";
 import AUDButton from "../../components/Buttons/AUDButton";
-import RegisterContainer from "../../components/Registration/RegisterContainer";
 import TextComponent from "../../components/Texts/TextComponent";
 import {
   useFetchApplicantStageOne,
   useFetchApplicantStageTwo,
 } from "../../Hooks/Appplicant";
 import { useLocation, useNavigate } from "react-router-dom";
-import RegisterFormStep1 from "../../components/Registration/RegisterFormStep1/RegisterFormStep1";
-import RegisterFormStep2 from "../../components/Registration/RegisterForm2/RegisterFormStep2";
-import RegisterFormStep3 from "../../components/Registration/RegisterForm3/RegisterFormStep3";
-import RegisterFormStep4 from "../../components/Registration/RegisterForm4/RegisterFormStep4";
-import WaiverAndReleases from "../../components/Registration/RegisterFormWaiver/WaiverAndReleases";
 import toast, { Toaster } from "react-hot-toast";
 import VerifiedCheckModal from "../../components/ShowInterest/VerifiedCheckModal";
 import ExitModal from "../../components/Registration/ExitModal";
+import StepGenerator from "../../components/Registration/StepGenerator";
 
 const RegisterPage = ({
   applicantId,
@@ -52,349 +47,7 @@ const RegisterPage = ({
     useFetchApplicantStageOne(applicantId, applicationId);
   const { data: applicantStageTwo, refetch: refetchStageTwo } =
     useFetchApplicantStageTwo(applicantId, applicationId);
-  console.log("stage2", applicantStageTwo);
-  console.log("application start", applicationStart);
 
-  const generateSteps = (applicationStart, applingAs) => {
-    if (applingAs === 7 || applingAs === 8) {
-      //visiting application  : visiting or clinton
-      return [
-        {
-          step: 1,
-          title: "Personal Info",
-          previousStep: "Back to main",
-          NextStep: "Go to Academic",
-          form: (
-            <RegisterFormStep1
-              ref={formikRefStep1}
-              fetchedData={fetchedData}
-              applicantId={applicantId}
-              applicationId={applicationId}
-              showInterest={showInterest}
-              activeStep={activeStep}
-              setApplicationStart={setApplicationStart}
-              applingAs={applingAs}
-              setApplyingAs={setApplyingAs}
-              applicationStart={applicationStart}
-              isView={isView}
-            />
-          ),
-          ref: formikRefStep1,
-        },
-        {
-          step: 2,
-          title: "Academic",
-          previousStep: "Back to Personal Info",
-          NextStep: "Go to Declaration",
-          form: (
-            <RegisterFormStep2
-              ref={formikRefStep2}
-              applicantId={applicantId}
-              fetchedData={fetchedData}
-              showThree={showThree}
-              activeStep={activeStep}
-              applicationId={applicationId}
-              setApplicationStart={setApplicationStart}
-              applingAs={applingAs}
-              setApplyingAs={setApplyingAs}
-              applicationStart={applicationStart}
-              isView={isView}
-            />
-          ),
-          ref: formikRefStep2,
-        },
-        {
-          step: 3,
-          title: "Waiver and Releases",
-          previousStep: "Back to Academic",
-          NextStep: "Go to Declaration",
-          form: (
-            <WaiverAndReleases
-              ref={formikRefStep5}
-              isView={isView}
-              applingAs={applingAs}
-              applicationStart={applicationStart}
-            />
-          ),
-          ref: formikRefStep5,
-        },
-        {
-          step: 4,
-          title: "Declaration",
-          previousStep: "Back to Waiver and Releases",
-          NextStep: "Go to Payment",
-          form: (
-            <RegisterFormStep3
-              ref={formikRefStep3}
-              applicantId={applicantId}
-              fetchedData={fetchedData}
-              applicationId={applicationId}
-              applingAs={applingAs}
-              activeStep={activeStep}
-              applicationStart={applicationStart}
-              isView={isView}
-            />
-          ),
-          ref: formikRefStep3,
-          ShowContinue: true,
-        },
-        // {
-        //   step: 5,
-        //   title: "Pay & Submit",
-        //   previousStep: "Back to Declaration",
-        //   NextStep: "Submit",
-        //   form: (
-        //     <RegisterFormStep4
-        //       activeStep={activeStep}
-        //       applicantId={applicantId}
-        //       applicationId={applicationId}
-        //       isView={isView}
-        //     />
-        //   ),
-        //   ref: formikRefStep4,
-        // },
-      ];
-    } else if (applingAs === 6) {
-      return [
-        {
-          step: 1,
-          title: "Personal Info",
-          previousStep: "Back to main",
-          NextStep: "Go to Academic",
-          form: (
-            <RegisterFormStep1
-              ref={formikRefStep1}
-              fetchedData={fetchedData}
-              applicantId={applicantId}
-              applicationId={applicationId}
-              showInterest={showInterest}
-              activeStep={activeStep}
-              setApplicationStart={setApplicationStart}
-              applingAs={applingAs}
-              setApplyingAs={setApplyingAs}
-              applicationStart={applicationStart}
-              isView={isView}
-            />
-          ),
-          ref: formikRefStep1,
-        },
-        {
-          step: 2,
-          title: "Academic",
-          previousStep: "Back to Personal Info",
-          NextStep: "Go to Declaration",
-          form: (
-            <RegisterFormStep2
-              ref={formikRefStep2}
-              applicantId={applicantId}
-              fetchedData={fetchedData}
-              showThree={showThree}
-              activeStep={activeStep}
-              applicationId={applicationId}
-              setApplicationStart={setApplicationStart}
-              applingAs={applingAs}
-              setApplyingAs={setApplyingAs}
-              applicationStart={applicationStart}
-              isView={isView}
-            />
-          ),
-          ref: formikRefStep2,
-        },
-        {
-          step: 3,
-          title: "Waiver and Releases",
-          previousStep: "Back to Academic",
-          NextStep: "Go to Declaration",
-          form: (
-            <WaiverAndReleases
-              ref={formikRefStep5}
-              isView={isView}
-              applingAs={applingAs}
-              applicationStart={applicationStart}
-            />
-          ),
-          ref: formikRefStep5,
-        },
-        {
-          step: 4,
-          title: "Declaration",
-          previousStep: "Back to Waiver and Releases",
-          NextStep: "Go to Payment",
-          form: (
-            <RegisterFormStep3
-              ref={formikRefStep3}
-              applicantId={applicantId}
-              fetchedData={fetchedData}
-              applicationId={applicationId}
-              applingAs={applingAs}
-              activeStep={activeStep}
-              applicationStart={applicationStart}
-              isView={isView}
-            />
-          ),
-          ref: formikRefStep3,
-        },
-        {
-          step: 5,
-          title: "Pay & Submit",
-          previousStep: "Back to Declaration",
-          NextStep: "Submit",
-          form: (
-            <RegisterFormStep4
-              activeStep={activeStep}
-              applicantId={applicantId}
-              applicationId={applicationId}
-              isView={isView}
-            />
-          ),
-          ref: formikRefStep4,
-        },
-      ];
-    } else if (applicationStart === "0" && applingAs === 2) {
-      //audit
-      return [
-        {
-          step: 1,
-          title: "Personal Info",
-          previousStep: "Back to main",
-          NextStep: "Go to Academic",
-          form: (
-            <RegisterFormStep1
-              ref={formikRefStep1}
-              fetchedData={fetchedData}
-              applicantId={applicantId}
-              showInterest={showInterest}
-              activeStep={activeStep}
-              applicationId={applicationId}
-              setApplicationStart={setApplicationStart}
-              applingAs={applingAs}
-              setApplyingAs={setApplyingAs}
-              applicationStart={applicationStart}
-              isView={isView}
-            />
-          ),
-          ref: formikRefStep1,
-        },
-        {
-          step: 2,
-          title: "Declaration",
-          previousStep: "Back to Personal Info",
-          NextStep: "Go to Payment",
-          form: (
-            <RegisterFormStep3
-              ref={formikRefStep3}
-              applicantId={applicantId}
-              fetchedData={fetchedData}
-              applicationId={applicationId}
-              applingAs={applingAs}
-              activeStep={activeStep}
-              applicationStart={applicationStart}
-              isView={isView}
-            />
-          ),
-          ref: formikRefStep3,
-        },
-        {
-          step: 3,
-          title: "Pay & Submit",
-          previousStep: "Back to Declaration",
-          NextStep: "Submit",
-          form: (
-            <RegisterFormStep4
-              activeStep={activeStep}
-              applicantId={applicantId}
-              applicationId={applicationId}
-              isView={isView}
-            />
-          ),
-          ref: formikRefStep4,
-        },
-      ];
-    } else {
-      return [
-        {
-          step: 1,
-          title: "Personal Info",
-          previousStep: "Back to main",
-          NextStep: "Go to Academic",
-          form: (
-            <RegisterFormStep1
-              ref={formikRefStep1}
-              fetchedData={fetchedData}
-              applicantId={applicantId}
-              showInterest={showInterest}
-              activeStep={activeStep}
-              applicationId={applicationId}
-              setApplicationStart={setApplicationStart}
-              applingAs={applingAs}
-              setApplyingAs={setApplyingAs}
-              applicationStart={applicationStart}
-              isView={isView}
-            />
-          ),
-          ref: formikRefStep1,
-        },
-        {
-          step: 2,
-          title: "Academic",
-          previousStep: "Back to Personal Info",
-          NextStep: "Go to Declaration",
-          form: (
-            <RegisterFormStep2
-              ref={formikRefStep2}
-              applicantId={applicantId}
-              fetchedData={fetchedData}
-              showThree={showThree}
-              applicationId={applicationId}
-              setApplicationStart={setApplicationStart}
-              applingAs={applingAs}
-              setApplyingAs={setApplyingAs}
-              applicationStart={applicationStart}
-              activeStep={activeStep}
-              isView={isView}
-            />
-          ),
-          ref: formikRefStep2,
-        },
-        {
-          step: 3,
-          title: "Declaration",
-          previousStep: "Back to Academic",
-          NextStep: "Go to Payment",
-          form: (
-            <RegisterFormStep3
-              ref={formikRefStep3}
-              applicantId={applicantId}
-              fetchedData={fetchedData}
-              applicationId={applicationId}
-              applingAs={applingAs}
-              applicationStart={applicationStart}
-              activeStep={activeStep}
-              isView={isView}
-            />
-          ),
-          ref: formikRefStep3,
-        },
-        {
-          step: 4,
-          title: "Pay & Submit",
-          previousStep: "Back to Declaration",
-          NextStep: "Submit",
-          form: (
-            <RegisterFormStep4
-              activeStep={activeStep}
-              applicantId={applicantId}
-              applicationId={applicationId}
-              isView={isView}
-            />
-          ),
-          ref: formikRefStep4,
-        },
-      ];
-    }
-  };
-
-  console.log("applicationID", applicationId);
   useEffect(() => {
     refreshPage();
   }, [showInterest, activeStep, applicantStageOne, applicantStageTwo]);
@@ -406,7 +59,6 @@ const RegisterPage = ({
       setfetchedData(applicantStageTwo);
     }
   };
-  console.log("isview", isView);
 
   useEffect(() => {
     refreshPage();
@@ -416,15 +68,8 @@ const RegisterPage = ({
     setApplicantId(localStorage.getItem("applicantId"));
   }, []);
 
-  useEffect(() => {
-    const newSteps = generateSteps(applicationStart, applingAs);
-    setSteps(newSteps);
-  }, [applicationStart, fetchedData, applingAs]);
-
   //handle continue to next step button
   const handleChange = async (next) => {
-    console.log("continue to next step");
-
     await steps[activeStep].ref.current?.setFieldValue("isSaved", true);
     steps[activeStep].ref.current?.setFieldValue(
       "NextActiveStep",
@@ -452,7 +97,6 @@ const RegisterPage = ({
 
   //handle save and continue button
   const handleSave = async (next) => {
-    console.log("handleSave");
     await steps[activeStep].ref.current?.setFieldValue("isSaved", false);
     steps[activeStep].ref.current?.setFieldValue("NextActiveStep", activeStep);
     if (next) steps[activeStep].ref.current?.submitForm();
@@ -545,12 +189,29 @@ const RegisterPage = ({
           font='800'
           classfont='register-title'
         />
-        <RegisterContainer
+        <StepGenerator
+          applicantId={applicantId}
+          applicationId={applicationId}
+          applicationStart={applicationStart}
+          applingAs={applingAs}
+          setApplicationStart={setApplicationStart}
+          setApplyingAs={setApplyingAs}
+          showInterest={showInterest}
+          isView={isView}
           activeStep={activeStep}
+          setActiveStep={setActiveStep}
+          fetchedData={fetchedData}
           steps={steps}
           lastStep={activeStep === steps.length - 1}
-          setActiveStep={setActiveStep}
+          formikRefStep1={formikRefStep1}
+          formikRefStep2={formikRefStep2}
+          formikRefStep3={formikRefStep3}
+          formikRefStep4={formikRefStep4}
+          formikRefStep5={formikRefStep5}
+          setSteps={setSteps}
+          showThree={showThree}
         />
+
         <div className='button-cont-register '>
           {steps[activeStep]?.ShowContinue === true ? (
             <AUDButton

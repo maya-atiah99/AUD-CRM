@@ -13,11 +13,6 @@ import { FormikProvider, useFormik } from "formik";
 import step1ValidationSchema from "../../../ValidationSchemas/Step1ValidationSchema";
 import { useAddApplicantStageTwo } from "../../../Hooks/Appplicant";
 import getValidationSchemaStep1 from "../../../ValidationSchemas/Step1ValidationSchema";
-import { type } from "@testing-library/user-event/dist/type";
-import TranscriptMailingAddress from "../RegisterForm2/TranscriptMailingAddress";
-import AttachCV from "../RegisterForm2/AttachCV";
-import { Reference } from "yup";
-import WaiverAndReleases from "../RegisterFormWaiver/WaiverAndReleases";
 
 const RegisterFormStep1 = forwardRef(
   (
@@ -193,8 +188,6 @@ const RegisterFormStep1 = forwardRef(
     }, [fetchedData]);
 
     const handleAddStageTwo = (values) => {
-      console.log("entered hereeeeeeeeeeeeeeeeee");
-      console.log(values);
       addApplicantStagetwo(values, {
         onSuccess: (data) => {
           setInit({});
@@ -206,10 +199,6 @@ const RegisterFormStep1 = forwardRef(
       });
     };
 
-    console.log(
-      "cdskmcsdcds0",
-      typeof fetchedData?.data?.application?.applyingAs
-    );
     useEffect(() => {
       if (showInterest) {
         localStorage.setItem(
@@ -227,10 +216,6 @@ const RegisterFormStep1 = forwardRef(
         );
       }
     }, [fetchedData, showInterest]);
-
-    // useEffect(() => {
-    //   console.log(init);
-    // }, [init]);
 
     const formik = useFormik({
       initialValues: init,

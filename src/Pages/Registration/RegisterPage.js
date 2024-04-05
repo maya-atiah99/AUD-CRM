@@ -25,6 +25,9 @@ const RegisterPage = ({
   const [activeStep, setActiveStep] = useState(
     parseInt(localStorage.getItem("message"), 10) || 0
   );
+  const [reApply, setReApply] = useState(
+    parseInt(localStorage.getItem("reApply")) || null
+  );
   const [isView, setIsView] = useState(
     localStorage.getItem("applicationStatus") === "true"
   );
@@ -36,6 +39,7 @@ const RegisterPage = ({
   const formikRefStep3 = useRef();
   const formikRefStep4 = useRef();
   const formikRefStep5 = useRef();
+  const formikRefStudentInfo = useRef();
   const location = useLocation();
   const navigate = useNavigate();
   const [showInterest, setShowInterest] = useState(
@@ -134,6 +138,7 @@ const RegisterPage = ({
       window.scrollTo(0, 0);
     }
   };
+
   useEffect(() => {
     if (showInterest === true && activeStep === 0) {
       refetchStageOne();
@@ -208,8 +213,10 @@ const RegisterPage = ({
           formikRefStep3={formikRefStep3}
           formikRefStep4={formikRefStep4}
           formikRefStep5={formikRefStep5}
+          formikRefStudentInfo={formikRefStudentInfo}
           setSteps={setSteps}
           showThree={showThree}
+          reApply={reApply}
         />
 
         <div className='button-cont-register '>

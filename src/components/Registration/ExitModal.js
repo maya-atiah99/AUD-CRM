@@ -17,8 +17,8 @@ const ExitModal = ({ setIsExit, handleExit, handleSave, isView }) => {
           font='500'
         />
         <div className='d-flex gap-1'>
-          <AUDButton text='Exit' handleOnClick={handleExit} />
-          {isView ? "" : <AUDButton text='Save' handleOnClick={handleSave} />}
+          <AUDButton text='Exit' handleOnClick={handleExit} width='100px' />
+          {isView ? "" : <AUDButton text='Save' handleOnClick={handleSave} width='100px' />}
         </div>
       </div>
     </ModalComponent>

@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import TextComponent from "./Texts/TextComponent";
 import AUDButton from "./Buttons/AUDButton";
-import ReactDOM from "react-dom"
+import ReactDOM from "react-dom";
 const ModalComponent = ({
   title,
   description,
@@ -14,20 +14,18 @@ const ModalComponent = ({
   classFont,
   text,
 }) => {
-
-  
   useEffect(() => {
     const handleEsc = (event) => {
       if (event.keyCode === 27) onClose();
     };
- 
-    window.addEventListener('keydown', handleEsc);
- 
+
+    window.addEventListener("keydown", handleEsc);
+
     return () => {
-      window.removeEventListener('keydown', handleEsc);
+      window.removeEventListener("keydown", handleEsc);
     };
   }, [onClose]);
-  return  (
+  return (
     <div className='modal-container'>
       <div
         className='inner-modal-container'
@@ -35,8 +33,12 @@ const ModalComponent = ({
       >
         <div>
           <h2 className={classFont}>{title}</h2>
-          <div onClick={onClose} className='close-icon'>
-            <img src='/images/closeicon.svg' alt='close icon' onClick={onClose}  />
+          <div
+            onClick={onClose}
+            className='close-icon'
+            style={{ cursor: "pointer" }}
+          >
+            <img src='/images/closeicon.svg' alt='close icon' />
           </div>
         </div>
         {description ? (

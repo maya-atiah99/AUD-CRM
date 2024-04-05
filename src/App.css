@@ -8,16 +8,17 @@
 .aud-button {
   /* width: 100%; */
   display: flex;
+  white-space: nowrap;
   border-radius: 5px;
-  padding: 10px;
+  padding: 15px 16px;
   background-color: #1b224c;
   color: #ffffff;
   border: none;
   font-size: 15px;
-  font-weight: 500;
+  font-weight: 600;
   vertical-align: middle;
   justify-content: center;
-  align-items: center;
+  align-items: center;height: 34px;
 }
 .aud-button > .button-icon {
   vertical-align: middle !important;
@@ -1146,6 +1147,12 @@ ul {
   grid-column-gap: 10px;
   grid-row-gap: 10px;
 }
+.grid-programInfo-subcont {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  grid-column-gap: 10px;
+  grid-row-gap: 10px;
+}
 
 .classfont-p {
   color: #1b224c;
@@ -1160,8 +1167,9 @@ ul {
   font-style: normal;
   font-weight: 500;
   line-height: normal;
-  /* justify-content: flex-end; */
+  justify-content: flex-end;
 }
+
 
 .moreInfo-grid a {
   cursor: pointer;
@@ -1237,7 +1245,13 @@ ul {
   flex-direction: row;
   gap: 3rem;
 }
+/*******StudentInfo***********/
+.studentInfo-subCont{
+  display: grid;
+  grid-template-columns: 3fr 1fr ;
+  grid-column-gap: 10px;
 
+}
 /***************************Agreement table***************/
 table {
   border: none;

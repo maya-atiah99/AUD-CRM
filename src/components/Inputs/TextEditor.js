@@ -10,6 +10,7 @@ const TextEditor = ({
   label,
   disabled,
   required,
+  count
 }) => {
   const [editorContent, setEditorContent] = useState(value || "");
 
@@ -53,9 +54,10 @@ const TextEditor = ({
         <span className='required-field'>
           {errors && touched && " Personal Statement is required "}
         </span>
-        <span className='words-number'>
+        {count &&  <span className='words-number'>
           Count : {countWords(editorContent)}
-        </span>
+        </span> }
+      
       </label>
       <ReactQuill
         theme='snow'

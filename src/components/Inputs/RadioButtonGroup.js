@@ -10,11 +10,15 @@ const RadioButtonGroup = ({
   name,
   onRadioChange,
   disabled,
+  fontWeight,
 }) => {
-  
   return (
     <div className='radio-buttons-container'>
-      <label htmlFor={label} className='radioBtn-label'>
+      <label
+        htmlFor={label}
+        className='radioBtn-label'
+        style={{ fontWeight: fontWeight }}
+      >
         {label}
         {required && <span className='required'>*</span>}
       </label>

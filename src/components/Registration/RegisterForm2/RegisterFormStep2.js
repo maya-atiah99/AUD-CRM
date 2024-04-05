@@ -285,7 +285,7 @@ const RegisterFormStep2 = forwardRef(
     );
     console.log("formik stage three", formik);
     return (
-      <div className='form-subcontainer '>
+      <div className='form-subcontainer'>
         <FormikProvider value={formik} innerRef={ref}>
           <SubmitText />
           <AcadamicInformation isView={isView} data={applicantStageThree} />

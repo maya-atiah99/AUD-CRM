@@ -26,6 +26,8 @@ const ShowInterest = ({
   setApplicationStart,
   applingAs,
   setApplyingAs,
+  reApply,
+  setReApply,
 }) => {
   const [showVerifiedModal, setshowVerifiedModal] = useState(false);
   const [showLoginModal, setShowLoginModal] = useState(false);
@@ -300,6 +302,7 @@ const ShowInterest = ({
           setEmail={setEmail}
           setApplicationStart={setApplicationStart}
           setApplicationId={setApplicationId}
+          
         />
       </div>
       {showVerifiedModal && (

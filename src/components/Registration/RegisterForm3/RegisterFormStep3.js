@@ -16,6 +16,7 @@ import {
   useFetchApplicantStageFour,
 } from "../../../Hooks/Appplicant";
 import Declaration from "./Declaration";
+import getStep3ValidationSchema from "../../../ValidationSchemas/Step3ValidationSchema";
 const RegisterFormStep3 = forwardRef(
   (
     {
@@ -25,6 +26,7 @@ const RegisterFormStep3 = forwardRef(
       applicationStart,
       activeStep,
       isView,
+      reApply,
     },
     ref
   ) => {
@@ -53,6 +55,7 @@ const RegisterFormStep3 = forwardRef(
           applicantStageFour?.data?.stage2?.acceptResponsibilitiesCheck ||
           false,
         RecordsCheck: applicantStageFour?.data?.stage2?.recordsCheck || false,
+        courseworkAwareness:false
       };
       setInit(initialvalues);
     }, [applicantStageFour]);
@@ -75,7 +78,7 @@ const RegisterFormStep3 = forwardRef(
 
     const formik = useFormik({
       initialValues: init,
-      validationSchema: Step3ValidationSchema,
+      validationSchema: getStep3ValidationSchema(reApply),
       enableReinitialize: true,
       onSubmit: (values) => {
         const formData = new FormData();
@@ -130,19 +133,24 @@ const RegisterFormStep3 = forwardRef(
           <FormikProvider
             value={formik}
             innerRef={ref}
-            validationSchema={Step3ValidationSchema}
+            validationSchema={getStep3ValidationSchema(reApply)}
           >
             <ProgramInformation isView={isView} />
             <Declaration
               applingAs={applingAs}
               applicationStart={applicationStart}
               isView={isView}
+              reApply={reApply}
             />
-            <ImportantNotices isView={isView} />
-            <Reservation
-              handleClick={() => setShowModal(true)}
-              isView={isView}
-            />
+            {!reApply && (
+              <>
+                <ImportantNotices isView={isView} />
+                <Reservation
+                  handleClick={() => setShowModal(true)}
+                  isView={isView}
+                />{" "}
+              </>
+            )}
           </FormikProvider>
         </div>
         {showModal && (

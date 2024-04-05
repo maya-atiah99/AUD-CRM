@@ -28,7 +28,7 @@ const Consent = ({ isView }) => {
         font='600'
         disabled={isView}
       /> */}
-      <div className=' bulleted-consent-grid'>
+      <div className='bulleted-consent-grid'>
         <BulletedText
           items={[{ text: "Student name" }, { text: "Address(es)" }]}
         />
@@ -45,7 +45,7 @@ const Consent = ({ isView }) => {
           ]}
         />
         <BulletedText
-          items={[{ text: "Dates of Attendance and Credentials AAwarded." }]}
+          items={[{ text: "Dates of Attendance and Credentials Awarded." }]}
         />
       </div>
       <TextComponent

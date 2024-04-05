@@ -5,6 +5,7 @@ import { useFetchApplicationsById } from "../Hooks/Login";
 import { useNavigate } from "react-router-dom";
 import AUDButton from "../components/Buttons/AUDButton";
 import Loader from "../components/Loader/Loader";
+import TextComponent from "../components/Texts/TextComponent";
 
 const ApplicationsModal = ({
   setShowApplicatiosModal,
@@ -40,8 +41,6 @@ const ApplicationsModal = ({
   };
 
   const stepsFunction = (startYourApplication, applyingAs, nextActiveStep) => {
-    console.log("cdjcjdbhcdfc", nextActiveStep);
-    console.log("dsmxdkscdsncsd", startYourApplication);
     if (applyingAs === 7 || applyingAs === 8) {
       switch (nextActiveStep) {
         case 0:
@@ -90,7 +89,7 @@ const ApplicationsModal = ({
       }
     }
   };
-  console.log("applications", applications);
+
   const handleContinueApplication = (item) => {
     localStorage.setItem("applicationId", item.applicationId);
     localStorage.setItem("applicantId", item.applicantId);
@@ -117,7 +116,7 @@ const ApplicationsModal = ({
     } else {
       localStorage.setItem("message", item.nextActiveStep);
     }
-
+    localStorage.removeItem("reApply");
     navigate("/register", {
       state: {
         activeStep: localStorage.getItem("message"),
@@ -126,6 +125,13 @@ const ApplicationsModal = ({
     });
   };
 
+  const handleReApply = () => {
+    localStorage.setItem("reApply", 2);
+    localStorage.setItem("token", "f12a8b7c-9d3e-4f6a-bb18-2c72f515");
+    setTimeout(() => {
+      navigate("/register", { state: { showInterest: true } });
+    }, 200);
+  };
   return (
     <ModalComponent
       // width='80%'
@@ -187,8 +193,16 @@ const ApplicationsModal = ({
           </>
         )}
 
-        <div className='d-flex gap-1'>
-          <AUDButton text='Re-Apply' />
+        <div className='d-flex gap-5 align-items-center pt-3'>
+          <div className='d-flex gap-2 align-items-center'>
+            <TextComponent
+              text='If you previously submitted an application and paid an application fee, you can initiate the re-application process by clicking the button'
+              color='#000'
+              font='500'
+              size='15px'
+            />
+            <AUDButton text='Re-Apply' handleOnClick={handleReApply} />
+          </div>
 
           <AUDButton text='Start New Application' />
         </div>

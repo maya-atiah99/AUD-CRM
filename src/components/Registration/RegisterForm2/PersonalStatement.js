@@ -36,6 +36,7 @@ const PersonalStatement = ({ isView }) => {
         errors={formik.errors?.PersonalStatement}
         touched={formik.touched?.PersonalStatement}
         disabled={isView}
+        count={true}
       />
     </div>
   );

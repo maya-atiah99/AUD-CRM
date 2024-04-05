@@ -3,6 +3,7 @@ import React from "react";
 const TextComponent = ({
   text,
   font,
+  size,
   classfont,
   color,
   opacity,
@@ -19,6 +20,7 @@ const TextComponent = ({
           color: color ? color : "#1B224C",
           opacity: opacity ? opacity : 1,
           fontWeight: font,
+          fontSize: size,
         }}
       >
         <span className='authorize-class'>{authorize}</span> {text}

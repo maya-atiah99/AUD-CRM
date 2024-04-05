@@ -19,6 +19,8 @@ const MainRoute = () => {
   const [applicationId, setApplicationId] = useState(
     localStorage.getItem("applicationId")
   );
+  const [reApply,setReApply]=useState( localStorage.getItem("reApply") ||null)
+
   return (
     <Routes>
         <Route

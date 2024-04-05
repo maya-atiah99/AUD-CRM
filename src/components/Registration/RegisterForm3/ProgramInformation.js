@@ -3,12 +3,15 @@ import SquareCheckBox from "../../Inputs/SquareCheckBox";
 import { useFormikContext } from "formik";
 import TextComponent from "../../Texts/TextComponent";
 import TextArea from "../../Inputs/TextArea";
+import SectionTitle from "../../Texts/SectionTitle";
 
-const ProgramInformation = ({ isView }) => {
+const ProgramInformation = ({ isView, reApply }) => {
   const formik = useFormikContext();
 
   return (
     <div className='form-subcontainers'>
+      {reApply && <SectionTitle title='HEALTH SECTION' />}
+
       <TextComponent
         classfont='classfont-p'
         font='700'

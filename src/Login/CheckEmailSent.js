@@ -2,7 +2,7 @@ import React from "react";
 import ModalComponent from "../components/ModalComponent";
 import TextComponent from "../components/Texts/TextComponent";
 
-const CheckEmailSent = ({ mode, setCheckEmailSent,email,phoneNumber }) => {
+const CheckEmailSent = ({ mode, setCheckEmailSent, email, phoneNumber }) => {
   return (
     <ModalComponent width='40rem' onClose={() => setCheckEmailSent(false)}>
       <div className='d-flex align-items-center flex-column'>
@@ -13,7 +13,7 @@ const CheckEmailSent = ({ mode, setCheckEmailSent,email,phoneNumber }) => {
           fontSize='expandable-card'
           text={mode === "mobile" ? "Check your phone" : "Check your email"}
         />
-        <div className='d-flex gap-1'>
+        <div className='d-flex gap-1 flex-column justify-center align-items-center'>
           <TextComponent
             font='500'
             classfont='classfont-p'
@@ -26,7 +26,7 @@ const CheckEmailSent = ({ mode, setCheckEmailSent,email,phoneNumber }) => {
           <TextComponent
             font='700'
             classfont='classfont-p'
-            text={mode === "mobile" ? phoneNumber : email}
+            text={mode === "mobile" ? "+" + phoneNumber : email}
           />
         </div>
       </div>

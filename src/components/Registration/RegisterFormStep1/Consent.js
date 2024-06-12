@@ -16,7 +16,6 @@ const Consent = ({ isView }) => {
       <SectionTitle title='CONSENT TO RELEASE EDUCATION RECORDS' />
       <TextComponent
         text='The American University in Dubai classifies Directory Information as the following :'
-        size='18px'
         font='600'
         classfont='consent-text'
         disabled={isView}
@@ -49,7 +48,6 @@ const Consent = ({ isView }) => {
         />
       </div>
       <TextComponent
-        size='18px'
         font='600'
         classfont='consent-text'
         text='Any other education record is classified as non-directory information and can not be disclosed to any party without the student’s consent.'
@@ -68,7 +66,7 @@ const Consent = ({ isView }) => {
         {/* <LinkButton title='I Authorize ' /> */}
         <TextComponent
           authorize='I Authorize'
-          size='18px'
+         
           font='600'
           classfont='consent-text'
           text='to release my education records (e.g., grades, GPA, ID, schedule, statement of fees) to the following:'

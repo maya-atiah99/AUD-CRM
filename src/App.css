@@ -18,7 +18,8 @@
   font-weight: 600;
   vertical-align: middle;
   justify-content: center;
-  align-items: center;height: 34px;
+  align-items: center;
+  height: 34px;
 }
 .aud-button > .button-icon {
   vertical-align: middle !important;
@@ -126,10 +127,13 @@ input[type="date"] {
   border-radius: 5px;
   height: 38px;
   border: 1px solid #1b224c31;
-  /* opacity: 0.2; */
+  color: #1b224c !important;
+  font-weight: 500;
   padding: 5px;
 }
-
+.text-input input[type="text"] {
+  color: #1b224c !important;
+}
 .text-input::placeholder {
   display: none;
 }
@@ -186,6 +190,7 @@ textarea:focus-visible {
 .textBox-container label {
   font-weight: 600;
   font-size: 17px;
+  /* white-space: nowrap; */
 }
 .moreInfo-img {
   width: 24px;
@@ -472,11 +477,13 @@ input[type="number"]::-webkit-outer-spin-button {
   height: 30px;
   width: 343px;
   outline: none;
+  color: #1b224c !important;
+  font-weight: 500 !important;
 }
 .form-control:focus {
   color: var(--bs-body-color);
   background-color: var(--bs-body-bg);
-  border-color: #1b224c !important;
+  border-color: none !important;
   outline: 0;
   box-shadow: none !important;
 }
@@ -1170,7 +1177,6 @@ ul {
   justify-content: flex-end;
 }
 
-
 .moreInfo-grid a {
   cursor: pointer;
   color: #3886bd !important;
@@ -1246,11 +1252,10 @@ ul {
   gap: 3rem;
 }
 /*******StudentInfo***********/
-.studentInfo-subCont{
+.studentInfo-subCont {
   display: grid;
-  grid-template-columns: 3fr 1fr ;
+  grid-template-columns: 3fr 1fr;
   grid-column-gap: 10px;
-
 }
 /***************************Agreement table***************/
 table {
@@ -1306,12 +1311,12 @@ td:first-child {
 }
 .custom-date-input input[type="date"] {
   position: absolute;
-  top: 0;
+  top: 4px;
   left: 0;
   z-index: 2;
   width: 100%;
   height: 85%;
-  color: hsl(0, 0%, 20%);
+  color: #1b224c;
   font-weight: 500;
   padding: 10px;
   border: transparent;
@@ -1481,7 +1486,10 @@ td:first-child {
   border: 1px solid #000000;
   opacity: 0.2;
 }
-
+.card_dropdown_cont {
+  display: flex;
+  gap: 2px;
+}
 /*********************************Card type********/
 .activeType {
   background-color: #39a3003c;
@@ -1574,6 +1582,7 @@ td:first-child {
 }
 
 /*****************Applications table****/
+
 .applications-table-cont {
   padding-top: 20px;
   display: flex;
@@ -1598,6 +1607,7 @@ td:first-child {
   font-size: 16px;
   font-weight: 700;
   text-align: left;
+  white-space: nowrap;
 }
 
 .applications-table-cont td {
@@ -1607,12 +1617,44 @@ td:first-child {
   font-weight: 600;
   text-align: start;
   padding: 10px;
+  white-space: nowrap;
 }
 .applications-table-cont tr:nth-child(even) {
   border-radius: 10px;
   background-color: #fafafc;
 }
 
+.applicationModal_text_cont {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding-top: 3px;
+  gap: 5px;
+}
+.applicationModal_text_subcont {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 2px;
+}
+
+@media screen and (max-width: 900px) {
+  .cont {
+    max-width: 80vw;
+    overflow-x: auto;
+  }
+  .applications-table {
+    overflow-x: scroll;
+  }
+  .applicationModal_text_cont {
+    flex-wrap: wrap;
+    gap: 4px;
+  }
+  .applicationModal_text_subcont {
+    flex-wrap: wrap;
+    gap: 2px;
+  }
+}
 /****************Media Query****************************/
 /**************************************/
 /*****************************/
@@ -1805,6 +1847,8 @@ td:first-child {
     width: 100%;
     gap: 10px;
     padding: 0 10px 0 10px;
+    overflow-y: scroll;
+    max-height: 100%;
   }
   .radio-buttons-container {
     gap: 8px;
@@ -1829,9 +1873,6 @@ td:first-child {
     display: none;
   }
 
-  .showInterestLogo {
-    display: none;
-  }
   .classfont-show {
     font-size: 18px;
     font-weight: 500;
@@ -2064,7 +2105,7 @@ td:first-child {
   }
 
   .form-subcontainers .textBox-container label {
-    font-size: 10px;
+    font-size: 11px;
   }
   .form-subcontainers ul {
     font-size: 12px;
@@ -2076,7 +2117,7 @@ td:first-child {
     font-size: 13px;
   }
   .form-subcontainers label {
-    font-size: 10px;
+    font-size: 11px;
   }
   /************Step2 MEDIA QUERY***************************************/
   .submittext-container ul li {
@@ -2111,13 +2152,13 @@ td:first-child {
     font-size: 12px !important;
   }
   .blue-link {
-    font-size: 10px;
+    font-size: 11px;
   }
   .blue-link span {
-    font-size: 10px;
+    font-size: 11px;
   }
   .classfont-p {
-    font-size: 10px;
+    font-size: 11px;
     margin: 0;
   }
   th,
@@ -2155,7 +2196,7 @@ td:first-child {
 responsiveness ************/
 
 /**************Mobile show interest***/
-@media screen and (max-width: 768px) and (max-height: 935px) {
+@media screen and (max-width: 850px) and (max-height: 1150px) {
   /**text box **/
   .text-input {
     height: 28px;
@@ -2187,6 +2228,9 @@ responsiveness ************/
     height: 28px !important;
     min-height: 25px !important;
   }
+  .css-18jj4pb-control {
+    min-height: 28px !important;
+  }
   /**phone input */
   .react-tel-input .form-control {
     height: 28px !important ;
@@ -2196,6 +2240,9 @@ responsiveness ************/
   }
   .css-1fdsijx-ValueContainer {
     padding: 0px 8px !important;
+  }
+  .react-tel-input .form-control {
+    font-size: 11px !important;
   }
 
   /***aud button*/
@@ -2253,7 +2300,7 @@ responsiveness ************/
   }
   .showInterestLogo {
     display: block;
-    width: 60%;
+    width: 40%;
   }
   .subContainer {
     padding: 10px 10px;
@@ -2319,7 +2366,7 @@ responsiveness ************/
     height: 15px;
   }
   .custom-date-input input[type="date"] {
-    font-size: 10px;
+    font-size: 11px;
   }
   .react-tel-input .form-control {
     font-size: 10px;
@@ -2328,7 +2375,17 @@ responsiveness ************/
     vertical-align: middle !important;
     width: 18px !important;
   }
-
+  .radio-input {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    padding-left: 10px;
+  }
+  .radio-buttons-container {
+    display: flex;
+    gap: 2rem;
+    flex-direction: column;
+  }
   /************************************/
   /*************************/
   /******************/
@@ -2383,7 +2440,7 @@ responsiveness ************/
     padding-top: 5px;
   }
   .checkbox-container p {
-    font-size: 10px;
+    font-size: 11px;
   }
   .checkmark,
   .red-checkmark {
@@ -2405,31 +2462,31 @@ responsiveness ************/
   }
 
   .radio-input label {
-    font-size: 9px !important;
+    font-size: 11px !important;
   }
   .radio-input input {
-    width: 10px;
-    height: 10px;
+    width: 15px;
+    height: 15px;
     border-radius: 50%;
     border: 1px solid #113161;
   }
   .radio-input .circle {
     position: relative;
     top: 0em;
-    right: 0.45em;
-    width: 5px;
-    height: 5px;
+    right: 13px;
+    width: 12px;
+    height: 12px;
     border-radius: 50%;
   }
   .radio-input input:checked {
     border: 1px solid #113161;
   }
   .radio-buttons-container {
-    gap: 1px;
+    gap: 3px;
   }
   .consent-text,
   .bulleted-text li {
-    font-size: 10px;
+    font-size: 11px;
   }
 
   /*******form step 2***/
@@ -2454,6 +2511,9 @@ responsiveness ************/
   /******payment*******/
   .payment-subcontainer {
     width: 100%;
+  }
+  .card_dropdown_cont {
+    flex-direction: column;
   }
   .select-via-email h3 {
     font-size: 13px;

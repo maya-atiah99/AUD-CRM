@@ -121,14 +121,13 @@ const DropDown = ({
       ...base,
       padding: "4px",
     }),
-    control: (base) => ({
+    control: (base, state) => ({
       ...base,
       border: errors && touched ? "1px solid #F3223C" : "",
       "&:focus": {
         borderColor: "blue",
       },
     }),
-
     placeholder: (base) => ({
       ...base,
       color: "transparent",
@@ -136,6 +135,11 @@ const DropDown = ({
     indicatorSeparator: (base) => ({
       ...base,
       display: "none",
+    }),
+    singleValue: (base, state) => ({
+      ...base,
+      fontWeight: "500",
+      color: "#1B224C",
     }),
   };
 

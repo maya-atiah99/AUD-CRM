@@ -12,7 +12,7 @@ const TextBox = ({
   type,
   disabled,
   moreInfo,
-  placeholder
+  placeholder,
 }) => {
   const [initialValue, setInitialValue] = useState(value);
 
@@ -34,6 +34,7 @@ const TextBox = ({
     width: width,
     borderColor: errors && touched && "#F3223C",
     cursor: disabled ? "no-drop" : "text",
+    color: "#1B224C",
   };
 
   useEffect(() => {

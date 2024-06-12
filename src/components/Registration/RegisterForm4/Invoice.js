@@ -20,7 +20,7 @@ const Invoice = () => {
         </div>
         <div className='app-fee-cont'>
           <label>Application Fee</label>
-          <div>420.00 AED</div>
+          <div style={{ color: "#1b224c" }}>420.00 AED</div>
         </div>
       </div>
     </div>

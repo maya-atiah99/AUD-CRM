@@ -62,7 +62,7 @@ const AcadamicFiles = ({ isView }) => {
         formik.values.applicantFiles.map((section, index) => {
           console.log("section.academicDocument", section.academicDocument);
           return (
-            <div key={index} className='form-subcontainers my-3'>
+            <div key={index} className='form-subcontainers'>
               <RadioButtonGroup
                 label='Choose Test :'
                 options={test}

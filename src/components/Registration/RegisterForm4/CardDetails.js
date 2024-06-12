@@ -11,16 +11,14 @@ const CardDetails = ({ isView }) => {
 
   const handleCardNumberChange = (name, value) => {
     const formattedValue = value.replace(/[\s-]/g, "");
-    const formattedCardNumber = formattedValue
-      .replace(/(.{4})/g, "$1-")
-      .trim();
+    const formattedCardNumber = formattedValue.replace(/(.{4})/g, "$1-").trim();
     formik.setFieldValue(name, formattedCardNumber);
   };
 
   return (
     <div className='payment-subcontainer'>
       <div>
-        <p>
+        <p style={{ color: "#1b224c" }}>
           Card Type <span className='required'>*</span>
         </p>
         <div className='d-flex gap-1'>
@@ -62,7 +60,7 @@ const CardDetails = ({ isView }) => {
         }
         disabled={isView}
       />
-      <div className='d-flex gap-1'>
+      <div className='card_dropdown_cont'>
         <DropDown
           label='Expiration Year'
           required={true}

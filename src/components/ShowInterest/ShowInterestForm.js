@@ -23,7 +23,6 @@ const ShowInterestForm = ({
   setEmail,
   setApplicationStart,
   setApplicationId,
-  
 }) => {
   const [submissionSuccess, setSubmissionSuccess] = useState(false);
   const [isResetForm, setIsResetform] = useState(false);
@@ -82,7 +81,6 @@ const ShowInterestForm = ({
       },
     });
   };
-  
 
   const handleSubmitForm = (values, { resetForm }) => {
     if (!values.titleId) {

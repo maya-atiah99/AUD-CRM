@@ -142,7 +142,7 @@ const ApplicationsModal = ({
         {isApplicationsByIdLoading ? (
           <Loader />
         ) : (
-          <>
+          <div className='cont'>
             <table className='applications-table'>
               <thead>
                 <tr>
@@ -190,11 +190,11 @@ const ApplicationsModal = ({
                 })}
               </tbody>
             </table>
-          </>
+          </div>
         )}
 
-        <div className='d-flex gap-5 align-items-center pt-3'>
-          <div className='d-flex gap-2 align-items-center'>
+        <div className='applicationModal_text_cont'>
+          <div className='applicationModal_text_subcont'>
             <TextComponent
               text='If you previously submitted an application and paid an application fee, you can initiate the re-application process by clicking the button'
               color='#000'

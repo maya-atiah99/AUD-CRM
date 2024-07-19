@@ -310,10 +310,9 @@ input[type="number"]::-webkit-outer-spin-button {
 }
 
 .img-text-container p {
-  /* max-width: 60%;  */
-  text-overflow: ellipsis;
+  max-width: 110px;
   overflow: hidden;
-  /* white-space: nowrap; */
+  text-overflow: ellipsis;
   color: #1b224c;
   font-family: Raleway;
   font-size: 14px;
@@ -324,7 +323,6 @@ input[type="number"]::-webkit-outer-spin-button {
   display: -webkit-box;
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 1;
-  overflow: hidden;
 }
 .size-upload-dc p {
   color: #1b224c;
@@ -2377,7 +2375,7 @@ responsiveness ************/
   }
   .span-required {
     font-size: 11px;
-}
+  }
   .aud-button > .button-icon {
     vertical-align: middle !important;
     width: 18px !important;

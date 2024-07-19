@@ -1598,6 +1598,7 @@ td:first-child {
 
 .applications-table-cont table thead tr th {
   padding: 10px;
+
 }
 .applications-table-cont th {
   background-color: #1b224c1e;
@@ -1616,6 +1617,9 @@ td:first-child {
   text-align: start;
   padding: 10px;
   white-space: nowrap;
+  max-width: 100px;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 .applications-table-cont tr:nth-child(even) {
   border-radius: 10px;

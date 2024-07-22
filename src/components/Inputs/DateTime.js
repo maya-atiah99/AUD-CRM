@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 
 const DateTime = ({
   label,
@@ -12,6 +12,7 @@ const DateTime = ({
   disabled,
 }) => {
   const [initialValue, setInitialValue] = useState(value);
+  const dateRef = useRef();
 
   const handleChange = (event) => {
     const newValue = event.target.value;
@@ -20,34 +21,43 @@ const DateTime = ({
       onChange(name, newValue);
     }
   };
+
   useEffect(() => {
     setInitialValue(value);
   }, [value]);
 
+  const handleFileInputClick = () => {
+    if (!disabled) {
+      dateRef.current.showPicker();
+    }
+  };
+
   return (
-    <div className='textBox-container'>
+    <div className="textBox-container">
       <label htmlFor={label}>
         {label}
-        {required && <span className='required'>*</span>}
+        {required && <span className="required">*</span>}
       </label>
       <div
-        id='dateInput'
+        id="dateInput"
         className={`${
           errors && touched ? "custom-date-input-red" : "custom-date-input"
         }`}
         style={{ width: width }}
+        onClick={handleFileInputClick}
       >
         <input
-          type='date'
+          type="date"
           id={label}
           required={required}
           onChange={handleChange}
           value={initialValue}
           disabled={disabled}
           style={{ cursor: disabled ? "not-allowed" : "pointer" }}
+          ref={dateRef}
           // className='text-input'
         />
-        <span className='custom-date-icon'></span>
+        <span className="custom-date-icon"></span>
       </div>
     </div>
   );

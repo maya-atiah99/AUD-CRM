@@ -18,7 +18,7 @@ const RegisterContainer = forwardRef(
       <div >
         <div className='aud-app-header'>
           <img
-            src='/images/Group 103.png'
+           src='/images/headerLogo.svg'
             alt='Logo'
             className='aud-header-logo'
           />

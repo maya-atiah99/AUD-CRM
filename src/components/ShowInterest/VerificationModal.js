@@ -64,12 +64,12 @@ const VerificationModal = ({
                   <div className='d-flex gap-1 flex-wrap'>
                     <TextComponent
                       text='We have send the OTP on '
-                      classfont='classfont-show'
+                      classfont='classfont-p'
                       font='500'
                     />{" "}
                     <TextComponent
                       text={"+"+ phoneNumber}
-                      classfont='classfont-show'
+                      classfont='classfont-p'
                       font='700'
                     />
                   </div>
@@ -96,11 +96,11 @@ const VerificationModal = ({
                     <TextComponent
                       text='We have send the OTP on'
                       font='500'
-                      classfont='classfont-show'
+                      classfont='classfont-p'
                     />
                     <TextComponent
                       text={email}
-                      classfont='classfont-show'
+                      classfont='classfont-p'
                       font='700'
                     />
                   </div>

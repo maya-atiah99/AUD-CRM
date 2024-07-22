@@ -199,7 +199,8 @@ const ApplicationsModal = ({
               text='If you previously submitted an application and paid an application fee, you can initiate the re-application process by clicking the button'
               color='#000'
               font='500'
-              size='15px'
+              // size='15px'
+              classfont='p-style'
             />
             <AUDButton text='Re-Apply' handleOnClick={handleReApply} />
           </div>

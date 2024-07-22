@@ -32,7 +32,8 @@ const ForgotPasswordModal = ({
       <div className='forgort-password-cont'>
         <TextComponent
           text='Select which contact details should we use to reset your password.'
-          size='18px'
+          // size='18px'
+          classfont="classfont-show"
           font='500'
         />
 

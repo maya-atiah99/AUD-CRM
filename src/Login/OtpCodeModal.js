@@ -50,7 +50,7 @@ const OtpCodeModal = ({
           text='The OTP code was sent to your mobile. Please enter the code '
           size='18px'
           font='500'
-        />{" "}
+        />
         <div className='otpField-container'>
           {otp.map((data, index) => {
             return (

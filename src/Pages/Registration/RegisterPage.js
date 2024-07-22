@@ -47,10 +47,16 @@ const RegisterPage = ({
   );
   const [showThree, setShowThree] = useState(false);
   const [fetchedData, setfetchedData] = useState({});
-  const { data: applicantStageOne, refetch: refetchStageOne } =
-    useFetchApplicantStageOne(applicantId, applicationId);
-  const { data: applicantStageTwo, refetch: refetchStageTwo } =
-    useFetchApplicantStageTwo(applicantId, applicationId);
+  const {
+    data: applicantStageOne,
+    refetch: refetchStageOne,
+    isLoading: isStageOneLoading,
+  } = useFetchApplicantStageOne(applicantId, applicationId);
+  const {
+    data: applicantStageTwo,
+    refetch: refetchStageTwo,
+    isLoading: isStageTwoLoading,
+  } = useFetchApplicantStageTwo(applicantId, applicationId);
 
   useEffect(() => {
     refreshPage();
@@ -217,6 +223,7 @@ const RegisterPage = ({
           setSteps={setSteps}
           showThree={showThree}
           reApply={reApply}
+          isLoading={isStageOneLoading || isStageTwoLoading}
         />
 
         <div className='button-cont-register '>

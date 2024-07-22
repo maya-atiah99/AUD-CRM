@@ -235,7 +235,7 @@ const ShowInterestForm = ({
                   />
                   {errorMessage ? (
                     <div>
-                      <div className='error-container d-flex gap-1 align-items-start'>
+                      <div className='error-container'>
                         <img src='/images/errorSign.svg' alt='error' />
                         <div>
                           <p>
@@ -294,7 +294,7 @@ const ShowInterestForm = ({
                   />
                   {errorPhoneMessage ? (
                     <div>
-                      <div className='error-container d-flex gap-1 align-items-start'>
+                      <div className='error-container'>
                         <img src='/images/errorSign.svg' alt='error' />
                         <div>
                           <p>

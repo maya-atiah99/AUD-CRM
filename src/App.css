@@ -116,6 +116,7 @@ a {
   /* text-transform: capitalize; */
   font-size: 18px;
   font-weight: bold;
+  white-space: nowrap;
 }
 /****************************************************TextBox**/
 input[type="date"] {
@@ -177,7 +178,7 @@ textarea:focus-visible {
 .required {
   color: #f3223c;
   padding-left: 1px;
-  font-size: 25px;
+  font-size: 20px;
   font-weight: bold;
 }
 
@@ -429,7 +430,7 @@ input[type="number"]::-webkit-outer-spin-button {
 .expandable-card {
   width: 100%;
   /* background-color: #020a581a; */
-  padding: 15px 0px;
+  padding: 15px 5px;
   margin: 10px 0;
   /* cursor: pointer; */
   border-radius: 5px;
@@ -823,10 +824,10 @@ ul {
 
 .showInterest-subContainer {
   position: relative;
-  padding: 30px 50px;
+  padding: 15px 50px;
   background-color: #ffffff;
   border-radius: 10px;
-  max-height: 90vh;
+  max-height: 95vh;
   width: 87%;
   display: flex;
   flex-direction: row;
@@ -919,19 +920,19 @@ ul {
 
 /*********************************8***Show Interest Form*********/
 .show-interest-form {
-  flex: 1;
+  flex: 1 1;
   max-height: 87vh;
   overflow-y: auto;
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: 10px;
   padding: 0px 20px;
 }
 
 .showInterestForm-inner-cont {
   display: flex;
   flex-direction: column;
-  gap: 0.8rem;
+  gap: 0.1rem;
 }
 .grid-container {
   display: grid;
@@ -1110,7 +1111,7 @@ ul {
 .form-subcontainers {
   display: flex;
   flex-direction: column;
-  gap: 0.5rem;
+  gap: 0.7rem;
 }
 
 /***********************************Personal Information********/
@@ -1237,6 +1238,28 @@ ul {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr;
   grid-column-gap: 10px;
+}
+.radioButton_removeIcon_cont {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
+.remove_text {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 0.1rem;
+  cursor: pointer;
+}
+.remove_text h6 {
+  margin: 0;
+  color: #ea3a3d;
+  font-family: Raleway;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
 }
 /*********************************Regulation table******************/
 .regulations-container {
@@ -1696,6 +1719,11 @@ td:first-child {
     font-size: 15px;
   }
 }
+@media screen and (max-width: 1750px) {
+  .show-interest-form {
+    gap: 5px;
+  }
+}
 @media screen and (max-height: 694px) {
   .showInterestLogo {
     width: 30%;
@@ -1747,6 +1775,16 @@ td:first-child {
   }
   .show-interest-form {
     width: 60%;
+  }
+}
+
+@media screen and (max-width: 1700px) and (min-height: 900px) {
+  .show-interest-form {
+    gap: 20px;
+    max-height: 90vh;
+  }
+  .showInterestForm-inner-cont {
+    gap: 1vh;
   }
 }
 @media screen and (max-width: 1280px) {
@@ -1903,6 +1941,9 @@ td:first-child {
 @media screen and (max-width: 880px) and (max-height: 850px) {
   .vertical-line-showInterest {
     display: none;
+  }
+  .showInterestForm-inner-cont {
+    gap: 0.2vh;
   }
 }
 
@@ -2272,6 +2313,9 @@ responsiveness ************/
     font-size: 11px !important;
   }
 
+  .words-number {
+    font-size: 12px;
+  }
   /***aud button*/
   .aud-button {
     padding: 5px;
@@ -2320,7 +2364,7 @@ responsiveness ************/
   .showInterest-subContainer {
     padding: 25px 1px;
     /* height: 70%; was 90 */
-    width: 99%;
+    width: 95%;
     flex-direction: column;
     /* justify-content: center;
     gap: 1%; */
@@ -2424,6 +2468,15 @@ responsiveness ************/
     display: flex;
     gap: 2rem;
     flex-direction: column;
+  }
+  .radioButton_removeIcon_cont {
+    align-items: flex-start;
+  }
+  .remove_text img {
+    width: 12px !important;
+  }
+  .remove_text h6 {
+    font-size: 12px;
   }
   /************************************/
   /*************************/

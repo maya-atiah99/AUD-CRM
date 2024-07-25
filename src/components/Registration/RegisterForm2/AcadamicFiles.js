@@ -47,22 +47,42 @@ const AcadamicFiles = ({ isView }) => {
     setSections(sections + 1);
   };
 
-  console.log("formik.values.applicantFiles", formik.values.applicantFiles);
+  const removeSection = (index) => {
+    if (formik.values.applicantFiles.length === 1) {
+      formik.setFieldValue("applicantFiles", [
+        {
+          testType: "",
+          academicDocument: "",
+          dateTaken: "",
+          registrationNumber: "",
+          totalScore: "",
+        },
+      ]);
+    } else {
+      const newFiles = formik.values.applicantFiles.filter(
+        (_, i) => i !== index
+      );
+      formik.setFieldValue("applicantFiles", newFiles);
+      setSections(sections - 1);
+    }
+  };
+
+  const isAnyFieldFilled = (section) => {
+    return Object.values(section).some((value) => value !== "");
+  };
 
   return (
     <div className='form-subcontainers academic-container'>
       <SectionTitle
         title='ACADEMIC IELTS/TOEFL/EMSAT/PTE SCORE/SAT'
-        // isTaken={true}
       />
       <ExpandableBox title='Further Details' backgroundColor={true}>
         <BulletedText items={details} />
       </ExpandableBox>
       {formik.values.applicantFiles &&
-        formik.values.applicantFiles.map((section, index) => {
-          console.log("section.academicDocument", section.academicDocument);
-          return (
-            <div key={index} className='form-subcontainers'>
+        formik.values.applicantFiles.map((section, index) => (
+          <div key={index} className='form-subcontainers'>
+            <div className='radioButton_removeIcon_cont'>
               <RadioButtonGroup
                 label='Choose Test :'
                 options={test}
@@ -74,82 +94,85 @@ const AcadamicFiles = ({ isView }) => {
                 errors={formik.errors?.applicantFiles?.[index]?.testType}
                 touched={formik.touched?.applicantFiles?.[index]?.testType}
               />
-              {formik.errors?.applicantFiles?.[index]?.testType &&
-              formik.touched?.applicantFiles?.[index]?.testType ? (
-                <span className='span-required'>Choose Test is required</span>
-              ) : (
-                ""
+              {(formik.values.applicantFiles.length > 1 || isAnyFieldFilled(section)) && (
+                <div className='remove_text' onClick={() => removeSection(index)}>
+                  <img
+                    src='/images/removeIcon.svg'
+                    alt='removeIcon'
+                    style={{ width: "1rem", cursor: "pointer" }}
+                  />
+                  <h6>{formik.values.applicantFiles.length === 1 ? "Clear" : "Remove"}</h6>
+                </div>
               )}
-              <DocumentUpload
-                text='Upload The Academic Document'
+            </div>
+
+            {formik.errors?.applicantFiles?.[index]?.testType &&
+            formik.touched?.applicantFiles?.[index]?.testType ? (
+              <span className='span-required'>Choose Test is required</span>
+            ) : (
+              ""
+            )}
+            <DocumentUpload
+              text='Upload The Academic Document'
+              required={true}
+              height='100px'
+              imageHeight='50px'
+              size='50'
+              label='Upload Document'
+              name={`applicantFiles[${index}].academicDocument`}
+              value={section.academicDocument}
+              filName={section.academicDocument}
+              onChange={(name, value) => {
+                formik.setFieldValue(name, value);
+              }}
+              errors={formik.errors?.applicantFiles?.[index]?.academicDocument}
+              touched={formik.touched?.applicantFiles?.[index]?.academicDocument}
+              disabled={isView}
+            />
+
+            <div className='grid-acd-cont'>
+              <DateTime
+                width='100%'
+                label='Date Taken'
                 required={true}
-                height='100px'
-                imageHeight='50px'
-                size='50'
-                label='Upload Document'
-                name={`applicantFiles[${index}].academicDocument`}
-                value={section.academicDocument}
-                filName={section.academicDocument}
+                name={`applicantFiles[${index}].dateTaken`}
+                value={section.dateTaken}
                 onChange={(name, value) => {
                   formik.setFieldValue(name, value);
                 }}
-                errors={
-                  formik.errors?.applicantFiles?.[index]?.academicDocument
-                }
-                touched={
-                  formik.touched?.applicantFiles?.[index]?.academicDocument
-                }
+                errors={formik.errors?.applicantFiles?.[index]?.dateTaken}
+                touched={formik.touched?.applicantFiles?.[index]?.dateTaken}
                 disabled={isView}
               />
-
-              <div className='grid-acd-cont'>
-                <DateTime
-                  width='100%'
-                  label='Date Taken'
-                  required={true}
-                  name={`applicantFiles[${index}].dateTaken`}
-                  value={section.dateTaken}
-                  onChange={(name, value) => {
-                    formik.setFieldValue(name, value);
-                  }}
-                  errors={formik.errors?.applicantFiles?.[index]?.dateTaken}
-                  touched={formik.touched?.applicantFiles?.[index]?.dateTaken}
-                  disabled={isView}
-                />
-                <TextBox
-                  width='100%'
-                  label='Registration No'
-                  required={true}
-                  name={`applicantFiles[${index}].registrationNumber`}
-                  value={section.registrationNumber}
-                  onChange={(name, value) => {
-                    formik.setFieldValue(name, value);
-                  }}
-                  errors={
-                    formik.errors?.applicantFiles?.[index]?.registrationNumber
-                  }
-                  touched={
-                    formik.touched?.applicantFiles?.[index]?.registrationNumber
-                  }
-                  disabled={isView}
-                />
-                <TextBox
-                  width='100%'
-                  label='Total Score'
-                  required={true}
-                  name={`applicantFiles[${index}].totalScore`}
-                  value={section.totalScore}
-                  onChange={(name, value) => {
-                    formik.setFieldValue(name, value);
-                  }}
-                  errors={formik.errors?.applicantFiles?.[index]?.totalScore}
-                  touched={formik.touched?.applicantFiles?.[index]?.totalScore}
-                  disabled={isView}
-                />
-              </div>
+              <TextBox
+                width='100%'
+                label='Registration No'
+                required={true}
+                name={`applicantFiles[${index}].registrationNumber`}
+                value={section.registrationNumber}
+                onChange={(name, value) => {
+                  formik.setFieldValue(name, value);
+                }}
+                errors={formik.errors?.applicantFiles?.[index]?.registrationNumber}
+                touched={formik.touched?.applicantFiles?.[index]?.registrationNumber}
+                disabled={isView}
+              />
+              <TextBox
+                width='100%'
+                label='Total Score'
+                required={true}
+                name={`applicantFiles[${index}].totalScore`}
+                value={section.totalScore}
+                onChange={(name, value) => {
+                  formik.setFieldValue(name, value);
+                }}
+                errors={formik.errors?.applicantFiles?.[index]?.totalScore}
+                touched={formik.touched?.applicantFiles?.[index]?.totalScore}
+                disabled={isView}
+              />
             </div>
-          );
-        })}
+          </div>
+        ))}
 
       <div className='form-subcontainers'>
         <RoundedButton

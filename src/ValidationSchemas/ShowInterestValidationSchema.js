@@ -18,6 +18,9 @@ const showInterestValidationSchema = Yup.object().shape({
   selectedTerm: Yup.string().required("Selected term is required"),
   fieldOfInterest: Yup.string().required("Field of interest is required"),
   applicationStart: Yup.string().required("Start your application is required"),
+  schoolCurriculumId: Yup.string(),
+  gradeId: Yup.string(),
+  highSchoolGPA: Yup.string(),
 });
 
 export default showInterestValidationSchema;

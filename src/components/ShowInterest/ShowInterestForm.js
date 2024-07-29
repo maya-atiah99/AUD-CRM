@@ -384,48 +384,52 @@ const ShowInterestForm = ({
                   errors={errors.fieldOfInterest}
                   touched={touched.fieldOfInterest}
                 />{" "}
-                <Dropdown
-                  styleType='formField'
-                  width='100%'
-                  label='School Curriculum'
-                  name='schoolCurriculumId'
-                  value={values.schoolCurriculumId}
-                  onChange={(name, value) => {
-                    setFieldValue(name, value);
-                  }}
-                  errors={errors.schoolCurriculumId}
-                  touched={touched.schoolCurriculumId}
-                  type='18'
-                />
+                {values.applicationStart && (
+                  <Dropdown
+                    styleType='formField'
+                    width='100%'
+                    label='School Curriculum'
+                    name='schoolCurriculumId'
+                    value={values.schoolCurriculumId}
+                    onChange={(name, value) => {
+                      setFieldValue(name, value);
+                    }}
+                    errors={errors.schoolCurriculumId}
+                    touched={touched.schoolCurriculumId}
+                    type='18'
+                  />
+                )}
               </div>{" "}
-              <div className='grid-container2 '>
-                <Dropdown
-                  styleType='formField'
-                  width='100%'
-                  label='Grade'
-                  name='gradeId'
-                  value={values.gradeId}
-                  onChange={(name, value) => {
-                    setFieldValue(name, value);
-                  }}
-                  errors={errors.gradeId}
-                  touched={touched.gradeId}
-                  type='23'
-                />{" "}
-                <TextBox
-                  styleType='formField'
-                  width='100%'
-                  label='High School Academic GPA'
-                  name='highSchoolGPA'
-                  value={values.highSchoolGPA}
-                  onChange={(name, value) => {
-                    setFieldValue(name, value);
-                  }}
-                  errors={errors.highSchoolGPA}
-                  touched={touched.highSchoolGPA}
-                  type='number'
-                />
-              </div>
+              {values.applicationStart && (
+                <div className='grid-container2 '>
+                  <Dropdown
+                    styleType='formField'
+                    width='100%'
+                    label='Grade'
+                    name='gradeId'
+                    value={values.gradeId}
+                    onChange={(name, value) => {
+                      setFieldValue(name, value);
+                    }}
+                    errors={errors.gradeId}
+                    touched={touched.gradeId}
+                    type='23'
+                  />{" "}
+                  <TextBox
+                    styleType='formField'
+                    width='100%'
+                    label='High School Academic GPA'
+                    name='highSchoolGPA'
+                    value={values.highSchoolGPA}
+                    onChange={(name, value) => {
+                      setFieldValue(name, value);
+                    }}
+                    errors={errors.highSchoolGPA}
+                    touched={touched.highSchoolGPA}
+                    type='number'
+                  />
+                </div>
+              )}
               <div className='showinterest-btn-container'>
                 <AUDButton
                   text='Submit an Application'

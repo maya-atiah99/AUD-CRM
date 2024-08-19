@@ -162,6 +162,7 @@ const ShowInterestForm = ({
         handleSubmit,
         isSubmitting,
       }) => {
+        console.log("scnjkvbd", values);
         return (
           <Form>
             <div className='showInterestForm-inner-cont '>
@@ -384,7 +385,7 @@ const ShowInterestForm = ({
                   errors={errors.fieldOfInterest}
                   touched={touched.fieldOfInterest}
                 />{" "}
-                {values.applicationStart && (
+                {values.applicationStart == "0" && (
                   <Dropdown
                     styleType='formField'
                     width='100%'
@@ -400,7 +401,7 @@ const ShowInterestForm = ({
                   />
                 )}
               </div>{" "}
-              {values.applicationStart && (
+              {values.applicationStart == "0" && (
                 <div className='grid-container2 '>
                   <Dropdown
                     styleType='formField'

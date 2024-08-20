@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import toast from "react-hot-toast";
 import { AiFillCloseCircle } from "react-icons/ai";
 
 const DocumentUpload = ({
@@ -21,8 +22,21 @@ const DocumentUpload = ({
 
   const handleFileChange = (event) => {
     const file = event.target.files[0];
+    
     if (file) {
-      console.log("filexasdcdasdaddd", file);
+    
+         if (file.type !== "application/pdf") {
+          toast.error("Only PDF files are allowed");
+          return;
+        }
+  
+    
+        if (file.size > 5 * 1024 * 1024) {
+          toast.error("File is too large. Max size is 5MB.");
+          return;
+        }
+  
+        setSelectedFile(file);
       setSelectedFile(file);
       onChange(name, file);
     } else if (value) {

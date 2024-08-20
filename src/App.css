@@ -316,7 +316,7 @@ input[type="number"]::-webkit-outer-spin-button {
 }
 
 .img-text-container p {
-  max-width: 110px;
+  /* max-width: 110px; */
   overflow: hidden;
   text-overflow: ellipsis;
   color: #1b224c;
@@ -347,7 +347,7 @@ input[type="number"]::-webkit-outer-spin-button {
   width: 16px;
 }
 .smallImage {
-  height: 30px;
+  height: 25px;
 }
 .bigImage {
   height: 50px;
@@ -387,7 +387,6 @@ input[type="number"]::-webkit-outer-spin-button {
     opacity: 1;
   }
 }
-
 
 .inner-modal-container .close-icon {
   position: absolute;
@@ -2613,6 +2612,9 @@ responsiveness ************/
   }
   .img-text-container p {
     font-size: 10px;
+    max-width: 110px;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
   .size-upload-dc p {
     font-size: 9px;

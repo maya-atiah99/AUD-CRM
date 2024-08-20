@@ -2,6 +2,7 @@ import * as Yup from "yup";
 
 const getValidationSchemaStep1 = (applicationStart, applingAs) => {
   console.log("applicatisaaatart", applicationStart);
+
   const baseSchema = {
     isSaved: Yup.boolean(),
     TitleId: Yup.string().notRequired("TitleId is required"),
@@ -111,14 +112,7 @@ const getValidationSchemaStep1 = (applicationStart, applingAs) => {
     GuardianName2: Yup.string(),
     GuardianMobile2: Yup.string(),
     GuardianEmail2: Yup.string().email("Invalid Email"),
-    AuthorizeToReleaseRecord: Yup.boolean().when("isSaved", {
-      is: (isSaved) => isSaved,
-      then: (schema) =>
-        schema
-          .required("AuthorizeToReleaseRecord is required")
-          .oneOf([true], "This field is required"),
-      otherwise: (schema) => schema.notRequired(),
-    }),
+    AuthorizeToReleaseRecord: Yup.boolean(),
     Authorize_GuardianName: Yup.string().when("isSaved", {
       is: (isSaved) => isSaved,
       then: (schema) => schema.required("Authorize_GuardianName is required"),
@@ -232,6 +226,7 @@ const getValidationSchemaStep1 = (applicationStart, applingAs) => {
       baseSchema.MiddleEasternStudies.notRequired();
     baseSchema.SemestersAtAUD = baseSchema.SemestersAtAUD.notRequired();
   }
+
   if (applingAs === 1 || applingAs === 5) {
     baseSchema.CurrentPlaceOfStudy = baseSchema.CurrentPlaceOfStudy.when(
       "isSaved",
@@ -242,11 +237,68 @@ const getValidationSchemaStep1 = (applicationStart, applingAs) => {
       }
     );
   } else {
-    baseSchema.CurrentPlaceOfStudy = baseSchema.CurrentPlaceOfStudy.notRequired(
-      "Current Place Of study is required"
-    );
+    baseSchema.CurrentPlaceOfStudy =
+      baseSchema.CurrentPlaceOfStudy.notRequired();
   }
+
+  // if (
+  //   baseSchema.LegacyApplicant
+  // ) {
+  //   console.log("vfuyfuycfucfdukcduf")
+  //   baseSchema.LegacyFatherName = baseSchema.LegacyFatherName.required();
+  //   baseSchema.LegacyFatherProgram = baseSchema.LegacyFatherProgram.required();
+  //   baseSchema.LegacyFatherGraduationYear =
+  //     baseSchema.LegacyFatherGraduationYear.required();
+
+  //   baseSchema.LegacyMotherName = baseSchema.LegacyMotherName.required();
+  //   baseSchema.LegacyMotherProgram = baseSchema.LegacyMotherProgram.required();
+  //   baseSchema.LegacyMotherGraduationYear =
+  //     baseSchema.LegacyMotherGraduationYear.required();
+  // } else if (
+  //   baseSchema.LegacyApplicant &&
+  //   baseSchema.LegacyFatherName.length > 0 &&
+  //   baseSchema.LegacyMotherName.length == 0
+  // ) {
+  //   baseSchema.LegacyFatherProgram = baseSchema.LegacyFatherProgram.required();
+  //   baseSchema.LegacyFatherGraduationYear =
+  //     baseSchema.LegacyFatherGraduationYear.required();
+  //   baseSchema.LegacyMotherName = baseSchema.LegacyMotherName.notRequired();
+  //   baseSchema.LegacyMotherProgram =
+  //     baseSchema.LegacyMotherProgram.notRequired();
+  //   baseSchema.LegacyMotherGraduationYear =
+  //     baseSchema.LegacyMotherGraduationYear.notRequired();
+  // } else if (
+  //   baseSchema.LegacyApplicant &&
+  //   baseSchema.LegacyFatherName.length == 0 &&
+  //   baseSchema.LegacyMotherName.length > 0
+  // ) {
+  //   baseSchema.LegacyFatherProgram =
+  //     baseSchema.LegacyFatherProgram.notRequired();
+  //   baseSchema.LegacyFatherGraduationYear =
+  //     baseSchema.LegacyFatherGraduationYear.notRequired();
+  //   baseSchema.LegacyFatherName = baseSchema.LegacyFatherName.notRequired();
+
+  //   baseSchema.LegacyMotherProgram = baseSchema.LegacyMotherProgram.required();
+  //   baseSchema.LegacyMotherGraduationYear =
+  //     baseSchema.LegacyMotherGraduationYear.required();
+  // } else {
+  //   console.log("hloihi", baseSchema.LegacyApplicant)
+  //   baseSchema.LegacyFatherName = baseSchema.LegacyFatherName.notRequired();
+  //   baseSchema.LegacyFatherProgram =
+  //     baseSchema.LegacyFatherProgram.notRequired();
+  //   baseSchema.LegacyFatherGraduationYear =
+  //     baseSchema.LegacyFatherGraduationYear.notRequired();
+
+  //   baseSchema.LegacyMotherName = baseSchema.LegacyMotherName.notRequired();
+  //   baseSchema.LegacyMotherProgram =
+  //     baseSchema.LegacyMotherProgram.notRequired();
+  //   baseSchema.LegacyMotherGraduationYear =
+  //     baseSchema.LegacyMotherGraduationYear.notRequired();
+  // }
+
+
 
   return Yup.object().shape(baseSchema);
 };
+
 export default getValidationSchemaStep1;

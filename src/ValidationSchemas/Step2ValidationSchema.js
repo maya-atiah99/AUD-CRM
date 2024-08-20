@@ -46,7 +46,16 @@ const getValidationSchemaStep2 = (applicationStart, applingAs) => {
     ),
     isSaved: Yup.boolean(),
     NextActiveStep: Yup.number(),
-    PersonalStatement: Yup.string(),
+    PersonalStatement: Yup.string()
+      .test("min-words", "Minimum 500 words are required", (value) => {
+        if (!value) {
+          return false;
+        }
+        const strippedStr = value.replace(/<[^>]*>/g, ""); 
+        console.log("words", strippedStr.split(/\s+/).length);
+        return strippedStr.split(/\s+/).length >= 500;
+      })
+      .required("PersonalStatement is required"), 
     EmploymentStatus: Yup.string(),
     EmploymentSector: Yup.string(),
     CompanyName: Yup.string(),
@@ -65,29 +74,29 @@ const getValidationSchemaStep2 = (applicationStart, applingAs) => {
     SchoolState: Yup.string(),
   };
 
-  if (applingAs !== 0 && applingAs !== 7) {
-    baseSchema.PersonalStatement = baseSchema.PersonalStatement.when(
-      "isSaved",
-      {
-        is: (isSaved) => isSaved,
-        then: (schema) =>
-          schema
-            .test("min-words", "Minimum 500 words are required", (value) => {
-              if (!value) {
-                return false;
-              }
-              const strippedStr = value.replace(/<[^>]*>/g, ''); // Fixed regex and variable name
-              console.log("words", strippedStr.split(/\s+/).length); // Count words properly
-              return strippedStr.split(/\s+/).length >= 500; // Check word count
-            })
-            .required("PersonalStatement is required"), // Moved required validation inside 'then'
-        otherwise: (schema) => schema.notRequired(),
-      }
-    );
-  }
-   else {
-    baseSchema.PersonalStatement = baseSchema.PersonalStatement.notRequired();
-  }
+  // if (applingAs !== 0 && applingAs !== 7) {
+  //   baseSchema.PersonalStatement = baseSchema.PersonalStatement.when(
+  //     "isSaved",
+  //     {
+  //       is: (isSaved) => isSaved,
+  //       then: (schema) =>
+  //         schema
+  //           .test("min-words", "Minimum 500 words are required", (value) => {
+  //             if (!value) {
+  //               return false;
+  //             }
+  //             const strippedStr = value.replace(/<[^>]*>/g, ''); // Fixed regex and variable name
+  //             console.log("words", strippedStr.split(/\s+/).length); // Count words properly
+  //             return strippedStr.split(/\s+/).length >= 500; // Check word count
+  //           })
+  //           .required("PersonalStatement is required"), // Moved required validation inside 'then'
+  //       otherwise: (schema) => schema.notRequired(),
+  //     }
+  //   );
+  // }
+  //  else {
+  //   baseSchema.PersonalStatement = baseSchema.PersonalStatement.notRequired();
+  // }
 
   if (applicationStart !== "2" && applingAs !== 5 && applingAs !== 8) {
     baseSchema.GraduationYear = baseSchema.GraduationYear.when("isSaved", {

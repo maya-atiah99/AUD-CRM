@@ -7,6 +7,14 @@ import {
   useFetchFieldOfInterestByApplicationStart,
 } from "../../Hooks/DropDownTypes";
 
+const CustomDropdownArrow = () => {
+  return (
+    <div className='custom-dropdown-arrow'>
+      <img src='/images/customDropdown.svg' />
+    </div>
+  );
+};
+
 const DropDown = ({
   label,
   required,
@@ -58,6 +66,7 @@ const DropDown = ({
     "December",
   ];
 
+  console.log("vasdjvlsvhasdv",academicOptions)
   const formattedOptions = options?.data
     ? options?.data?.map((option) => ({
         value: option.ddid,
@@ -102,19 +111,12 @@ const DropDown = ({
   const handleOnChange = (name, selectedOption) => {
     onChange(name, selectedOption.value);
   };
+
   useEffect(() => {
     if (type) {
       refetchTypes();
     }
   }, [type, refetchTypes]);
-
-  const CustomDropdownArrow = () => {
-    return (
-      <div className='custom-dropdown-arrow'>
-        <img src='/images/customDropdown.svg' />
-      </div>
-    );
-  };
 
   const customStyles = {
     dropdownIndicator: (base) => ({
@@ -140,6 +142,10 @@ const DropDown = ({
       ...base,
       fontWeight: "500",
       color: "#1B224C",
+    }),
+    menuPortal: (base) => ({
+      ...base,
+      zIndex: 9999,
     }),
   };
 
@@ -169,25 +175,8 @@ const DropDown = ({
         {required && <span className='required'>*</span>}
       </label>
       <Select
-        options={
-          fieldOfInterest
-            ? formattedFieldOfInterestOptions
-            : bolean
-            ? boleanOptions
-            : isAcademic
-            ? formattedAcademicOptions
-            : isYear
-            ? formattedYear
-            : isMonth
-            ? formattedMonth
-            : parent
-            ? formattedParentOptions
-            : data
-            ? data
-            : formattedOptions
-        }
+        options={optionsSelected}
         isDisabled={disabled}
-        // required={required}
         styles={customStyles}
         maxMenuHeight={140}
         components={{
@@ -195,6 +184,7 @@ const DropDown = ({
         }}
         value={optionsSelected.find((option) => option.value === value) || null}
         onChange={(selectedOption) => handleOnChange(name, selectedOption)}
+        menuPortalTarget={document.body}
       />
     </div>
   );

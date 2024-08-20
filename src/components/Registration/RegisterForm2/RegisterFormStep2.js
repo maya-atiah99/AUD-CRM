@@ -320,11 +320,12 @@ const RegisterFormStep2 = forwardRef(
             ""
           )}
 
-          {applingAs !== 0 && applingAs !== 7 ? (
+          {/* {applingAs !== 0 && applingAs !== 7 ? (
             <PersonalStatement isView={isView} />
           ) : (
             ""
-          )}
+          )} */}
+          <PersonalStatement isView={isView} />
         </FormikProvider>
       </div>
     );

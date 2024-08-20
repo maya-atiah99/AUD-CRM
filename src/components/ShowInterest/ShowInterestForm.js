@@ -55,6 +55,13 @@ const ShowInterestForm = ({
       const { titleId, ...valuesToSendWithoutTitleId } = values;
       values = valuesToSendWithoutTitleId;
     }
+
+    if (values.applicationStart !== "0") {
+      const { schoolCurriculumId, gradeId, highSchoolGPA, ...valuesToSend } =
+        values;
+      values = valuesToSend;
+    }
+
     addApplicant(values, {
       onSuccess: (data) => {
         localStorage.setItem("applicantId", data?.data?.applicantId);
@@ -89,6 +96,13 @@ const ShowInterestForm = ({
     if (!values.titleId) {
       const { titleId, ...valuesToSendWithoutTitleId } = values;
       values = valuesToSendWithoutTitleId;
+    }
+
+    // Conditionally remove fields based on applicationStart
+    if (values.applicationStart !== "0") {
+      const { schoolCurriculumId, gradeId, highSchoolGPA, ...valuesToSend } =
+        values;
+      values = valuesToSend;
     }
     addShowInterest(values, {
       onSuccess: (data) => {
@@ -163,6 +177,8 @@ const ShowInterestForm = ({
         isSubmitting,
       }) => {
         console.log("scnjkvbd", values);
+        console.log("errors", errors);
+
         return (
           <Form>
             <div className='showInterestForm-inner-cont '>

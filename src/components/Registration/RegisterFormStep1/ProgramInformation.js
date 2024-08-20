@@ -24,7 +24,7 @@ const ProgramInformation = ({ fetchedData, isView }) => {
     { label: "Graduate", value: "1" },
     { label: "Visiting", value: "2" },
   ];
-
+console.log("applyingAsData",applyingAsData)
   useEffect(() => {
     const fetchApplyingAsData = async () => {
       await refetchApplyinAs();
@@ -95,6 +95,7 @@ const ProgramInformation = ({ fetchedData, isView }) => {
     formik.setFieldValue(name, value);
   };
 
+  console.log("formik.values.SelectedTerm",formik.values.SelectedTerm)
   return (
     <>
       <div className='form-subcontainers'>

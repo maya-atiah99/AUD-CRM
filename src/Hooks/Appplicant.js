@@ -141,6 +141,7 @@ export const useFetchApplicantStageFour = (applicantId, applicationId) => {
 
 const fetchApplyingAs = async (data) => {
   const app = data?.applicationStart || 0;
+  console.log("sbsgkfbkjgbsb",data)
   if (data?.academicTermId) {
     return await axios.get(
       API_URL +

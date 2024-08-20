@@ -123,6 +123,11 @@ const PersonalInformation = ({ isView }) => {
           value={formik.values.Nationality}
           onChange={(name, value) => {
             formik.setFieldValue(name, value);
+            formik.setFieldValue("FamilyBookNumber", "");
+            formik.setFieldValue("FamilyBook_File", "");
+            formik.setFieldValue("EtibharaNo", "");
+            formik.setFieldValue("FamilyNo", "");
+            formik.setFieldValue("CityNo", "");
           }}
           errors={formik.errors?.Nationality}
           touched={formik.touched?.Nationality}
@@ -143,7 +148,7 @@ const PersonalInformation = ({ isView }) => {
           touched={formik.touched?.Mobile}
           disabled={true}
         />
-         <PhoneNumber
+        <PhoneNumber
           width='50%'
           label='WhatsApp Number'
           required={true}
@@ -292,7 +297,8 @@ const PersonalInformation = ({ isView }) => {
         ) : (
           ""
         )}
-        {showEmirate ? (
+        {formik.values.Nationality ===
+        "dcb9b21c-31bf-42fa-9b60-fab3608a49e6" ? (
           <div className='grid-personal1-cont'>
             <TextBox
               width='100%'

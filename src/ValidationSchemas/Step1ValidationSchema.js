@@ -1,7 +1,6 @@
 import * as Yup from "yup";
 
 const getValidationSchemaStep1 = (applicationStart, applingAs) => {
-  console.log("applicatisaaatart", applicationStart);
 
   const baseSchema = {
     isSaved: Yup.boolean(),

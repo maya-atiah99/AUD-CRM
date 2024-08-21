@@ -125,6 +125,13 @@ const ParentInformation = ({ isView }) => {
         value={formik.values.LegacyApplicant}
         onChange={(checked) => {
           formik.setFieldValue("LegacyApplicant", checked);
+          formik.setFieldValue("testLegacy", "");
+          formik.setFieldValue("LegacyFatherProgram", "");
+          formik.setFieldValue("LegacyFatherName", "");
+          formik.setFieldValue("LegacyFatherGraduationYear", "");
+          formik.setFieldValue("LegacyMotherName", "");
+          formik.setFieldValue("LegacyMotherProgram", "");
+          formik.setFieldValue("LegacyMotherGraduationYear", "");
         }}
         errors={formik.errors?.LegacyApplicant}
         touched={formik.errors?.LegacyApplicant}
@@ -141,7 +148,7 @@ const ParentInformation = ({ isView }) => {
               value={formik.values.LegacyFatherName}
               onChange={(name, value) => {
                 formik.setFieldValue(name, value);
-                formik.setFieldValue("testLegacy",true)
+                formik.setFieldValue("testLegacy", true);
               }}
               errors={formik.errors?.LegacyFatherName}
               touched={formik.touched?.LegacyFatherName}

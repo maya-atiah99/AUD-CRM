@@ -141,6 +141,7 @@ const ParentInformation = ({ isView }) => {
               value={formik.values.LegacyFatherName}
               onChange={(name, value) => {
                 formik.setFieldValue(name, value);
+                formik.setFieldValue("testLegacy",true)
               }}
               errors={formik.errors?.LegacyFatherName}
               touched={formik.touched?.LegacyFatherName}

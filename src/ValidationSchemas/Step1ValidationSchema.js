@@ -154,13 +154,59 @@ const getValidationSchemaStep1 = (applicationStart, applingAs) => {
     Pobox: Yup.string().max(50),
     ZipCode: Yup.string().max(5).min(5),
     LegacyApplicant: Yup.boolean(),
-    LegacyFatherName: Yup.string().max(10),
-    LegacyFatherProgram: Yup.string(),
-    LegacyFatherGraduationYear: Yup.number(),
+    LegacyFatherName: Yup.string()
+      .max(10)
+      .when(["LegacyApplicant", "LegacyMotherName"], {
+        is: (legacyApplicant, legacyMotherName) =>
+          legacyApplicant &&
+          (!legacyMotherName || legacyMotherName.length === 0),
+        then: (schema) => schema.required("LegacyFatherName is required"),
+        otherwise: (schema) => schema.notRequired(),
+      }),
+    LegacyFatherProgram: Yup.string().when(
+      ["LegacyApplicant", "LegacyMotherName"],
+      {
+        is: (legacyApplicant, legacyMotherName) =>
+          legacyApplicant &&
+          (!legacyMotherName || legacyMotherName.length === 0),
+        then: (schema) => schema.required("LegacyFatherProgram is required"),
+        otherwise: (schema) => schema.notRequired(),
+      }
+    ),
+    testLegacy: Yup.boolean(),
+    LegacyFatherGraduationYear: Yup.number().when(
+      ["LegacyApplicant", "LegacyMotherName"],
+      {
+        is: (legacyApplicant, legacyMotherName) =>
+          legacyApplicant &&
+          (!legacyMotherName || legacyMotherName.length === 0),
+        then: (schema) =>
+          schema.required("LegacyFatherGraduationYear is required"),
+        otherwise: (schema) => schema.notRequired(),
+      }
+    ),
     LegacyFatherMobile: Yup.string(),
-    LegacyMotherName: Yup.string().max(10),
-    LegacyMotherProgram: Yup.string(),
-    LegacyMotherGraduationYear: Yup.number(),
+    LegacyMotherName: Yup.string()
+      .max(10)
+      .when(["LegacyApplicant", "testLegacy"], {
+        is: (legacyApplicant, testLegacy) => legacyApplicant && !testLegacy,
+        then: (schema) => schema.required("LegacyMotherName is required"),
+        otherwise: (schema) => schema.notRequired(),
+      }),
+    LegacyMotherProgram: Yup.string().when(["LegacyApplicant", "testLegacy"], {
+      is: (legacyApplicant, testLegacy) => legacyApplicant && !testLegacy,
+      then: (schema) => schema.required("LegacyMotherProgram is required"),
+      otherwise: (schema) => schema.notRequired(),
+    }),
+    LegacyMotherGraduationYear: Yup.number().when(
+      ["LegacyApplicant", "testLegacy"],
+      {
+        is: (legacyApplicant, testLegacy) => legacyApplicant && !testLegacy,
+        then: (schema) =>
+          schema.required("LegacyMotherGraduationYear is required"),
+        otherwise: (schema) => schema.notRequired(),
+      }
+    ),
     LegacyMotherMobile: Yup.string(),
     PassportNumber: Yup.string().max(10),
     EmiratesId: Yup.string().max(10).min(10),
@@ -295,8 +341,6 @@ const getValidationSchemaStep1 = (applicationStart, applingAs) => {
   //   baseSchema.LegacyMotherGraduationYear =
   //     baseSchema.LegacyMotherGraduationYear.notRequired();
   // }
-
-
 
   return Yup.object().shape(baseSchema);
 };

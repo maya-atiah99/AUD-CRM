@@ -8,7 +8,9 @@ const step4ValidationSchema = Yup.object().shape({
       EncryptedCardNumber: Yup.mixed().required("Card Number is required"),
       ExpirationYear: Yup.number().required("Expiration Year is required"),
       ExpirationMonth: Yup.number().required("Expiration Month is required"),
-      CVV: Yup.number().required("CVV is required"),
+      CVV: Yup.number()
+        .required("CVV is required")
+       
     }),
   }),
 });

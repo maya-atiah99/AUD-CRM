@@ -22,21 +22,19 @@ const DocumentUpload = ({
 
   const handleFileChange = (event) => {
     const file = event.target.files[0];
-    
+
     if (file) {
-    
-         if (file.type !== "application/pdf") {
-          toast.error("Only PDF files are allowed");
-          return;
-        }
-  
-    
-        if (file.size > 5 * 1024 * 1024) {
-          toast.error("File is too large. Max size is 5MB.");
-          return;
-        }
-  
-        setSelectedFile(file);
+      if (file.type !== "application/pdf") {
+        toast.error("Only PDF files are allowed");
+        return;
+      }
+
+      if (file.size > 5 * 1024 * 1024) {
+        toast.error("File is too large. Max size is 5MB.");
+        return;
+      }
+
+      setSelectedFile(file);
       setSelectedFile(file);
       onChange(name, file);
     } else if (value) {
@@ -48,7 +46,7 @@ const DocumentUpload = ({
   const handleRemoveFile = (event) => {
     event.preventDefault();
     setSelectedFile(null);
-    onChange(name, undefined);
+    onChange(name, "");
     // onChange(name, null);
   };
   const containerStyle = {

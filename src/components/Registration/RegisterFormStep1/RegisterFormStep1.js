@@ -309,7 +309,7 @@ const RegisterFormStep1 = forwardRef(
         ];
 
         fileToAppend.forEach((key) => {
-          if (!values[key]?.fileName) {
+          if (!values[key]?.fileName || values[key] !== "") {
             formData.append(key, values[key]);
           }
         });

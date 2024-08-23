@@ -55,7 +55,7 @@ const AcadamicInformation = ({ isView,data }) => {
             }}
             errors={formik.errors?.CurrentUniversityCountry}
             touched={formik.touched?.CurrentUniversityCountry}
-            disabled={isView}
+            disabled={isView || applingAS === 8}
           />
 
           <DropDown

@@ -24,7 +24,7 @@ const ProgramInformation = ({ fetchedData, isView }) => {
     { label: "Graduate", value: "1" },
     { label: "Visiting", value: "2" },
   ];
-console.log("applyingAsData",applyingAsData)
+  console.log("applyingAsData", applyingAsData);
   useEffect(() => {
     const fetchApplyingAsData = async () => {
       await refetchApplyinAs();
@@ -95,7 +95,7 @@ console.log("applyingAsData",applyingAsData)
     formik.setFieldValue(name, value);
   };
 
-  console.log("formik.values.SelectedTerm",formik.values.SelectedTerm)
+  console.log("formik.values.SelectedTerm", formik.values.SelectedTerm);
   return (
     <>
       <div className='form-subcontainers'>
@@ -277,7 +277,7 @@ console.log("applyingAsData",applyingAsData)
                     target='_blank'
                     rel='noreferrer'
                   >
-                    Certificate in Middle Eastern Studies
+                    Student Accomodation
                   </a>
                 </p>
               </div>
@@ -303,7 +303,7 @@ console.log("applyingAsData",applyingAsData)
                     target='_blank'
                     rel='noreferrer'
                   >
-                    Student Accomodation
+                    Certificate in Middle Eastern Studies
                   </a>
                 </p>
               </div>

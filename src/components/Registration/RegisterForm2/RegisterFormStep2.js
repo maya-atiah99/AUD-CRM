@@ -120,6 +120,8 @@ const RegisterFormStep2 = forwardRef(
     }, [applicantStageThree]);
 
     const handleAddStageThree = (values) => {
+      console.log("entered handleAddStageThree")
+      
       addApplicantStageThree(values, {
         onSuccess: (data) => {
           setInit({});
@@ -154,6 +156,7 @@ const RegisterFormStep2 = forwardRef(
       validationSchema: getValidationSchemaStep2(applicationStart, applingAs),
       enableReinitialize: true,
       onSubmit: (values) => {
+        console.log("entered submit")
         const formData = new FormData();
         formData.append("ApplicantId", applicantId);
         formData.append("ApplicationId", applicationId);

@@ -93,6 +93,7 @@ const RegisterPage = ({
           if (activeStep === 0) {
             setShowInterest(false);
           }
+
           setActiveStep((prevActiveStep) => prevActiveStep + 1);
           window.scrollTo(0, 0);
         } else {
@@ -109,6 +110,7 @@ const RegisterPage = ({
   const handleSave = async (next) => {
     await steps[activeStep].ref.current?.setFieldValue("isSaved", false);
     steps[activeStep].ref.current?.setFieldValue("NextActiveStep", activeStep);
+    console.log("handle save")
     if (next) steps[activeStep].ref.current?.submitForm();
     setTimeout(() => {
       navigate("/");
@@ -127,6 +129,7 @@ const RegisterPage = ({
         await steps[activeStep].ref.current?.submitForm();
         if (steps[activeStep].ref.current?.isValid) {
           setIsVerified(true);
+          
           window.scrollTo(0, 0);
         } else {
           toast.error("Please Fill All Required Fields");

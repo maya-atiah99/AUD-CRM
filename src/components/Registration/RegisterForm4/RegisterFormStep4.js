@@ -5,10 +5,11 @@ import { FormikProvider, useFormik } from "formik";
 import step4ValidationSchema from "../../../ValidationSchemas/Step4ValidationSchema";
 import { usePayment } from "../../../Hooks/Appplicant";
 import VerifiedCheckModal from "../../ShowInterest/VerifiedCheckModal";
+import { useNavigate } from "react-router-dom";
 
-const RegisterFormStep4 = ({ applicantId, applicationId,isView }) => {
+const RegisterFormStep4 = ({ applicantId, applicationId, isView }) => {
+  const navigate = useNavigate();
   const [isSubmitted, setIsSubmitted] = useState(false);
- 
 
   const { mutate: payment } = usePayment();
 
@@ -33,7 +34,10 @@ const RegisterFormStep4 = ({ applicantId, applicationId,isView }) => {
       formData.append("ApplicationId", applicationId);
       formData.append(
         "EncryptedCardNumber",
-        values.paymentDetails.cardDetails.EncryptedCardNumber.replace(/[\s-]/g, "")
+        values.paymentDetails.cardDetails.EncryptedCardNumber.replace(
+          /[\s-]/g,
+          ""
+        )
       );
       formData.append("CardType", values.paymentDetails.cardDetails.CardType);
       formData.append(
@@ -52,7 +56,9 @@ const RegisterFormStep4 = ({ applicantId, applicationId,isView }) => {
 
           setTimeout(() => {
             setIsSubmitted(false);
-          }, 3000);
+            navigate("/");
+            localStorage.clear();
+          }, 3500);
         },
         onErrorr: () => {},
       });

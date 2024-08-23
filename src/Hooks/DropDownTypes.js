@@ -4,7 +4,9 @@ import { API_URL } from "../Constants";
 
 const fetchDropdownTypes = async (typeId) => {
   if (typeId) {
-    return await axios.get(API_URL + `/api/Setting/GetDrowDown/${typeId}`);
+    return await axios.get(
+      API_URL + `/api/Setting/GetDrowDown/${typeId}?OrderBy=Text&orderDir=asc`
+    );
   }
 };
 

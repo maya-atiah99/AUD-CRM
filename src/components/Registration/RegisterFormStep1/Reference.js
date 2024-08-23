@@ -77,7 +77,7 @@ const Reference = ({ isView, applingAs }) => {
         disabled={isView}
       />
       <SquareCheckBox
-        text='I have read and understand the above information'
+        text='I have read and understood the above information'
         name='ReadAndUnderstand'
         value={formik.values.ReadAndUnderstand}
         onChange={(checked) => {

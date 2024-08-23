@@ -68,7 +68,7 @@ const TranscriptMailingAddress = ({ isView }) => {
       <DocumentUpload
         height='100px'
         size='50'
-        label='Upload Document'
+        label='Upload Official Transcript'
         text='Upload Official Transcript'
         required={true}
         name='DiplomaFile'

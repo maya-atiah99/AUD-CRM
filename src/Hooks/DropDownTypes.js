@@ -17,7 +17,8 @@ const fetchAcademicTerms = async () => {
 const fetchDropDownFromPArent = async (typeId, parentId) => {
   if (typeId && parentId) {
     return await axios.get(
-      API_URL + `/api/Setting/GetDrowDownFromParent/${typeId}/${parentId}`
+      API_URL +
+        `/api/Setting/GetUnPagedDrowDownFromParent/${typeId}/${parentId}`
     );
   }
 };

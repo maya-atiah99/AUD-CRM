@@ -66,7 +66,6 @@ const DropDown = ({
     "December",
   ];
 
-  console.log("vasdjvlsvhasdv",academicOptions)
   const formattedOptions = options?.data
     ? options?.data?.map((option) => ({
         value: option.ddid,

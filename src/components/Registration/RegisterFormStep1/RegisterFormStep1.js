@@ -13,6 +13,7 @@ import { FormikProvider, useFormik } from "formik";
 import step1ValidationSchema from "../../../ValidationSchemas/Step1ValidationSchema";
 import { useAddApplicantStageTwo } from "../../../Hooks/Appplicant";
 import getValidationSchemaStep1 from "../../../ValidationSchemas/Step1ValidationSchema";
+import toast from "react-hot-toast";
 
 const RegisterFormStep1 = forwardRef(
   (
@@ -27,6 +28,7 @@ const RegisterFormStep1 = forwardRef(
       setApplyingAs,
       activeStep,
       isView,
+      setActiveStep,
     },
     ref
   ) => {
@@ -190,11 +192,16 @@ const RegisterFormStep1 = forwardRef(
     const handleAddStageTwo = (values) => {
       addApplicantStagetwo(values, {
         onSuccess: (data) => {
+        
+          setActiveStep((prevActiveStep) => prevActiveStep + 1);
           setInit({});
+          window.scrollTo(0, 0);
+
         },
         onError: (error) => {
+          window.scrollTo(0, 0);
           console.error("An error occurred:", error);
-          setInit({});
+          toast.error("Something went wrong");
         },
       });
     };

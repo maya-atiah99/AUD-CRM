@@ -31,7 +31,7 @@ const StepGenerator = ({
   reApply,
   isLoading,
 }) => {
-  console.log("vmdeefdkjnvdf",isLoading)
+ 
   const generateSteps = (applicationStart, applingAs, reApply) => {
     if (reApply === 1) {
       return [
@@ -54,6 +54,7 @@ const StepGenerator = ({
               applicationStart={applicationStart}
               isView={isView}
               isLoading={isLoading}
+              setActiveStep={setActiveStep}
             />
           ),
           ref: formikRefStep1,
@@ -75,6 +76,7 @@ const StepGenerator = ({
               setApplyingAs={setApplyingAs}
               applicationStart={applicationStart}
               isView={isView}
+              setActiveStep={setActiveStep}
             />
           ),
           ref: formikRefStudentInfo,
@@ -96,6 +98,7 @@ const StepGenerator = ({
               isView={isView}
               reApply={reApply}
               isLoading={isLoading}
+              setActiveStep={setActiveStep}
             />
           ),
           ref: formikRefStep3,
@@ -112,6 +115,7 @@ const StepGenerator = ({
               applicantId={applicantId}
               applicationId={applicationId}
               isView={isView}
+              setActiveStep={setActiveStep}
             />
           ),
           ref: formikRefStep4,
@@ -138,6 +142,7 @@ const StepGenerator = ({
               applicationStart={applicationStart}
               isView={isView}
               isLoading={isLoading}
+              setActiveStep={setActiveStep}
             />
           ),
           ref: formikRefStep1,
@@ -159,6 +164,7 @@ const StepGenerator = ({
               setApplyingAs={setApplyingAs}
               applicationStart={applicationStart}
               isView={isView}
+              setActiveStep={setActiveStep}
             />
           ),
           ref: formikRefStudentInfo,
@@ -179,6 +185,7 @@ const StepGenerator = ({
               applicationStart={applicationStart}
               isView={isView}
               reApply={reApply}
+              setActiveStep={setActiveStep}
             />
           ),
           ShowContinue: true,
@@ -208,6 +215,7 @@ const StepGenerator = ({
                 applicationStart={applicationStart}
                 isView={isView}
                 isLoading={isLoading}
+                setActiveStep={setActiveStep}
               />
             ),
             ref: formikRefStep1,
@@ -231,6 +239,7 @@ const StepGenerator = ({
                 applicationStart={applicationStart}
                 isView={isView}
                 isLoading={isLoading}
+                setActiveStep={setActiveStep}
               />
             ),
             ref: formikRefStep2,
@@ -246,6 +255,7 @@ const StepGenerator = ({
                 isView={isView}
                 applingAs={applingAs}
                 applicationStart={applicationStart}
+                setActiveStep={setActiveStep}
               />
             ),
             ref: formikRefStep5,
@@ -265,6 +275,7 @@ const StepGenerator = ({
                 activeStep={activeStep}
                 applicationStart={applicationStart}
                 isView={isView}
+                setActiveStep={setActiveStep}
               />
             ),
             ref: formikRefStep3,
@@ -307,6 +318,7 @@ const StepGenerator = ({
                 applicationStart={applicationStart}
                 isView={isView}
                 isLoading={isLoading}
+                setActiveStep={setActiveStep}
               />
             ),
             ref: formikRefStep1,
@@ -330,6 +342,7 @@ const StepGenerator = ({
                 applicationStart={applicationStart}
                 isView={isView}
                 isLoading={isLoading}
+                setActiveStep={setActiveStep}
               />
             ),
             ref: formikRefStep2,
@@ -345,6 +358,7 @@ const StepGenerator = ({
                 isView={isView}
                 applingAs={applingAs}
                 applicationStart={applicationStart}
+                setActiveStep={setActiveStep}
               />
             ),
             ref: formikRefStep5,
@@ -364,6 +378,7 @@ const StepGenerator = ({
                 activeStep={activeStep}
                 applicationStart={applicationStart}
                 isView={isView}
+                setActiveStep={setActiveStep}
               />
             ),
             ref: formikRefStep3,
@@ -379,6 +394,7 @@ const StepGenerator = ({
                 applicantId={applicantId}
                 applicationId={applicationId}
                 isView={isView}
+                setActiveStep={setActiveStep}
               />
             ),
             ref: formikRefStep4,
@@ -406,6 +422,7 @@ const StepGenerator = ({
                 applicationStart={applicationStart}
                 isView={isView}
                 isLoading={isLoading}
+                setActiveStep={setActiveStep}
               />
             ),
             ref: formikRefStep1,
@@ -425,6 +442,7 @@ const StepGenerator = ({
                 activeStep={activeStep}
                 applicationStart={applicationStart}
                 isView={isView}
+                setActiveStep={setActiveStep}
               />
             ),
             ref: formikRefStep3,
@@ -440,6 +458,7 @@ const StepGenerator = ({
                 applicantId={applicantId}
                 applicationId={applicationId}
                 isView={isView}
+                setActiveStep={setActiveStep}
               />
             ),
             ref: formikRefStep4,
@@ -466,6 +485,7 @@ const StepGenerator = ({
                 applicationStart={applicationStart}
                 isView={isView}
                 isLoading={isLoading}
+                setActiveStep={setActiveStep}
               />
             ),
             ref: formikRefStep1,
@@ -489,6 +509,7 @@ const StepGenerator = ({
                 activeStep={activeStep}
                 isView={isView}
                 isLoading={isLoading}
+                setActiveStep={setActiveStep}
               />
             ),
             ref: formikRefStep2,
@@ -508,6 +529,7 @@ const StepGenerator = ({
                 applicationStart={applicationStart}
                 activeStep={activeStep}
                 isView={isView}
+                setActiveStep={setActiveStep}
               />
             ),
             ref: formikRefStep3,
@@ -523,6 +545,7 @@ const StepGenerator = ({
                 applicantId={applicantId}
                 applicationId={applicationId}
                 isView={isView}
+                setActiveStep={setActiveStep}
               />
             ),
             ref: formikRefStep4,

@@ -76,13 +76,20 @@ export const usePayment = () => {
 };
 
 /**************Fetch  Applicant stage 1 */
-const fetchApplicantStageOne = async (applicantId, applicationId) => {
-  if (applicantId && applicationId) {
-    return await axios.get(
-      API_URL +
-        `/api/Applicant/GetApplicantStage/Stage1/${applicantId}?ApplicationId=${applicationId}`
-    );
+const fetchApplicantStageOne = async (
+  applicantId,
+  applicationId,
+  showInterest
+) => {
+  if (applicantId && !showInterest) {
+    // Conditionally append ApplicationId to the URL
+    const url = applicationId
+      ? `${API_URL}/api/Applicant/GetApplicantStage/Stage1/${applicantId}?ApplicationId=${applicationId}`
+      : `${API_URL}/api/Applicant/GetApplicantStage/Stage1/${applicantId}`;
+
+    return await axios.get(url);
   }
+  throw new Error("applicantId is required"); // Handle missing applicantId case
 };
 
 export const useFetchApplicantStageOne = (applicantId, applicationId) => {
@@ -94,16 +101,27 @@ export const useFetchApplicantStageOne = (applicantId, applicationId) => {
 };
 
 /**************Fetch  Applicant stage 2 */
-const fetchApplicantStageTwo = async (applicantId, applicationId) => {
-  return await axios.get(
-    API_URL +
-      `/api/Applicant/GetApplicantStage/Stage2/${applicantId}/${applicationId}`
-  );
+const fetchApplicantStageTwo = async (
+  applicantId,
+  applicationId,
+  showInterest
+) => {
+  if (!showInterest) {
+    return await axios.get(
+      API_URL +
+        `/api/Applicant/GetApplicantStage/Stage2/${applicantId}/${applicationId}`
+    );
+  }
 };
-export const useFetchApplicantStageTwo = (applicantId, applicationId) => {
+export const useFetchApplicantStageTwo = (
+  applicantId,
+  applicationId,
+  showInterest
+) => {
   return useQuery({
-    queryKey: ["stage2", applicantId, applicationId],
-    queryFn: () => fetchApplicantStageTwo(applicantId, applicationId),
+    queryKey: ["stage2", applicantId, applicationId, showInterest],
+    queryFn: () =>
+      fetchApplicantStageTwo(applicantId, applicationId, showInterest),
     enabled: true,
   });
 };
@@ -141,7 +159,7 @@ export const useFetchApplicantStageFour = (applicantId, applicationId) => {
 
 const fetchApplyingAs = async (data) => {
   const app = data?.applicationStart || 0;
-  console.log("sbsgkfbkjgbsb",data)
+  console.log("sbsgkfbkjgbsb", data);
   if (data?.academicTermId) {
     return await axios.get(
       API_URL +

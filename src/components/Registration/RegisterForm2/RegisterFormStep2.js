@@ -19,6 +19,7 @@ import Reference from "../RegisterFormStep1/Reference";
 import WorkExperience from "../RegisterFormStep1/WorkExperience";
 import TranscriptMailingAddress from "./TranscriptMailingAddress";
 import AttachCV from "./AttachCV";
+import toast from "react-hot-toast";
 
 const RegisterFormStep2 = forwardRef(
   (
@@ -30,6 +31,7 @@ const RegisterFormStep2 = forwardRef(
       applicationStart,
       setApplyingAs,
       activeStep,
+      setActiveStep,
       isView,
     },
     ref
@@ -40,6 +42,8 @@ const RegisterFormStep2 = forwardRef(
     const { mutate: addFiles } = useAddFiles();
 
     const [init, setInit] = useState({});
+    const [moveNext, setMoveNext] = useState({ files: false, fields: false });
+
     useEffect(() => {
       const initialvalues = {
         isSaved: true,
@@ -120,25 +124,36 @@ const RegisterFormStep2 = forwardRef(
     }, [applicantStageThree]);
 
     const handleAddStageThree = (values) => {
-      console.log("entered handleAddStageThree")
-      
+      console.log("entered handleAddStageThree");
+
       addApplicantStageThree(values, {
         onSuccess: (data) => {
+          setMoveNext((prevPass) => ({
+            ...prevPass,
+            fields: true,
+          }));
           setInit({});
         },
         onError: (error) => {
+          window.scrollTo(0, 0);
           console.error("An error occurred:", error);
-          setInit({});
+          toast.error("Something went wrong");
         },
       });
     };
 
     const handleAddFiles = (values) => {
-      console.log("sncdjkcnkds", values);
       addFiles(values, {
-        onSuccess: (data) => {},
+        onSuccess: (data) => {
+          setMoveNext((prevPass) => ({
+            ...prevPass,
+            files: true,
+          }));
+        },
         onError: (error) => {
+          window.scrollTo(0, 0);
           console.error("An error occurred:", error);
+          toast.error("Something in the files is wrong");
         },
       });
     };
@@ -150,13 +165,12 @@ const RegisterFormStep2 = forwardRef(
     useEffect(() => {
       console.log(init);
     }, [init]);
-    console.log("applicant33333333", applicantStageThree);
+
     const formik = useFormik({
       initialValues: init,
       validationSchema: getValidationSchemaStep2(applicationStart, applingAs),
       enableReinitialize: true,
       onSubmit: (values) => {
-        console.log("entered submit")
         const formData = new FormData();
         formData.append("ApplicantId", applicantId);
         formData.append("ApplicationId", applicationId);
@@ -274,6 +288,7 @@ const RegisterFormStep2 = forwardRef(
         formik.submitForm();
       },
     }));
+
     useEffect(() => {
       ref.current = formik;
     }, [ref, formik]);
@@ -282,11 +297,27 @@ const RegisterFormStep2 = forwardRef(
       setApplyingAs(parseInt(localStorage.getItem("applingAs")));
       setApplicationStart(localStorage.getItem("applicationStart"));
     }, []);
-    console.log(
-      "values?.DiplomaFile?.fileName",
-      formik.values?.DiplomaFile?.fileName
-    );
-    console.log("formik stage three", formik);
+    useEffect(() => {
+      const hasFiles =
+        formik.values.applicantFiles && formik.values.applicantFiles.length > 0;
+      if (hasFiles) {
+        if (moveNext.fields && moveNext.files) {
+          setActiveStep((prev) => prev + 1);
+          window.scrollTo(0, 0);
+        }
+      } else if (moveNext.fields) {
+        setActiveStep((prev) => prev + 1);
+        window.scrollTo(0, 0);
+      }
+
+      setTimeout(() => {
+        setMoveNext((prevPass) => ({
+          ...prevPass,
+          fields: false,
+          files: false,
+        }));
+      }, [1000]);
+    }, [moveNext.fields, moveNext.files, formik.values.applicantFiles]);
     return (
       <div className='form-subcontainer'>
         <FormikProvider value={formik} innerRef={ref}>

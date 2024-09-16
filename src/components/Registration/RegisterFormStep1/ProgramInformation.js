@@ -24,7 +24,7 @@ const ProgramInformation = ({ fetchedData, isView }) => {
     { label: "Graduate", value: "1" },
     { label: "Visiting", value: "2" },
   ];
-  console.log("applyingAsData", applyingAsData);
+
   useEffect(() => {
     const fetchApplyingAsData = async () => {
       await refetchApplyinAs();
@@ -76,12 +76,12 @@ const ProgramInformation = ({ fetchedData, isView }) => {
   }, [formik.values.ApplicationStart]);
 
   useEffect(() => {
-    setSelectedTerm(formik.values.selectedTerm);
+    setSelectedTerm(formik.values.SelectedTerm);
     refetchApplyinAs({
       applicationStart: applicationStartValue,
       academicTermId: selectedTerm,
     });
-  }, [formik.values.selectedTerm]);
+  }, [formik.values.SelectedTerm,formik.values.ApplicationStart]);
 
   const handleCancelClinton = () => {
     formik.setFieldValue("ApplingAs", "");
@@ -95,7 +95,6 @@ const ProgramInformation = ({ fetchedData, isView }) => {
     formik.setFieldValue(name, value);
   };
 
-  console.log("formik.values.SelectedTerm", formik.values.SelectedTerm);
   return (
     <>
       <div className='form-subcontainers'>

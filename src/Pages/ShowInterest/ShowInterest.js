@@ -122,11 +122,10 @@ const ShowInterest = ({
       );
     },
     onSuccess: async (data) => {
-      console.log("mutate successed");
+     
       openVerifiedModal("Continue");
       setActionOrigin("Continue");
       if (data?.data?.verified === "true") {
-        console.log("here verified");
         setshowVerifiedModal(false);
         localStorage.setItem("token", "f12a8b7c-9d3e-4f6a-bb18-2c72f515");
         setTimeout(() => {
@@ -188,7 +187,6 @@ const ShowInterest = ({
     if (actionOrigin === "Submit") {
       validateShowInterest.mutate();
     } else if (actionOrigin === "Continue") {
-      console.log("etsgsvdcvsdhgcsd");
       validateApplicant.mutate();
     }
   };
@@ -264,7 +262,7 @@ const ShowInterest = ({
       toast.error("Something went wrong");
     },
   });
-  console.log("otpcodeeee", otpCode);
+
   //***handle send otp mobile or email  */
   const handleNextStepForgotPasswordOTP = () => {
     if (mode === "mobile") {

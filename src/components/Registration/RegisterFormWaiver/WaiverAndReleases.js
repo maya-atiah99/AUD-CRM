@@ -7,7 +7,7 @@ import WaiverAndReleasesValidationSchema from "../../../ValidationSchemas/Waiver
 import getValidationSchemaWaiverAndRelease from "../../../ValidationSchemas/WaiverAndReleasesValidationSchema";
 
 const WaiverAndReleases = forwardRef(
-  ({ isView, applingAs, applicationStart }, ref) => {
+  ({ isView, applingAs, applicationStart, setActiveStep }, ref) => {
     const formik = useFormik({
       initialValues: {
         RemainInFullForceCheck: "",
@@ -21,7 +21,10 @@ const WaiverAndReleases = forwardRef(
         applicationStart
       ),
       enableReinitialize: true,
-      onSubmit: (values) => {},
+      onSubmit: (values) => {
+        setActiveStep((prev) => prev + 1);
+        window.scrollTo(0, 0);
+      },
     });
 
     useImperativeHandle(ref, () => ({

@@ -20,6 +20,7 @@ const StudentInfoStep = forwardRef(
       setApplyingAs,
       activeStep,
       isView,
+      setActiveStep,
     },
     ref
   ) => {
@@ -38,7 +39,11 @@ const StudentInfoStep = forwardRef(
       initialValues: init,
       validationSchema: StudentInfoValidationSchema,
       enableReinitialize: true,
-      onSubmit: (value) => {},
+      onSubmit: (value) => {
+        setActiveStep((prev) => prev + 1);
+        window.scrollTo(0, 0);
+
+      },
     });
 
     useImperativeHandle(ref, () => ({

@@ -127,7 +127,15 @@ const ApplicationsModal = ({
 
   const handleReApply = () => {
     localStorage.setItem("reApply", 2);
-    localStorage.setItem("token", "f12a8b7c-9d3e-4f6a-bb18-2c72f515");
+    // localStorage.setItem("token", "f12a8b7c-9d3e-4f6a-bb18-2c72f515");
+
+    setTimeout(() => {
+      navigate("/register", { state: { showInterest: true } });
+    }, 200);
+  };
+
+  const handleStartNewApplication = () => {
+    localStorage.setItem("newApp", true);
     setTimeout(() => {
       navigate("/register", { state: { showInterest: true } });
     }, 200);
@@ -205,7 +213,10 @@ const ApplicationsModal = ({
             <AUDButton text='Re-Apply' handleOnClick={handleReApply} />
           </div>
 
-          <AUDButton text='Start New Application' />
+          <AUDButton
+            text='Start New Application'
+            handleOnClick={handleStartNewApplication}
+          />
         </div>
       </div>
     </ModalComponent>

@@ -73,9 +73,7 @@ const AcadamicFiles = ({ isView }) => {
 
   return (
     <div className='form-subcontainers academic-container'>
-      <SectionTitle
-        title='ACADEMIC IELTS/TOEFL/EMSAT/PTE SCORE/SAT'
-      />
+      <SectionTitle title='ACADEMIC IELTS/TOEFL/EMSAT/PTE SCORE/SAT' />
       <ExpandableBox title='Further Details' backgroundColor={true}>
         <BulletedText items={details} />
       </ExpandableBox>
@@ -93,15 +91,24 @@ const AcadamicFiles = ({ isView }) => {
                 }}
                 errors={formik.errors?.applicantFiles?.[index]?.testType}
                 touched={formik.touched?.applicantFiles?.[index]?.testType}
+                disabled={isView}
               />
-              {(formik.values.applicantFiles.length > 1 || isAnyFieldFilled(section)) && (
-                <div className='remove_text' onClick={() => removeSection(index)}>
+              {(formik.values.applicantFiles.length > 1 ||
+                isAnyFieldFilled(section)) && (
+                <div
+                  className='remove_text'
+                  onClick={() => removeSection(index)}
+                >
                   <img
                     src='/images/removeIcon.svg'
                     alt='removeIcon'
                     style={{ width: "1rem", cursor: "pointer" }}
                   />
-                  <h6>{formik.values.applicantFiles.length === 1 ? "Clear" : "Remove"}</h6>
+                  <h6>
+                    {formik.values.applicantFiles.length === 1
+                      ? "Clear"
+                      : "Remove"}
+                  </h6>
                 </div>
               )}
             </div>
@@ -126,7 +133,9 @@ const AcadamicFiles = ({ isView }) => {
                 formik.setFieldValue(name, value);
               }}
               errors={formik.errors?.applicantFiles?.[index]?.academicDocument}
-              touched={formik.touched?.applicantFiles?.[index]?.academicDocument}
+              touched={
+                formik.touched?.applicantFiles?.[index]?.academicDocument
+              }
               disabled={isView}
             />
 
@@ -153,8 +162,12 @@ const AcadamicFiles = ({ isView }) => {
                 onChange={(name, value) => {
                   formik.setFieldValue(name, value);
                 }}
-                errors={formik.errors?.applicantFiles?.[index]?.registrationNumber}
-                touched={formik.touched?.applicantFiles?.[index]?.registrationNumber}
+                errors={
+                  formik.errors?.applicantFiles?.[index]?.registrationNumber
+                }
+                touched={
+                  formik.touched?.applicantFiles?.[index]?.registrationNumber
+                }
                 disabled={isView}
               />
               <TextBox

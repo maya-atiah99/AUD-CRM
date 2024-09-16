@@ -17,6 +17,7 @@ import {
 } from "../../../Hooks/Appplicant";
 import Declaration from "./Declaration";
 import getStep3ValidationSchema from "../../../ValidationSchemas/Step3ValidationSchema";
+import toast from "react-hot-toast";
 const RegisterFormStep3 = forwardRef(
   (
     {
@@ -27,6 +28,7 @@ const RegisterFormStep3 = forwardRef(
       activeStep,
       isView,
       reApply,
+      setActiveStep,
     },
     ref
   ) => {
@@ -55,7 +57,7 @@ const RegisterFormStep3 = forwardRef(
           applicantStageFour?.data?.stage2?.acceptResponsibilitiesCheck ||
           false,
         RecordsCheck: applicantStageFour?.data?.stage2?.recordsCheck || false,
-        courseworkAwareness:false
+        courseworkAwareness: false,
       };
       setInit(initialvalues);
     }, [applicantStageFour]);
@@ -64,17 +66,16 @@ const RegisterFormStep3 = forwardRef(
       addApplicantStageFour(values, {
         onSuccess: (data) => {
           setInit({});
+          setActiveStep((prevActiveStep) => prevActiveStep + 1);
+          window.scrollTo(0, 0);
         },
         onError: (error) => {
+          window.scrollTo(0, 0);
           console.error("An error occurred:", error);
-          setInit({});
+          toast.error("Something went wrong");
         },
       });
     };
-
-    // useEffect(() => {
-    //   console.log("init", init);
-    // }, [init]);
 
     const formik = useFormik({
       initialValues: init,
@@ -107,7 +108,7 @@ const RegisterFormStep3 = forwardRef(
         handleAddStageFour(formData);
       },
     });
-    console.log("formik step 3 isSaved", formik?.values?.isSaved);
+
     useEffect(() => {
       if (showModal) document.body.style.overflowY = "hidden";
       else document.body.style.overflowY = "scroll";
@@ -126,7 +127,7 @@ const RegisterFormStep3 = forwardRef(
     // useEffect(() => {
     //   refetchStageFour();
     // }, []);
-    console.log("formik", formik);
+
     return (
       <>
         <div className='form-subcontainer'>

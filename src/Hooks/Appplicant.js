@@ -65,7 +65,7 @@ const addStage1NewApplication = (applicant) => {
 export const useAddStage1NewApplication = () => {
   return useMutation(addStage1NewApplication);
 };
-/***********************Aff applicant files */
+/***********************Add applicant files */
 const addFiles = (applicant) => {
   return axios.post(API_URL + `/api/Applicant/PostStage3_Files`, applicant, {
     headers: {
@@ -77,7 +77,18 @@ const addFiles = (applicant) => {
 export const useAddFiles = () => {
   return useMutation(addFiles);
 };
+//****************Add applicant stage 3 which is step 2*/
+const addStudentInfo = (applicant) => {
+  return axios.post(API_URL + `/api/Applicant/PostReApplication`, applicant, {
+    headers: {
+      "Content-Type": "multipart/form-data",
+    },
+  });
+};
 
+export const useAddStudentInfo = () => {
+  return useMutation(addStudentInfo);
+};
 /***********************Payment */
 const payment = (applicant) => {
   return axios.post(API_URL + `/api/Applicant/PostPayment`, applicant, {

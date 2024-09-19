@@ -8,6 +8,8 @@ import React, {
 import getStudentInfoValidationSchema from "../../../ValidationSchemas/StudentInfoValidationSchema";
 import StudentInfo from "./StudentInfo";
 import StudentInfoValidationSchema from "../../../ValidationSchemas/StudentInfoValidationSchema";
+import { useAddStudentInfo } from "../../../Hooks/Appplicant";
+import toast from "react-hot-toast";
 
 const StudentInfoStep = forwardRef(
   (
@@ -35,14 +37,27 @@ const StudentInfoStep = forwardRef(
       ],
       Involvement: "",
     });
+
+    const { mutate: addStudentInfo } = useAddStudentInfo();
+
+    const handleAddStudentInfo = (values) => {
+      addStudentInfo(values, {
+        onSuccess: () => {
+          setActiveStep((prev) => prev + 1);
+          window.scrollTo(0, 0);
+        },
+        onError: () => {
+          toast.error("Something wrong");
+          window.scrollTo(0, 0);
+        },
+      });
+    };
     const formik = useFormik({
       initialValues: init,
       validationSchema: StudentInfoValidationSchema,
       enableReinitialize: true,
       onSubmit: (value) => {
-        setActiveStep((prev) => prev + 1);
-        window.scrollTo(0, 0);
-
+        handleAddStudentInfo(value);
       },
     });
 
@@ -55,10 +70,13 @@ const StudentInfoStep = forwardRef(
       ref.current = formik;
     }, [ref, formik]);
 
-   
     return (
       <div className='form-subcontainer'>
-        <FormikProvider value={formik} innerRef={ref}   validationSchema={StudentInfoValidationSchema}>
+        <FormikProvider
+          value={formik}
+          innerRef={ref}
+          validationSchema={StudentInfoValidationSchema}
+        >
           <StudentInfo />
         </FormikProvider>
       </div>

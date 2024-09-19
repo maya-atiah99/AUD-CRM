@@ -20,6 +20,7 @@ import WorkExperience from "../RegisterFormStep1/WorkExperience";
 import TranscriptMailingAddress from "./TranscriptMailingAddress";
 import AttachCV from "./AttachCV";
 import toast from "react-hot-toast";
+import Loader from "../../Loader/Loader";
 
 const RegisterFormStep2 = forwardRef(
   (
@@ -32,17 +33,22 @@ const RegisterFormStep2 = forwardRef(
       setApplyingAs,
       activeStep,
       setActiveStep,
+      setApplicationId,
       isView,
     },
     ref
   ) => {
-    const { data: applicantStageThree, refetch: refetchStageThree } =
-      useFetchApplicantStageThree(applicantId, applicationId);
+    const {
+      data: applicantStageThree,
+      refetch: refetchStageThree,
+      isLoading,
+    } = useFetchApplicantStageThree(applicantId, applicationId);
     const { mutate: addApplicantStageThree } = useAddApplicantStageThree();
     const { mutate: addFiles } = useAddFiles();
 
     const [init, setInit] = useState({});
     const [moveNext, setMoveNext] = useState({ files: false, fields: false });
+
 
     useEffect(() => {
       const initialvalues = {
@@ -124,8 +130,6 @@ const RegisterFormStep2 = forwardRef(
     }, [applicantStageThree]);
 
     const handleAddStageThree = (values) => {
-      console.log("entered handleAddStageThree");
-
       addApplicantStageThree(values, {
         onSuccess: (data) => {
           setMoveNext((prevPass) => ({
@@ -163,8 +167,13 @@ const RegisterFormStep2 = forwardRef(
     }, []);
 
     useEffect(() => {
-      console.log(init);
-    }, [init]);
+      if (!applicationId) {
+        const storedApplicationId = localStorage.getItem("applicationId");
+        if (storedApplicationId) {
+          setApplicationId(storedApplicationId); // Update parent state if null
+        }
+      }
+    }, [applicationId]);
 
     const formik = useFormik({
       initialValues: init,
@@ -294,30 +303,36 @@ const RegisterFormStep2 = forwardRef(
     }, [ref, formik]);
 
     useEffect(() => {
-      setApplyingAs(parseInt(localStorage.getItem("applingAs")));
-      setApplicationStart(localStorage.getItem("applicationStart"));
-    }, []);
-    useEffect(() => {
-      const hasFiles =
-        formik.values.applicantFiles && formik.values.applicantFiles.length > 0;
-      if (hasFiles) {
+      const hasFilledFile = formik.values.applicantFiles?.some((file) => {
+        return Object.values(file).some((value) => value !== "");
+      });
+
+      if (hasFilledFile) {
         if (moveNext.fields && moveNext.files) {
           setActiveStep((prev) => prev + 1);
           window.scrollTo(0, 0);
         }
-      } else if (moveNext.fields) {
-        setActiveStep((prev) => prev + 1);
-        window.scrollTo(0, 0);
+      } else {
+        if (moveNext.fields) {
+          setActiveStep((prev) => prev + 1);
+          window.scrollTo(0, 0);
+        }
       }
-
-      setTimeout(() => {
+      const timeout = setTimeout(() => {
         setMoveNext((prevPass) => ({
           ...prevPass,
           fields: false,
           files: false,
         }));
-      }, [1000]);
+      }, 1000);
+
+      return () => clearTimeout(timeout);
     }, [moveNext.fields, moveNext.files, formik.values.applicantFiles]);
+
+    if (isLoading) {
+      return <Loader width='100%' />;
+    }
+
     return (
       <div className='form-subcontainer'>
         <FormikProvider value={formik} innerRef={ref}>

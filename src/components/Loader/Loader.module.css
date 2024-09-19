@@ -11,6 +11,9 @@
 }
 .load-main-cont {
   width: 25rem;
+  align-items: center;
+  display: flex;
+  justify-content: center;
 }
 .loader {
   border: 4px solid #1b224c;

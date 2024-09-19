@@ -11,9 +11,13 @@ import ParentInformation from "./ParentInformation";
 import Consent from "./Consent";
 import { FormikProvider, useFormik } from "formik";
 import step1ValidationSchema from "../../../ValidationSchemas/Step1ValidationSchema";
-import { useAddApplicantStageTwo } from "../../../Hooks/Appplicant";
+import {
+  useAddApplicantStageTwo,
+  useAddStage1NewApplication,
+} from "../../../Hooks/Appplicant";
 import getValidationSchemaStep1 from "../../../ValidationSchemas/Step1ValidationSchema";
 import toast from "react-hot-toast";
+import Loader from "../../Loader/Loader";
 
 const RegisterFormStep1 = forwardRef(
   (
@@ -29,12 +33,18 @@ const RegisterFormStep1 = forwardRef(
       activeStep,
       isView,
       setActiveStep,
+      setApplicationId,
+      isLoading,
     },
     ref
   ) => {
     const [init, setInit] = useState({});
     const { mutate: addApplicantStagetwo } = useAddApplicantStageTwo();
-    console.log("mxkdsjcnkdsc", fetchedData);
+    const { mutate: addStage1NewApplication } = useAddStage1NewApplication();
+    const [newApplication, setNewApplication] = useState(
+      JSON.parse(localStorage.getItem("newApp")) || false
+    );
+
     useEffect(() => {
       if (showInterest) {
         const initialOne = {
@@ -192,11 +202,9 @@ const RegisterFormStep1 = forwardRef(
     const handleAddStageTwo = (values) => {
       addApplicantStagetwo(values, {
         onSuccess: (data) => {
-        
           setActiveStep((prevActiveStep) => prevActiveStep + 1);
           setInit({});
           window.scrollTo(0, 0);
-
         },
         onError: (error) => {
           window.scrollTo(0, 0);
@@ -205,7 +213,24 @@ const RegisterFormStep1 = forwardRef(
         },
       });
     };
-
+    const handleNewApplication = (values) => {
+      addStage1NewApplication(values, {
+        onSuccess: (data) => {
+          localStorage.setItem("applicationId", data?.data?.applicationId);
+          setApplicationId(data?.data?.applicationId);
+          setActiveStep((prevActiveStep) => prevActiveStep + 1);
+          setInit({});
+          localStorage.setItem("newApp", false);
+          setNewApplication(false)
+          window.scrollTo(0, 0);
+        },
+        onError: (error) => {
+          window.scrollTo(0, 0);
+          console.error("An error occurred:", error);
+          toast.error("Something went wrong");
+        },
+      });
+    };
     useEffect(() => {
       if (showInterest) {
         localStorage.setItem(
@@ -238,7 +263,14 @@ const RegisterFormStep1 = forwardRef(
         setApplyingAs(formik.values?.ApplingAs);
         const formData = new FormData();
         formData.append("ApplicantId", applicantId);
-        formData.append("ApplicationId", applicationId);
+        if (!newApplication) {
+          formData.append("ApplicationId", applicationId);
+        } else {
+          formData.append(
+            "ApplicationId",
+            "00000000-0000-0000-0000-000000000000"
+          );
+        }
 
         const FieldsAppend = [
           "isSaved",
@@ -326,7 +358,12 @@ const RegisterFormStep1 = forwardRef(
         } else {
           formData.append("ApplingAs", values.ApplingAs);
         }
-        handleAddStageTwo(formData);
+
+        if (newApplication == false) {
+          handleAddStageTwo(formData);
+        } else {
+          handleNewApplication(formData);
+        }
       },
     });
 
@@ -345,7 +382,10 @@ const RegisterFormStep1 = forwardRef(
       setApplicationStart(formik.values?.ApplicationStart);
       setApplyingAs(formik.values?.ApplingAs);
     }, [formik.values?.ApplicationStart, formik.values?.ApplingAs]);
-    console.log("formikxsdcsd", formik.values);
+
+    if (isLoading) {
+      return <Loader width='100%' />;
+    }
     return (
       <div className='form-subcontainer'>
         <FormikProvider

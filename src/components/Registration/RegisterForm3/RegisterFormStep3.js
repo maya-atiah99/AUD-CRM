@@ -18,6 +18,7 @@ import {
 import Declaration from "./Declaration";
 import getStep3ValidationSchema from "../../../ValidationSchemas/Step3ValidationSchema";
 import toast from "react-hot-toast";
+import Loader from "../../Loader/Loader";
 const RegisterFormStep3 = forwardRef(
   (
     {
@@ -29,11 +30,15 @@ const RegisterFormStep3 = forwardRef(
       isView,
       reApply,
       setActiveStep,
+      setApplicationId,
     },
     ref
   ) => {
-    const { data: applicantStageFour, refetch: refetchStageFour } =
-      useFetchApplicantStageFour(applicantId, applicationId);
+    const {
+      data: applicantStageFour,
+      refetch: refetchStageFour,
+      isLoading,
+    } = useFetchApplicantStageFour(applicantId, applicationId);
     const [showModal, setShowModal] = useState(false);
     const { mutate: addApplicantStageFour } = useAddApplicantStageFour();
     const [init, setInit] = useState({});
@@ -128,6 +133,15 @@ const RegisterFormStep3 = forwardRef(
     //   refetchStageFour();
     // }, []);
 
+    useEffect(() => {
+      if (applicationId == null) {
+        setApplicationId(localStorage.getItem("applicationId"));
+      }
+    }, []);
+
+    if (isLoading) {
+      return <Loader width='100%' />;
+    }
     return (
       <>
         <div className='form-subcontainer'>

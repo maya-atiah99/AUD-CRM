@@ -49,6 +49,22 @@ export const useAddApplicantStageFour = () => {
   return useMutation(addApplicantStageFour);
 };
 
+//****************Add applicant stage 1 reaapplication  */
+const addStage1NewApplication = (applicant) => {
+  return axios.post(
+    API_URL + `/api/Applicant/Post_StartNewApplication`,
+    applicant,
+    {
+      headers: {
+        "Content-Type": "multipart/form-data",
+      },
+    }
+  );
+};
+
+export const useAddStage1NewApplication = () => {
+  return useMutation(addStage1NewApplication);
+};
 /***********************Aff applicant files */
 const addFiles = (applicant) => {
   return axios.post(API_URL + `/api/Applicant/PostStage3_Files`, applicant, {
@@ -106,7 +122,7 @@ const fetchApplicantStageTwo = async (
   applicationId,
   showInterest
 ) => {
-  if (!showInterest) {
+  if (!showInterest && applicantId && applicationId) {
     return await axios.get(
       API_URL +
         `/api/Applicant/GetApplicantStage/Stage2/${applicantId}/${applicationId}`
@@ -128,10 +144,16 @@ export const useFetchApplicantStageTwo = (
 
 /***************Fetch  Applicant stage 3 ***************/
 const fetchApplicantStageThree = async (applicantId, applicationId) => {
-  return await axios.get(
-    API_URL +
-      `/api/Applicant/GetApplicantStage/Stage3/${applicantId}/${applicationId}`
-  );
+  if (
+    applicantId &&
+    applicationId &&
+    applicationId !== "00000000-0000-0000-0000-000000000000"
+  ) {
+    return await axios.get(
+      API_URL +
+        `/api/Applicant/GetApplicantStage/Stage3/${applicantId}/${applicationId}`
+    );
+  }
 };
 export const useFetchApplicantStageThree = (applicantId, applicationId) => {
   return useQuery({
@@ -142,10 +164,12 @@ export const useFetchApplicantStageThree = (applicantId, applicationId) => {
 };
 /***************Fetch  Applicant stage 4 ***************/
 const fetchApplicantStageFour = async (applicantId, applicationId) => {
-  return await axios.get(
-    API_URL +
-      `/api/Applicant/GetApplicantStage/Stage4/${applicantId}/${applicationId}`
-  );
+  if (applicantId && applicantId) {
+    return await axios.get(
+      API_URL +
+        `/api/Applicant/GetApplicantStage/Stage4/${applicantId}/${applicationId}`
+    );
+  }
 };
 export const useFetchApplicantStageFour = (applicantId, applicationId) => {
   return useQuery({
@@ -159,7 +183,6 @@ export const useFetchApplicantStageFour = (applicantId, applicationId) => {
 
 const fetchApplyingAs = async (data) => {
   const app = data?.applicationStart || 0;
-  console.log("sbsgkfbkjgbsb", data);
   if (data?.academicTermId) {
     return await axios.get(
       API_URL +

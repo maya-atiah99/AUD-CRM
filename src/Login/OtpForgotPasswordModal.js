@@ -33,7 +33,6 @@ const OtpForgotPasswordModal = ({
           : verificationEmailFieldSchema
       }
       onSubmit={() => {
-        console.log("helloo00000");
         handleNextStepForgotPasswordOTP();
       }}
     >
@@ -46,9 +45,6 @@ const OtpForgotPasswordModal = ({
         handleSubmit,
         isSubmitting,
       }) => {
-        console.log(values);
-        console.log(errors);
-
         return (
           <Form>
             <ModalComponent

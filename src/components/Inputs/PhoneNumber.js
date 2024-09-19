@@ -29,7 +29,6 @@ const PhoneNumber = ({
 
   const handleValidate = (value) => {
     const isValid = isValidPhoneNumber(value);
-    console.log({ isValid });
     return isValid;
   };
 

@@ -95,6 +95,7 @@ const ApplicationsModal = ({
     localStorage.setItem("applicantId", item.applicantId);
     localStorage.setItem("applingAs", item.applyingAs);
     localStorage.setItem("applicationStart", item.startYourApplication);
+    localStorage.setItem("newApp", false);
 
     if (item.applicationStatus === 4) {
       localStorage.setItem("applicationStatus", true);
@@ -128,14 +129,22 @@ const ApplicationsModal = ({
   const handleReApply = () => {
     localStorage.setItem("reApply", 2);
     // localStorage.setItem("token", "f12a8b7c-9d3e-4f6a-bb18-2c72f515");
+    localStorage.setItem("newApp", false);
 
     setTimeout(() => {
       navigate("/register", { state: { showInterest: true } });
     }, 200);
   };
 
-  const handleStartNewApplication = () => {
+  const handleStartNewApplication = (item) => {
     localStorage.setItem("newApp", true);
+    // localStorage.setItem("applicationStart", item.startYourApplication);
+    // setApplicationStart(item.startYourApplication);
+    localStorage.setItem(
+      "applicationId",
+      "00000000-0000-0000-0000-000000000000"
+    );
+
     setTimeout(() => {
       navigate("/register", { state: { showInterest: true } });
     }, 200);
@@ -166,13 +175,15 @@ const ApplicationsModal = ({
               <tbody>
                 {applications?.data?.map((item) => {
                   return (
-                    <tr key={item.applicantId}>
+                    <tr key={item.applicationId}>
                       <td>
                         {applicationStartFunction(item.startYourApplication)}
                       </td>
 
                       <td style={{ maxWidth: "200px" }}>
-                        {item.fieldOfInterest_Display}
+                        {item.programOfInterest_Display
+                          ? item.programOfInterest_Display
+                          : item.fieldOfInterest_Display}
                       </td>
                       <td>{item.termName}</td>
                       <td></td>

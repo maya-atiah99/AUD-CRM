@@ -55,7 +55,7 @@ const StudentInfoStep = forwardRef(
       ref.current = formik;
     }, [ref, formik]);
 
-    console.log("formikkksdcms ", formik);
+   
     return (
       <div className='form-subcontainer'>
         <FormikProvider value={formik} innerRef={ref}   validationSchema={StudentInfoValidationSchema}>

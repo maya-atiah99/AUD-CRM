@@ -81,7 +81,7 @@ const ProgramInformation = ({ fetchedData, isView }) => {
       applicationStart: applicationStartValue,
       academicTermId: selectedTerm,
     });
-  }, [formik.values.SelectedTerm,formik.values.ApplicationStart]);
+  }, [formik.values.SelectedTerm]);
 
   const handleCancelClinton = () => {
     formik.setFieldValue("ApplingAs", "");

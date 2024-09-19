@@ -20,9 +20,6 @@ const OtpCodeModal = ({
     }
 
     if (element.value === "" && index > 0) {
-      console.log("element.value", element.value);
-      console.log("indexxx", index);
-
       const previousInput = document.getElementById(index - 1);
       if (previousInput) {
         previousInput.focus();

@@ -54,9 +54,6 @@ const TestComponents = () => {
     { text: "Student name" },
   ];
 
-  const handleClick = () => {
-    console.log("Button clicked");
-  };
 
   const collapsed = (type) => {
     if (type == "phone") {

@@ -28,7 +28,6 @@ const RegisterFormStep4 = ({ applicantId, applicationId, isView }) => {
     },
     validationSchema: step4ValidationSchema,
     onSubmit: (values) => {
-      console.log("Form Values", values);
       const formData = new FormData();
       formData.append("ApplicantId", applicantId);
       formData.append("ApplicationId", applicationId);
@@ -64,7 +63,6 @@ const RegisterFormStep4 = ({ applicantId, applicationId, isView }) => {
       });
     },
   });
-  console.log("formik", formik);
   return (
     <>
       <div className='payment-container'>

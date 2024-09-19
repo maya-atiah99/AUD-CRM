@@ -3,7 +3,6 @@ import { useState } from "react";
 import { Route, Routes, Navigate } from "react-router-dom";
 import ShowInterest from "../Pages/ShowInterest/ShowInterest";
 import RegisterPage from "../Pages/Registration/RegisterPage";
-import PublicRoutes from "./PublicRoutes";
 import PrivateRoutes from "./PrivateRoute";
 
 const MainRoute = () => {
@@ -17,27 +16,29 @@ const MainRoute = () => {
     parseInt(localStorage.getItem("applingAs")) || null
   );
   const [applicationId, setApplicationId] = useState(
-    localStorage.getItem("applicationId")
+    localStorage.getItem("applicationId") || null
   );
-  const [reApply,setReApply]=useState( localStorage.getItem("reApply") ||null)
+  // const [reApply, setReApply] = useState(
+  //   localStorage.getItem("reApply") || null
+  // );
 
   return (
     <Routes>
-        <Route
-          index
-          element={
-            <ShowInterest
-              setApplicantId={setApplicantId}
-              applicantId={applicantId}
-              applicationStart={applicationStart}
-              setApplicationStart={setApplicationStart}
-              applingAs={applingAs}
-              setApplyingAs={setApplyingAs}
-              applicationId={applicationId}
-              setApplicationId={setApplicationId}
-            />
-          }
-        />
+      <Route
+        index
+        element={
+          <ShowInterest
+            setApplicantId={setApplicantId}
+            applicantId={applicantId}
+            applicationStart={applicationStart}
+            setApplicationStart={setApplicationStart}
+            applingAs={applingAs}
+            setApplyingAs={setApplyingAs}
+            applicationId={applicationId}
+            setApplicationId={setApplicationId}
+          />
+        }
+      />
       <Route path='/register' element={<PrivateRoutes />}>
         <Route
           path='/register'

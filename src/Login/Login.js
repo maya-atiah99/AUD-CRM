@@ -35,8 +35,6 @@ const Login = ({
         initialValues={initialValues}
         validationSchema={LoginValidationSchema}
         onSubmit={(values, { setFieldError }) => {
-          console.log("test", values);
-
           login(values, {
             onSuccess: (data) => {
               setApplicantId(data?.data?.applicantId);
@@ -50,10 +48,6 @@ const Login = ({
               localStorage.setItem("applingAs", data?.data?.appliyingAs);
               setApplicationStart(data?.data?.applicationStart);
               setApplyingAs(data?.data?.appliyingAs);
-              console.log(
-                "manageShowInterest,manageShowInterest",
-                manageShowInterest
-              );
               setShowApplicatiosModal(true);
               setShowLoginModal(false);
             },

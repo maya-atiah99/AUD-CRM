@@ -46,25 +46,20 @@ const getValidationSchemaStep2 = (applicationStart, applingAs) => {
     ),
     isSaved: Yup.boolean(),
     NextActiveStep: Yup.number(),
-    PersonalStatement: Yup.string()
-    .when(
-          "isSaved",
-          {
-            is: (isSaved) => isSaved,
-            then: (schema) =>
-              schema
-                .test("min-words", "Minimum 500 words are required", (value) => {
-                  if (!value) {
-                    return false;
-                  }
-                  const strippedStr = value.replace(/<[^>]*>/g, ''); 
-                  console.log("words", strippedStr.split(/\s+/).length); 
-                  return strippedStr.split(/\s+/).length >= 500;
-                })
-                .required("PersonalStatement is required"), 
-            otherwise: (schema) => schema.notRequired(),
-          }
-        ),
+    PersonalStatement: Yup.string().when("isSaved", {
+      is: (isSaved) => isSaved,
+      then: (schema) =>
+        schema
+          .test("min-words", "Minimum 500 words are required", (value) => {
+            if (!value) {
+              return false;
+            }
+            const strippedStr = value.replace(/<[^>]*>/g, "");
+            return strippedStr.split(/\s+/).length >= 500;
+          })
+          .required("PersonalStatement is required"),
+      otherwise: (schema) => schema.notRequired(),
+    }),
     EmploymentStatus: Yup.string(),
     EmploymentSector: Yup.string(),
     CompanyName: Yup.string(),

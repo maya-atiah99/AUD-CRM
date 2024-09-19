@@ -74,7 +74,6 @@ const ShowInterest = ({
       }, [5000]);
     },
     onError: (error) => {
-      console.log("error: ", error);
       toast.error("Something went wrong");
       setOtpError(true);
     },
@@ -92,9 +91,7 @@ const ShowInterest = ({
         "Resend is done, please wait until you receive an otp then verify your email"
       );
     },
-    onError: (error) => {
-      console.log("error: ", error);
-    },
+    onError: (error) => {},
   });
 
   const resendShowInterestPhoneOtp = useMutation({
@@ -109,9 +106,7 @@ const ShowInterest = ({
         "Resend is done, please wait until you receive an otp then verify your mobile"
       );
     },
-    onError: (error) => {
-      console.log("error: ", error);
-    },
+    onError: (error) => {},
   });
   /*****************Validate for registeration */
   const validateApplicant = useMutation({
@@ -122,7 +117,6 @@ const ShowInterest = ({
       );
     },
     onSuccess: async (data) => {
-     
       openVerifiedModal("Continue");
       setActionOrigin("Continue");
       if (data?.data?.verified === "true") {
@@ -137,8 +131,6 @@ const ShowInterest = ({
       }
     },
     onError: (error) => {
-      console.log("error: ", error);
-
       toast.error("Something went wrong");
       setOtpError(true);
     },
@@ -159,9 +151,7 @@ const ShowInterest = ({
         "Resend is done, please wait until you receive an otp then verify your mobile"
       );
     },
-    onError: (error) => {
-      console.log("error: ", error);
-    },
+    onError: (error) => {},
   });
   const resendApplicantEmailOtp = useMutation({
     mutationFn: () => {
@@ -178,7 +168,6 @@ const ShowInterest = ({
       );
     },
     onError: (error) => {
-      console.log("error: ", error);
     },
   });
 
@@ -221,7 +210,6 @@ const ShowInterest = ({
       setCheckEmailSent(true);
     },
     onError: (error) => {
-      console.log("error: ", error);
       toast.error("Something went wrong");
     },
   });
@@ -239,7 +227,6 @@ const ShowInterest = ({
       setApplicantId(data?.data?.applicantId);
     },
     onError: (error) => {
-      console.log("error: ", error);
       toast.error("Something went wrong");
     },
   });
@@ -258,7 +245,6 @@ const ShowInterest = ({
       setOtpCode("");
     },
     onError: (error) => {
-      console.log("error: ", error);
       toast.error("Something went wrong");
     },
   });
@@ -300,7 +286,6 @@ const ShowInterest = ({
           setEmail={setEmail}
           setApplicationStart={setApplicationStart}
           setApplicationId={setApplicationId}
-          
         />
       </div>
       {showVerifiedModal && (

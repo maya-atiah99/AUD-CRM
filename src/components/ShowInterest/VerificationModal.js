@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import ModalComponent from "../ModalComponent";
 import TextBox from "../Inputs/TextBox";
 import TextComponent from "../Texts/TextComponent";
@@ -33,7 +33,6 @@ const VerificationModal = ({
       initialValues={init}
       validationSchema={verificationSchema}
       onSubmit={() => {
-        console.log("helloo");
         handleDone();
       }}
     >
@@ -46,9 +45,6 @@ const VerificationModal = ({
         handleSubmit,
         isSubmitting,
       }) => {
-        console.log(values);
-        console.log(errors);
-
         return (
           <Form>
             <ModalComponent

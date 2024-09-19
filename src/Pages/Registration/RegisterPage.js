@@ -51,12 +51,12 @@ const RegisterPage = ({
     data: applicantStageOne,
     refetch: refetchStageOne,
     isLoading: isStageOneLoading,
-  } = useFetchApplicantStageOne(applicantId, applicationId,showInterest);
+  } = useFetchApplicantStageOne(applicantId, applicationId, showInterest);
   const {
     data: applicantStageTwo,
     refetch: refetchStageTwo,
     isLoading: isStageTwoLoading,
-  } = useFetchApplicantStageTwo(applicantId, applicationId,showInterest);
+  } = useFetchApplicantStageTwo(applicantId, applicationId, showInterest);
 
   useEffect(() => {
     refreshPage();
@@ -77,10 +77,9 @@ const RegisterPage = ({
     setApplicationId(localStorage.getItem("applicationId"));
     setApplicantId(localStorage.getItem("applicantId"));
   }, []);
-
   //handle continue to next step button
   const handleChange = async (next) => {
-    await steps[activeStep].ref.current?.setFieldValue("isSaved", true);
+    await steps[activeStep]?.ref?.current?.setFieldValue("isSaved", true);
     steps[activeStep].ref.current?.setFieldValue(
       "NextActiveStep",
       activeStep + 1
@@ -116,6 +115,7 @@ const RegisterPage = ({
     }, 500);
   };
 
+  //handle declaration in case audit
   const handleContinueDeclaration = async (next) => {
     await steps[activeStep].ref.current?.setFieldValue("isSaved", true);
     steps[activeStep].ref.current?.setFieldValue(
@@ -128,6 +128,11 @@ const RegisterPage = ({
         if (steps[activeStep].ref.current?.isValid) {
           setIsVerified(true);
           window.scrollTo(0, 0);
+          setTimeout(() => {
+            navigate("/");
+            localStorage.clear();
+            setIsVerified(false);
+          }, 2000);
         } else {
           toast.error("Please Fill All Required Fields");
           window.scrollTo(0, 0);
@@ -137,6 +142,7 @@ const RegisterPage = ({
       }
     }
   };
+
   //handle next in case view application
   const handleNext = (next) => {
     if (next) {
@@ -205,6 +211,7 @@ const RegisterPage = ({
           applicationId={applicationId}
           applicationStart={applicationStart}
           applingAs={applingAs}
+          setApplicationId={setApplicationId}
           setApplicationStart={setApplicationStart}
           setApplyingAs={setApplyingAs}
           showInterest={showInterest}

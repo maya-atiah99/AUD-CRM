@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useState } from "react";
 import Dropdown from "../Inputs/DropDown";
 import TextBox from "../Inputs/TextBox";
 import PhoneNumber from "../Inputs/PhoneNumber";
@@ -8,7 +8,6 @@ import showInterestValidationSchema from "../../ValidationSchemas/ShowInterestVa
 import { useAddApplicantToShowInterest } from "../../Hooks/ShowInterest";
 import { useAddApplicant } from "../../Hooks/Appplicant";
 import DropDown from "../Inputs/DropDown";
-import toast from "react-hot-toast";
 
 const startYourApplicationOptions = [
   { label: "Undergraduate", value: "0" },
@@ -69,6 +68,7 @@ const ShowInterestForm = ({
         setApplicationId(data?.data?.applicationId);
         localStorage.setItem("applicationStart", values.applicationStart);
         localStorage.setItem("applicationStatus", false);
+        localStorage.setItem("newApp", false);
         setApplicationStart(values.applicationStart);
         setApplicantId(data?.data?.applicantId);
         openVerifiedModal("Continue");
@@ -140,7 +140,6 @@ const ShowInterestForm = ({
         setEmail(values.email);
         const valuesToSend =
           values.titleId === "" ? { ...values, titleId: undefined } : values;
-        console.log("clickedbutton", clickedButton);
         if (clickedButton === "continueToApply") {
           handleContinueToApply(valuesToSend, { setFieldError, resetForm });
         } else if (clickedButton === "submitForm") {
@@ -176,8 +175,6 @@ const ShowInterestForm = ({
         handleSubmit,
         isSubmitting,
       }) => {
-        console.log("scnjkvbd", values);
-        console.log("errors", errors);
 
         return (
           <Form>

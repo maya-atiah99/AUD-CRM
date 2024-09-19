@@ -19,7 +19,7 @@ const TextEditor = ({
     onChange(name, content);
   };
 
-  console.log("djkwehde", editorContent);
+
   const modules = {
     toolbar: [
       [{ font: [] }],

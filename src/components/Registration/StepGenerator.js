@@ -164,19 +164,19 @@ const StepGenerator = ({
       return [
         {
           step: 1,
-          title: "Student Info",
-          previousStep: "Back to Personal Info",
-          NextStep: "Go to Declaration",
-          form: studantInfo,
-          ref: formikRefStudentInfo,
-        },
-        {
-          step: 2,
           title: "Personal Info",
           previousStep: "Back to main",
           NextStep: "Go to Academic",
           form: personalInfo,
           ref: formikRefStep1,
+        },
+        {
+          step: 2,
+          title: "Student Info",
+          previousStep: "Back to Personal Info",
+          NextStep: "Go to Declaration",
+          form: studantInfo,
+          ref: formikRefStudentInfo,
         },
 
         {

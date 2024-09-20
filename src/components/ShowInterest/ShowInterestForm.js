@@ -8,12 +8,19 @@ import showInterestValidationSchema from "../../ValidationSchemas/ShowInterestVa
 import { useAddApplicantToShowInterest } from "../../Hooks/ShowInterest";
 import { useAddApplicant } from "../../Hooks/Appplicant";
 import DropDown from "../Inputs/DropDown";
+import { useLocation } from "react-router-dom";
 
 const startYourApplicationOptions = [
   { label: "Undergraduate", value: "0" },
   { label: "Graduate", value: "1" },
   { label: "Visiting", value: "2" },
 ];
+const removeKeys = (obj, keys) => {
+  return keys.reduce((acc, key) => {
+    const { [key]: removedKey, ...rest } = acc;
+    return rest;
+  }, obj);
+};
 const ShowInterestForm = ({
   setShowLoginModal,
   openVerifiedModal,
@@ -45,6 +52,8 @@ const ShowInterestForm = ({
     gradeId: "",
     highSchoolGPA: "",
   });
+  const [source, setSource] = useState("");
+  const location = useLocation(); // This gives you access to the current URL
 
   const { mutate: addShowInterest } = useAddApplicantToShowInterest();
   const { mutate: addApplicant } = useAddApplicant();
@@ -61,7 +70,17 @@ const ShowInterestForm = ({
       values = valuesToSend;
     }
 
-    addApplicant(values, {
+    const keysToCheck = ["schoolCurriculumId", "gradeId", "highSchoolGPA"];
+    values = removeKeys(
+      values,
+      keysToCheck.filter((key) => !values[key])
+    );
+
+    const valuesToAdd = {
+      ...values,
+      sourceOfConnection: source,
+    };
+    addApplicant(valuesToAdd, {
       onSuccess: (data) => {
         localStorage.setItem("applicantId", data?.data?.applicantId);
         localStorage.setItem("applicationId", data?.data?.applicationId);
@@ -98,13 +117,22 @@ const ShowInterestForm = ({
       values = valuesToSendWithoutTitleId;
     }
 
-    // Conditionally remove fields based on applicationStart
     if (values.applicationStart !== "0") {
       const { schoolCurriculumId, gradeId, highSchoolGPA, ...valuesToSend } =
         values;
       values = valuesToSend;
     }
-    addShowInterest(values, {
+
+    const keysToCheck = ["schoolCurriculumId", "gradeId", "highSchoolGPA"];
+    values = removeKeys(
+      values,
+      keysToCheck.filter((key) => !values[key])
+    );
+    const valuesToAdd = {
+      ...values,
+      sourceOfConnection: source,
+    };
+    addShowInterest(valuesToAdd, {
       onSuccess: (data) => {
         openVerifiedModal("Submit");
         setApplicantId(data?.data?.applicantId);
@@ -131,6 +159,14 @@ const ShowInterestForm = ({
   useEffect(() => {
     setIsResetform(false);
   }, [init]);
+  useEffect(() => {
+    const queryParams = new URLSearchParams(location.search);
+    const soc = queryParams.get("soc"); // Get the value of 'soc' from the query string
+    if (soc) {
+      setSource(soc);
+    }
+  }, [location.search]);
+
   return (
     <Formik
       initialValues={init}
@@ -175,7 +211,6 @@ const ShowInterestForm = ({
         handleSubmit,
         isSubmitting,
       }) => {
-
         return (
           <Form>
             <div className='showInterestForm-inner-cont '>

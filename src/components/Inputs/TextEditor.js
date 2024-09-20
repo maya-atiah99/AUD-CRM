@@ -10,7 +10,7 @@ const TextEditor = ({
   label,
   disabled,
   required,
-  count
+  count,
 }) => {
   const [editorContent, setEditorContent] = useState(value || "");
 
@@ -18,7 +18,6 @@ const TextEditor = ({
     setEditorContent(content);
     onChange(name, content);
   };
-
 
   const modules = {
     toolbar: [
@@ -51,13 +50,12 @@ const TextEditor = ({
       <label htmlFor={label}>
         {label}
         {required && <span className='required'>*</span>}
-        <span className='required-field'>
-          {errors && touched && " Personal Statement is required "}
-        </span>
-        {count &&  <span className='words-number'>
-          Count : {countWords(editorContent)}
-        </span> }
-      
+        <span className='required-field'>{errors && touched && errors}</span>
+        {count && (
+          <span className='words-number'>
+            Count : {countWords(editorContent)}
+          </span>
+        )}
       </label>
       <ReactQuill
         theme='snow'

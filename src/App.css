@@ -1131,7 +1131,11 @@ ul {
   flex-direction: column;
   gap: 0.7rem;
 }
-
+.required_residence{
+  display: flex;
+  flex-direction: column;
+  gap:0.2rem;
+}
 /***********************************Personal Information********/
 .grid-personal1-cont {
   display: grid;

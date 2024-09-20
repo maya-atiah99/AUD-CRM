@@ -5,7 +5,6 @@ import React, {
   useImperativeHandle,
   useState,
 } from "react";
-import getStudentInfoValidationSchema from "../../../ValidationSchemas/StudentInfoValidationSchema";
 import StudentInfo from "./StudentInfo";
 import StudentInfoValidationSchema from "../../../ValidationSchemas/StudentInfoValidationSchema";
 import { useAddStudentInfo } from "../../../Hooks/Appplicant";
@@ -27,15 +26,15 @@ const StudentInfoStep = forwardRef(
     ref
   ) => {
     const [init, setInit] = useState({
-      ResidenceVisa: "",
-      HousingRequired: "",
-      collage: [
+      residenceVisa: "",
+      housingRequired: "",
+      college: [
         {
           NameOfCollege: "",
           YearsAttended: "",
         },
       ],
-      Involvement: "",
+      otherInvolvement: "",
     });
 
     const { mutate: addStudentInfo } = useAddStudentInfo();
@@ -57,7 +56,29 @@ const StudentInfoStep = forwardRef(
       validationSchema: StudentInfoValidationSchema,
       enableReinitialize: true,
       onSubmit: (value) => {
-        handleAddStudentInfo(value);
+        const transformCollageData = (collage) => {
+          const transformedData = {};
+
+          collage.forEach((item, index) => {
+            const collegeIndex = index + 1;
+            transformedData[`collegeUniversity${collegeIndex}`] =
+              item.NameOfCollege;
+            transformedData[`yearsAttended${collegeIndex}`] =
+              item.YearsAttended;
+          });
+
+          return transformedData;
+        };
+        const transformedCollegeData = transformCollageData(value.college);
+        const valuesToSend = {
+          ...transformedCollegeData,
+          applicationId: applicationId,
+          applicantId: applicantId,
+          residenceVisa: value?.residenceVisa,
+          housingRequired: value?.housingRequired,
+          otherInvolvement: value?.otherInvolvement,
+        };
+        handleAddStudentInfo(valuesToSend);
       },
     });
 

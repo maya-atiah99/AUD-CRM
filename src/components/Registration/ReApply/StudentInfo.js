@@ -14,99 +14,120 @@ const options = [
 const StudentInfo = ({ isView }) => {
   const [sections, setSections] = useState(1);
   const formik = useFormikContext();
-
+  console.log("Cdkmlkdfv", formik?.values);
   const addSection = () => {
     const newSection = {
       NameOfCollege: "",
       YearsAttended: "",
     };
-    formik.setFieldValue("collage", [...formik.values.collage, newSection]);
+    formik.setFieldValue("college", [...formik.values.college, newSection]);
     setSections(sections + 1);
   };
   return (
     <div className='form-subcontainers'>
       <SectionTitle title='STUDENT’S UPDATED INFORMATION' />
-      <div className="d-flex gap-5 align-items-center">
-        <RadioButtonGroup
-          options={options}
-          label='Residence Visa Needed'
-          required={true}
-          fontWeight="500"
-          name='ResidenceVisa'
-          selectedValue={formik.values.ResidenceVisa}
-          onRadioChange={(name, value) => {
-            formik.setFieldValue(name, value);
-          }}
-          disabled={isView}
-          errors={formik.errors?.ResidenceVisa}
-          touched={formik.touched?.ResidenceVisa}
-        />
-        <RadioButtonGroup
-          options={options}
-          label='Housing Required'
-          required={true}
-          fontWeight="500"
-
-          name='HousingRequired'
-          selectedValue={formik.values.HousingRequired}
-          onRadioChange={(name, value) => {
-            formik.setFieldValue(name, value);
-          }}
-          errors={formik.errors?.HousingRequired}
-          touched={formik.touched?.HousingRequired}
-        />
+      <div className='d-flex gap-5 align-items-center'>
+        <div className='required_residence'>
+          <RadioButtonGroup
+            options={options}
+            label='Residence Visa Needed'
+            required={true}
+            fontWeight='500'
+            name='residenceVisa'
+            selectedValue={formik.values.residenceVisa}
+            onRadioChange={(name, value) => {
+              formik.setFieldValue(name, value);
+            }}
+            disabled={isView}
+            errors={formik.errors?.residenceVisa}
+            touched={formik.touched?.residenceVisa}
+          />{" "}
+          {formik.errors?.residenceVisa && formik.touched?.residenceVisa ? (
+            <span className='span-required'>
+              {formik.errors?.residenceVisa}
+            </span>
+          ) : (
+            ""
+          )}
+        </div>
+        <div className='required_residence'>
+          <RadioButtonGroup
+            options={options}
+            label='Housing Required'
+            required={true}
+            fontWeight='500'
+            name='housingRequired'
+            selectedValue={formik.values.housingRequired}
+            onRadioChange={(name, value) => {
+              formik.setFieldValue(name, value);
+            }}
+            errors={formik.errors?.housingRequired}
+            touched={formik.touched?.housingRequired}
+          />{" "}
+          {formik.errors?.housingRequired && formik.touched?.housingRequired ? (
+            <span className='span-required'>
+              {formik.errors?.housingRequired}
+            </span>
+          ) : (
+            ""
+          )}
+        </div>
       </div>
-      {formik.values.collage &&
-        formik.values.collage.map((section, index) => {
+      {formik.values.college &&
+        formik.values.college.map((section, index) => {
           return (
-            <div className="studentInfo-subCont">
+            <div className='studentInfo-subCont'>
               <TextBox
                 width='100%'
                 label='Name of college/university attended (if applicable)'
                 required={true}
-                name={`collage[${index}].NameOfCollege`}
+                name={`college[${index}].NameOfCollege`}
                 value={section.NameOfCollege}
                 onChange={(name, value) => {
                   formik.setFieldValue(name, value);
                 }}
-                errors={formik.errors?.collage?.[index]?.NameOfCollege}
-                touched={formik.touched?.collage?.[index]?.NameOfCollege}
+                errors={formik.errors?.college?.[index]?.NameOfCollege}
+                touched={formik.touched?.college?.[index]?.NameOfCollege}
                 disabled={isView}
               />
-              <DropDown
+              <TextBox
                 width='100%'
                 label='Years Attended'
                 //  type=""
                 required={true}
-                name='YearsAttended'
-                value={formik.values.YearsAttended}
+                name={`college[${index}].YearsAttended`}
+                value={section.YearsAttended}
                 onChange={(name, value) => {
                   formik.setFieldValue(name, value);
                 }}
-                errors={formik.errors?.YearsAttended}
-                touched={formik.touched?.YearsAttended}
+                errors={formik.errors?.college?.[index]?.YearsAttended}
+                touched={formik.touched?.college?.[index]?.YearsAttended}
                 disabled={isView}
-              />{" "}
+                type='number'
+              />
             </div>
           );
         })}
-      <div className='form-subcontainers'>
-        <RoundedButton
-          icon='/images/plusicon.svg'
-          text='Add More'
-          handleOnClick={addSection}
-        />
-      </div>
+      {formik.values?.college?.length <= 2 && (
+        <div className='form-subcontainers'>
+          <RoundedButton
+            icon='/images/plusicon.svg'
+            text='Add More'
+            handleOnClick={addSection}
+          />
+        </div>
+      )}
+
       <TextEditor
         label='Please specify other involvement since your first application to AUD'
         required={true}
-        name='Involvement'
-        value={formik.values.Involvement}
+        name='otherInvolvement'
+        value={formik.values.otherInvolvement}
         onChange={(name, value) => {
           formik.setFieldValue(name, value);
         }}
-        errors={formik.errors?.Involvement}
-        touched={formik.touched?.Involvement}
+        errors={formik.errors?.otherInvolvement}
+        touched={formik.touched?.otherInvolvement}
         disabled={isView}
       />
     </div>

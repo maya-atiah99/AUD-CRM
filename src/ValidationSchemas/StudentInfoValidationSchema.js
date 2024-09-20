@@ -20,15 +20,15 @@
 import * as Yup from "yup";
 
 const StudentInfoValidationSchema = Yup.object().shape({
-  ResidenceVisa: Yup.boolean().notRequired(),
-  HousingRequired: Yup.boolean().notRequired(),
-  collage: Yup.array().of(
+  residenceVisa: Yup.boolean().required("Residence visa is required"),
+  housingRequired: Yup.boolean().required("Housing Field is required"),
+  college: Yup.array().of(
     Yup.object().shape({
-      NameOfCollege: Yup.string().notRequired(),
-      YearsAttended: Yup.number().notRequired(),
+      NameOfCollege: Yup.string().required(),
+      YearsAttended: Yup.number().required(),
     })
   ),
-  Involvement: Yup.string().notRequired(),
+  otherInvolvement: Yup.string().required("Other involvement is required"),
 });
 
 export default StudentInfoValidationSchema;

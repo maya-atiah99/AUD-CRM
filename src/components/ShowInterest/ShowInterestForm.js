@@ -159,6 +159,7 @@ const ShowInterestForm = ({
   useEffect(() => {
     setIsResetform(false);
   }, [init]);
+
   useEffect(() => {
     const queryParams = new URLSearchParams(location.search);
     const soc = queryParams.get("soc");
@@ -166,7 +167,7 @@ const ShowInterestForm = ({
       setSource(soc);
     }
   }, [location.search]);
-  console.log("cdjkcnds", source);
+  
   return (
     <Formik
       initialValues={init}

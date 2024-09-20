@@ -50,7 +50,7 @@ const TextEditor = ({
       <label htmlFor={label}>
         {label}
         {required && <span className='required'>*</span>}
-        <span className='required-field'>{errors && touched && errors}</span>
+        <span className='span-required'>{errors && touched && errors}</span>
         {count && (
           <span className='words-number'>
             Count : {countWords(editorContent)}

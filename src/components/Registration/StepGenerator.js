@@ -178,7 +178,6 @@ const StepGenerator = ({
           form: studantInfo,
           ref: formikRefStudentInfo,
         },
-
         {
           step: 3,
           title: "Declaration",

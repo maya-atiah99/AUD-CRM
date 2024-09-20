@@ -26,7 +26,7 @@ const StudentInfo = ({ isView }) => {
   return (
     <div className='form-subcontainers'>
       <SectionTitle title='STUDENT’S UPDATED INFORMATION' />
-      <div className='d-flex gap-5 align-items-center'>
+      <div className='residenceCont'>
         <div className='required_residence'>
           <RadioButtonGroup
             options={options}

@@ -161,7 +161,7 @@ const ShowInterestForm = ({
   }, [init]);
   useEffect(() => {
     const queryParams = new URLSearchParams(location.search);
-    const soc = queryParams.get("soc"); // Get the value of 'soc' from the query string
+    const soc = queryParams.get("soc"); 
     if (soc) {
       setSource(soc);
     }

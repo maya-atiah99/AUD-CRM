@@ -78,7 +78,7 @@ const ShowInterestForm = ({
 
     const valuesToAdd = {
       ...values,
-      sourceOfConnection: source,
+      ...(source && { sourceOfConnection: source }),
     };
     addApplicant(valuesToAdd, {
       onSuccess: (data) => {
@@ -130,7 +130,7 @@ const ShowInterestForm = ({
     );
     const valuesToAdd = {
       ...values,
-      sourceOfConnection: source,
+      ...(source && { sourceOfConnection: source }),
     };
     addShowInterest(valuesToAdd, {
       onSuccess: (data) => {
@@ -161,12 +161,12 @@ const ShowInterestForm = ({
   }, [init]);
   useEffect(() => {
     const queryParams = new URLSearchParams(location.search);
-    const soc = queryParams.get("soc"); 
+    const soc = queryParams.get("soc");
     if (soc) {
       setSource(soc);
     }
   }, [location.search]);
-
+  console.log("cdjkcnds", source);
   return (
     <Formik
       initialValues={init}

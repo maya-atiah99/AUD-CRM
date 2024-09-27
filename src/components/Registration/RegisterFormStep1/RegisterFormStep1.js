@@ -221,7 +221,7 @@ const RegisterFormStep1 = forwardRef(
           setActiveStep((prevActiveStep) => prevActiveStep + 1);
           setInit({});
           localStorage.setItem("newApp", false);
-          setNewApplication(false)
+          setNewApplication(false);
           window.scrollTo(0, 0);
         },
         onError: (error) => {
@@ -347,9 +347,38 @@ const RegisterFormStep1 = forwardRef(
           "Passport_File",
         ];
 
+        // Passport_File: fetchedData?.data?.passport || "",
+        // EmiratesId_File: fetchedData?.data?.emiratesID || "",
+        // FamilyBook_File: fetchedData?.data?.familyBook || "",
+        const fetchedNames = {
+          FamilyBook_File: "familyBook",
+          EmiratesId_File: "emiratesID",
+          Passport_File: "passport",
+        };
+
         fileToAppend.forEach((key) => {
-          if (!values[key]?.fileName || values[key] !== "") {
-            formData.append(key, values[key]);
+          const fileValue = values[key];
+          const fileName = fileValue?.fileName;
+
+          if (fileName) {
+            return;
+          }
+
+          const fetchedFile = fetchedData?.data?.[fetchedNames[key]];
+
+          if ((!fileValue || fileValue === "") && !fetchedFile) {
+            return;
+          }
+          if (!fileName && !fetchedFile && fileValue) {
+            formData.append(`${key}.File`, fileValue);
+            formData.append(`${key}.StatusId`, 0);
+          }
+          if (!fileName && fetchedFile && fileValue) {
+            formData.append(`${key}.File`, fileValue);
+            formData.append(`${key}.StatusId`, 1);
+          }
+          if (fetchedFile && !fileValue) {
+            formData.append(`${key}.StatusId`, 2);
           }
         });
 

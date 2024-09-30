@@ -49,6 +49,9 @@ const DocumentUpload = ({
     onChange(name, "");
     // onChange(name, null);
   };
+
+  console.log("nvkjfnkvnf", name, value);
+  console.log("vfdkjvmkdf",selectedFile)
   const containerStyle = {
     width: width,
     height: height,
@@ -60,6 +63,8 @@ const DocumentUpload = ({
     if (value) {
       setSelectedFile(value);
       onChange(name, value);
+    } else {
+      setSelectedFile(null);
     }
   }, [value]);
 

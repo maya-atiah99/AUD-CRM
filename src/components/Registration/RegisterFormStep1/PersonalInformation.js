@@ -17,7 +17,7 @@ const PersonalInformation = ({ isView }) => {
       setShowEmirate(true);
     }
   }, [formik.values.Nationality]);
-
+  console.log("hbjhbj", formik.values.Passport_File );
   return (
     <div className='form-subcontainers'>
       <SectionTitle title='PERSONAL INFORMATION OF THE APPLICANT' />

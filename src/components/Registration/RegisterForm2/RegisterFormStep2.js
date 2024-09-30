@@ -49,7 +49,6 @@ const RegisterFormStep2 = forwardRef(
     const [init, setInit] = useState({});
     const [moveNext, setMoveNext] = useState({ files: false, fields: false });
 
-
     useEffect(() => {
       const initialvalues = {
         isSaved: true,
@@ -170,11 +169,10 @@ const RegisterFormStep2 = forwardRef(
       if (!applicationId) {
         const storedApplicationId = localStorage.getItem("applicationId");
         if (storedApplicationId) {
-          setApplicationId(storedApplicationId); // Update parent state if null
+          setApplicationId(storedApplicationId);
         }
       }
     }, [applicationId]);
-
     const formik = useFormik({
       initialValues: init,
       validationSchema: getValidationSchemaStep2(applicationStart, applingAs),
@@ -223,9 +221,43 @@ const RegisterFormStep2 = forwardRef(
         );
         // Handle CV
 
-        if (!values.CV.fileName) {
-          formData.append("CV", values.CV);
-        }
+        const fileToAppend = ["CV", "DiplomaFile"];
+        const fetchedNames = {
+          CV: "cv",
+          DiplomaFile: "diploma",
+        };
+        fileToAppend.forEach((key) => {
+          const fileValue = values[key];
+          const fileName = fileValue?.fileName;
+
+          if (fileName) {
+            return;
+          }
+
+          const fetchedFile =
+            key == "DiplomaFile" &&
+            applicantStageThree?.data?.diploma?.length > 0
+              ? applicantStageThree?.data?.[fetchedNames[key]][0]
+              : applicantStageThree?.data?.[fetchedNames[key]];
+
+          if ((!fileValue || fileValue === "") && !fetchedFile) {
+            return;
+          }
+          if (!fileName && !fetchedFile && fileValue) {
+            formData.append(`${key}.File`, fileValue);
+            formData.append(`${key}.StatusId`, 0);
+          }
+          if (!fileName && fetchedFile && fileValue) {
+            formData.append(`${key}.File`, fileValue);
+            formData.append(`${key}.StatusId`, 1);
+          }
+          if (fetchedFile && !fileValue) {
+            formData.append(`${key}.StatusId`, 2);
+          }
+        });
+        // if (!values.CV.fileName) {
+        //   formData.append("CV", values.CV);
+        // }
         // Handle DiplomaFile
         // if (values.DiplomaFile && "documentContent" in values.DiplomaFile) {
         //   const diplomaFileContent = values.DiplomaFile.documentContent;
@@ -240,16 +272,15 @@ const RegisterFormStep2 = forwardRef(
         // } else {
         //   formData.append("DiplomaFile", values.DiplomaFile);
         // }
-        if (!values?.DiplomaFile?.fileName) {
-          formData.append("DiplomaFile", values.DiplomaFile);
-        }
+
+        // if (!values?.DiplomaFile?.fileName) {
+        //   formData.append("DiplomaFile", values.DiplomaFile);
+        // }
         /*********************Appliacnt files post */
-        if (
-          values.applicantFiles?.length > 0 &&
-          values.applicantFiles.some((file) => !!file.testType)
-        ) {
+   
           const formDataFiles = new FormData();
           values.applicantFiles.forEach((file, index) => {
+            // Append common applicant file data
             formDataFiles.append(
               `applicantFiles[${index}].applicantId`,
               applicantId
@@ -262,13 +293,6 @@ const RegisterFormStep2 = forwardRef(
               `applicantFiles[${index}].testType`,
               file.testType
             );
-
-            if (!file.academicDocument.fileName) {
-              formDataFiles.append(
-                `applicantFiles[${index}].academicDocument`,
-                file.academicDocument
-              );
-            }
             formDataFiles.append(
               `applicantFiles[${index}].dateTaken`,
               file.dateTaken
@@ -281,10 +305,42 @@ const RegisterFormStep2 = forwardRef(
               `applicantFiles[${index}].totalScore`,
               file.totalScore
             );
-          });
 
+            const fileValue = file.academicDocument;
+            const fileName = fileValue?.fileName;
+            const fetchedFile =
+              applicantStageThree?.data?.applicantFiles?.[index]
+                ?.academicDocument?.file;
+
+            if (!fileName && !fetchedFile && fileValue) {
+              formDataFiles.append(
+                `applicantFiles[${index}].academicDocument.file`,
+                fileValue
+              );
+              formDataFiles.append(
+                `applicantFiles[${index}].academicDocument.statusId`,
+                1
+              );
+            }
+            if (!fileName && fetchedFile && fileValue) {
+              formDataFiles.append(
+                `applicantFiles[${index}].academicDocument.file`,
+                fileValue
+              );
+              formDataFiles.append(
+                `applicantFiles[${index}].academicDocument.statusId`,
+                1
+              );
+            }
+            if (fetchedFile && !fileValue) {
+              formDataFiles.append(
+                `applicantFiles[${index}].academicDocument.statusId`,
+                2
+              );
+            }
+          });
           handleAddFiles(formDataFiles);
-        }
+        
 
         if (hasStageThreeData) {
           handleAddStageThree(formData);
@@ -332,7 +388,7 @@ const RegisterFormStep2 = forwardRef(
     if (isLoading) {
       return <Loader width='100%' />;
     }
-
+    console.log("cdsbchshvca", formik.values);
     return (
       <div className='form-subcontainer'>
         <FormikProvider value={formik} innerRef={ref}>

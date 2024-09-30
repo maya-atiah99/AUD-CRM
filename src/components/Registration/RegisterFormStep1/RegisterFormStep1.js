@@ -44,7 +44,7 @@ const RegisterFormStep1 = forwardRef(
     const [newApplication, setNewApplication] = useState(
       JSON.parse(localStorage.getItem("newApp")) || false
     );
-
+console.log("shbcjdsb",showInterest)
     useEffect(() => {
       if (showInterest) {
         const initialOne = {
@@ -248,6 +248,7 @@ const RegisterFormStep1 = forwardRef(
         );
       }
     }, [fetchedData, showInterest]);
+    console.log("cdnskjvdbvas",init)
 
     const formik = useFormik({
       initialValues: init,
@@ -404,6 +405,7 @@ const RegisterFormStep1 = forwardRef(
     useEffect(() => {
       ref.current = formik;
     }, [ref, formik]);
+    console.log("sbxsbjbhc",formik?.values)
 
     useEffect(() => {
       localStorage.setItem("applicationStart", formik.values?.ApplicationStart);
@@ -415,6 +417,7 @@ const RegisterFormStep1 = forwardRef(
     if (isLoading) {
       return <Loader width='100%' />;
     }
+    console.log("bhjhbj",formik.values.EmiratesId_File)
     return (
       <div className='form-subcontainer'>
         <FormikProvider

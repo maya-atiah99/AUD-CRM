@@ -43,8 +43,11 @@ const RegisterFormStep2 = forwardRef(
       refetch: refetchStageThree,
       isLoading,
     } = useFetchApplicantStageThree(applicantId, applicationId);
-    const { mutate: addApplicantStageThree } = useAddApplicantStageThree();
-    const { mutate: addFiles } = useAddFiles();
+    const {
+      mutate: addApplicantStageThree,
+      isLoading: isLoadingSubmitStageThree,
+    } = useAddApplicantStageThree();
+    const { mutate: addFiles, isLoading: isLoadingSubmitFiles } = useAddFiles();
 
     const [init, setInit] = useState({});
     const [moveNext, setMoveNext] = useState({ files: false, fields: false });
@@ -277,70 +280,69 @@ const RegisterFormStep2 = forwardRef(
         //   formData.append("DiplomaFile", values.DiplomaFile);
         // }
         /*********************Appliacnt files post */
-   
-          const formDataFiles = new FormData();
-          values.applicantFiles.forEach((file, index) => {
-            // Append common applicant file data
-            formDataFiles.append(
-              `applicantFiles[${index}].applicantId`,
-              applicantId
-            );
-            formDataFiles.append(
-              `applicantFiles[${index}].applicationId`,
-              applicationId
-            );
-            formDataFiles.append(
-              `applicantFiles[${index}].testType`,
-              file.testType
-            );
-            formDataFiles.append(
-              `applicantFiles[${index}].dateTaken`,
-              file.dateTaken
-            );
-            formDataFiles.append(
-              `applicantFiles[${index}].registrationNumber`,
-              file.registrationNumber
-            );
-            formDataFiles.append(
-              `applicantFiles[${index}].totalScore`,
-              file.totalScore
-            );
 
-            const fileValue = file.academicDocument;
-            const fileName = fileValue?.fileName;
-            const fetchedFile =
-              applicantStageThree?.data?.applicantFiles?.[index]
-                ?.academicDocument?.file;
+        const formDataFiles = new FormData();
+        values.applicantFiles.forEach((file, index) => {
+          // Append common applicant file data
+          formDataFiles.append(
+            `applicantFiles[${index}].applicantId`,
+            applicantId
+          );
+          formDataFiles.append(
+            `applicantFiles[${index}].applicationId`,
+            applicationId
+          );
+          formDataFiles.append(
+            `applicantFiles[${index}].testType`,
+            file.testType
+          );
+          formDataFiles.append(
+            `applicantFiles[${index}].dateTaken`,
+            file.dateTaken
+          );
+          formDataFiles.append(
+            `applicantFiles[${index}].registrationNumber`,
+            file.registrationNumber
+          );
+          formDataFiles.append(
+            `applicantFiles[${index}].totalScore`,
+            file.totalScore
+          );
 
-            if (!fileName && !fetchedFile && fileValue) {
-              formDataFiles.append(
-                `applicantFiles[${index}].academicDocument.file`,
-                fileValue
-              );
-              formDataFiles.append(
-                `applicantFiles[${index}].academicDocument.statusId`,
-                1
-              );
-            }
-            if (!fileName && fetchedFile && fileValue) {
-              formDataFiles.append(
-                `applicantFiles[${index}].academicDocument.file`,
-                fileValue
-              );
-              formDataFiles.append(
-                `applicantFiles[${index}].academicDocument.statusId`,
-                1
-              );
-            }
-            if (fetchedFile && !fileValue) {
-              formDataFiles.append(
-                `applicantFiles[${index}].academicDocument.statusId`,
-                2
-              );
-            }
-          });
-          handleAddFiles(formDataFiles);
-        
+          const fileValue = file.academicDocument;
+          const fileName = fileValue?.fileName;
+          const fetchedFile =
+            applicantStageThree?.data?.applicantFiles?.[index]?.academicDocument
+              ?.file;
+
+          if (!fileName && !fetchedFile && fileValue) {
+            formDataFiles.append(
+              `applicantFiles[${index}].academicDocument.file`,
+              fileValue
+            );
+            formDataFiles.append(
+              `applicantFiles[${index}].academicDocument.statusId`,
+              1
+            );
+          }
+          if (!fileName && fetchedFile && fileValue) {
+            formDataFiles.append(
+              `applicantFiles[${index}].academicDocument.file`,
+              fileValue
+            );
+            formDataFiles.append(
+              `applicantFiles[${index}].academicDocument.statusId`,
+              1
+            );
+          }
+          if (fetchedFile && !fileValue) {
+            formDataFiles.append(
+              `applicantFiles[${index}].academicDocument.statusId`,
+              2
+            );
+          }
+        });
+        handleAddFiles(formDataFiles);
 
         if (hasStageThreeData) {
           handleAddStageThree(formData);
@@ -385,7 +387,7 @@ const RegisterFormStep2 = forwardRef(
       return () => clearTimeout(timeout);
     }, [moveNext.fields, moveNext.files, formik.values.applicantFiles]);
 
-    if (isLoading) {
+    if (isLoading || isLoadingSubmitFiles || isLoadingSubmitStageThree) {
       return <Loader width='100%' />;
     }
     console.log("cdsbchshvca", formik.values);

@@ -8,8 +8,8 @@ import SectionTitle from "../../Texts/SectionTitle";
 import { useFormikContext } from "formik";
 
 const options = [
-  { label: "Yes", value: "0" },
-  { label: "No", value: "1" },
+  { label: "Yes", value: true },
+  { label: "No", value: false },
 ];
 const StudentInfo = ({ isView }) => {
   const [sections, setSections] = useState(1);

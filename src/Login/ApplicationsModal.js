@@ -128,8 +128,11 @@ const ApplicationsModal = ({
 
   const handleReApply = () => {
     localStorage.setItem("reApply", 2);
-    // localStorage.setItem("token", "f12a8b7c-9d3e-4f6a-bb18-2c72f515");
-    localStorage.setItem("newApp", false);
+    localStorage.setItem("newApp", true);
+    localStorage.setItem(
+      "applicationId",
+      "00000000-0000-0000-0000-000000000000"
+    );
 
     setTimeout(() => {
       navigate("/register", { state: { showInterest: true } });

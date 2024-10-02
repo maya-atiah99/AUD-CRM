@@ -35,16 +35,19 @@ const RegisterFormStep1 = forwardRef(
       setActiveStep,
       setApplicationId,
       isLoading,
+      reApply,
     },
     ref
   ) => {
     const [init, setInit] = useState({});
-    const { mutate: addApplicantStagetwo } = useAddApplicantStageTwo();
-    const { mutate: addStage1NewApplication } = useAddStage1NewApplication();
+    const { mutate: addApplicantStagetwo, isLoading: isLoadingSubmitstageTwo } =
+      useAddApplicantStageTwo();
+    const { mutate: addStage1NewApplication, isLoading: isLoadingStageOne } =
+      useAddStage1NewApplication();
     const [newApplication, setNewApplication] = useState(
       JSON.parse(localStorage.getItem("newApp")) || false
     );
-console.log("shbcjdsb",showInterest)
+
     useEffect(() => {
       if (showInterest) {
         const initialOne = {
@@ -248,7 +251,7 @@ console.log("shbcjdsb",showInterest)
         );
       }
     }, [fetchedData, showInterest]);
-    console.log("cdnskjvdbvas",init)
+    console.log("cdnskjvdbvas", init);
 
     const formik = useFormik({
       initialValues: init,
@@ -405,7 +408,15 @@ console.log("shbcjdsb",showInterest)
     useEffect(() => {
       ref.current = formik;
     }, [ref, formik]);
-    console.log("sbxsbjbhc",formik?.values)
+    console.log("sbxsbjbhc", formik?.values);
+
+    useEffect(() => {
+      if (fetchedData?.data?.stage2?.legacyMotherName) {
+        formik.setFieldValue("testLegacy", true);
+      } else if (fetchedData?.data?.stage2?.legacyMotherName) {
+        formik.setFieldValue("testLegacy", false);
+      }
+    }, [fetchedData]);
 
     useEffect(() => {
       localStorage.setItem("applicationStart", formik.values?.ApplicationStart);
@@ -414,10 +425,10 @@ console.log("shbcjdsb",showInterest)
       setApplyingAs(formik.values?.ApplingAs);
     }, [formik.values?.ApplicationStart, formik.values?.ApplingAs]);
 
-    if (isLoading) {
+    if (isLoading || isLoadingStageOne || isLoadingSubmitstageTwo) {
       return <Loader width='100%' />;
     }
-    console.log("bhjhbj",formik.values.EmiratesId_File)
+
     return (
       <div className='form-subcontainer'>
         <FormikProvider

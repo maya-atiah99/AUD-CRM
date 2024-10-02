@@ -31,7 +31,7 @@ const StepGenerator = ({
   setSteps,
   reApply,
   isLoading,
-  setApplicationId,
+  setApplicationId
 }) => {
   const personalInfo = (
     <RegisterFormStep1
@@ -49,6 +49,7 @@ const StepGenerator = ({
       isLoading={isLoading}
       setActiveStep={setActiveStep}
       setApplicationId={setApplicationId}
+      reApply={reApply}
     />
   );
   const studantInfo = (

@@ -40,7 +40,7 @@ const RegisterFormStep3 = forwardRef(
       isLoading,
     } = useFetchApplicantStageFour(applicantId, applicationId);
     const [showModal, setShowModal] = useState(false);
-    const { mutate: addApplicantStageFour } = useAddApplicantStageFour();
+    const { mutate: addApplicantStageFour ,isLoading:isLoadingSubmitStageFour} = useAddApplicantStageFour();
     const [init, setInit] = useState({});
 
     useEffect(() => {
@@ -139,7 +139,7 @@ const RegisterFormStep3 = forwardRef(
       }
     }, []);
 
-    if (isLoading) {
+    if (isLoading || isLoadingSubmitStageFour) {
       return <Loader width='100%' />;
     }
     return (

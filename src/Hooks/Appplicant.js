@@ -79,11 +79,7 @@ export const useAddFiles = () => {
 };
 //****************Add applicant stage 3 which is step 2*/
 const addStudentInfo = (applicant) => {
-  return axios.post(API_URL + `/api/Applicant/PostReApplication`, applicant, {
-    headers: {
-      "Content-Type": "multipart/form-data",
-    },
-  });
+  return axios.post(API_URL + `/api/Applicant/PostReApplication`, applicant);
 };
 
 export const useAddStudentInfo = () => {

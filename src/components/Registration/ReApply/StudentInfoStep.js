@@ -9,6 +9,7 @@ import StudentInfo from "./StudentInfo";
 import StudentInfoValidationSchema from "../../../ValidationSchemas/StudentInfoValidationSchema";
 import { useAddStudentInfo } from "../../../Hooks/Appplicant";
 import toast from "react-hot-toast";
+import Loader from "../../Loader/Loader";
 
 const StudentInfoStep = forwardRef(
   (
@@ -37,8 +38,8 @@ const StudentInfoStep = forwardRef(
       otherInvolvement: "",
     });
 
-    const { mutate: addStudentInfo } = useAddStudentInfo();
-
+    const { mutate: addStudentInfo, isLoading } = useAddStudentInfo();
+    console.log("vjndfk", applicationId);
     const handleAddStudentInfo = (values) => {
       addStudentInfo(values, {
         onSuccess: () => {
@@ -91,6 +92,9 @@ const StudentInfoStep = forwardRef(
       ref.current = formik;
     }, [ref, formik]);
 
+    if (isLoading) {
+      return <Loader />;
+    }
     return (
       <div className='form-subcontainer'>
         <FormikProvider

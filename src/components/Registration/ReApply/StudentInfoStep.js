@@ -88,6 +88,7 @@ const StudentInfoStep = forwardRef(
         formik.submitForm();
       },
     }));
+    
     useEffect(() => {
       ref.current = formik;
     }, [ref, formik]);
@@ -95,6 +96,7 @@ const StudentInfoStep = forwardRef(
     if (isLoading) {
       return <Loader />;
     }
+
     return (
       <div className='form-subcontainer'>
         <FormikProvider

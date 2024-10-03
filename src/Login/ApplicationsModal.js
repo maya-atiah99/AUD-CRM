@@ -158,10 +158,10 @@ const ApplicationsModal = ({
       title='Your Previous Applications'
       onClose={() => setShowApplicatiosModal(false)}
     >
-      <div className='applications-table-cont'>
-        {isApplicationsByIdLoading ? (
-          <Loader />
-        ) : (
+      {isApplicationsByIdLoading ? (
+        <Loader />
+      ) : (
+        <div className='applications-table-cont'>
           <div className='cont'>
             <table className='applications-table'>
               <thead>
@@ -213,26 +213,26 @@ const ApplicationsModal = ({
               </tbody>
             </table>
           </div>
-        )}
 
-        <div className='applicationModal_text_cont'>
-          <div className='applicationModal_text_subcont'>
-            <TextComponent
-              text='If you previously submitted an application and paid an application fee, you can initiate the re-application process by clicking the button'
-              color='#000'
-              font='500'
-              // size='15px'
-              classfont='p-style'
+          <div className='applicationModal_text_cont'>
+            <div className='applicationModal_text_subcont'>
+              <TextComponent
+                text='If you previously submitted an application and paid an application fee, you can initiate the re-application process by clicking the button'
+                color='#000'
+                font='500'
+                // size='15px'
+                classfont='p-style'
+              />
+              <AUDButton text='Re-Apply' handleOnClick={handleReApply} />
+            </div>
+
+            <AUDButton
+              text='Start New Application'
+              handleOnClick={handleStartNewApplication}
             />
-            <AUDButton text='Re-Apply' handleOnClick={handleReApply} />
           </div>
-
-          <AUDButton
-            text='Start New Application'
-            handleOnClick={handleStartNewApplication}
-          />
         </div>
-      </div>
+      )}
     </ModalComponent>
   );
 };

@@ -137,7 +137,7 @@ const ProgramInformation = ({ fetchedData, isView }) => {
           ""
         )}
 
-        <RadioButtonGroup
+{formik.values.SelectedTerm &&<> <RadioButtonGroup
           options={applyingAsOptions}
           name='ApplingAs'
           selectedValue={formik.values.ApplingAs}
@@ -150,7 +150,8 @@ const ProgramInformation = ({ fetchedData, isView }) => {
           <span className='span-required'>Applying as is required</span>
         ) : (
           ""
-        )}
+        )}</> }
+       
         <div className='grid-programInfo-cont'>
           <DropDown
             width='100%'

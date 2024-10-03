@@ -88,6 +88,7 @@ const ShowInterestForm = ({
         localStorage.setItem("applicationStart", values.applicationStart);
         localStorage.setItem("applicationStatus", false);
         localStorage.setItem("newApp", false);
+        localStorage.setItem("reApply", null);
         setApplicationStart(values.applicationStart);
         setApplicantId(data?.data?.applicantId);
         openVerifiedModal("Continue");
@@ -167,7 +168,7 @@ const ShowInterestForm = ({
       setSource(soc);
     }
   }, [location.search]);
-  
+
   return (
     <Formik
       initialValues={init}

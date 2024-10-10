@@ -10,6 +10,7 @@ import StudentInfoValidationSchema from "../../../ValidationSchemas/StudentInfoV
 import { useAddStudentInfo } from "../../../Hooks/Appplicant";
 import toast from "react-hot-toast";
 import Loader from "../../Loader/Loader";
+import getStudentInfoValidationSchema from "../../../ValidationSchemas/StudentInfoValidationSchema";
 
 const StudentInfoStep = forwardRef(
   (
@@ -36,10 +37,12 @@ const StudentInfoStep = forwardRef(
         },
       ],
       otherInvolvement: "",
+      isSaved: true,
+      NextActiveStep: "",
     });
 
     const { mutate: addStudentInfo, isLoading } = useAddStudentInfo();
-    console.log("vjndfk", applicationId);
+
     const handleAddStudentInfo = (values) => {
       addStudentInfo(values, {
         onSuccess: () => {
@@ -52,9 +55,10 @@ const StudentInfoStep = forwardRef(
         },
       });
     };
+
     const formik = useFormik({
       initialValues: init,
-      validationSchema: StudentInfoValidationSchema,
+      validationSchema: getStudentInfoValidationSchema(),
       enableReinitialize: true,
       onSubmit: (value) => {
         const transformCollageData = (collage) => {
@@ -78,6 +82,8 @@ const StudentInfoStep = forwardRef(
           residenceVisa: value?.residenceVisa,
           housingRequired: value?.housingRequired,
           otherInvolvement: value?.otherInvolvement,
+          isSaved: value?.isSaved,
+          nextActiveStep: value?.NextActiveStep,
         };
         handleAddStudentInfo(valuesToSend);
       },
@@ -88,7 +94,7 @@ const StudentInfoStep = forwardRef(
         formik.submitForm();
       },
     }));
-    
+
     useEffect(() => {
       ref.current = formik;
     }, [ref, formik]);

@@ -408,7 +408,6 @@ const RegisterFormStep1 = forwardRef(
     useEffect(() => {
       ref.current = formik;
     }, [ref, formik]);
-    console.log("sbxsbjbhc", formik?.values);
 
     useEffect(() => {
       if (fetchedData?.data?.stage2?.legacyMotherName) {

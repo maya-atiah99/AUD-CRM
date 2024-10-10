@@ -112,7 +112,7 @@ const fetchApplicantStageOne = async (
 
     return await axios.get(url);
   }
-  throw new Error("applicantId is required"); // Handle missing applicantId case
+  throw new Error("applicantId is required");
 };
 
 export const useFetchApplicantStageOne = (applicantId, applicationId) => {

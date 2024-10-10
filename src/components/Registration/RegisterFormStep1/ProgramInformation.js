@@ -137,21 +137,26 @@ const ProgramInformation = ({ fetchedData, isView }) => {
           ""
         )}
 
-{formik.values.SelectedTerm &&<> <RadioButtonGroup
-          options={applyingAsOptions}
-          name='ApplingAs'
-          selectedValue={formik.values.ApplingAs}
-          label='Applying As'
-          required={true}
-          onRadioChange={onRadioChange}
-          disabled={isView}
-        />
-        {formik.errors?.ApplingAs && formik.touched?.ApplingAs ? (
-          <span className='span-required'>Applying as is required</span>
-        ) : (
-          ""
-        )}</> }
-       
+        {formik.values.SelectedTerm && (
+          <>
+            {" "}
+            <RadioButtonGroup
+              options={applyingAsOptions}
+              name='ApplingAs'
+              selectedValue={formik.values.ApplingAs}
+              label='Applying As'
+              required={true}
+              onRadioChange={onRadioChange}
+              disabled={isView}
+            />
+            {formik.errors?.ApplingAs && formik.touched?.ApplingAs ? (
+              <span className='span-required'>Applying as is required</span>
+            ) : (
+              ""
+            )}
+          </>
+        )}
+
         <div className='grid-programInfo-cont'>
           <DropDown
             width='100%'

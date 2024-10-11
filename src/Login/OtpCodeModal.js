@@ -3,12 +3,14 @@ import ModalComponent from "../components/ModalComponent";
 import LinkButton from "../components/Buttons/LinkButton";
 import TextComponent from "../components/Texts/TextComponent";
 import AUDButton from "../components/Buttons/AUDButton";
+import LoaderButton from "../components/Loader/LoaderButton";
 
 const OtpCodeModal = ({
   setShowOtpCodeMOdal,
   setOtpCode,
   handleVerifyMobileOtpForPassword,
   handleOnClickLinkPhone,
+  isLoading,
 }) => {
   const [otp, setOtp] = useState(new Array(4).fill(""));
 
@@ -70,7 +72,11 @@ const OtpCodeModal = ({
           underlined={true}
           handleOnClick={handleOnClickLinkPhone}
         />
-        <AUDButton text='Enter' handleOnClick={handleEnter} />
+        {isLoading ? (
+          <LoaderButton />
+        ) : (
+          <AUDButton text='Enter' handleOnClick={handleEnter} />
+        )}
       </div>
     </ModalComponent>
   );

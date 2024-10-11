@@ -5,12 +5,14 @@ import AUDButton from "../components/Buttons/AUDButton";
 import * as Yup from "yup";
 import { Formik, Form } from "formik";
 import PhoneNumber from "../components/Inputs/PhoneNumber";
+import LoaderButton from "../components/Loader/LoaderButton";
 const OtpForgotPasswordModal = ({
   mode,
   setShowOtpForgotPasswordModal,
   setEmail,
   setPhoneNumber,
   handleNextStepForgotPasswordOTP,
+  isLoading,
 }) => {
   const init = {
     inputField: "",
@@ -80,12 +82,15 @@ const OtpForgotPasswordModal = ({
                     touched={touched.inputField}
                   />
                 )}
-
-                <AUDButton
-                  text='Enter'
-                  handleOnClick={handleSubmit}
-                  type='Submit'
-                />
+                {isLoading ? (
+                  <LoaderButton />
+                ) : (
+                  <AUDButton
+                    text='Enter'
+                    handleOnClick={handleSubmit}
+                    type='Submit'
+                  />
+                )}
               </div>
             </ModalComponent>
           </Form>

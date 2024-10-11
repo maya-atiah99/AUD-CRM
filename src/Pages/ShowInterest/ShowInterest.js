@@ -167,8 +167,7 @@ const ShowInterest = ({
         "Resend is done, please wait until you receive an otp then verify your email"
       );
     },
-    onError: (error) => {
-    },
+    onError: (error) => {},
   });
 
   /***************handle done in verification model for otp */
@@ -263,6 +262,21 @@ const ShowInterest = ({
     verifyForgotPasswordOtp.mutate();
   };
 
+  const { isLoading: isValidatingShowInterest } = validateShowInterest;
+  const { isLoading: isValidatingApplicant } = validateApplicant;
+  const { isLoading: isResendingForgotPasswordEmail } = sendForgotPasswordEmail;
+  const { isLoading: isResendingForgotPasswordMobile } =
+    sendForgotPasswordMobile;
+  const { isLoading: isVerifyingForgotPasswordOtp } = verifyForgotPasswordOtp;
+
+  // Combine all isLoading states
+  const isLoading =
+    isValidatingShowInterest ||
+    isValidatingApplicant ||
+    isResendingForgotPasswordMobile ||
+    isResendingForgotPasswordMobile ||
+    isVerifyingForgotPasswordOtp ||
+    isResendingForgotPasswordEmail;
   return (
     <div className='showInterest-container'>
       <video autoPlay loop muted id='background-video'>
@@ -338,6 +352,7 @@ const ShowInterest = ({
           setShowOtpForgotPasswordModal={setShowOtpForgotPasswordModal}
           setMode={setMode}
           setActionOrigin={setActionOrigin}
+          isLoading={isLoading}
         />
       )}
       {showOtpForgotPasswordModal && (
@@ -347,6 +362,7 @@ const ShowInterest = ({
           setEmail={setEmail}
           setPhoneNumber={setPhoneNumber}
           handleNextStepForgotPasswordOTP={handleNextStepForgotPasswordOTP}
+          isLoading={isLoading}
         />
       )}
       {showOtpCodeModal && (
@@ -356,6 +372,7 @@ const ShowInterest = ({
           setCheckEmailSent={setCheckEmailSent}
           handleVerifyMobileOtpForPassword={handleVerifyMobileOtpForPassword}
           handleOnClickLinkPhone={handleResendPhone}
+          isLoading={isLoading}
         />
       )}
       {checkEmailSent && (

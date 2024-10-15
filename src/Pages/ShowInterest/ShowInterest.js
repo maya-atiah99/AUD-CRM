@@ -316,6 +316,7 @@ const ShowInterest = ({
           phoneNumber={phoneNumber}
           email={email}
           otpError={otpError}
+          isLoading={isLoading}
         />
       )}
       {showVerifiedCheckModal && (

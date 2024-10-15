@@ -13,6 +13,7 @@ const ModalComponent = ({
   isButton,
   classFont,
   text,
+  isLoading,
 }) => {
   useEffect(() => {
     const handleEsc = (event) => {
@@ -52,7 +53,11 @@ const ModalComponent = ({
         <div className='modal-content'>{children}</div>
         {isButton && (
           <div className='submit-modal-button'>
-            <AUDButton text={text} handleOnClick={handleOnClick} />
+            <AUDButton
+              text={text}
+              handleOnClick={handleOnClick}
+              disabled={isLoading}
+            />
           </div>
         )}
       </div>

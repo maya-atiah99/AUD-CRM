@@ -5,7 +5,7 @@ const AUDButton = ({ text, to, handleOnClick, icon, width, disabled }) => {
   return (
     <button
       onClick={handleOnClick}
-      className='aud-button'
+      className={`aud-button ${disabled ? "aud-button-disabled" : ""}`}
       style={{ width: width }}
       disabled={disabled}
     >

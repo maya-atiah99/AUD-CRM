@@ -18,6 +18,7 @@ const VerificationModal = ({
   setEmailOtp,
   email,
   otpError,
+  isLoading,
 }) => {
   const init = {
     otpCode: "",
@@ -54,6 +55,7 @@ const VerificationModal = ({
               width='60rem'
               title='OTP'
               text='Confirm'
+              isLoading={isLoading}
             >
               <div>
                 <div className='expandable-card'>
@@ -64,7 +66,7 @@ const VerificationModal = ({
                       font='500'
                     />{" "}
                     <TextComponent
-                      text={"+"+ phoneNumber}
+                      text={"+" + phoneNumber}
                       classfont='classfont-p'
                       font='700'
                     />

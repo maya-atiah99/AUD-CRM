@@ -53,10 +53,12 @@ const ShowInterestForm = ({
     highSchoolGPA: "",
   });
   const [source, setSource] = useState("");
-  const location = useLocation(); // This gives you access to the current URL
+  const location = useLocation();
 
-  const { mutate: addShowInterest } = useAddApplicantToShowInterest();
-  const { mutate: addApplicant } = useAddApplicant();
+  const { mutate: addShowInterest, isLoading: isLoadingInterested } =
+    useAddApplicantToShowInterest();
+  const { mutate: addApplicant, isLoading: isLoadingProspect } =
+    useAddApplicant();
 
   const handleContinueToApply = (values, { setFieldError, resetForm }) => {
     if (!values.titleId) {
@@ -489,6 +491,7 @@ const ShowInterestForm = ({
                   handleOnClick={() => {
                     setClickedButton("continueToApply");
                   }}
+                  disabled={isLoadingProspect}
                 />
                 <AUDButton
                   text='Submit your Inquiry'
@@ -497,6 +500,7 @@ const ShowInterestForm = ({
                   handleOnClick={() => {
                     setClickedButton("submitForm");
                   }}
+                  disabled={isLoadingInterested}
                 />
               </div>
               <p className='applicant-loginp'>

@@ -39,6 +39,7 @@ const RegisterFormStep1 = forwardRef(
     },
     ref
   ) => {
+
     const [init, setInit] = useState({});
     const { mutate: addApplicantStagetwo, isLoading: isLoadingSubmitstageTwo } =
       useAddApplicantStageTwo();
@@ -251,7 +252,7 @@ const RegisterFormStep1 = forwardRef(
         );
       }
     }, [fetchedData, showInterest]);
-    console.log("cdnskjvdbvas", init);
+
 
     const formik = useFormik({
       initialValues: init,
@@ -409,13 +410,13 @@ const RegisterFormStep1 = forwardRef(
       ref.current = formik;
     }, [ref, formik]);
 
-    useEffect(() => {
-      if (fetchedData?.data?.stage2?.legacyMotherName) {
-        formik.setFieldValue("testLegacy", true);
-      } else if (fetchedData?.data?.stage2?.legacyMotherName) {
-        formik.setFieldValue("testLegacy", false);
-      }
-    }, [fetchedData]);
+    // useEffect(() => {
+    //   if (fetchedData?.data?.stage2?.legacyMotherName) {
+    //     formik.setFieldValue("testLegacy", true);
+    //   } else if (fetchedData?.data?.stage2?.legacyMotherName) {
+    //     formik.setFieldValue("testLegacy", false);
+    //   }
+    // }, [fetchedData]);
 
     useEffect(() => {
       localStorage.setItem("applicationStart", formik.values?.ApplicationStart);

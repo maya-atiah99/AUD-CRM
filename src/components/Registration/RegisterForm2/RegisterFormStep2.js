@@ -176,6 +176,7 @@ const RegisterFormStep2 = forwardRef(
         }
       }
     }, [applicationId]);
+
     const formik = useFormik({
       initialValues: init,
       validationSchema: getValidationSchemaStep2(applicationStart, applingAs),
@@ -390,7 +391,7 @@ const RegisterFormStep2 = forwardRef(
     if (isLoading || isLoadingSubmitFiles || isLoadingSubmitStageThree) {
       return <Loader width='100%' />;
     }
-    console.log("cdsbchshvca", formik.values);
+
     return (
       <div className='form-subcontainer'>
         <FormikProvider value={formik} innerRef={ref}>

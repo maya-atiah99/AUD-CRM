@@ -76,7 +76,8 @@ const RegisterPage = ({
     setApplyingAs(parseInt(localStorage.getItem("applingAs")));
     setApplicationId(localStorage.getItem("applicationId"));
     setApplicantId(localStorage.getItem("applicantId"));
-  }, []);
+  }, [activeStep]);
+  console.log("cksmd",location?.state?.showInterest)
   //handle continue to next step button
   const handleChange = async (next) => {
     await steps[activeStep]?.ref?.current?.setFieldValue("isSaved", true);

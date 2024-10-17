@@ -14,7 +14,7 @@ const options = [
 const StudentInfo = ({ isView }) => {
   const [sections, setSections] = useState(1);
   const formik = useFormikContext();
-  console.log("Cdkmlkdfv", formik?.values);
+  console.log("Cdkmlkdfv", typeof formik?.values?.college[0]?.YearsAttended);
   const addSection = () => {
     const newSection = {
       NameOfCollege: "",
@@ -98,7 +98,8 @@ const StudentInfo = ({ isView }) => {
                 name={`college[${index}].YearsAttended`}
                 value={section.YearsAttended}
                 onChange={(name, value) => {
-                  formik.setFieldValue(name, value);
+                  const numericValue = value ? Number(value) : "";
+                  formik.setFieldValue(name, numericValue);
                 }}
                 errors={formik.errors?.college?.[index]?.YearsAttended}
                 touched={formik.touched?.college?.[index]?.YearsAttended}

@@ -127,7 +127,12 @@ const ApplicationsModal = ({
   };
 
   const handleReApply = () => {
-    localStorage.setItem("reApply", 2);
+    if (applications?.data?.payment != 0) {
+      localStorage.setItem("reApply", 2);
+      localStorage.setItem("payment", applications?.data?.payment);
+    } else {
+      localStorage.setItem("reApply", 1);
+    }
     localStorage.setItem("newApp", true);
     localStorage.setItem(
       "applicationId",
@@ -176,7 +181,7 @@ const ApplicationsModal = ({
                 </tr>
               </thead>
               <tbody>
-                {applications?.data?.map((item) => {
+                {applications?.data?.applications?.map((item) => {
                   return (
                     <tr key={item.applicationId}>
                       <td>
@@ -223,7 +228,10 @@ const ApplicationsModal = ({
                 // size='15px'
                 classfont='p-style'
               />
-              <AUDButton text='Re-Apply' handleOnClick={handleReApply} />
+
+              {applications?.data?.reapply && (
+                <AUDButton text='Re-Apply' handleOnClick={handleReApply} />
+              )}
             </div>
 
             <AUDButton

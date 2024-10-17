@@ -7,7 +7,10 @@ import React, {
 } from "react";
 import StudentInfo from "./StudentInfo";
 import StudentInfoValidationSchema from "../../../ValidationSchemas/StudentInfoValidationSchema";
-import { useAddStudentInfo } from "../../../Hooks/Appplicant";
+import {
+  useAddStudentInfo,
+  useFetchApplicantStageTwo,
+} from "../../../Hooks/Appplicant";
 import toast from "react-hot-toast";
 import Loader from "../../Loader/Loader";
 import getStudentInfoValidationSchema from "../../../ValidationSchemas/StudentInfoValidationSchema";
@@ -24,9 +27,17 @@ const StudentInfoStep = forwardRef(
       activeStep,
       isView,
       setActiveStep,
+      setApplicationId,
     },
     ref
   ) => {
+    const {
+      data: applicantStageTwo,
+      refetch: refetchStageTwo,
+      isLoading: isStageTwoLoading,
+    } = useFetchApplicantStageTwo(applicantId, applicationId, false);
+    const { mutate: addStudentInfo, isLoading } = useAddStudentInfo();
+
     const [init, setInit] = useState({
       residenceVisa: "",
       housingRequired: "",
@@ -41,7 +52,38 @@ const StudentInfoStep = forwardRef(
       NextActiveStep: "",
     });
 
-    const { mutate: addStudentInfo, isLoading } = useAddStudentInfo();
+    useEffect(() => {
+      if (applicantStageTwo?.data?.reapplication) {
+        const { residenceVisa, housingRequired, otherInvolvement } =
+          applicantStageTwo.data.reapplication;
+
+        const colleges = [];
+        for (let i = 1; i <= 3; i++) {
+          const collegeName =
+            applicantStageTwo.data.reapplication[`collegeUniversity${i}`];
+          const yearsAttended =
+            applicantStageTwo.data.reapplication[`yearsAttended${i}`];
+          if (collegeName) {
+            colleges.push({
+              NameOfCollege: collegeName,
+              YearsAttended: yearsAttended,
+            });
+          }
+        }
+
+        setInit({
+          residenceVisa: residenceVisa || false,
+          housingRequired: housingRequired || false,
+          college:
+            colleges.length > 0
+              ? colleges
+              : [{ NameOfCollege: "", YearsAttended: null }],
+          otherInvolvement: otherInvolvement || "",
+          isSaved: true,
+          NextActiveStep: "",
+        });
+      }
+    }, [applicantStageTwo]);
 
     const handleAddStudentInfo = (values) => {
       addStudentInfo(values, {
@@ -50,7 +92,7 @@ const StudentInfoStep = forwardRef(
           window.scrollTo(0, 0);
         },
         onError: () => {
-          toast.error("Something wrong");
+          toast.error("Something went wrong");
           window.scrollTo(0, 0);
         },
       });
@@ -74,10 +116,11 @@ const StudentInfoStep = forwardRef(
 
           return transformedData;
         };
+
         const transformedCollegeData = transformCollageData(value.college);
         const valuesToSend = {
           ...transformedCollegeData,
-          applicationId: applicationId,
+          applicationId: localStorage.getItem("applicationId"),
           applicantId: applicantId,
           residenceVisa: value?.residenceVisa,
           housingRequired: value?.housingRequired,
@@ -89,6 +132,15 @@ const StudentInfoStep = forwardRef(
       },
     });
 
+    useEffect(() => {
+      if (!applicationId) {
+        const storedApplicationId = localStorage.getItem("applicationId");
+        if (storedApplicationId) {
+          setApplicationId(storedApplicationId);
+        }
+      }
+    }, [formik?.values?.housingRequired]);
+
     useImperativeHandle(ref, () => ({
       submitForm: () => {
         formik.submitForm();
@@ -99,7 +151,7 @@ const StudentInfoStep = forwardRef(
       ref.current = formik;
     }, [ref, formik]);
 
-    if (isLoading) {
+    if (isLoading || isStageTwoLoading) {
       return <Loader />;
     }
 

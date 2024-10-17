@@ -21,7 +21,6 @@ const MainRoute = () => {
   // const [reApply, setReApply] = useState(
   //   localStorage.getItem("reApply") || null
   // );
-
   return (
     <Routes>
       <Route

@@ -21,7 +21,7 @@ const getStudentInfoValidationSchema = (applicationStart, applingAs) => {
           then: (schema) => schema.required("Name of college is required"),
           otherwise: (schema) => schema.notRequired(),
         }),
-        YearsAttended: Yup.date().when("isSaved", {
+        YearsAttended: Yup.number().when("isSaved", {
           is: (isSaved) => isSaved,
           then: (schema) => schema.required("Years attended is required"),
           otherwise: (schema) => schema.notRequired(),

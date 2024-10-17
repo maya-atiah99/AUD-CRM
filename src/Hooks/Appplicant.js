@@ -129,6 +129,7 @@ const fetchApplicantStageTwo = async (
   applicationId,
   showInterest
 ) => {
+  console.log("dvsmvksd",showInterest)
   if (!showInterest && applicantId && applicationId) {
     return await axios.get(
       API_URL +

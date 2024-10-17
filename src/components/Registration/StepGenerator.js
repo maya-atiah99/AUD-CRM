@@ -31,8 +31,8 @@ const StepGenerator = ({
   setSteps,
   reApply,
   isLoading,
-  setApplicationId
-}) => {
+  setApplicationId,
+}) => {  
   const personalInfo = (
     <RegisterFormStep1
       ref={formikRefStep1}

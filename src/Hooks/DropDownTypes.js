@@ -18,7 +18,7 @@ const fetchDropDownFromPArent = async (typeId, parentId) => {
   if (typeId && parentId) {
     return await axios.get(
       API_URL +
-        `/api/Setting/GetUnPagedDrowDownFromParent/${typeId}/${parentId}`
+        `/api/Setting/GetUnPagedDrowDownFromParent/${typeId}/${parentId}?OrderBy=Text&orderDir=asc`
     );
   }
 };

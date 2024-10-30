@@ -49,7 +49,7 @@ a {
   cursor: pointer;
   transition: 0.3s ease-in-out;
 }
-.aud-button-disabled:hover{
+.aud-button-disabled:hover {
   background-color: rgb(94, 94, 94);
 }
 .blue-link a {
@@ -139,7 +139,7 @@ input[type="date"] {
   background-color: transparent;
   border-radius: 5px;
   height: 38px;
-  border: 1px solid #1b224c31;
+  border: 1px solid hsl(0, 0%, 80%);
   color: #1b224c !important;
   font-weight: 500;
   padding: 5px;
@@ -179,7 +179,7 @@ textarea:hover {
   transition: 0.2s ease-in-out;
 }
 textarea:focus-visible {
-  outline: 0.8px solid #1b224c;
+  outline: 0.8px solid hsl(0, 0%, 80%);
   border: none;
 }
 .required {
@@ -307,7 +307,7 @@ input[type="number"]::-webkit-outer-spin-button {
   justify-content: space-between;
   align-items: center;
   padding: 0 10px;
-  border: 1px solid #1b224c31;
+  border: 1px solid hsl(0, 0%, 80%);
   border-radius: 5px;
   cursor: pointer;
 }
@@ -335,7 +335,7 @@ input[type="number"]::-webkit-outer-spin-button {
   margin: 0;
   display: -webkit-box;
   -webkit-box-orient: vertical;
-  -webkit-line-clamp: 1;
+  /* -webkit-line-clamp: 1; */
 }
 .size-upload-dc p {
   color: #1b224c;
@@ -494,7 +494,7 @@ input[type="number"]::-webkit-outer-spin-button {
   padding-left: 48px;
   margin-left: 0;
   background: transparent !important;
-  border: 1px solid #cacaca;
+  border: 1px solid #1b224c31;
   border-radius: 5px;
   line-height: 25px;
   height: 30px;
@@ -701,7 +701,7 @@ ul {
 .textBox-container textarea {
   resize: none;
   border-radius: 5px;
-  border: 1px solid #1b224c31;
+  border: 1px solid hsl(0, 0%, 80%);
 }
 .textBox-container textarea:hover {
   border: 0.5px solid #1b224c5c;
@@ -824,7 +824,6 @@ ul {
 }
 .css-ugifqb-control {
   border: none !important;
-
   outline: none;
 }
 /************************************Show interest*****/
@@ -838,7 +837,7 @@ ul {
   transform: "translate(-50%,-50%";
   z-index: 10;
   width: 100%;
-  height: 100vh;
+  height: 100dvh;
 }
 
 .showInterest-subContainer {
@@ -846,7 +845,7 @@ ul {
   padding: 15px 50px;
   background-color: #ffffff;
   border-radius: 10px;
-  max-height: 95vh;
+  max-height: 95dvh;
   width: 87%;
   display: flex;
   flex-direction: row;
@@ -940,7 +939,7 @@ ul {
 /*********************************8***Show Interest Form*********/
 .show-interest-form {
   flex: 1 1;
-  max-height: 87vh;
+  max-height: 87dvh;
   overflow-y: auto;
   display: flex;
   flex-direction: column;
@@ -1374,7 +1373,7 @@ td:first-child {
   position: relative;
   border-radius: 5px;
   height: 38px;
-  border: 1px solid #1b224c31;
+  border: 1px solid hsl(0, 0%, 80%);
   padding: 5px;
   overflow: hidden;
 }
@@ -1823,7 +1822,7 @@ td:first-child {
 @media screen and (max-width: 1700px) and (min-height: 900px) {
   .show-interest-form {
     gap: 20px;
-    max-height: 90vh;
+    max-height: 90dvh;
   }
   .showInterestForm-inner-cont {
     gap: 1vh;
@@ -2324,6 +2323,7 @@ responsiveness ************/
   .css-1b9fmbm-control {
     min-height: 25px !important;
     height: 28px !important;
+    border-color: 1px solid #1b224c31 !important;
   }
   .css-18jj4pb-controll {
     height: 28px !important;

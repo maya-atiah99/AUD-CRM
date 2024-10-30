@@ -19,7 +19,7 @@ const PhoneNumber = ({
   const [initialCode, setInitialCode] = useState(initialCountry || "ae");
   const inputStyle = {
     width: "100%",
-    border: errors && touched ? "1px solid red" : "",
+    border: errors && touched ? "1px solid red" : "1px solid hsl(0, 0%, 80%)",
   };
 
   const handlePhoneChange = (phone) => {
